@@ -1,0 +1,34 @@
+- que nada sea Singleton, porque se hace imposible para unit-testear,
+  se cambia el estado global y las cosas hacen cualquiera,
+  si puede haber contantes estaticas globales (no harm done)
+- GameObject que tenga capacidad de autocargarse/guardarse cuando se construye/destruye
+- ResourceManager no Singleton, pero que se facilmente accesible
+- ResourcePtr con contador de referencias
+
+uso pretendido:
+
+Game game;
+game.run(MyStartingScene());
+
+AUN MEJOR:
+
+Game game;
+game.run("my_starting_scene.json");
+
+==============================================================================================
+idea:
+
+Eliminar todo lo que haya del Engine que SFML lo maneje ya:
+ - Window
+ - Input
+
+
+Game es un GameObject, que tiene varios behaviors
+ - SceneBehavior: un controlador de escenas, state machine, algo asi
+ - WindowBehavior: abre la ventana, escucha eventos, etc
+
+Scene es un GameObject:
+ - WorldBehavior: tiene un World que maneja los gameobjects.
+                  - World se comunica con RenderBehavior y le pasa los rendereables
+ - RenderBehavior: dibuja todos los Rendereables que recibe de World
+

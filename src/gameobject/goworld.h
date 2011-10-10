@@ -1,0 +1,88 @@
+#ifndef FORAGERS_GOWORLD_H
+#define FORAGERS_GOWORLD_H
+//----------------------------------------------------------------------------//
+#include <vector>
+#include <map>
+#include <string>
+//----------------------------------------------------------------------------//
+#include "DllExport.h"
+//----------------------------------------------------------------------------//
+namespace foragers
+{
+//----------------------------------------------------------------------------//
+class GameObject;
+class GOBehavior;
+class Scene;
+class ResourceManager;
+//----------------------------------------------------------------------------//
+// GOWorld
+//
+// Class that manages and constructs GameObject objects
+//----------------------------------------------------------------------------//
+class ENGINE_API GOWorld
+{
+public:
+	GOWorld(Scene& scene, ResourceManager& resourceManager);
+// TODO: cleaning! destructor!
+
+// GameObject Management
+public:
+	// Adds a GameObject to the list of objects in the world
+	void addObject(GameObject *object);
+	// Removes a GameObject from the list of objects in the world
+	void removeObject(GameObject *object);
+	// Gets a GameObject by its name, returns 0 if not found
+	GameObject* getObject(const char* name);
+
+	// Updates all the objects in the world
+	void update();
+	// Sends a message to every object in the world
+	void broadcast(const char* message, void* args);
+
+// GameObject Prototypes
+public:
+	// Registers a GameObject as a prototype to create more objects like it
+	void registerObjectPrototype(const char* name, GameObject* object);
+	// Unregisters a GameObject as a prototype
+	void unregisterObjectPrototype(const char* name);
+	// Creates a GameObject from a prototype
+	GameObject* createObject(const char* name) const;
+
+// GameObject Behavior Management
+public:
+	// Registers a behavior in a list so it can be recognized later when constructing a new object
+	void registerBehavior(const char* name, GOBehavior* behavior);
+	// Unregisters a behavior
+	void unregisterBehavior(const char* name);
+	// Returns a copy of a registered behavior
+	GOBehavior* createBehavior(const char* name) const;
+
+// GameObject Parsing
+public:
+	// Creates an object from a json file
+	GameObject* parseObject(const char* filename);
+	
+public:
+	typedef std::vector<GameObject*> ObjectVector;
+	typedef std::map<std::string, GameObject*> ObjectMap;
+	typedef std::map<std::string, GOBehavior*> BehaviorMap;
+
+private:
+	ObjectVector _objects;
+	ObjectMap _objectPrototypes;
+	BehaviorMap _behaviors;
+
+public:
+	Scene& getScene() const;
+	ResourceManager& getResourceManager() const;
+
+private:
+	Scene &_scene;
+	ResourceManager &_resourceManager;
+};
+//----------------------------------------------------------------------------//
+#include "goworld.inl"
+//----------------------------------------------------------------------------//
+} // end namespace foragers
+//----------------------------------------------------------------------------//
+#endif // FORAGERS_GOWORLD_H

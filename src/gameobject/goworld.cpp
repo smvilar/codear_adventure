@@ -1,0 +1,128 @@
+#include "gameobject/goworld.h"
+//----------------------------------------------------------------------------//
+#include <algorithm>
+//----------------------------------------------------------------------------//
+#include "core/Assert.h"
+#include "gameobject/gameobject.h"
+#include "gameobject/goattribute.h"
+#include "gameobject/gobehavior.h"
+#include "objectparser.h"
+//----------------------------------------------------------------------------//
+using namespace foragers;
+//----------------------------------------------------------------------------//
+class ObjectNamesAreEqual
+{
+	const char* _name;
+public:
+	ObjectNamesAreEqual(const char* name) : _name(name) {}
+	bool operator()(GameObject* obj)
+	{
+		return (obj->name.compare(_name) == 0);
+	}
+};
+//----------------------------------------------------------------------------//
+GOWorld::GOWorld(Scene& scene, ResourceManager& resourceManager)
+: _scene(scene)
+, _resourceManager(resourceManager)
+{
+	// ...
+}
+//----------------------------------------------------------------------------//
+void GOWorld::addObject(GameObject *object)
+{
+	_objects.push_back(object);
+	object->_pWorld = this;
+	object->added();
+}
+//----------------------------------------------------------------------------//
+void GOWorld::removeObject(GameObject *object)
+{
+	std::remove(_objects.begin(), _objects.end(), object);
+	object->removed();
+	object->_pWorld = 0;
+}
+//----------------------------------------------------------------------------//
+GameObject* GOWorld::getObject(const char* name)
+{
+	ObjectVector::iterator it = std::find_if(_objects.begin(), _objects.end(),
+											 ObjectNamesAreEqual(name));
+	return (it != _objects.end()) ? *it : 0;
+}
+//----------------------------------------------------------------------------//
+void GOWorld::registerObjectPrototype(const char *name, GameObject *object)
+{
+	Assert(_objectPrototypes.find(name) == _objectPrototypes.end(),
+		   "Registering a duplicate object");
+
+	_objectPrototypes[name] = object;
+}
+//----------------------------------------------------------------------------//
+void GOWorld::unregisterObjectPrototype(const char *name)
+{
+	_objectPrototypes.erase(name);
+}
+//----------------------------------------------------------------------------//
+GameObject* GOWorld::createObject(const char *name) const
+{
+	ObjectMap::const_iterator it = _objectPrototypes.find(name);
+	Assert(it != _objectPrototypes.end(), "Couldn't find object prototype");
+
+	return it->second->clone();
+}
+//----------------------------------------------------------------------------//
+void GOWorld::registerBehavior(const char *name, GOBehavior *behavior)
+{
+	Assert(_behaviors.find(name) == _behaviors.end(),
+		   "Registering a duplicate behavior");
+
+	behavior->_pWorld = this;
+	_behaviors[name] = behavior;
+}
+//----------------------------------------------------------------------------//
+void GOWorld::unregisterBehavior(const char *name)
+{
+	Assert(_behaviors.find(name) != _behaviors.end(),
+		   "Unregistering an unexistent behavior");
+
+	_behaviors[name]->_pWorld = 0;
+	_behaviors.erase(name);
+}
+//----------------------------------------------------------------------------//
+GOBehavior* GOWorld::createBehavior(const char *name) const
+{
+	BehaviorMap::const_iterator it = _behaviors.find(name);
+	if (it != _behaviors.end())
+	{
+		GOBehavior* behavior = it->second->clone();
+		behavior->_pWorld = const_cast<GOWorld*>(this);
+		return behavior;
+	}
+	else return 0;
+}
+//----------------------------------------------------------------------------//
+void GOWorld::update()
+{
+	ObjectVector::iterator it = _objects.begin();
+	for (; it != _objects.end(); ++it)
+	{
+		(*it)->update();
+	}
+}
+//----------------------------------------------------------------------------//
+void GOWorld::broadcast(const char *message, void *args)
+{
+	ObjectVector::iterator it = _objects.begin();
+	for (; it != _objects.end(); ++it)
+	{
+		(*it)->broadcast(message, args);
+	}
+}
+//----------------------------------------------------------------------------//
+GameObject* GOWorld::parseObject(const char *filename)
+{
+	GameObject* obj = new GameObject("unnamed");
+	ObjectParser parser;
+	parser.parse(filename, *obj, *this);
+	return obj;
+}
+//----------------------------------------------------------------------------//

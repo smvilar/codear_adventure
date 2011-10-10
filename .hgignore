@@ -1,0 +1,10 @@
+relre:obj/
+relre:bin/
+relre:bin-debug/
+relre:/Debug/
+relre:/Release/
+relre:\.suo$
+relre:\.ncb$
+relre:\.user$
+relre:\.pyc$
+relre:\.DS_Store
