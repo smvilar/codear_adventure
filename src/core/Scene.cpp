@@ -43,7 +43,7 @@ void Scene::render()
 	// render entities
 	for (size_t i=0; i<_entities.size(); ++i)
 	{
-		_entities[i]->render(_pGame->getRenderer());
+		_entities[i]->render(*_pGame->getAttributeAs<Renderer*>("renderer"));
 	}
 }
 //----------------------------------------------------------------------------//

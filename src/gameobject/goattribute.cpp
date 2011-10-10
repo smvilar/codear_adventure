@@ -2,14 +2,14 @@
 //----------------------------------------------------------------------------//
 using namespace foragers;
 //----------------------------------------------------------------------------//
-GOAttribute::GOAttribute(boost::any value)
+Attribute::Attribute(boost::any value)
 	: _value(value)
 {
 	// ...
 }
 //----------------------------------------------------------------------------//
-GOAttribute* GOAttribute::clone() const
+Attribute* Attribute::clone() const
 {
-	return new GOAttribute(_value);
+	return new Attribute(_value);
 }
 //----------------------------------------------------------------------------//

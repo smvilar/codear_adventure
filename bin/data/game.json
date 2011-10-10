@@ -1,0 +1,20 @@
+{
+	"name" : "Game",
+	"attributes" :
+	{
+		"name" : "CODEAR Adventure",
+		"width" : 800,
+		"height" : 400,
+		"bpp" : 32,
+		"fullscreen" : 0,
+		"maxFramerate" : 100,
+		"startingScene" : "Scene1"
+	},
+	"behaviors" :
+	[
+		"Window",
+		"SceneManager",
+		"Render"
+	]
+}
+

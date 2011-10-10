@@ -32,18 +32,21 @@ INCLUDEPATH += \
 	../lib/zlib125/include
 
 HEADERS += \
-    ../src/ForagersEngine.h \
-    ../src/DllExport.h \
-    ../src/behaviors/SpriteBehavior.h \
+	../src/foragersengine.h \
+	../src/dllexport.h \
+	../src/behaviors/spritebehavior.h \
     ../src/behaviors/followmousebehavior.h \
     ../src/behaviors/editbehavior.h \
+	../src/behaviors/scenemanager.h \
+	../src/behaviors/windowbehavior.h \
+	../src/behaviors/renderbehavior.h \
+	../src/behaviors/gamebehaviors.h \
     ../src/core/Assert.h \
     ../src/core/Types.h \
-    ../src/core/Scene.h \
-    ../src/core/GameConfig.h \
-    ../src/core/Game.h \
-    ../src/core/Entity.h \
-    ../src/core/BaseObject.h \
+	../src/core/Scene.h \
+	../src/core/Entity.h \
+	../src/core/BaseObject.h \
+	../src/core/GameLoop.h \
     ../src/gameobject/objectparser.h \
     ../src/gameobject/goworld.h \
     ../src/gameobject/gobehavior.h \
@@ -88,12 +91,14 @@ HEADERS += \
 	../src/video/Color.h
 
 SOURCES += \
-	../src/behaviors/SpriteBehavior.cpp \
+	../src/behaviors/spritebehavior.cpp \
 	../src/behaviors/followmousebehavior.cpp \
 	../src/behaviors/editbehavior.cpp \
+	../src/behaviors/scenemanager.cpp \
+	../src/behaviors/windowbehavior.cpp \
+	../src/behaviors/renderbehavior.cpp \
 	../src/core/Scene.cpp \
-	../src/core/GameConfig.cpp \
-	../src/core/Game.cpp \
+	../src/core/GameLoop.cpp \
 	../src/gameobject/objectparser.cpp \
 	../src/gameobject/goworld.cpp \
 	../src/gameobject/gobehavior.cpp \

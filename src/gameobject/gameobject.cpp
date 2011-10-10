@@ -1,5 +1,6 @@
 #include "gameobject/gameobject.h"
 //----------------------------------------------------------------------------//
+#include "gameobject/goworld.h"
 #include "gameobject/goattribute.h"
 #include "gameobject/gobehavior.h"
 #include "core/Assert.h"
@@ -11,21 +12,21 @@ GameObject::GameObject(const char *name)
 {
 }
 //----------------------------------------------------------------------------//
-void GameObject::addBehavior(GOBehavior *behavior)
+void GameObject::addBehavior(Behavior *behavior)
 {
 	_behaviors.push_back(behavior);
 	behavior->_pOwner = this;
 	behavior->added();
 }
 //----------------------------------------------------------------------------//
-void GameObject::removeBehavior(GOBehavior *behavior)
+void GameObject::removeBehavior(Behavior *behavior)
 {
 	behavior->removed();
 	behavior->_pOwner = 0;
 	std::remove(_behaviors.begin(), _behaviors.end(), behavior);
 }
 //----------------------------------------------------------------------------//
-void GameObject::addAttribute(const char *name, GOAttribute *attribute)
+void GameObject::addAttribute(const char *name, Attribute *attribute)
 {
 	Assert(_attributes.find(name) == _attributes.end(),
 		   "Error when adding attribute: another one with the same name exists");
@@ -37,7 +38,7 @@ void GameObject::removeAttribute(const char *name)
 	_attributes.erase(name);
 }
 //----------------------------------------------------------------------------//
-GOAttribute* GameObject::getAttribute(const char *name)
+Attribute* GameObject::getAttribute(const char *name)
 {
 	AttributeMap::iterator it = _attributes.find(name);
 	return it != _attributes.end() ? it->second : 0;
@@ -55,6 +56,12 @@ void GameObject::broadcast(const char *message, void *args)
 	BehaviorVector::iterator it = _behaviors.begin();
 	for (; it != _behaviors.end(); ++it)
 		(*it)->handleMessage(message, args);
+}
+//----------------------------------------------------------------------------//
+void GameObject::removeFromWorld()
+{
+	Assert(_pWorld, "Error removing from world: pWorld is a null pointer");
+	_pWorld->removeObject(this);
 }
 //----------------------------------------------------------------------------//
 GameObject* GameObject::clone() const

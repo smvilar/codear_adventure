@@ -7,11 +7,11 @@
 namespace foragers
 {
 //----------------------------------------------------------------------------//
-class ENGINE_API GOAttribute
+class ENGINE_API Attribute
 {
 public:
-	GOAttribute(boost::any value);
-	GOAttribute* clone() const;
+	Attribute(boost::any value);
+	Attribute* clone() const;
 
 	template<typename T>
 	T getValue() const

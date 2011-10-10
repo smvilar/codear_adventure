@@ -51,14 +51,14 @@ void ObjectParser::parseAttributes(const Json::Value &attrsValue,
 	{
 		const std::string& attrName = *it;
 		Json::Value value = attrsValue[attrName];
-		GOAttribute *attribute = 0;
+		Attribute *attribute = 0;
 
 		if (value.isInt())
-			attribute = new GOAttribute(value.asInt());
+			attribute = new Attribute(value.asInt());
 		else if (value.isBool())
-			attribute = new GOAttribute(value.asBool());
+			attribute = new Attribute(value.asBool());
 		else if (value.isString())
-			attribute = new GOAttribute(value.asString());
+			attribute = new Attribute(value.asString());
 		else
 			cerr << "The type of attribute" << attrName
 				 << "isn't supported" << endl;
@@ -87,7 +87,7 @@ void ObjectParser::parseBehaviors(const Json::Value &behaviorsValue,
 	{
 		const char* behaviorName = behaviorsValue[i].asCString();
 
-		GOBehavior* behavior = world.createBehavior(behaviorName);
+		Behavior* behavior = world.createBehavior(behaviorName);
 		if (behavior)
 		{
 			object.addBehavior(behavior);

@@ -1,12 +1,12 @@
 #include "ForagersEngine.h"
+#include "behaviors/gamebehaviors.h"
 
 int main()
 {
-	using foragers::Game;
+	using foragers::GameLoop;
 
-	Game game("game.json");
-
-	game.run();
+	GameLoop gameLoop;
+	gameLoop.start("game.json");
 
 	return 0;
 }

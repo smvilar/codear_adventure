@@ -11,7 +11,7 @@
 namespace foragers
 {
 //----------------------------------------------------------------------------//
-class GOBehavior;
+class Behavior;
 class World;
 //----------------------------------------------------------------------------//
 class ENGINE_API GameObject
@@ -22,12 +22,12 @@ public:
 public:
 	GameObject(const char* name);
 
-	void addBehavior(GOBehavior* behavior);
-	void removeBehavior(GOBehavior* behavior);
+	void addBehavior(Behavior* behavior);
+	void removeBehavior(Behavior* behavior);
 
-	void addAttribute(const char* name, GOAttribute* attribute);
+	void addAttribute(const char* name, Attribute* attribute);
 	void removeAttribute(const char* name);
-	GOAttribute* getAttribute(const char* name);
+	Attribute* getAttribute(const char* name);
 
 	template <typename T>
 	T getAttributeAs(const char* name)
@@ -36,7 +36,9 @@ public:
 	}
 
 	void update();
-	void broadcast(const char* message, void* args);
+	void broadcast(const char* message, void* args = 0);
+
+	void removeFromWorld();
 
 	GameObject* clone() const;
 
@@ -44,13 +46,14 @@ private:
 	void added();
 	void removed();
 
+private:
 	World* _pWorld;
 
 private:
-	typedef std::vector<GOBehavior*> BehaviorVector;
+	typedef std::vector<Behavior*> BehaviorVector;
 	BehaviorVector _behaviors;
 
-	typedef std::map<std::string, GOAttribute*> AttributeMap;
+	typedef std::map<std::string, Attribute*> AttributeMap;
 	AttributeMap _attributes;
 
 	friend class World;

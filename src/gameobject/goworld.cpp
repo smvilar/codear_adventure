@@ -21,9 +21,8 @@ public:
 	}
 };
 //----------------------------------------------------------------------------//
-World::World(Scene& scene, ResourceManager& resourceManager)
-: _scene(scene)
-, _resourceManager(resourceManager)
+World::World()
+: _scene(0)
 {
 	// ...
 }
@@ -70,7 +69,7 @@ GameObject* World::createObject(const char *name) const
 	return it->second->clone();
 }
 //----------------------------------------------------------------------------//
-void World::registerBehavior(const char *name, GOBehavior *behavior)
+void World::registerBehavior(const char *name, Behavior *behavior)
 {
 	Assert(_behaviors.find(name) == _behaviors.end(),
 		   "Registering a duplicate behavior");
@@ -88,12 +87,12 @@ void World::unregisterBehavior(const char *name)
 	_behaviors.erase(name);
 }
 //----------------------------------------------------------------------------//
-GOBehavior* World::createBehavior(const char *name) const
+Behavior* World::createBehavior(const char *name) const
 {
 	BehaviorMap::const_iterator it = _behaviors.find(name);
 	if (it != _behaviors.end())
 	{
-		GOBehavior* behavior = it->second->clone();
+		Behavior* behavior = it->second->clone();
 		behavior->_pWorld = const_cast<World*>(this);
 		return behavior;
 	}

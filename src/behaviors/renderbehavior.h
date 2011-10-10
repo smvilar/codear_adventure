@@ -1,37 +1,26 @@
-#ifndef FORAGERS_SPRITEBEHAVIOR_H
-#define FORAGERS_SPRITEBEHAVIOR_H
+#ifndef FORAGERS_RENDERBEHAVIOR_H
+#define FORAGERS_RENDERBEHAVIOR_H
 //----------------------------------------------------------------------------//
-#include <string>
 #include "DllExport.h"
-#include "core/Types.h"
 #include "gameobject/gobehavior.h"
-#include "video/Sprite.h"
+#include "video/Renderer.h"
 //----------------------------------------------------------------------------//
 namespace foragers {
 //----------------------------------------------------------------------------//
-class GOAttribute;
-//----------------------------------------------------------------------------//
-class ENGINE_API SpriteBehavior : public GOBehavior
+class ENGINE_API RenderBehavior : public Behavior
 {
 public:
-	virtual ~SpriteBehavior() {}
-
 	virtual void update();
-	//virtual void handleMessage(const char* message, void* args) {}
-
-	virtual GOBehavior* clone() const;
-
-protected:
-	virtual void added();
-	virtual void removed();
-	virtual void activate();
-	virtual void deactivate();
+	virtual Behavior* clone() const;
 
 private:
-	Sprite _sprite;
-	GOAttribute *_posX, *_posY, *_rotation, *_scale;
+	virtual void added();
+	virtual void removed();
+
+private:
+	Renderer _renderer;
 };
 //----------------------------------------------------------------------------//
 } // end namespace foragers
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_SPRITEBEHAVIOR_H
+#endif // FORAGERS_RENDERBEHAVIOR_H

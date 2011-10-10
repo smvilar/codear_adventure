@@ -9,16 +9,16 @@ namespace foragers
 class GameObject;
 class World;
 //----------------------------------------------------------------------------//
-class ENGINE_API GOBehavior
+class ENGINE_API Behavior
 {
 public:
-	GOBehavior();
-	virtual ~GOBehavior() {}
+	Behavior();
+	virtual ~Behavior() {}
 
 	virtual void update() {}
 	virtual void handleMessage(const char */*message*/, void */*args*/) {}
 
-	virtual GOBehavior* clone() const = 0;
+	virtual Behavior* clone() const = 0;
 
 protected:
 	virtual void added() {}

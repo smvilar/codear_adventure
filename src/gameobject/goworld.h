@@ -6,14 +6,14 @@
 #include <string>
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
+#include "resource/ResourceManager.h"
 //----------------------------------------------------------------------------//
 namespace foragers
 {
 //----------------------------------------------------------------------------//
 class GameObject;
-class GOBehavior;
+class Behavior;
 class Scene;
-class ResourceManager;
 //----------------------------------------------------------------------------//
 // World
 //
@@ -22,7 +22,7 @@ class ResourceManager;
 class ENGINE_API World
 {
 public:
-	World(Scene& scene, ResourceManager& resourceManager);
+	World();
 // TODO: cleaning! destructor!
 
 // GameObject Management
@@ -51,11 +51,11 @@ public:
 // GameObject Behavior Management
 public:
 	// Registers a behavior in a list so it can be recognized later when constructing a new object
-	void registerBehavior(const char* name, GOBehavior* behavior);
+	void registerBehavior(const char* name, Behavior* behavior);
 	// Unregisters a behavior
 	void unregisterBehavior(const char* name);
 	// Returns a copy of a registered behavior
-	GOBehavior* createBehavior(const char* name) const;
+	Behavior* createBehavior(const char* name) const;
 
 // GameObject Parsing
 public:
@@ -65,7 +65,7 @@ public:
 public:
 	typedef std::vector<GameObject*> ObjectVector;
 	typedef std::map<std::string, GameObject*> ObjectMap;
-	typedef std::map<std::string, GOBehavior*> BehaviorMap;
+	typedef std::map<std::string, Behavior*> BehaviorMap;
 
 private:
 	ObjectVector _objects;
@@ -74,11 +74,11 @@ private:
 
 public:
 	Scene& getScene() const;
-	ResourceManager& getResourceManager() const;
+	ResourceManager& getResourceManager();
 
 private:
-	Scene &_scene;
-	ResourceManager &_resourceManager;
+	Scene* _scene;
+	ResourceManager _resourceManager;
 };
 //----------------------------------------------------------------------------//
 #include "goworld.inl"

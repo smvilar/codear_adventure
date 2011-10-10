@@ -47,8 +47,8 @@ def main():
 	header_path = (module_name + '/' + class_name + '.h').lower()
 	source_path = (module_name + '/' + class_name + '.cpp').lower()
 
-	full_header_path = config.include_path + header_path
-	full_source_path = config.src_path + source_path
+	full_header_path = config.include_path + '/' + header_path
+	full_source_path = config.src_path + '/' + source_path
 
 	with open(full_header_path, 'w') as header_file:
 		header_file.write(header_text(class_name))
