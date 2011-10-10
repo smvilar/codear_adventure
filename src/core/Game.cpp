@@ -1,18 +1,22 @@
 #include "core/Game.h"
+//----------------------------------------------------------------------------//
+#include <SFML/Graphics.hpp>
+//----------------------------------------------------------------------------//
 #include "core/Scene.h"
 #include "core/GameConfig.h"
 #include "util/Profile.h"
+#include "gameobject/objectparser.h"
 //----------------------------------------------------------------------------//
 using namespace foragers;
 //----------------------------------------------------------------------------//
-Game::Game(GameConfig& gameConfig)
-: _running(false)
-, _window(gameConfig.name.c_str(),
-		  gameConfig.screenWidth, gameConfig.screenHeight,
-		  gameConfig.screenBpp, gameConfig.fullscreen)
-, _fpsCounter(gameConfig.maxFramerate)
+Game::Game(const char *filename)
+	: GameObject("Game")
 {
-	// ...
+	if (filename)
+	{
+		ObjectParser parser;
+		parser.parse(filename, *this);
+	}
 }
 //----------------------------------------------------------------------------//
 Game::~Game()
@@ -31,6 +35,13 @@ void Game::run(Scene* pStartingScene)
 
 	while (_running)
 	{
+		sf::Event event;
+		while (_window->PollEvent(event))
+		{
+			if (event.Type == sf::Event::Closed)
+				quit();
+		}
+
 		update();
 		render();
 		_fpsCounter.tick();
@@ -40,9 +51,19 @@ void Game::run(Scene* pStartingScene)
 //----------------------------------------------------------------------------//
 bool Game::init()
 {
-	bool success = _renderer.init(&_window);
+	using std::string;
 
-	return success;
+	u32 width = getAttributeAs<int>("width");
+	u32 height = getAttributeAs<int>("height");
+	u32 bpp = getAttributeAs<int>("bpp");
+	const string &caption = getAttributeAs<string>("name");
+
+	sf::VideoMode videoMode(width, height, bpp);
+	sf::ContextSettings contextSettings; // TODO: specify ogl stuff
+	_window = new sf::Window(videoMode, caption,
+							 sf::Style::Default, contextSettings);
+
+	return _renderer.init(width, height);
 }
 //----------------------------------------------------------------------------//
 void Game::deinit()
@@ -58,9 +79,6 @@ void Game::update()
 {
 	ProfilerBlock p("Game::update");
 
-	// update window and input events
-	_window.update(this, &_input);
-
 	// update scene
 	if (!_sceneStack.empty())
 	{
@@ -72,6 +90,7 @@ void Game::render()
 {
 	ProfilerBlock p("Game::render");
 
+	_window->SetActive();
 	_renderer.begin();
 
 	// render scene
@@ -81,6 +100,7 @@ void Game::render()
 	}
 
 	_renderer.end();
+	_window->Display();
 }
 //----------------------------------------------------------------------------//
 void Game::setScene(Scene* newScene)

@@ -22,7 +22,7 @@ public:
 	u32				screenWidth;
 	u32				screenHeight;
 	u32				screenBpp;
-	bool			fullscreen;
+	bool				fullscreen;
 
 	u32				maxFramerate;
 

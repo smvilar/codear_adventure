@@ -4,20 +4,22 @@
 #include <string>
 #include <vector>
 #include <map>
+//----------------------------------------------------------------------------//
 #include "DllExport.h"
+#include "gameobject/goattribute.h"
 //----------------------------------------------------------------------------//
 namespace foragers
 {
 //----------------------------------------------------------------------------//
 class GOBehavior;
-class GOAttribute;
-class GOWorld;
+class World;
 //----------------------------------------------------------------------------//
 class ENGINE_API GameObject
 {
 public:
 	std::string name;
 
+public:
 	GameObject(const char* name);
 
 	void addBehavior(GOBehavior* behavior);
@@ -26,6 +28,12 @@ public:
 	void addAttribute(const char* name, GOAttribute* attribute);
 	void removeAttribute(const char* name);
 	GOAttribute* getAttribute(const char* name);
+
+	template <typename T>
+	T getAttributeAs(const char* name)
+	{
+		return getAttribute(name)->getValue<T>();
+	}
 
 	void update();
 	void broadcast(const char* message, void* args);
@@ -36,7 +44,7 @@ private:
 	void added();
 	void removed();
 
-	GOWorld* _pWorld;
+	World* _pWorld;
 
 private:
 	typedef std::vector<GOBehavior*> BehaviorVector;
@@ -45,7 +53,7 @@ private:
 	typedef std::map<std::string, GOAttribute*> AttributeMap;
 	AttributeMap _attributes;
 
-	friend class GOWorld;
+	friend class World;
 };
 //----------------------------------------------------------------------------//
 } // end namespace foragers

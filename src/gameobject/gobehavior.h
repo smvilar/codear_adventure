@@ -7,7 +7,7 @@ namespace foragers
 {
 //----------------------------------------------------------------------------//
 class GameObject;
-class GOWorld;
+class World;
 //----------------------------------------------------------------------------//
 class ENGINE_API GOBehavior
 {
@@ -16,7 +16,7 @@ public:
 	virtual ~GOBehavior() {}
 
 	virtual void update() {}
-	virtual void handleMessage(const char *message, void *args) {}
+	virtual void handleMessage(const char */*message*/, void */*args*/) {}
 
 	virtual GOBehavior* clone() const = 0;
 
@@ -28,10 +28,10 @@ protected:
 
 protected:
 	GameObject *_pOwner;
-	GOWorld *_pWorld;
+	World *_pWorld;
 
 	friend class GameObject;
-	friend class GOWorld;
+	friend class World;
 };
 //----------------------------------------------------------------------------//
 } // end namespace foragers

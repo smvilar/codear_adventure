@@ -1,10 +1,10 @@
 //----------------------------------------------------------------------------//
-inline Scene& GOWorld::getScene() const
+inline Scene& World::getScene() const
 {
 	return _scene;
 }
 //----------------------------------------------------------------------------//
-inline ResourceManager& GOWorld::getResourceManager() const
+inline ResourceManager& World::getResourceManager() const
 {
 	return _resourceManager;
 }

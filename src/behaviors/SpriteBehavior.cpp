@@ -20,8 +20,7 @@ void SpriteBehavior::added()
 {
 	using std::string;
 
-	GOAttribute *attr = _pOwner->getAttribute("sprite_filename");
-	const string &filename = attr->getValue<string>();
+	const string &filename = _pOwner->getAttributeAs<string>("sprite_filename");
 	
 	ResourceManager &resMgr = _pWorld->getResourceManager();
 	TexturePtr texture = resMgr.get<Texture>(filename.c_str());

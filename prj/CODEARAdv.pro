@@ -38,11 +38,8 @@ HEADERS += \
     ../src/behaviors/followmousebehavior.h \
     ../src/behaviors/editbehavior.h \
     ../src/core/Assert.h \
-    ../src/core/Window.h \
     ../src/core/Types.h \
     ../src/core/Scene.h \
-    ../src/core/Input.h \
-    ../src/core/IInputListener.h \
     ../src/core/GameConfig.h \
     ../src/core/Game.h \
     ../src/core/Entity.h \
@@ -82,23 +79,19 @@ HEADERS += \
     ../src/video/Text.h \
     ../src/video/StaticVertexBuffer.h \
     ../src/video/Sprite.h \
-    ../src/video/Shape.h \
-    ../src/video/RendererImpl.h \
+	../src/video/Shape.h \
     ../src/video/Renderer.h \
     ../src/video/GLee.h \
     ../src/video/ForagersEngine.h \
     ../src/video/DynamicVertexBuffer.h \
     ../src/video/DllExport.h \
-    ../src/video/Color.h \
-    ../src/video/SFML/SFMLRenderer.h
+	../src/video/Color.h
 
 SOURCES += \
 	../src/behaviors/SpriteBehavior.cpp \
 	../src/behaviors/followmousebehavior.cpp \
 	../src/behaviors/editbehavior.cpp \
-	../src/core/Window.cpp \
 	../src/core/Scene.cpp \
-	../src/core/Input.cpp \
 	../src/core/GameConfig.cpp \
 	../src/core/Game.cpp \
 	../src/gameobject/objectparser.cpp \
@@ -131,5 +124,4 @@ SOURCES += \
 	../src/video/GLee.c \
 	../src/video/DynamicVertexBuffer.cpp \
 	../src/video/Color.cpp \
-	../src/video/SFML/SFMLRenderer.cpp \
 	../src/game/main.cpp

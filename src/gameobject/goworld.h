@@ -15,14 +15,14 @@ class GOBehavior;
 class Scene;
 class ResourceManager;
 //----------------------------------------------------------------------------//
-// GOWorld
+// World
 //
 // Class that manages and constructs GameObject objects
 //----------------------------------------------------------------------------//
-class ENGINE_API GOWorld
+class ENGINE_API World
 {
 public:
-	GOWorld(Scene& scene, ResourceManager& resourceManager);
+	World(Scene& scene, ResourceManager& resourceManager);
 // TODO: cleaning! destructor!
 
 // GameObject Management

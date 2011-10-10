@@ -14,12 +14,12 @@ class GameObject;
 class ObjectParser
 {
 public:
-	bool parse(const char* filename, GameObject& object, const GOWorld &world);
+	bool parse(const char* filename, GameObject& object, const World *world = 0);
 
 private:
 	void parseAttributes(const Json::Value& jsonValue, GameObject& object);
 	void parseBehaviors(const Json::Value& jsonValue, GameObject& object,
-						const GOWorld &world);
+						const World &world);
 };
 //----------------------------------------------------------------------------//
 } // end namespace foragers

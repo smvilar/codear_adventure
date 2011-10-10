@@ -8,11 +8,8 @@
 //----------------------------------------------------------------------------//
 #include "core/Types.h"
 #include "core/Assert.h"
-#include "core/Window.h"
 #include "core/Game.h"
 #include "core/Scene.h"
-#include "core/Input.h"
-#include "core/IInputListener.h"
 //----------------------------------------------------------------------------//
 #include "math/Vector2.h"
 #include "math/Rect.h"

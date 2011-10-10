@@ -5,11 +5,15 @@
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "core/GameConfig.h"
-#include "core/Window.h"
-#include "core/Input.h"
 #include "video/Renderer.h"
 #include "resource/ResourceManager.h"
 #include "util/FPSCounter.h"
+#include "gameobject/gameobject.h"
+//----------------------------------------------------------------------------//
+namespace sf
+{
+class Window;
+}
 //----------------------------------------------------------------------------//
 namespace foragers
 {
@@ -22,10 +26,10 @@ class Scene;
 // It creates everything needed for the game: a Window, an Input system,
 // a Renderer, a ResourceManager, etc.
 //----------------------------------------------------------------------------//
-class ENGINE_API Game
+class ENGINE_API Game : public GameObject
 {
 public:
-	Game(GameConfig& gameConfig);
+	Game(const char *filename = 0);
 	~Game();
 
 /// Run loop
@@ -51,19 +55,11 @@ public:
 private:
 	std::stack<Scene*> _sceneStack;
 
-/// Window / input management
 public:
 	// This is the function you should call for quitting the game
 	void quit();
 	void pause();
 	void resume();
-
-	Window& getWindow() { return _window; }
-	Input& getInput() { return _input; }
-
-private:
-	Window _window;
-	Input _input;
 
 /// Renderer
 public:
@@ -82,6 +78,10 @@ public:
 	const FPSCounter& getFPSCounter() { return _fpsCounter; }
 private:
 	FPSCounter _fpsCounter;
+
+/// Window implementation
+private:
+	sf::Window *_window;
 };
 //----------------------------------------------------------------------------//
 } // end namespace foragers

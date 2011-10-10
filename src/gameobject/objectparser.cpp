@@ -10,7 +10,7 @@
 using namespace foragers;
 //----------------------------------------------------------------------------//
 bool ObjectParser::parse(const char *filename, GameObject &object,
-						 const GOWorld &world)
+						 const World *world)
 {
 	std::ifstream ifs(filename);
 
@@ -26,7 +26,9 @@ bool ObjectParser::parse(const char *filename, GameObject &object,
 	object.name = root["name"].asCString();
 
 	parseAttributes(root["attributes"], object);
-	parseBehaviors(root["behaviors"], object, world);
+
+	if (world)
+		parseBehaviors(root["behaviors"], object, *world);
 
 	return true;
 }
@@ -70,7 +72,7 @@ void ObjectParser::parseAttributes(const Json::Value &attrsValue,
 }
 //----------------------------------------------------------------------------//
 void ObjectParser::parseBehaviors(const Json::Value &behaviorsValue,
-								  GameObject &object, const GOWorld &world)
+								  GameObject &object, const World &world)
 {
 	using std::cerr;
 	using std::endl;

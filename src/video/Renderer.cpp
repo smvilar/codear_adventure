@@ -1,13 +1,7 @@
 #include "video/Renderer.h"
 //----------------------------------------------------------------------------//
-// Implementation
-#include "SFML/SFMLRenderer.h"
 #include <SFML/OpenGL.hpp>
 //----------------------------------------------------------------------------//
-#include <string>
-#include <iostream>
-//----------------------------------------------------------------------------//
-#include "core/Window.h"
 #include "math/MathUtil.h"
 #include "math/Vector2.h"
 #include "video/Color.h"
@@ -15,28 +9,22 @@
 using namespace foragers;
 //----------------------------------------------------------------------------//
 Renderer::Renderer()
-: _pImpl(new SFMLRenderer)
 {
 }
 //----------------------------------------------------------------------------//
 Renderer::~Renderer()
 {
-	delete _pImpl;
 }
 //----------------------------------------------------------------------------//
-bool Renderer::init(Window* pWindow)
+bool Renderer::init(u32 width, u32 height)
 {
-	using std::string;
-
-	_pImpl->init(pWindow);
-
 	// Init buffers
 	_dynamicVBO.init();
 
 	// Set the 2D Projection Matrix
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, pWindow->getWidth(), pWindow->getHeight(), 0, -1, 1);
+	glOrtho(0, width, height, 0, -1, 1);
 
 	// Set alpha blending
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -51,14 +39,10 @@ bool Renderer::init(Window* pWindow)
 void Renderer::deinit()
 {
 	_dynamicVBO.deinit();
-
-	_pImpl->deinit();
 }
 //----------------------------------------------------------------------------//
 void Renderer::begin()
 {
-	_pImpl->begin();
-
 	glEnable(GL_CULL_FACE);	
 	
 	glMatrixMode(GL_MODELVIEW);
@@ -70,8 +54,6 @@ void Renderer::begin()
 void Renderer::end()
 {
 	_dynamicVBO.render();
-
-	_pImpl->end();
 }
 //----------------------------------------------------------------------------//
 void Renderer::setClearColor(const Color& color)
