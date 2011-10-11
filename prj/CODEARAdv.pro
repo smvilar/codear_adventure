@@ -32,7 +32,7 @@ INCLUDEPATH += \
 	../lib/zlib125/include
 
 HEADERS += \
-	../src/foragersengine.h \
+	../src/hierophantengine.h \
 	../src/dllexport.h \
 	../src/behaviors/spritebehavior.h \
     ../src/behaviors/followmousebehavior.h \
@@ -88,7 +88,7 @@ HEADERS += \
 	../src/video/Shape.h \
     ../src/video/Renderer.h \
     ../src/video/GLee.h \
-    ../src/video/ForagersEngine.h \
+    ../src/video/hierophantengine.h \
     ../src/video/DynamicVertexBuffer.h \
     ../src/video/DllExport.h \
 	../src/video/Color.h
