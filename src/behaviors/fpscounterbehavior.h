@@ -1,18 +1,22 @@
-#ifndef FORAGERS_GAMELOOP_H
-#define FORAGERS_GAMELOOP_H
+#ifndef FORAGERS_FPSCOUNTERBEHAVIOR_H
+#define FORAGERS_FPSCOUNTERBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
+#include "gameobject/gobehavior.h"
+#include "util/FPSCounter.h"
 //----------------------------------------------------------------------------//
 namespace foragers {
 //----------------------------------------------------------------------------//
-class World;
-//----------------------------------------------------------------------------//
-class ENGINE_API GameLoop
+class ENGINE_API FPSCounterBehavior : public Behavior
 {
 public:
-	void start(World &world, const char *gameFilename) const;
+	virtual void update();
+	virtual Behavior* clone() const;
+
+private:
+	FPSCounter _fpsCounter;
 };
 //----------------------------------------------------------------------------//
 } // end namespace foragers
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_GAMELOOP_H
+#endif // FORAGERS_FPSCOUNTERBEHAVIOR_H

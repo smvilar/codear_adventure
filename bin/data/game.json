@@ -14,7 +14,8 @@
 	[
 		"Window",
 		"SceneManager",
-		"Render"
+		"Render",
+		"FPSCounter"
 	]
 }
 

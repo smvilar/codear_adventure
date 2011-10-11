@@ -7,12 +7,12 @@
 //----------------------------------------------------------------------------//
 using namespace foragers;
 //----------------------------------------------------------------------------//
-void GameLoop::start(const char *gameFilename) const
+void GameLoop::start(World &world, const char *gameFilename) const
 {
-	World world;
 	world.registerBehavior("SceneManager", new SceneManager);
 	world.registerBehavior("Render", new RenderBehavior);
 	world.registerBehavior("Window", new WindowBehavior);
+	world.registerBehavior("FPSCounter", new FPSCounterBehavior);
 
 	GameObject* game = world.parseObject(gameFilename);
 	Attribute* isGameAlive = new Attribute(true);

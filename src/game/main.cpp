@@ -4,9 +4,11 @@
 int main()
 {
 	using foragers::GameLoop;
+	using foragers::World;
 
+	World world;
 	GameLoop gameLoop;
-	gameLoop.start("game.json");
+	gameLoop.start(world, "game.json");
 
 	return 0;
 }

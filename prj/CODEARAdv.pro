@@ -40,6 +40,7 @@ HEADERS += \
 	../src/behaviors/scenemanager.h \
 	../src/behaviors/windowbehavior.h \
 	../src/behaviors/renderbehavior.h \
+	../src/behaviors/fpscounter.h \
 	../src/behaviors/gamebehaviors.h \
     ../src/core/Assert.h \
     ../src/core/Types.h \
@@ -97,6 +98,7 @@ SOURCES += \
 	../src/behaviors/scenemanager.cpp \
 	../src/behaviors/windowbehavior.cpp \
 	../src/behaviors/renderbehavior.cpp \
+	../src/behaviors/fpscounterbehavior.cpp \
 	../src/core/Scene.cpp \
 	../src/core/GameLoop.cpp \
 	../src/gameobject/objectparser.cpp \
