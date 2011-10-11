@@ -6,7 +6,7 @@
 #include <map>
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
-#include "gameobject/goattribute.h"
+#include "gameobject/attribute.h"
 //----------------------------------------------------------------------------//
 namespace foragers
 {

@@ -2,7 +2,7 @@
 #define FORAGERS_FPSCOUNTERBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
-#include "gameobject/gobehavior.h"
+#include "gameobject/behavior.h"
 #include "util/FPSCounter.h"
 //----------------------------------------------------------------------------//
 namespace foragers {

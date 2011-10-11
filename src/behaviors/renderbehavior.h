@@ -2,7 +2,7 @@
 #define FORAGERS_RENDERBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
-#include "gameobject/gobehavior.h"
+#include "gameobject/behavior.h"
 #include "video/Renderer.h"
 //----------------------------------------------------------------------------//
 namespace foragers {

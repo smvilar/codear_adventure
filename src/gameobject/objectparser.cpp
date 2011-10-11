@@ -4,8 +4,8 @@
 //----------------------------------------------------------------------------//
 #include "json/json.h"
 #include "gameobject/gameobject.h"
-#include "gameobject/goattribute.h"
-#include "gameobject/gobehavior.h"
+#include "gameobject/attribute.h"
+#include "gameobject/behavior.h"
 //----------------------------------------------------------------------------//
 using namespace foragers;
 //----------------------------------------------------------------------------//

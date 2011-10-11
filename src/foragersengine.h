@@ -24,8 +24,8 @@
 #include "resource/ResourceManager.h"
 //----------------------------------------------------------------------------//
 #include "gameobject/gameobject.h"
-#include "gameobject/goattribute.h"
-#include "gameobject/gobehavior.h"
-#include "gameobject/goworld.h"
+#include "gameobject/attribute.h"
+#include "gameobject/behavior.h"
+#include "gameobject/world.h"
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_FORAGERSENGINE_H

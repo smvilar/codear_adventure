@@ -1,8 +1,8 @@
 #include "gameobject/gameobject.h"
 //----------------------------------------------------------------------------//
-#include "gameobject/goworld.h"
-#include "gameobject/goattribute.h"
-#include "gameobject/gobehavior.h"
+#include "gameobject/world.h"
+#include "gameobject/attribute.h"
+#include "gameobject/behavior.h"
 #include "core/Assert.h"
 //----------------------------------------------------------------------------//
 using namespace foragers;

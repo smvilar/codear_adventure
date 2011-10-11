@@ -1,15 +1,11 @@
-#include "gameobject/goattribute.h"
+#include "gameobject/behavior.h"
 //----------------------------------------------------------------------------//
 using namespace foragers;
 //----------------------------------------------------------------------------//
-Attribute::Attribute(boost::any value)
-	: _value(value)
+Behavior::Behavior()
+: _pOwner(0)
+, _pWorld(0)
 {
 	// ...
-}
-//----------------------------------------------------------------------------//
-Attribute* Attribute::clone() const
-{
-	return new Attribute(_value);
 }
 //----------------------------------------------------------------------------//

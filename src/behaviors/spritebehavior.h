@@ -4,7 +4,7 @@
 #include <string>
 #include "DllExport.h"
 #include "core/Types.h"
-#include "gameobject/gobehavior.h"
+#include "gameobject/behavior.h"
 #include "video/Sprite.h"
 //----------------------------------------------------------------------------//
 namespace foragers {

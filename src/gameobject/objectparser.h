@@ -3,7 +3,7 @@
 //----------------------------------------------------------------------------//
 // This is a "inner" header file, it won't be visible to the library user
 //----------------------------------------------------------------------------//
-#include "gameobject/goworld.h"
+#include "gameobject/world.h"
 #include "json/json.h"
 //----------------------------------------------------------------------------//
 namespace foragers

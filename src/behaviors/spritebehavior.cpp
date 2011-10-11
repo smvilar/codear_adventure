@@ -2,9 +2,9 @@
 //----------------------------------------------------------------------------//
 #include <string>
 //----------------------------------------------------------------------------//
-#include "gameobject/goworld.h"
+#include "gameobject/world.h"
 #include "gameobject/gameobject.h"
-#include "gameobject/goattribute.h"
+#include "gameobject/attribute.h"
 #include "resource/ResourceManager.h"
 #include "video/Texture.h"
 #include "core/Scene.h"

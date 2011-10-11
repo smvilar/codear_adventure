@@ -49,9 +49,9 @@ HEADERS += \
 	../src/core/BaseObject.h \
 	../src/core/GameLoop.h \
     ../src/gameobject/objectparser.h \
-    ../src/gameobject/goworld.h \
-    ../src/gameobject/gobehavior.h \
-    ../src/gameobject/goattribute.h \
+	../src/gameobject/world.h \
+	../src/gameobject/behavior.h \
+	../src/gameobject/attribute.h \
     ../src/gameobject/gameobject.h \
     ../src/json/writer.h \
     ../src/json/value.h \
@@ -102,9 +102,9 @@ SOURCES += \
 	../src/core/Scene.cpp \
 	../src/core/GameLoop.cpp \
 	../src/gameobject/objectparser.cpp \
-	../src/gameobject/goworld.cpp \
-	../src/gameobject/gobehavior.cpp \
-	../src/gameobject/goattribute.cpp \
+	../src/gameobject/world.cpp \
+	../src/gameobject/behavior.cpp \
+	../src/gameobject/attribute.cpp \
 	../src/gameobject/gameobject.cpp \
 	../src/json/json_writer.cpp \
 	../src/json/json_value.cpp \

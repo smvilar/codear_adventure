@@ -1,9 +1,9 @@
 #include "core/gameloop.h"
 //----------------------------------------------------------------------------//
 #include "behaviors/gamebehaviors.h"
-#include "gameobject/goworld.h"
+#include "gameobject/world.h"
 #include "gameobject/gameobject.h"
-#include "gameobject/goattribute.h"
+#include "gameobject/attribute.h"
 //----------------------------------------------------------------------------//
 using namespace foragers;
 //----------------------------------------------------------------------------//

@@ -2,7 +2,7 @@
 #define FORAGERS_WINDOWBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
-#include "gameobject/gobehavior.h"
+#include "gameobject/behavior.h"
 //----------------------------------------------------------------------------//
 namespace sf
 {
