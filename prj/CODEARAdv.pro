@@ -41,6 +41,8 @@ HEADERS += \
 	../src/behaviors/windowbehavior.h \
 	../src/behaviors/renderbehavior.h \
 	../src/behaviors/fpscounter.h \
+	../src/behaviors/activatespawnerbehavior.h \
+	../src/behaviors/spawnbehavior.h \
 	../src/behaviors/gamebehaviors.h \
     ../src/core/Assert.h \
     ../src/core/Types.h \
@@ -99,6 +101,8 @@ SOURCES += \
 	../src/behaviors/windowbehavior.cpp \
 	../src/behaviors/renderbehavior.cpp \
 	../src/behaviors/fpscounterbehavior.cpp \
+	../src/behaviors/activatespawnerbehavior.cpp \
+	../src/behaviors/spawnbehavior.cpp \
 	../src/core/Scene.cpp \
 	../src/core/gameloop.cpp \
 	../src/gameobject/objectparser.cpp \

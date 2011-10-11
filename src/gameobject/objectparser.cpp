@@ -36,6 +36,7 @@ bool ObjectParser::parse(const char *filename, GameObject &object,
 void ObjectParser::parseAttributes(const Json::Value &attrsValue,
 								   GameObject &object)
 {
+	using std::cout;
 	using std::cerr;
 	using std::endl;
 
@@ -51,22 +52,18 @@ void ObjectParser::parseAttributes(const Json::Value &attrsValue,
 	{
 		const std::string& attrName = *it;
 		Json::Value value = attrsValue[attrName];
-		Attribute *attribute = 0;
 
-		if (value.isInt())
-			attribute = new Attribute(value.asInt());
-		else if (value.isBool())
-			attribute = new Attribute(value.asBool());
-		else if (value.isString())
-			attribute = new Attribute(value.asString());
-		else
-			cerr << "The type of attribute" << attrName
-				 << "isn't supported" << endl;
+		Attribute *attribute = resolveType(value);
 
 		if (attribute)
 		{
-			std::cout << "Adding attribute " << attrName << endl;
+			cout << "Adding attribute " << attrName << endl;
 			object.addAttribute(attrName.c_str(), attribute);
+		}
+		else
+		{
+			cerr << "The type of attribute '" << attrName
+				 << "' isn't supported" << endl;
 		}
 	}
 }
@@ -95,5 +92,34 @@ void ObjectParser::parseBehaviors(const Json::Value &behaviorsValue,
 		else
 			cerr << behaviorName << " not found" << endl;
 	}
+}
+//----------------------------------------------------------------------------//
+Attribute* ObjectParser::resolveType(const Json::Value &jsonValue)
+{
+	Attribute* attribute = 0;
+
+	if (jsonValue.isInt())
+	{
+		attribute = new Attribute(jsonValue.asInt());
+	}
+	else if (jsonValue.isBool())
+	{
+		attribute = new Attribute(jsonValue.asBool());
+	}
+	else if (jsonValue.isString())
+	{
+		attribute = new Attribute(jsonValue.asString());
+	}
+	else if (jsonValue.isArray())
+	{
+		std::vector<Attribute*> vec;
+		vec.reserve(jsonValue.size());
+		// recurse
+		for (size_t i = 0; i < jsonValue.size(); ++i)
+			vec.push_back(resolveType(jsonValue[i]));
+		attribute = new Attribute(vec);
+	}
+
+	return attribute;
 }
 //----------------------------------------------------------------------------//

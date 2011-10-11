@@ -24,7 +24,7 @@ void SpriteBehavior::added()
 	
 	ResourceManager &resMgr = _pWorld->getResourceManager();
 	TexturePtr texture = resMgr.get<Texture>(filename.c_str());
-	_sprite = Sprite(texture, 6, 1, 120);
+	_sprite = Sprite(texture, 1, 1, 0);
 
 	_posX = _pOwner->getAttribute("pos_x");
 	_posY = _pOwner->getAttribute("pos_y");

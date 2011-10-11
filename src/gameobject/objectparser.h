@@ -10,6 +10,7 @@ namespace he
 {
 //----------------------------------------------------------------------------//
 class GameObject;
+class Attribute;
 //----------------------------------------------------------------------------//
 class ObjectParser
 {
@@ -20,6 +21,8 @@ private:
 	void parseAttributes(const Json::Value& jsonValue, GameObject& object);
 	void parseBehaviors(const Json::Value& jsonValue, GameObject& object,
 						const World &world);
+
+	Attribute* resolveType(const Json::Value& jsonValue);
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

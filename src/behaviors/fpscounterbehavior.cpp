@@ -1,14 +1,12 @@
 #include "behaviors/fpscounterbehavior.h"
 //----------------------------------------------------------------------------//
 #include "gameobject/gameobject.h"
-#include <iostream>
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
 void FPSCounterBehavior::update()
 {
 	_fpsCounter.tick();
-	std::cout << _fpsCounter.getFPS() << std::endl;
 }
 //----------------------------------------------------------------------------//
 Behavior* FPSCounterBehavior::clone() const

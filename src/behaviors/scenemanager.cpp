@@ -30,9 +30,10 @@ void SceneBehavior::added()
 void SceneBehavior::activate()
 {
 	_pFPSCounter = _pOwner->getAttribute("fpscounter");
-
-	// Start the first scene
-	using std::string;
-	string sceneName = _pOwner->getAttributeAs<string>("startingscene");
+}
+//----------------------------------------------------------------------------//
+void SceneBehavior::removed()
+{
+	_pWorld->getScene().removed();
 }
 //----------------------------------------------------------------------------//

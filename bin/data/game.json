@@ -4,18 +4,19 @@
 	{
 		"name" : "CODEAR Adventure",
 		"width" : 800,
-		"height" : 400,
+		"height" : 600,
 		"bpp" : 32,
 		"fullscreen" : 0,
 		"maxframerate" : 60,
-		"startingscene" : "Scene1"
+		"spawner" : "spawner.json"
 	},
 	"behaviors" :
 	[
 		"FPSCounter",
 		"Window",
 		"SceneManager",
-		"Render"
+		"Render",
+		"ActivateSpawner"
 	]
 }
 

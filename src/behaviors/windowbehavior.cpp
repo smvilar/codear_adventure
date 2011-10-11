@@ -3,6 +3,7 @@
 #include <string>
 //----------------------------------------------------------------------------//
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 //----------------------------------------------------------------------------//
 #include "core/Types.h"
 #include "gameobject/gameobject.h"
@@ -17,6 +18,11 @@ void WindowBehavior::update()
 		if (event.Type == sf::Event::Closed)
 			_pOwner->getAttribute("alive")->setValue(false);
 	}
+	// TODO: this should be maybe in another behavior, or gone
+	bool isControlPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::LSystem);
+	bool isQPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::Q);
+	if (isControlPressed && isQPressed)
+		_pOwner->getAttribute("alive")->setValue(false);
 }
 //----------------------------------------------------------------------------//
 void WindowBehavior::handleMessage(const char *message, void *args)

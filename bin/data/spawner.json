@@ -1,0 +1,16 @@
+// This is a "spawner" object: it just spawns other objects
+{
+	"name" : "Spawner",
+	"attributes" :
+	{
+		"objects" :
+		[
+			"background.json"
+		]
+	},
+	"behaviors" :
+	[
+		"Spawn"
+	]
+}
+

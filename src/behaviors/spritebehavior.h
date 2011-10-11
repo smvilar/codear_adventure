@@ -17,7 +17,6 @@ public:
 	virtual ~SpriteBehavior() {}
 
 	virtual void update();
-	//virtual void handleMessage(const char* message, void* args) {}
 
 	virtual Behavior* clone() const;
 
