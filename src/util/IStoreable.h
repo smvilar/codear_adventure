@@ -1,5 +1,5 @@
-#ifndef FORAGERS_ISTOREABLE_H
-#define FORAGERS_ISTOREABLE_H
+#ifndef HE_ISTOREABLE_H
+#define HE_ISTOREABLE_H
 //----------------------------------------------------------------------------//
 #include <string>
 #include <rapidxml.hpp>
@@ -48,5 +48,5 @@ void IStoreable::getValueFromNode(rapidxml::xml_node<>* node, Type& value)
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_ISTOREABLE_H
+#endif // HE_ISTOREABLE_H
 //----------------------------------------------------------------------------//

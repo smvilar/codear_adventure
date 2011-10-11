@@ -1,5 +1,5 @@
-#ifndef FORAGERS_FONT_H
-#define FORAGERS_FONT_H
+#ifndef HE_FONT_H
+#define HE_FONT_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "resource/IResource.h"

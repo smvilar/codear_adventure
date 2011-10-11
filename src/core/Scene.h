@@ -1,5 +1,5 @@
-#ifndef FORAGERS_SCENE_H
-#define FORAGERS_SCENE_H
+#ifndef HE_SCENE_H
+#define HE_SCENE_H
 //----------------------------------------------------------------------------//
 #include <vector>
 #include "DllExport.h"
@@ -37,4 +37,4 @@ private: // shouldn't be accessed by children classes
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_SCENE_H
+#endif // HE_SCENE_H

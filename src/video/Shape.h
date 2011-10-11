@@ -1,5 +1,5 @@
-#ifndef FORAGERS_SHAPE_H
-#define FORAGERS_SHAPE_H
+#ifndef HE_SHAPE_H
+#define HE_SHAPE_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "core/Entity.h"
@@ -40,4 +40,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_SHAPE_H
+#endif // HE_SHAPE_H

@@ -1,5 +1,5 @@
-#ifndef FORAGERS_FOLLOWMOUSEBEHAVIOR_H
-#define FORAGERS_FOLLOWMOUSEBEHAVIOR_H
+#ifndef HE_FOLLOWMOUSEBEHAVIOR_H
+#define HE_FOLLOWMOUSEBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 //----------------------------------------------------------------------------//
@@ -11,4 +11,4 @@ class ENGINE_API FollowMouseBehavior
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_FOLLOWMOUSEBEHAVIOR_H
+#endif // HE_FOLLOWMOUSEBEHAVIOR_H

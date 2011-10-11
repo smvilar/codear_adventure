@@ -1,5 +1,5 @@
-#ifndef FORAGERS_GAMEOBJECT_H
-#define FORAGERS_GAMEOBJECT_H
+#ifndef HE_GAMEOBJECT_H
+#define HE_GAMEOBJECT_H
 //----------------------------------------------------------------------------//
 #include <string>
 #include <vector>
@@ -61,4 +61,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_GAMEOBJECT_H
+#endif // HE_GAMEOBJECT_H

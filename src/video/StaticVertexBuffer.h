@@ -1,5 +1,5 @@
-#ifndef FORAGERS_STATICVERTEXBUFFER_H
-#define FORAGERS_STATICVERTEXBUFFER_H
+#ifndef HE_STATICVERTEXBUFFER_H
+#define HE_STATICVERTEXBUFFER_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "video/Vertex.h"
@@ -30,4 +30,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_STATICVERTEXBUFFER_H
+#endif // HE_STATICVERTEXBUFFER_H

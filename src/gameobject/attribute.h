@@ -1,5 +1,5 @@
-#ifndef FORAGERS_GOATTRIBUTE_H
-#define FORAGERS_GOATTRIBUTE_H
+#ifndef HE_ATTRIBUTE_H
+#define HE_ATTRIBUTE_H
 //----------------------------------------------------------------------------//
 #include <boost/any.hpp>
 #include "DllExport.h"
@@ -31,4 +31,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_GOATTRIBUTE_H
+#endif // HE_ATTRIBUTE_H

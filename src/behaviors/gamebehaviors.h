@@ -1,5 +1,5 @@
-#ifndef FORAGERS_GAMEBEHAVIORS_H
-#define FORAGERS_GAMEBEHAVIORS_H
+#ifndef HE_GAMEBEHAVIORS_H
+#define HE_GAMEBEHAVIORS_H
 //----------------------------------------------------------------------------//
 #include "windowbehavior.h"
 #include "scenemanager.h"
@@ -7,4 +7,4 @@
 #include "fpscounterbehavior.h"
 #include "activatespawnerbehavior.h"
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_GAMEBEHAVIORS_H
+#endif // HE_GAMEBEHAVIORS_H

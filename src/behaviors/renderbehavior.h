@@ -1,5 +1,5 @@
-#ifndef FORAGERS_RENDERBEHAVIOR_H
-#define FORAGERS_RENDERBEHAVIOR_H
+#ifndef HE_RENDERBEHAVIOR_H
+#define HE_RENDERBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "gameobject/behavior.h"
@@ -23,4 +23,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_RENDERBEHAVIOR_H
+#endif // HE_RENDERBEHAVIOR_H

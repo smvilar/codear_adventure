@@ -1,5 +1,5 @@
-#ifndef FORAGERS_OBJECTPARSER_H
-#define FORAGERS_OBJECTPARSER_H
+#ifndef HE_OBJECTPARSER_H
+#define HE_OBJECTPARSER_H
 //----------------------------------------------------------------------------//
 // This is a "inner" header file, it won't be visible to the library user
 //----------------------------------------------------------------------------//
@@ -27,4 +27,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_OBJECTPARSER_H
+#endif // HE_OBJECTPARSER_H

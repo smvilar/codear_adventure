@@ -1,5 +1,5 @@
-#ifndef FORAGERS_DYNAMICVERTEXBUFFER_H
-#define FORAGERS_DYNAMICVERTEXBUFFER_H
+#ifndef HE_DYNAMICVERTEXBUFFER_H
+#define HE_DYNAMICVERTEXBUFFER_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "core/Types.h"

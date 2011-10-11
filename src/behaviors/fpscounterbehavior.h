@@ -1,5 +1,5 @@
-#ifndef FORAGERS_FPSCOUNTERBEHAVIOR_H
-#define FORAGERS_FPSCOUNTERBEHAVIOR_H
+#ifndef HE_FPSCOUNTERBEHAVIOR_H
+#define HE_FPSCOUNTERBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "gameobject/behavior.h"
@@ -23,4 +23,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_FPSCOUNTERBEHAVIOR_H
+#endif // HE_FPSCOUNTERBEHAVIOR_H

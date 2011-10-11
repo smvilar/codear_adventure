@@ -1,5 +1,5 @@
-#ifndef FORAGERS_RECT_H
-#define FORAGERS_RECT_H
+#ifndef HE_RECT_H
+#define HE_RECT_H
 //----------------------------------------------------------------------------//
 #include <cmath>
 #include "core/Types.h"
@@ -37,4 +37,4 @@ typedef Rect<s32> Recti;
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_RECT_H
+#endif // HE_RECT_H

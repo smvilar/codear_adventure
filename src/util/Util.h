@@ -1,5 +1,5 @@
-#ifndef FORAGERS_UTIL_H
-#define FORAGERS_UTIL_H
+#ifndef HE_UTIL_H
+#define HE_UTIL_H
 //----------------------------------------------------------------------------//
 #include <sstream>
 #include "DllExport.h"
@@ -28,5 +28,5 @@ inline T fromString(const char* str)
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_UTIL_H
+#endif // HE_UTIL_H
 //----------------------------------------------------------------------------//

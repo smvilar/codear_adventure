@@ -1,5 +1,5 @@
-#ifndef FORAGERS_VERTEX_H
-#define FORAGERS_VERTEX_H
+#ifndef HE_VERTEX_H
+#define HE_VERTEX_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "core/Types.h"
@@ -26,4 +26,4 @@ struct ENGINE_API Vertex2D
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_VERTEX_H
+#endif // HE_VERTEX_H

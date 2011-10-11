@@ -1,5 +1,5 @@
-#ifndef FORAGERS_WINDOWBEHAVIOR_H
-#define FORAGERS_WINDOWBEHAVIOR_H
+#ifndef HE_WINDOWBEHAVIOR_H
+#define HE_WINDOWBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "gameobject/behavior.h"
@@ -28,4 +28,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_WINDOWBEHAVIOR_H
+#endif // HE_WINDOWBEHAVIOR_H

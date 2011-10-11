@@ -1,5 +1,5 @@
-#ifndef FORAGERS_IRESOURCE_H
-#define FORAGERS_IRESOURCE_H
+#ifndef HE_IRESOURCE_H
+#define HE_IRESOURCE_H
 //----------------------------------------------------------------------------//
 #include <boost/smart_ptr/shared_ptr.hpp>
 //----------------------------------------------------------------------------//
@@ -23,4 +23,4 @@ typedef boost::shared_ptr<IResource> IResourcePtr;
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_IRESOURCE_H
+#endif // HE_IRESOURCE_H

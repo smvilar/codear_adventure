@@ -1,5 +1,5 @@
-#ifndef FORAGERS_SPRITEBEHAVIOR_H
-#define FORAGERS_SPRITEBEHAVIOR_H
+#ifndef HE_SPRITEBEHAVIOR_H
+#define HE_SPRITEBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include <string>
 #include "DllExport.h"
@@ -33,4 +33,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_SPRITEBEHAVIOR_H
+#endif // HE_SPRITEBEHAVIOR_H

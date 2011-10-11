@@ -1,5 +1,5 @@
-#ifndef FORAGERS_EDITBEHAVIOR_H
-#define FORAGERS_EDITBEHAVIOR_H
+#ifndef HE_EDITBEHAVIOR_H
+#define HE_EDITBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 //----------------------------------------------------------------------------//
@@ -11,4 +11,4 @@ class ENGINE_API EditBehavior
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_EDITBEHAVIOR_H
+#endif // HE_EDITBEHAVIOR_H

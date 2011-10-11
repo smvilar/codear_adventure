@@ -1,5 +1,5 @@
-#ifndef FORAGERS_RESOURCEMANAGER_H
-#define FORAGERS_RESOURCEMANAGER_H
+#ifndef HE_RESOURCEMANAGER_H
+#define HE_RESOURCEMANAGER_H
 //----------------------------------------------------------------------------//
 #include <map>
 //----------------------------------------------------------------------------//
@@ -40,4 +40,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_RESOURCEMANAGER_H
+#endif // HE_RESOURCEMANAGER_H

@@ -1,5 +1,5 @@
-#ifndef FORAGERS_TEXTURE_H
-#define FORAGERS_TEXTURE_H
+#ifndef HE_TEXTURE_H
+#define HE_TEXTURE_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "resource/IResource.h"
@@ -36,4 +36,4 @@ typedef boost::shared_ptr<Texture> TexturePtr;
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_TEXTURE_H
+#endif // HE_TEXTURE_H

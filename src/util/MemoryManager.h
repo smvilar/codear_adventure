@@ -1,5 +1,5 @@
-#ifndef FORAGERS_MEMORYMANAGER_H
-#define FORAGERS_MEMORYMANAGER_H
+#ifndef HE_MEMORYMANAGER_H
+#define HE_MEMORYMANAGER_H
 //----------------------------------------------------------------------------//
 //#define USE_MEMORY_MANAGER
 //----------------------------------------------------------------------------//
@@ -71,5 +71,5 @@ void operator delete[]	(void* addr, char* file, thr::u32 line);
 //----------------------------------------------------------------------------//
 #endif // USE_MEMORY_MANAGER
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_MEMORYMANAGER_H
+#endif // HE_MEMORYMANAGER_H
 //----------------------------------------------------------------------------//

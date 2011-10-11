@@ -1,5 +1,5 @@
-#ifndef FORAGERS_SPRITE_H
-#define FORAGERS_SPRITE_H
+#ifndef HE_SPRITE_H
+#define HE_SPRITE_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "core/Entity.h"
@@ -52,4 +52,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_SPRITE_H
+#endif // HE_SPRITE_H

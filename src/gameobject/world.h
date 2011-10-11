@@ -1,5 +1,5 @@
-#ifndef FORAGERS_GOWORLD_H
-#define FORAGERS_GOWORLD_H
+#ifndef HE_WORLD_H
+#define HE_WORLD_H
 //----------------------------------------------------------------------------//
 #include <vector>
 #include <map>
@@ -83,4 +83,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_GOWORLD_H
+#endif // HE_WORLD_H

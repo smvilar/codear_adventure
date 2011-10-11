@@ -1,5 +1,5 @@
-#ifndef FORAGERS_RENDERER_H
-#define FORAGERS_RENDERER_H
+#ifndef HE_RENDERER_H
+#define HE_RENDERER_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "core/Types.h"
@@ -37,4 +37,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_RENDERER_H
+#endif // HE_RENDERER_H

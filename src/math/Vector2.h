@@ -1,5 +1,5 @@
-#ifndef FORAGERS_VECTOR2_H
-#define FORAGERS_VECTOR2_H
+#ifndef HE_VECTOR2_H
+#define HE_VECTOR2_H
 //----------------------------------------------------------------------------//
 #include <cmath>
 #include "core/Types.h"
@@ -89,4 +89,4 @@ template <> const Vector2i Vector2i::UNIT_Y(0, 1);
 #endif // _MSC_VER
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_VECTOR2_H
+#endif // HE_VECTOR2_H

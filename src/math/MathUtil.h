@@ -1,5 +1,5 @@
-#ifndef FORAGERS_MATHUTIL_H
-#define FORAGERS_MATHUTIL_H
+#ifndef HE_MATHUTIL_H
+#define HE_MATHUTIL_H
 //----------------------------------------------------------------------------//
 #include <cmath>
 #include "DllExport.h"
@@ -35,4 +35,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_MATHUTIL_H
+#endif // HE_MATHUTIL_H

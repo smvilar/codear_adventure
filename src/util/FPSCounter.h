@@ -1,5 +1,5 @@
-#ifndef FORAGERS_FPSCOUNTER_H
-#define FORAGERS_FPSCOUNTER_H
+#ifndef HE_FPSCOUNTER_H
+#define HE_FPSCOUNTER_H
 //----------------------------------------------------------------------------//
 #include <string>
 #include "DllExport.h"
@@ -35,5 +35,5 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_FPSCOUNTER_H
+#endif // HE_FPSCOUNTER_H
 //----------------------------------------------------------------------------//

@@ -1,5 +1,5 @@
-#ifndef FORAGERS_BASEOBJECT_H
-#define FORAGERS_BASEOBJECT_H
+#ifndef HE_BASEOBJECT_H
+#define HE_BASEOBJECT_H
 //----------------------------------------------------------------------------//
 #include <string>
 #include "DllExport.h"
@@ -25,4 +25,4 @@ protected:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_BASEOBJECT_H
+#endif // HE_BASEOBJECT_H

@@ -1,5 +1,5 @@
-#ifndef FORAGERS_SCENEBEHAVIOR_H
-#define FORAGERS_SCENEBEHAVIOR_H
+#ifndef HE_SCENEMANAGER_H
+#define HE_SCENEMANAGER_H
 //----------------------------------------------------------------------------//
 #include <stack>
 //----------------------------------------------------------------------------//
@@ -29,4 +29,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_SCENEBEHAVIOR_H
+#endif // HE_SCENEMANAGER_H

@@ -1,5 +1,5 @@
-#ifndef FORAGERS_TEXT_H
-#define FORAGERS_TEXT_H
+#ifndef HE_TEXT_H
+#define HE_TEXT_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "core/Entity.h"
@@ -46,4 +46,4 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_TEXT_H
+#endif // HE_TEXT_H

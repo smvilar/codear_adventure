@@ -1,5 +1,5 @@
-#ifndef FORAGERS_TYPES_H
-#define FORAGERS_TYPES_H
+#ifndef HE_TYPES_H
+#define HE_TYPES_H
 //----------------------------------------------------------------------------//
 #if 0 // c++0x
 #include <cstdint>
@@ -41,4 +41,4 @@ typedef double				f64;
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_TYPES_H
+#endif // HE_TYPES_H

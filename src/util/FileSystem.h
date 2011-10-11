@@ -1,5 +1,5 @@
-#ifndef FORAGERS_FILESYSTEM_H
-#define FORAGERS_FILESYSTEM_H
+#ifndef HE_FILESYSTEM_H
+#define HE_FILESYSTEM_H
 //----------------------------------------------------------------------------//
 #include <string>
 #include <vector>
@@ -23,5 +23,5 @@ private:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_FILESYSTEM_H
+#endif // HE_FILESYSTEM_H
 //----------------------------------------------------------------------------//
