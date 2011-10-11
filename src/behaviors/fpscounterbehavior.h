@@ -5,7 +5,7 @@
 #include "gameobject/behavior.h"
 #include "util/FPSCounter.h"
 //----------------------------------------------------------------------------//
-namespace foragers {
+namespace he {
 //----------------------------------------------------------------------------//
 class ENGINE_API FPSCounterBehavior : public Behavior
 {
@@ -14,9 +14,13 @@ public:
 	virtual Behavior* clone() const;
 
 private:
+	virtual void added();
+	virtual void removed();
+
+private:
 	FPSCounter _fpsCounter;
 };
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_FPSCOUNTERBEHAVIOR_H

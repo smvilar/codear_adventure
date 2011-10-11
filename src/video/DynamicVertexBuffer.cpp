@@ -2,7 +2,7 @@
 #include "video/glee.h"
 //#include <SFML/OpenGL.hpp>
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 DynamicVertexBuffer::DynamicVertexBuffer()
 : _vboID(0)
@@ -79,7 +79,7 @@ void DynamicVertexBuffer::addVertex(f32 x, f32 y, f32 u, f32 v)
 	_vertexBuffer[_vertexBufferSize++] = Vertex2D(x, y, u, v);
 
 	// Automatic indexing for quads. 
-	// It´d be cool to have another way of indexing to draw other polygons.
+	// Itd be cool to have another way of indexing to draw other polygons.
 	if(_vertexBufferSize % 4 == 0)
 	{
 		u32 i = 0;

@@ -7,7 +7,7 @@
 #include "DllExport.h"
 #include "util/Util.h"
 //----------------------------------------------------------------------------//
-namespace foragers
+namespace he
 {
 //----------------------------------------------------------------------------//
 class ENGINE_API IStoreable
@@ -46,7 +46,7 @@ void IStoreable::getValueFromNode(rapidxml::xml_node<>* node, Type& value)
 	value = fromString<Type>(node->value());
 }
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_ISTOREABLE_H
 //----------------------------------------------------------------------------//

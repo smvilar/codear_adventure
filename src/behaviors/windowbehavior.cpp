@@ -7,7 +7,7 @@
 #include "core/Types.h"
 #include "gameobject/gameobject.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 void WindowBehavior::update()
 {

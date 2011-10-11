@@ -5,7 +5,7 @@
 #include "gameobject/behavior.h"
 #include "core/Assert.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 GameObject::GameObject(const char *name)
 : name(name)

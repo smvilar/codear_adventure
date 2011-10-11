@@ -47,7 +47,7 @@ HEADERS += \
 	../src/core/Scene.h \
 	../src/core/Entity.h \
 	../src/core/BaseObject.h \
-	../src/core/GameLoop.h \
+	../src/core/gameloop.h \
     ../src/gameobject/objectparser.h \
 	../src/gameobject/world.h \
 	../src/gameobject/behavior.h \
@@ -100,7 +100,7 @@ SOURCES += \
 	../src/behaviors/renderbehavior.cpp \
 	../src/behaviors/fpscounterbehavior.cpp \
 	../src/core/Scene.cpp \
-	../src/core/GameLoop.cpp \
+	../src/core/gameloop.cpp \
 	../src/gameobject/objectparser.cpp \
 	../src/gameobject/world.cpp \
 	../src/gameobject/behavior.cpp \

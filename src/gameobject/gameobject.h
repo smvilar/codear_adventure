@@ -8,7 +8,7 @@
 #include "DllExport.h"
 #include "gameobject/attribute.h"
 //----------------------------------------------------------------------------//
-namespace foragers
+namespace he
 {
 //----------------------------------------------------------------------------//
 class Behavior;
@@ -59,6 +59,6 @@ private:
 	friend class World;
 };
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_GAMEOBJECT_H

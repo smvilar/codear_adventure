@@ -5,7 +5,7 @@
 #include "core/Types.h"
 #include "core/Assert.h"
 //----------------------------------------------------------------------------//
-namespace foragers
+namespace he
 {
 //----------------------------------------------------------------------------//
 template <typename Real>
@@ -87,6 +87,6 @@ template <> const Vector2i Vector2i::UNIT_X(1, 0);
 template <> const Vector2i Vector2i::UNIT_Y(0, 1);
 //----------------------------------------------------------------------------//
 #endif // _MSC_VER
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_VECTOR2_H

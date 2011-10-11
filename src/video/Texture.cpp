@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 Texture::Texture()
 : _size(0)

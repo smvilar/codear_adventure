@@ -1,7 +1,7 @@
 //----------------------------------------------------------------------------//
-inline Scene& World::getScene() const
+inline Scene& World::getScene()
 {
-	return *_scene;
+	return _scene;
 }
 //----------------------------------------------------------------------------//
 inline ResourceManager& World::getResourceManager()

@@ -4,42 +4,37 @@
 #include <vector>
 #include "DllExport.h"
 //----------------------------------------------------------------------------//
-namespace foragers
-{
+#include "core/Types.h"
 //----------------------------------------------------------------------------//
-class Game;
+namespace he {
+//----------------------------------------------------------------------------//
 class Entity;
+class Renderer;
+class GameObject;
 //----------------------------------------------------------------------------//
 class ENGINE_API Scene
 {
 public:
-	Scene();
-	virtual ~Scene();
-
-	void added(Game* pGame);
+	void added(GameObject *pGame);
 	void removed();
 
-	void update();
-	void render();
+	void update(u32 dt);
+	void render(Renderer &renderer);
 
-protected:
-	Game* _pGame;
-
-	virtual void onInit() {}
-	virtual void onDeinit() {}
-	virtual void onUpdate() {}
-	virtual void onRender() {}
+private:
+	GameObject* _pGame;
 
 /// Entity management
 public:
 	void addEntity(Entity* pEntity);
 	void removeEntity(Entity* pEntity);
 	void clearEntities();
+
 private: // shouldn't be accessed by children classes
 	typedef std::vector<Entity*> EntityVector;
 	EntityVector _entities;
 };
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_SCENE_H

@@ -5,7 +5,7 @@
 #include "core/Types.h"
 #include "Vector2.h"
 //----------------------------------------------------------------------------//
-namespace foragers
+namespace he
 {
 //----------------------------------------------------------------------------//
 template <typename Real>
@@ -35,6 +35,6 @@ typedef Rect<f64> Rectd;
 typedef Rect<u32> Rectu;
 typedef Rect<s32> Recti;
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_RECT_H

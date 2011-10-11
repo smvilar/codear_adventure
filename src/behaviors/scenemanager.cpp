@@ -1,59 +1,38 @@
 #include "behaviors/scenemanager.h"
 //----------------------------------------------------------------------------//
+#include <string>
+//----------------------------------------------------------------------------//
 #include "core/Scene.h"
-#include "core/Game.h"
+#include "gameobject/gameobject.h"
+#include "gameobject/world.h"
+#include "gameobject/attribute.h"
+#include "video/Renderer.h"
+#include "util/FPSCounter.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
-Behavior* SceneManager::clone() const
+void SceneBehavior::update()
 {
-	return new SceneManager;
+	u32 dt = _pFPSCounter->getValue<FPSCounter*>()->getDT();
+	_pWorld->getScene().update(dt);
 }
 //----------------------------------------------------------------------------//
-void SceneManager::update()
+Behavior* SceneBehavior::clone() const
 {
-	// update scene
-	if (!_sceneStack.empty())
-	{
-		_sceneStack.top()->update();
-	}
+	return new SceneBehavior;
 }
 //----------------------------------------------------------------------------//
-void SceneManager::handleMessage(const char *message, void *args)
+void SceneBehavior::added()
 {
-	if (strcmp(message, "scene_render") == 0)
-	{
-		render();
-	}
+	_pWorld->getScene().added(_pOwner);
 }
 //----------------------------------------------------------------------------//
-void SceneManager::render()
+void SceneBehavior::activate()
 {
-	if (!_sceneStack.empty())
-	{
-		_sceneStack.top()->render();
-	}
-}
-//----------------------------------------------------------------------------//
-void SceneManager::changeScene(Scene* newScene)
-{
-	popScene();
-	pushScene(newScene);
-}
-//----------------------------------------------------------------------------//
-void SceneManager::pushScene(Scene* newScene)
-{
-	newScene->added(static_cast<Game*>(_pOwner));
-	_sceneStack.push(newScene);
-}
-//----------------------------------------------------------------------------//
-void SceneManager::popScene()
-{
-	if (!_sceneStack.empty())
-	{
-		_sceneStack.top()->removed();
-		delete _sceneStack.top();
-		_sceneStack.pop();
-	}
+	_pFPSCounter = _pOwner->getAttribute("fpscounter");
+
+	// Start the first scene
+	using std::string;
+	string sceneName = _pOwner->getAttributeAs<string>("startingscene");
 }
 //----------------------------------------------------------------------------//

@@ -1,49 +1,34 @@
 #include "core/Scene.h"
-#include "core/Game.h"
+//----------------------------------------------------------------------------//
 #include "core/Entity.h"
-#include "util/Profile.h"
+#include "gameobject/gameobject.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
-Scene::Scene()
-{
-}
-//----------------------------------------------------------------------------//
-Scene::~Scene()
-{
-}
-//----------------------------------------------------------------------------//
-void Scene::added(Game* pGame)
+void Scene::added(GameObject *pGame)
 {
 	_pGame = pGame;
-	onInit();
 }
 //----------------------------------------------------------------------------//
 void Scene::removed()
 {
-	onDeinit();
-
 	// remove any entity
 	clearEntities();
 }
 //----------------------------------------------------------------------------//
-void Scene::update()
+void Scene::update(u32 dt)
 {
-	onUpdate();
-
 	// update entities
 	for (size_t i=0; i<_entities.size(); ++i)
-		_entities[i]->update(_pGame->getFPSCounter().getDT());
+		_entities[i]->update(dt);
 }
 //----------------------------------------------------------------------------//
-void Scene::render()
+void Scene::render(Renderer &renderer)
 {
-	onRender();
-
 	// render entities
 	for (size_t i=0; i<_entities.size(); ++i)
 	{
-		_entities[i]->render(*_pGame->getAttributeAs<Renderer*>("renderer"));
+		_entities[i]->render(renderer);
 	}
 }
 //----------------------------------------------------------------------------//

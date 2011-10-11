@@ -1,6 +1,6 @@
 #include "gameobject/behavior.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 Behavior::Behavior()
 : _pOwner(0)

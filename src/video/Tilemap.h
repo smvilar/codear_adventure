@@ -9,7 +9,7 @@
 #include "math/Vector2.h"
 #include "video/StaticVertexBuffer.h"
 //----------------------------------------------------------------------------//
-namespace foragers
+namespace he
 {
 //----------------------------------------------------------------------------//
 class Renderer;
@@ -66,6 +66,6 @@ private:
 	void prerender();
 };
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_TILEMAP_H

@@ -6,7 +6,7 @@
 #include "math/Vector2.h"
 #include "video/Color.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 Renderer::Renderer()
 {

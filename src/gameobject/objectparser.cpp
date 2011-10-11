@@ -7,7 +7,7 @@
 #include "gameobject/attribute.h"
 #include "gameobject/behavior.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 bool ObjectParser::parse(const char *filename, GameObject &object,
 						 const World *world)

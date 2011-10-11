@@ -9,7 +9,7 @@
 #include "video/Texture.h"
 #include "core/Scene.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 Behavior* SpriteBehavior::clone() const
 {

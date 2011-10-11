@@ -1,8 +1,9 @@
 #include "behaviors/renderbehavior.h"
 //----------------------------------------------------------------------------//
+#include "gameobject/world.h"
 #include "gameobject/gameobject.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 void RenderBehavior::update()
 {
@@ -10,7 +11,7 @@ void RenderBehavior::update()
 
 	_renderer.begin();
 
-	_pOwner->broadcast("scene_render", &_renderer);
+	_pWorld->getScene().render(_renderer);
 
 	_renderer.end();
 

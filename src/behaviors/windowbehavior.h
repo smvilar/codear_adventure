@@ -9,7 +9,7 @@ namespace sf
 class Window;
 }
 //----------------------------------------------------------------------------//
-namespace foragers {
+namespace he {
 //----------------------------------------------------------------------------//
 class ENGINE_API WindowBehavior : public Behavior
 {
@@ -26,6 +26,6 @@ private:
 	sf::Window *_window;
 };
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_WINDOWBEHAVIOR_H

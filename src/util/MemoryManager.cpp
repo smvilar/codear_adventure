@@ -6,7 +6,7 @@
 #include <fstream>
 #include "core/Assert.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 MemoryManager::Block* MemoryManager::m_pHead = NULL;
 MemoryManager::Block* MemoryManager::m_pTail = NULL;

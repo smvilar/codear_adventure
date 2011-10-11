@@ -1,6 +1,6 @@
 #include "math/Vector2.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 #ifndef _MSC_VER
 template <> const Vector2f Vector2f::ZERO(0.0f);

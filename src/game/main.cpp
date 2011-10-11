@@ -3,8 +3,8 @@
 
 int main()
 {
-	using foragers::GameLoop;
-	using foragers::World;
+	using he::GameLoop;
+	using he::World;
 
 	World world;
 	GameLoop gameLoop;

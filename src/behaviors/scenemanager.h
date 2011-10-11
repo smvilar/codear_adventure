@@ -1,32 +1,30 @@
-#ifndef FORAGERS_SCENEMANAGER_H
-#define FORAGERS_SCENEMANAGER_H
+#ifndef FORAGERS_SCENEBEHAVIOR_H
+#define FORAGERS_SCENEBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include <stack>
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "gameobject/behavior.h"
 //----------------------------------------------------------------------------//
-namespace foragers {
+namespace he {
 //----------------------------------------------------------------------------//
 class Scene;
+class Attribute;
 //----------------------------------------------------------------------------//
-class ENGINE_API SceneManager : public Behavior
+class ENGINE_API SceneBehavior : public Behavior
 {
 public:
 	virtual void update();
-	virtual void handleMessage(const char *message, void *args);
 	virtual Behavior* clone() const;
 
 private:
-	void render();
+	virtual void added();
+	virtual void activate();
 
-	void changeScene(Scene* pNewScene);
-	void pushScene(Scene* pNewScene);
-	void popScene();
-
-	std::stack<Scene*> _sceneStack;
+private:
+	Attribute *_pFPSCounter;
 };
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
-#endif // FORAGERS_SCENEMANAGER_H
+#endif // FORAGERS_SCENEBEHAVIOR_H

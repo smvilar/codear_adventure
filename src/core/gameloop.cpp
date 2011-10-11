@@ -5,13 +5,13 @@
 #include "gameobject/gameobject.h"
 #include "gameobject/attribute.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 void GameLoop::start(World &world, const char *gameFilename) const
 {
-	world.registerBehavior("SceneManager", new SceneManager);
-	world.registerBehavior("Render", new RenderBehavior);
 	world.registerBehavior("Window", new WindowBehavior);
+	world.registerBehavior("SceneManager", new SceneBehavior);
+	world.registerBehavior("Render", new RenderBehavior);
 	world.registerBehavior("FPSCounter", new FPSCounterBehavior);
 
 	GameObject* game = world.parseObject(gameFilename);

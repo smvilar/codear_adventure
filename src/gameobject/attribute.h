@@ -4,7 +4,7 @@
 #include <boost/any.hpp>
 #include "DllExport.h"
 //----------------------------------------------------------------------------//
-namespace foragers
+namespace he
 {
 //----------------------------------------------------------------------------//
 class ENGINE_API Attribute
@@ -29,6 +29,6 @@ private:
 	boost::any _value;
 };
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_GOATTRIBUTE_H

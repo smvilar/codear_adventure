@@ -1,7 +1,7 @@
 #include "video/Shape.h"
 #include "video/Renderer.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 Shape::Shape(ShapeType shapeType)
 : _shapeType(shapeType)

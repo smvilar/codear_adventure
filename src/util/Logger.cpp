@@ -3,7 +3,7 @@
 #include <fstream>
 #include <ctime>
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 Logger::Logger(const char* filename)
 : _filename(filename)

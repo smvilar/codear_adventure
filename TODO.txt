@@ -16,19 +16,11 @@ Game game;
 game.run("my_starting_scene.json");
 
 ==============================================================================================
-idea:
 
-Eliminar todo lo que haya del Engine que SFML lo maneje ya:
- - Window
- - Input
+The game itself is a GameObject, with the following behaviors:
+ - WindowBehavior: opens the window, polls events
+ - SceneManager: manages the Scene objects (which contain renderable Entities)
+ - RenderBehavior: renders the current Scene
 
-
-Game es un GameObject, que tiene varios behaviors
- - SceneBehavior: un controlador de escenas, state machine, algo asi
- - WindowBehavior: abre la ventana, escucha eventos, etc
-
-Scene es un GameObject:
- - WorldBehavior: tiene un World que maneja los gameobjects.
-                  - World se comunica con RenderBehavior y le pasa los rendereables
- - RenderBehavior: dibuja todos los Rendereables que recibe de World
+The 'game' GameObject is created by World
 

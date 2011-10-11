@@ -8,7 +8,7 @@
 #include "gameobject/behavior.h"
 #include "gameobject/objectparser.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 class ObjectNamesAreEqual
 {
@@ -20,12 +20,6 @@ public:
 		return (obj->name.compare(_name) == 0);
 	}
 };
-//----------------------------------------------------------------------------//
-World::World()
-: _scene(0)
-{
-	// ...
-}
 //----------------------------------------------------------------------------//
 void World::addObject(GameObject *object)
 {

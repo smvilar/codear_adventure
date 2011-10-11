@@ -6,7 +6,7 @@
 #include "video/DynamicVertexBuffer.h"
 #include "video/Texture.h"
 //----------------------------------------------------------------------------//
-namespace foragers
+namespace he
 {
 //----------------------------------------------------------------------------//
 class Texture;
@@ -35,6 +35,6 @@ private:
 	DynamicVertexBuffer _dynamicVBO;
 };
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_RENDERER_H

@@ -1,6 +1,6 @@
 #include "gameobject/attribute.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 Attribute::Attribute(boost::any value)
 	: _value(value)

@@ -2,7 +2,7 @@
 
 Contains the common configuration for the tools of the engine'''
 
-namespace = 'foragers'
+namespace = 'he'
 dll_header = 'DllExport.h'
 dll_define = 'ENGINE_API'
 

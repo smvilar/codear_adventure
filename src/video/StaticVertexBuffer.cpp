@@ -2,7 +2,7 @@
 #include "core/Assert.h"
 #include "video/glee.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 StaticVertexBuffer::StaticVertexBuffer()
 {

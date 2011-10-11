@@ -5,7 +5,7 @@
 #include "gameobject/behavior.h"
 #include "video/Renderer.h"
 //----------------------------------------------------------------------------//
-namespace foragers {
+namespace he {
 //----------------------------------------------------------------------------//
 class ENGINE_API RenderBehavior : public Behavior
 {
@@ -21,6 +21,6 @@ private:
 	Renderer _renderer;
 };
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_RENDERBEHAVIOR_H

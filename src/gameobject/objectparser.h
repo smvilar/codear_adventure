@@ -6,7 +6,7 @@
 #include "gameobject/world.h"
 #include "json/json.h"
 //----------------------------------------------------------------------------//
-namespace foragers
+namespace he
 {
 //----------------------------------------------------------------------------//
 class GameObject;
@@ -22,6 +22,6 @@ private:
 						const World &world);
 };
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_OBJECTPARSER_H

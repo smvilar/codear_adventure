@@ -9,7 +9,7 @@
 #include "video/Renderer.h"
 #include "resource/ResourceManager.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 Tilemap::Tilemap()
 {

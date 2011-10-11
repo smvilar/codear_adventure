@@ -7,15 +7,15 @@
 		"height" : 400,
 		"bpp" : 32,
 		"fullscreen" : 0,
-		"maxFramerate" : 100,
-		"startingScene" : "Scene1"
+		"maxframerate" : 60,
+		"startingscene" : "Scene1"
 	},
 	"behaviors" :
 	[
+		"FPSCounter",
 		"Window",
 		"SceneManager",
-		"Render",
-		"FPSCounter"
+		"Render"
 	]
 }
 

@@ -1,6 +1,6 @@
 #include "video/Color.h"
 //----------------------------------------------------------------------------//
-using namespace foragers;
+using namespace he;
 //----------------------------------------------------------------------------//
 const Color Color::WHITE =	0xffffffff;
 const Color Color::BLACK =	0xff000000;

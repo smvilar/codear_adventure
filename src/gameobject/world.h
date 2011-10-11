@@ -7,13 +7,12 @@
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "resource/ResourceManager.h"
+#include "core/Scene.h"
 //----------------------------------------------------------------------------//
-namespace foragers
-{
+namespace he {
 //----------------------------------------------------------------------------//
 class GameObject;
 class Behavior;
-class Scene;
 //----------------------------------------------------------------------------//
 // World
 //
@@ -22,7 +21,6 @@ class Scene;
 class ENGINE_API World
 {
 public:
-	World();
 // TODO: cleaning! destructor!
 
 // GameObject Management
@@ -73,16 +71,16 @@ private:
 	BehaviorMap _behaviors;
 
 public:
-	Scene& getScene() const;
+	Scene& getScene();
 	ResourceManager& getResourceManager();
 
 private:
-	Scene* _scene;
+	Scene _scene;
 	ResourceManager _resourceManager;
 };
 //----------------------------------------------------------------------------//
 #include "world.inl"
 //----------------------------------------------------------------------------//
-} // end namespace foragers
+} // end namespace he
 //----------------------------------------------------------------------------//
 #endif // FORAGERS_GOWORLD_H
