@@ -1,5 +1,5 @@
-#ifndef HE_FORAGERSENGINE_H
-#define HE_FORAGERSENGINE_H
+#ifndef HE_HIEROPHANTENGINE_H
+#define HE_HIEROPHANTENGINE_H
 //----------------------------------------------------------------------------//
 #include "util/MemoryManager.h"
 #include "util/FileSystem.h"
@@ -28,4 +28,4 @@
 #include "gameobject/behavior.h"
 #include "gameobject/world.h"
 //----------------------------------------------------------------------------//
-#endif // HE_FORAGERSENGINE_H
+#endif // HE_HIEROPHANTENGINE_H
