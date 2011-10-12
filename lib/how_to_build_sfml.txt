@@ -1,0 +1,9 @@
+How to build SFML on Mac
+
+1- Download SFML latest development snapshot (http://www.sfml-dev.org/download.php)
+2- Go to SFML dir in a Terminal and type "cmake -i" to start the CMake interactive mode
+3- Press Enter for every question
+4- If everything's ok, then type "make install"
+5- It should compile, link and install the libs in /usr/local/lib
+6- Profit. The game should run now.
+
