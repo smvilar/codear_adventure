@@ -60,7 +60,3 @@ void WindowBehavior::added()
 	_pOwner->addAttribute("window", new Attribute(_window));
 }
 //----------------------------------------------------------------------------//
-void WindowBehavior::activate()
-{
-}
-//----------------------------------------------------------------------------//

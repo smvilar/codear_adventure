@@ -20,7 +20,6 @@ public:
 
 private:
 	virtual void added();
-	virtual void activate();
 
 private:
 	sf::Window *_window;
