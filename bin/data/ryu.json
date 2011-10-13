@@ -1,0 +1,18 @@
+{
+	"name" : "Ryu",
+	"attributes" :
+	{
+		"pos_x" : 200,
+		"pos_y" : 200,
+		"rotation" : 0,
+		"scale" : 2,
+		"sprite_filename" : "ryu_test.png",
+		"frames_horizontal" : 6,
+		"ms_per_frame" : 60
+	},
+	"behaviors" :
+	[
+		"Sprite",
+		"Edit"
+	]
+}

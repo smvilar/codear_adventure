@@ -3,8 +3,8 @@
 	"attributes" :
 	{
 		"sprite_filename" : "background.png",
-		"pos_x" : 400,
-		"pos_y" : 300,
+		"pos_x" : 0,
+		"pos_y" : 0,
 		"rotation" : 0
 	},
 	"behaviors" :

@@ -13,7 +13,7 @@ using namespace he;
 //----------------------------------------------------------------------------//
 Behavior* SpriteBehavior::clone() const
 {
-	return dynamic_cast<Behavior*>(new SpriteBehavior());
+	return new SpriteBehavior;
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::added()
@@ -21,10 +21,23 @@ void SpriteBehavior::added()
 	using std::string;
 
 	const string &filename = _pOwner->getAttributeAs<string>("sprite_filename");
+	int framesHorizontal = 1;
+	int framesVertical = 1;
+	int msPerFrame = 0;
+
+	Attribute* framesHorizAttr = _pOwner->getAttribute("frames_horizontal");
+	if (framesHorizAttr)
+		framesHorizontal = framesHorizAttr->getValue<int>();
+	Attribute* framesVerticAttr = _pOwner->getAttribute("frames_vertical");
+	if (framesVerticAttr)
+		framesVertical = framesVerticAttr->getValue<int>();
+	Attribute* msPerFrameAttr = _pOwner->getAttribute("ms_per_frame");
+	if (msPerFrameAttr)
+		msPerFrame = msPerFrameAttr->getValue<int>();
 	
 	ResourceManager &resMgr = _pWorld->getResourceManager();
 	TexturePtr texture = resMgr.get<Texture>(filename.c_str());
-	_sprite = Sprite(texture, 1, 1, 0);
+	_sprite = Sprite(texture, framesHorizontal, framesVertical, msPerFrame);
 
 	_posX = _pOwner->getAttribute("pos_x");
 	_posY = _pOwner->getAttribute("pos_y");

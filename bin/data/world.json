@@ -1,0 +1,17 @@
+// This is a "world" object: it spawns other objects and manages them overall
+{
+	"name" : "World",
+	"attributes" :
+	{
+		"objects" :
+		[
+			"background.json",
+			"ryu.json"
+		]
+	},
+	"behaviors" :
+	[
+		"Spawn"
+	]
+}
+

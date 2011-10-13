@@ -14,6 +14,11 @@ ResourceManager::~ResourceManager()
 	if (getLoadedCount() > 0)
 	{
 		std::cerr << "There's a resource leak!!" << std::endl;
+		ResourceMap::iterator it = _resMap.begin();
+		for (; it != _resMap.end(); ++it)
+		{
+			std::cerr << "Unreleased resource: " << it->first << std::endl;
+		}
 	}
 }
 //----------------------------------------------------------------------------//
