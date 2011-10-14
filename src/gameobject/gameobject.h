@@ -21,6 +21,7 @@ public:
 
 public:
 	GameObject(const char* name);
+	~GameObject();
 
 	void addBehavior(Behavior* behavior);
 	void removeBehavior(Behavior* behavior);

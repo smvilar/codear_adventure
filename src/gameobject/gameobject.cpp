@@ -12,6 +12,19 @@ GameObject::GameObject(const char *name)
 {
 }
 //----------------------------------------------------------------------------//
+GameObject::~GameObject()
+{
+	// clean behaviors
+	BehaviorVector::iterator itBehavior = _behaviors.begin();
+	for (; itBehavior != _behaviors.end(); ++itBehavior)
+		delete *itBehavior;
+
+	// clean attributes
+	AttributeMap::iterator itAttribute = _attributes.begin();
+	for (; itAttribute != _attributes.end(); ++itAttribute)
+		delete itAttribute->second;
+}
+//----------------------------------------------------------------------------//
 void GameObject::addBehavior(Behavior *behavior)
 {
 	_behaviors.push_back(behavior);
@@ -35,6 +48,9 @@ void GameObject::addAttribute(const char *name, Attribute *attribute)
 //----------------------------------------------------------------------------//
 void GameObject::removeAttribute(const char *name)
 {
+	Assert(_attributes.find(name) != _attributes.end(),
+		   "Error when removing attribute: it doesn't exist");
+	delete _attributes[name];
 	_attributes.erase(name);
 }
 //----------------------------------------------------------------------------//

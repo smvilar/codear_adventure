@@ -17,12 +17,12 @@ void SpawnBehavior::activate()
 	using std::string;
 	typedef std::vector<Attribute*> AttributeVector;
 
-	AttributeVector _objects =
+	AttributeVector objects =
 			_pOwner->getAttributeAs<AttributeVector>("objects");
 
-	for (size_t i = 0; i < _objects.size(); ++i)
+	for (size_t i = 0; i < objects.size(); ++i)
 	{
-		string objectFilename = _objects[i]->getValue<string>();
+		string objectFilename = objects[i]->getValue<string>();
 		_pWorld->addObject(_pWorld->parseObject(objectFilename.c_str()));
 	}
 }

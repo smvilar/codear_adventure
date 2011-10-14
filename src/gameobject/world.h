@@ -21,9 +21,9 @@ class Behavior;
 class ENGINE_API World
 {
 public:
-// TODO: cleaning! destructor!
+	~World();
 
-// GameObject Management
+/// GameObject Management
 public:
 	// Adds a GameObject to the list of objects in the world
 	void addObject(GameObject *object);
@@ -37,7 +37,7 @@ public:
 	// Sends a message to every object in the world
 	void broadcast(const char* message, void* args);
 
-// GameObject Prototypes
+/// GameObject Prototypes
 public:
 	// Registers a GameObject as a prototype to create more objects like it
 	void registerObjectPrototype(const char* name, GameObject* object);
@@ -46,7 +46,7 @@ public:
 	// Creates a GameObject from a prototype
 	GameObject* createObject(const char* name) const;
 
-// GameObject Behavior Management
+/// GameObject Behavior Management
 public:
 	// Registers a behavior in a list so it can be recognized later when constructing a new object
 	void registerBehavior(const char* name, Behavior* behavior);
@@ -55,11 +55,12 @@ public:
 	// Returns a copy of a registered behavior
 	Behavior* createBehavior(const char* name) const;
 
-// GameObject Parsing
+/// GameObject Parsing
 public:
 	// Creates an object from a json file
 	GameObject* parseObject(const char* filename);
 	
+/// Type definitions
 public:
 	typedef std::vector<GameObject*> ObjectVector;
 	typedef std::map<std::string, GameObject*> ObjectMap;
@@ -70,6 +71,7 @@ private:
 	ObjectMap _objectPrototypes;
 	BehaviorMap _behaviors;
 
+/// Scene and ResourceManager (for behaviors that need to render stuff)
 public:
 	Scene& getScene();
 	ResourceManager& getResourceManager();

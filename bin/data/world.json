@@ -11,7 +11,8 @@
 	},
 	"behaviors" :
 	[
-		"Spawn"
+		"Spawn",
+		"Edit"
 	]
 }
 

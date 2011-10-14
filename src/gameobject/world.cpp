@@ -10,6 +10,8 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
+// Helper class that acts like a "Functor"
+//----------------------------------------------------------------------------//
 class ObjectNamesAreEqual
 {
 	const char* _name;
@@ -20,6 +22,24 @@ public:
 		return (obj->name.compare(_name) == 0);
 	}
 };
+//----------------------------------------------------------------------------//
+World::~World()
+{
+	// clean objects in the world
+	ObjectVector::iterator itObj = _objects.begin();
+	for (; itObj != _objects.end(); ++itObj)
+		delete *itObj;
+
+	// clean registered objects
+	ObjectMap::iterator itObjMap = _objectPrototypes.begin();
+	for (; itObjMap != _objectPrototypes.end(); ++itObjMap)
+		delete itObjMap->second;
+
+	// clean registered behaviors
+	BehaviorMap::iterator itBehMap = _behaviors.begin();
+	for (; itBehMap != _behaviors.end(); ++itBehMap)
+		delete itBehMap->second;
+}
 //----------------------------------------------------------------------------//
 void World::addObject(GameObject *object)
 {
@@ -52,6 +72,10 @@ void World::registerObjectPrototype(const char *name, GameObject *object)
 //----------------------------------------------------------------------------//
 void World::unregisterObjectPrototype(const char *name)
 {
+	Assert(_objectPrototypes.find(name) != _objectPrototypes.end(),
+		   "Unregistering an unexistent object prototype");
+
+	delete _objectPrototypes[name];
 	_objectPrototypes.erase(name);
 }
 //----------------------------------------------------------------------------//
@@ -77,7 +101,7 @@ void World::unregisterBehavior(const char *name)
 	Assert(_behaviors.find(name) != _behaviors.end(),
 		   "Unregistering an unexistent behavior");
 
-	_behaviors[name]->_pWorld = 0;
+	delete _behaviors[name];
 	_behaviors.erase(name);
 }
 //----------------------------------------------------------------------------//
