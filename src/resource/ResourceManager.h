@@ -2,6 +2,7 @@
 #define HE_RESOURCEMANAGER_H
 //----------------------------------------------------------------------------//
 #include <map>
+#include <string>
 //----------------------------------------------------------------------------//
 #include "resource/IResource.h"
 //----------------------------------------------------------------------------//
@@ -32,7 +33,7 @@ public:
 	boost::shared_ptr<ResType> add(const char* name, ResType* res);
 	
 private:
-	typedef std::map<const char*, IResourcePtr> ResourceMap;
+	typedef std::map<std::string, IResourcePtr> ResourceMap;
 	ResourceMap _resMap;
 };
 //----------------------------------------------------------------------------//

@@ -16,7 +16,7 @@ public:
 	virtual ~Behavior() {}
 
 	virtual void update() {}
-	virtual void handleMessage(const char */*message*/, void */*args*/) {}
+	virtual void handleMessage(const char * /*message*/, void * /*args*/) {}
 
 	virtual Behavior* clone() const = 0;
 
