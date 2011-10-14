@@ -1,9 +1,9 @@
 relre:obj/
-relre:bin-debug/
-relre:/Debug/
-relre:/Release/
+relre:/ipch/
 relre:\.suo$
 relre:\.ncb$
+relre:\.sdf$
+relre:\.opensdf$
 relre:\.user$
 relre:\.pyc$
 relre:\.DS_Store
