@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0FC49A02-2C75-4D2A-A9B2-A8231F00EE07}</ProjectGuid>
+    <RootNamespace>CODEARAdv</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>../bin</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>../obj</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>../bin</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>../obj</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../src;../lib;../lib/SFML/include;../lib/freetype/include;../lib/rapidxml-1.13;../lib/zlib125/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../lib/SFML/lib/win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenGL32.lib;sfml-main-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(ProjectDir)..\lib\SFML\lib\win32\*.dll" "$(ProjectDir)..\bin"</Command>
+      <Message>Copy SFML dlls</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>../src;../lib;../lib/SFML/include;../lib/freetype/include;../lib/rapidxml-1.13;../lib/zlib125/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../lib/SFML/lib/win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenGL32.lib;sfml-main.lib;sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(ProjectDir)..\lib\SFML\lib\win32\*.dll" "$(ProjectDir)..\bin"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy SFML dlls</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\behaviors\activatespawnerbehavior.cpp" />
+    <ClCompile Include="..\src\behaviors\editbehavior.cpp" />
+    <ClCompile Include="..\src\behaviors\followmousebehavior.cpp" />
+    <ClCompile Include="..\src\behaviors\fpscounterbehavior.cpp" />
+    <ClCompile Include="..\src\behaviors\renderbehavior.cpp" />
+    <ClCompile Include="..\src\behaviors\scenemanager.cpp" />
+    <ClCompile Include="..\src\behaviors\spawnbehavior.cpp" />
+    <ClCompile Include="..\src\behaviors\spritebehavior.cpp" />
+    <ClCompile Include="..\src\behaviors\windowbehavior.cpp" />
+    <ClCompile Include="..\src\core\gameloop.cpp" />
+    <ClCompile Include="..\src\core\Scene.cpp" />
+    <ClCompile Include="..\src\gameobject\attribute.cpp" />
+    <ClCompile Include="..\src\gameobject\behavior.cpp" />
+    <ClCompile Include="..\src\gameobject\gameobject.cpp" />
+    <ClCompile Include="..\src\gameobject\objectparser.cpp" />
+    <ClCompile Include="..\src\gameobject\world.cpp" />
+    <ClCompile Include="..\src\game\main.cpp" />
+    <ClCompile Include="..\src\json\json_reader.cpp" />
+    <ClCompile Include="..\src\json\json_value.cpp" />
+    <ClCompile Include="..\src\json\json_writer.cpp" />
+    <ClCompile Include="..\src\math\MathUtil.cpp" />
+    <ClCompile Include="..\src\math\Vector2.cpp" />
+    <ClCompile Include="..\src\resource\ResourceManager.cpp" />
+    <ClCompile Include="..\src\util\base64.cpp" />
+    <ClCompile Include="..\src\util\FileSystem.cpp" />
+    <ClCompile Include="..\src\util\FPSCounter.cpp" />
+    <ClCompile Include="..\src\util\IStoreable.cpp" />
+    <ClCompile Include="..\src\util\Logger.cpp" />
+    <ClCompile Include="..\src\util\MemoryManager.cpp" />
+    <ClCompile Include="..\src\util\Profile.cpp" />
+    <ClCompile Include="..\src\util\ZLib.cpp" />
+    <ClCompile Include="..\src\video\Color.cpp" />
+    <ClCompile Include="..\src\video\DynamicVertexBuffer.cpp" />
+    <ClCompile Include="..\src\video\GLee.c" />
+    <ClCompile Include="..\src\video\Renderer.cpp" />
+    <ClCompile Include="..\src\video\Shape.cpp" />
+    <ClCompile Include="..\src\video\Sprite.cpp" />
+    <ClCompile Include="..\src\video\StaticVertexBuffer.cpp" />
+    <ClCompile Include="..\src\video\Texture.cpp" />
+    <ClCompile Include="..\src\video\Tilemap.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\behaviors\activatespawnerbehavior.h" />
+    <ClInclude Include="..\src\behaviors\editbehavior.h" />
+    <ClInclude Include="..\src\behaviors\followmousebehavior.h" />
+    <ClInclude Include="..\src\behaviors\fpscounterbehavior.h" />
+    <ClInclude Include="..\src\behaviors\gamebehaviors.h" />
+    <ClInclude Include="..\src\behaviors\renderbehavior.h" />
+    <ClInclude Include="..\src\behaviors\scenemanager.h" />
+    <ClInclude Include="..\src\behaviors\spawnbehavior.h" />
+    <ClInclude Include="..\src\behaviors\spritebehavior.h" />
+    <ClInclude Include="..\src\behaviors\windowbehavior.h" />
+    <ClInclude Include="..\src\core\Assert.h" />
+    <ClInclude Include="..\src\core\BaseObject.h" />
+    <ClInclude Include="..\src\core\Entity.h" />
+    <ClInclude Include="..\src\core\gameloop.h" />
+    <ClInclude Include="..\src\core\Scene.h" />
+    <ClInclude Include="..\src\core\Types.h" />
+    <ClInclude Include="..\src\dllexport.h" />
+    <ClInclude Include="..\src\gameobject\attribute.h" />
+    <ClInclude Include="..\src\gameobject\behavior.h" />
+    <ClInclude Include="..\src\gameobject\gameobject.h" />
+    <ClInclude Include="..\src\gameobject\objectparser.h" />
+    <ClInclude Include="..\src\gameobject\world.h" />
+    <ClInclude Include="..\src\hierophantengine.h" />
+    <ClInclude Include="..\src\json\autolink.h" />
+    <ClInclude Include="..\src\json\config.h" />
+    <ClInclude Include="..\src\json\features.h" />
+    <ClInclude Include="..\src\json\forwards.h" />
+    <ClInclude Include="..\src\json\json.h" />
+    <ClInclude Include="..\src\json\json_batchallocator.h" />
+    <ClInclude Include="..\src\json\reader.h" />
+    <ClInclude Include="..\src\json\value.h" />
+    <ClInclude Include="..\src\json\writer.h" />
+    <ClInclude Include="..\src\math\MathUtil.h" />
+    <ClInclude Include="..\src\math\Rect.h" />
+    <ClInclude Include="..\src\math\Vector2.h" />
+    <ClInclude Include="..\src\resource\Font.h" />
+    <ClInclude Include="..\src\resource\IResource.h" />
+    <ClInclude Include="..\src\resource\ResourceManager.h" />
+    <ClInclude Include="..\src\util\base64.h" />
+    <ClInclude Include="..\src\util\FileSystem.h" />
+    <ClInclude Include="..\src\util\FPSCounter.h" />
+    <ClInclude Include="..\src\util\IStoreable.h" />
+    <ClInclude Include="..\src\util\Logger.h" />
+    <ClInclude Include="..\src\util\MemoryManager.h" />
+    <ClInclude Include="..\src\util\Profile.h" />
+    <ClInclude Include="..\src\util\Util.h" />
+    <ClInclude Include="..\src\util\ZLib.h" />
+    <ClInclude Include="..\src\video\Color.h" />
+    <ClInclude Include="..\src\video\DynamicVertexBuffer.h" />
+    <ClInclude Include="..\src\video\GLee.h" />
+    <ClInclude Include="..\src\video\Renderer.h" />
+    <ClInclude Include="..\src\video\Shape.h" />
+    <ClInclude Include="..\src\video\Sprite.h" />
+    <ClInclude Include="..\src\video\StaticVertexBuffer.h" />
+    <ClInclude Include="..\src\video\Text.h" />
+    <ClInclude Include="..\src\video\Texture.h" />
+    <ClInclude Include="..\src\video\Tilemap.h" />
+    <ClInclude Include="..\src\video\Vertex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\core\BaseObject.inl" />
+    <None Include="..\src\core\Entity.inl" />
+    <None Include="..\src\gameobject\world.inl" />
+    <None Include="..\src\json\json_internalarray.inl" />
+    <None Include="..\src\json\json_internalmap.inl" />
+    <None Include="..\src\json\json_valueiterator.inl" />
+    <None Include="..\src\math\MathUtil.inl" />
+    <None Include="..\src\math\Rect.inl" />
+    <None Include="..\src\math\Vector2.inl" />
+    <None Include="..\src\resource\ResourceManager.inl" />
+    <None Include="..\src\util\FPSCounter.inl" />
+    <None Include="..\src\util\Logger.inl" />
+    <None Include="..\src\util\MemoryManager.inl" />
+    <None Include="..\src\video\Shape.inl" />
+    <None Include="..\src\video\Texture.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
