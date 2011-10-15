@@ -17,9 +17,7 @@ class ENGINE_API Entity
 	: public BaseObject
 {
 public:
-	Entity()
-		: _angle(0),
-		_scale(1, 1) {}
+	Entity() : _angle(0), _scale(1, 1) {}
 	virtual ~Entity() {}
 
 public:
@@ -39,7 +37,7 @@ public:
 
 protected:
 	Vector2f		_position;
-	f32				_angle;
+	f32			_angle;
 	Vector2f		_scale;
 };
 //----------------------------------------------------------------------------//

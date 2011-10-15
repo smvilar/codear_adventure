@@ -3,7 +3,7 @@
 	"name" : "World",
 	"attributes" :
 	{
-		"objects" :
+		"object_filenames" :
 		[
 			"background.json",
 			"ryu.json"
@@ -11,6 +11,7 @@
 	},
 	"behaviors" :
 	[
+		"ObjectContainer",
 		"Spawn",
 		"Edit"
 	]

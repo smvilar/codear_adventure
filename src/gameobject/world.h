@@ -32,6 +32,8 @@ public:
 	// Gets a GameObject by its name, returns 0 if not found
 	GameObject* getObject(const char* name);
 
+	void removeAllObjects();
+
 	// Updates all the objects in the world
 	void update();
 	// Sends a message to every object in the world
@@ -46,6 +48,8 @@ public:
 	// Creates a GameObject from a prototype
 	GameObject* createObject(const char* name) const;
 
+	void cleanRegisteredObjectPrototypes();
+
 /// GameObject Behavior Management
 public:
 	// Registers a behavior in a list so it can be recognized later when constructing a new object
@@ -54,6 +58,8 @@ public:
 	void unregisterBehavior(const char* name);
 	// Returns a copy of a registered behavior
 	Behavior* createBehavior(const char* name) const;
+
+	void cleanRegisteredBehaviors();
 
 /// GameObject Parsing
 public:

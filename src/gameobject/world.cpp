@@ -25,20 +25,9 @@ public:
 //----------------------------------------------------------------------------//
 World::~World()
 {
-	// clean objects in the world
-	ObjectVector::iterator itObj = _objects.begin();
-	for (; itObj != _objects.end(); ++itObj)
-		delete *itObj;
-
-	// clean registered objects
-	ObjectMap::iterator itObjMap = _objectPrototypes.begin();
-	for (; itObjMap != _objectPrototypes.end(); ++itObjMap)
-		delete itObjMap->second;
-
-	// clean registered behaviors
-	BehaviorMap::iterator itBehMap = _behaviors.begin();
-	for (; itBehMap != _behaviors.end(); ++itBehMap)
-		delete itBehMap->second;
+	removeAllObjects();
+	cleanRegisteredObjectPrototypes();
+	cleanRegisteredBehaviors();
 }
 //----------------------------------------------------------------------------//
 void World::addObject(GameObject *object)
@@ -60,6 +49,31 @@ GameObject* World::getObject(const char* name)
 	ObjectVector::iterator it = std::find_if(_objects.begin(), _objects.end(),
 											 ObjectNamesAreEqual(name));
 	return (it != _objects.end()) ? *it : 0;
+}
+//----------------------------------------------------------------------------//
+void World::removeAllObjects()
+{
+	ObjectVector::iterator it = _objects.begin();
+	for (; it != _objects.end(); ++it)
+		delete *it;
+}
+//----------------------------------------------------------------------------//
+void World::update()
+{
+	ObjectVector::iterator it = _objects.begin();
+	for (; it != _objects.end(); ++it)
+	{
+		(*it)->update();
+	}
+}
+//----------------------------------------------------------------------------//
+void World::broadcast(const char *message, void *args)
+{
+	ObjectVector::iterator it = _objects.begin();
+	for (; it != _objects.end(); ++it)
+	{
+		(*it)->broadcast(message, args);
+	}
 }
 //----------------------------------------------------------------------------//
 void World::registerObjectPrototype(const char *name, GameObject *object)
@@ -85,6 +99,13 @@ GameObject* World::createObject(const char *name) const
 	Assert(it != _objectPrototypes.end(), "Couldn't find object prototype");
 
 	return it->second->clone();
+}
+//----------------------------------------------------------------------------//
+void World::cleanRegisteredObjectPrototypes()
+{
+	ObjectMap::iterator it = _objectPrototypes.begin();
+	for (; it != _objectPrototypes.end(); ++it)
+		delete it->second;
 }
 //----------------------------------------------------------------------------//
 void World::registerBehavior(const char *name, Behavior *behavior)
@@ -117,22 +138,11 @@ Behavior* World::createBehavior(const char *name) const
 	else return 0;
 }
 //----------------------------------------------------------------------------//
-void World::update()
+void World::cleanRegisteredBehaviors()
 {
-	ObjectVector::iterator it = _objects.begin();
-	for (; it != _objects.end(); ++it)
-	{
-		(*it)->update();
-	}
-}
-//----------------------------------------------------------------------------//
-void World::broadcast(const char *message, void *args)
-{
-	ObjectVector::iterator it = _objects.begin();
-	for (; it != _objects.end(); ++it)
-	{
-		(*it)->broadcast(message, args);
-	}
+	BehaviorMap::iterator it = _behaviors.begin();
+	for (; it != _behaviors.end(); ++it)
+		delete it->second;
 }
 //----------------------------------------------------------------------------//
 GameObject* World::parseObject(const char *filename)

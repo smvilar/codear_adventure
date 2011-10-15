@@ -27,11 +27,15 @@ INCLUDEPATH += \
 	../src \
 	../lib \
 	../lib/SFML/include \
-	../lib/freetype/include \
+#	../lib/freetype/include \
 	../lib/rapidxml-1.13 \
 	../lib/zlib125/include
 
 HEADERS += \
+	../bin/data/game.json \
+	../bin/data/world.json \
+	../bin/data/background.json \
+	../bin/data/ryu.json \
 	../src/hierophantengine.h \
 	../src/dllexport.h \
 	../src/behaviors/spritebehavior.h \
@@ -41,6 +45,7 @@ HEADERS += \
 	../src/behaviors/windowbehavior.h \
 	../src/behaviors/renderbehavior.h \
 	../src/behaviors/fpscounter.h \
+	../src/behaviors/objectcontainerbehavior.h \
 	../src/behaviors/activatespawnerbehavior.h \
 	../src/behaviors/spawnbehavior.h \
 	../src/behaviors/gamebehaviors.h \
@@ -101,6 +106,7 @@ SOURCES += \
 	../src/behaviors/windowbehavior.cpp \
 	../src/behaviors/renderbehavior.cpp \
 	../src/behaviors/fpscounterbehavior.cpp \
+	../src/behaviors/objectcontainerbehavior.cpp \
 	../src/behaviors/activatespawnerbehavior.cpp \
 	../src/behaviors/spawnbehavior.cpp \
 	../src/core/Scene.cpp \

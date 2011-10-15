@@ -43,6 +43,13 @@ void SpriteBehavior::added()
 	_posY = _pOwner->getAttribute("pos_y");
 	_rotation = _pOwner->getAttribute("rotation");
 	_scale = _pOwner->getAttribute("scale");
+
+	Attribute* width = _pOwner->getAttribute("width");
+	Attribute* height = _pOwner->getAttribute("height");
+	if (!width)
+		_pOwner->addAttribute("width", new Attribute(_sprite.getSize().x));
+	if (!height)
+		_pOwner->addAttribute("height", new Attribute(_sprite.getSize().y));
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::removed()

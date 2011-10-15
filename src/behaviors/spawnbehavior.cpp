@@ -14,16 +14,14 @@ Behavior* SpawnBehavior::clone() const
 //----------------------------------------------------------------------------//
 void SpawnBehavior::activate()
 {
-	using std::string;
-	typedef std::vector<Attribute*> AttributeVector;
+	typedef std::vector<GameObject*> GameObjectVector;
 
-	AttributeVector objects =
-			_pOwner->getAttributeAs<AttributeVector>("objects");
+	GameObjectVector objects =
+			_pOwner->getAttributeAs<GameObjectVector>("objects");
 
 	for (size_t i = 0; i < objects.size(); ++i)
 	{
-		string objectFilename = objects[i]->getValue<string>();
-		_pWorld->addObject(_pWorld->parseObject(objectFilename.c_str()));
+		_pWorld->addObject(objects[i]);
 	}
 }
 //----------------------------------------------------------------------------//

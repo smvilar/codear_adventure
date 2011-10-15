@@ -1,6 +1,6 @@
 #include "behaviors/editbehavior.h"
 //----------------------------------------------------------------------------//
-#include <iostream>
+#include "math/Rect.h"
 #include "gameobject/gameobject.h"
 #include "gameobject/world.h"
 //----------------------------------------------------------------------------//
@@ -13,22 +13,70 @@ Behavior* EditBehavior::clone() const
 //----------------------------------------------------------------------------//
 void EditBehavior::activate()
 {
-	using std::string;
-	typedef std::vector<Attribute*> AttributeVector;
-
-	AttributeVector objects =
-			_pOwner->getAttributeAs<AttributeVector>("objects");
-
-	for (size_t i = 0; i < objects.size(); ++i)
+	_mode = SELECT;
+	_objects = _pOwner->getAttributeAs<GameObjectVector>("objects");
+	_window = _pWorld->getObject("Game")->getAttributeAs<sf::Window*>("window");
+}
+//----------------------------------------------------------------------------//
+void EditBehavior::update()
+{
+	switch (_mode)
 	{
-		string objectFilename = objects[i]->getValue<string>();
-		GameObject *dummyObject = _pWorld->parseObject(objectFilename.c_str());
-		if (GameObject *obj = _pWorld->getObject(dummyObject->name.c_str()))
+	case SELECT:
+		updateSelect();
+		break;
+	case DRAG:
+		updateDrag();
+		break;
+	}
+}
+//----------------------------------------------------------------------------//
+void EditBehavior::updateSelect()
+{
+	const sf::Vector2i& mousePos = sf::Mouse::GetPosition(*_window);
+
+	//check the topmost object that collides with the mouse
+	GameObjectVector::reverse_iterator it = _objects.rbegin();
+	for (; it != _objects.rend(); ++it)
+	{
+		GameObject* object = *it;
+
+		int posX = object->getAttributeAs<int>("pos_x");
+		int posY = object->getAttributeAs<int>("pos_y");
+		int width = object->getAttributeAs<float>("width");
+		int height = object->getAttributeAs<float>("height");
+
+		Recti rect(posX, posY, width, height);
+		if (rect.contains(Vector2i(mousePos.x, mousePos.y)))
 		{
-			std::cout << "Adding " << obj << std::endl;
-			_objects.push_back(obj);
+			std::cout << "Over object: " << object->name << std::endl;
+			if (sf::Mouse::IsButtonPressed(sf::Mouse::Left))
+			{
+				_mode = DRAG;
+				_activeObject = object;
+				_lastMousePos = mousePos;
+			}
+			break;
 		}
-		delete dummyObject;
+	}
+}
+//----------------------------------------------------------------------------//
+void EditBehavior::updateDrag()
+{
+	const sf::Vector2i& mousePos = sf::Mouse::GetPosition(*_window);
+	sf::Vector2i movement = mousePos - _lastMousePos;
+
+	Attribute *aPosX = _activeObject->getAttribute("pos_x");
+	Attribute *aPosY = _activeObject->getAttribute("pos_y");
+	aPosX->setValue(aPosX->getValue<int>()+movement.x);
+	aPosY->setValue(aPosY->getValue<int>()+movement.y);
+
+	_lastMousePos = mousePos;
+
+	if (!sf::Mouse::IsButtonPressed(sf::Mouse::Left))
+	{
+		_mode = SELECT;
+		_activeObject = 0;
 	}
 }
 //----------------------------------------------------------------------------//

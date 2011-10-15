@@ -17,8 +17,9 @@ public:
 
 	// Default constructor
 	Rect();
-	// Parameterized constructor
+	// Parameterized constructors
 	Rect(const Vector2<Real>& topLeft, const Vector2<Real>& bottomRight);
+	Rect(Real x, Real y, Real width, Real height);
 	// Copy constructor
 	Rect(const Rect& other);
 	// Destructor
@@ -26,6 +27,8 @@ public:
 
 	Real getWidth() const;
 	Real getHeight() const;
+
+	bool contains(const Vector2<Real>& point);
 };
 //----------------------------------------------------------------------------//
 #include "Rect.inl"
