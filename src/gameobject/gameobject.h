@@ -58,6 +58,7 @@ private:
 	AttributeMap _attributes;
 
 	friend class World;
+	friend class WorldSerializer;
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

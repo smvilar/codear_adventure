@@ -49,7 +49,7 @@ void EditBehavior::updateSelect()
 		Recti rect(posX, posY, width, height);
 		if (rect.contains(Vector2i(mousePos.x, mousePos.y)))
 		{
-			std::cout << "Over object: " << object->name << std::endl;
+			//std::cout << "Over object: " << object->name << std::endl;
 			if (sf::Mouse::IsButtonPressed(sf::Mouse::Left))
 			{
 				_mode = DRAG;

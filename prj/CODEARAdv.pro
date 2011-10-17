@@ -46,6 +46,7 @@ HEADERS += \
 	../src/behaviors/renderbehavior.h \
 	../src/behaviors/fpscounter.h \
 	../src/behaviors/objectcontainerbehavior.h \
+	../src/behaviors/loadworldstatebehavior.h \
 	../src/behaviors/activatespawnerbehavior.h \
 	../src/behaviors/spawnbehavior.h \
 	../src/behaviors/gamebehaviors.h \
@@ -55,11 +56,12 @@ HEADERS += \
 	../src/core/Entity.h \
 	../src/core/BaseObject.h \
 	../src/core/gameloop.h \
-    ../src/gameobject/objectparser.h \
+	../src/gameobject/objectparser.h \
 	../src/gameobject/world.h \
 	../src/gameobject/behavior.h \
 	../src/gameobject/attribute.h \
     ../src/gameobject/gameobject.h \
+	../src/gameobject/worldserializer.h \
     ../src/json/writer.h \
     ../src/json/value.h \
     ../src/json/reader.h \
@@ -107,6 +109,7 @@ SOURCES += \
 	../src/behaviors/renderbehavior.cpp \
 	../src/behaviors/fpscounterbehavior.cpp \
 	../src/behaviors/objectcontainerbehavior.cpp \
+	../src/behaviors/loadworldstatebehavior.cpp \
 	../src/behaviors/activatespawnerbehavior.cpp \
 	../src/behaviors/spawnbehavior.cpp \
 	../src/core/Scene.cpp \
@@ -116,6 +119,7 @@ SOURCES += \
 	../src/gameobject/behavior.cpp \
 	../src/gameobject/attribute.cpp \
 	../src/gameobject/gameobject.cpp \
+	../src/gameobject/worldserializer.cpp \
 	../src/json/json_writer.cpp \
 	../src/json/json_value.cpp \
 	../src/json/json_reader.cpp \

@@ -16,7 +16,7 @@ class Renderer;
 class ResourceManager;
 //----------------------------------------------------------------------------//
 class ENGINE_API Tilemap
-	: public Entity
+	: public View
 {
 public:
 	Tilemap();

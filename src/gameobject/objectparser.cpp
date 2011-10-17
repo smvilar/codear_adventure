@@ -9,8 +9,7 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-bool ObjectParser::parse(const char *filename, GameObject &object,
-						 const World *world)
+bool ObjectParser::parse(const char *filename, GameObject &object, const World *world) const
 {
 	std::ifstream ifs(filename);
 
@@ -33,8 +32,7 @@ bool ObjectParser::parse(const char *filename, GameObject &object,
 	return true;
 }
 //----------------------------------------------------------------------------//
-void ObjectParser::parseAttributes(const Json::Value &attrsValue,
-								   GameObject &object)
+void ObjectParser::parseAttributes(const Json::Value &attrsValue, GameObject &object) const
 {
 	using std::cout;
 	using std::cerr;
@@ -68,8 +66,7 @@ void ObjectParser::parseAttributes(const Json::Value &attrsValue,
 	}
 }
 //----------------------------------------------------------------------------//
-void ObjectParser::parseBehaviors(const Json::Value &behaviorsValue,
-								  GameObject &object, const World &world)
+void ObjectParser::parseBehaviors(const Json::Value &behaviorsValue, GameObject &object, const World &world) const
 {
 	using std::cerr;
 	using std::endl;
@@ -94,7 +91,7 @@ void ObjectParser::parseBehaviors(const Json::Value &behaviorsValue,
 	}
 }
 //----------------------------------------------------------------------------//
-Attribute* ObjectParser::resolveType(const Json::Value &jsonValue)
+Attribute* ObjectParser::resolveType(const Json::Value &jsonValue) const
 {
 	Attribute* attribute = 0;
 

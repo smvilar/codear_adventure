@@ -27,6 +27,8 @@ public:
 
 private:
 	boost::any _value;
+
+	friend class WorldSerializer;
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

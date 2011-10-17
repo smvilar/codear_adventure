@@ -11,7 +11,7 @@ namespace he
 class Renderer;
 //----------------------------------------------------------------------------//
 class ENGINE_API Shape
-	: public Entity
+	: public View
 {
 public:
 	enum ShapeType

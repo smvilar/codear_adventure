@@ -9,7 +9,8 @@
 		"bpp" : 32,
 		"fullscreen" : 0,
 		"maxframerate" : 60,
-		"spawner" : "world.json"
+		"spawner" : "world.json",
+		"saved_world_state" : "world_saved_state.json"
 	},
 	"behaviors" :
 	[
@@ -17,7 +18,8 @@
 		"Window",
 		"SceneManager",
 		"Render",
-		"ActivateSpawner"
+		//"ActivateSpawner",
+		"LoadWorldState"
 	]
 }
 

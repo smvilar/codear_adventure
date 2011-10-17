@@ -8,6 +8,7 @@
 #include "DllExport.h"
 #include "resource/ResourceManager.h"
 #include "core/Scene.h"
+#include "gameobject/worldserializer.h"
 //----------------------------------------------------------------------------//
 namespace he {
 //----------------------------------------------------------------------------//
@@ -21,6 +22,7 @@ class Behavior;
 class ENGINE_API World
 {
 public:
+	World();
 	~World();
 
 /// GameObject Management
@@ -65,9 +67,21 @@ public:
 public:
 	// Creates an object from a json file
 	GameObject* parseObject(const char* filename);
+
+/// Persistence
+public:
+	// Saves the state of the world in a json file
+	void saveState(const char* filename) const;
+	// Loads the state of the world from a json file
+	void loadState(const char* filename);
+
+	WorldSerializer& getWorldSerializer();
+
+private:
+	WorldSerializer _worldSerializer;
 	
 /// Type definitions
-public:
+private:
 	typedef std::vector<GameObject*> ObjectVector;
 	typedef std::map<std::string, GameObject*> ObjectMap;
 	typedef std::map<std::string, Behavior*> BehaviorMap;
@@ -85,6 +99,8 @@ public:
 private:
 	Scene _scene;
 	ResourceManager _resourceManager;
+
+	friend class WorldSerializer;
 };
 //----------------------------------------------------------------------------//
 #include "world.inl"

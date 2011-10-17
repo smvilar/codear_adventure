@@ -15,14 +15,13 @@ class Attribute;
 class ObjectParser
 {
 public:
-	bool parse(const char* filename, GameObject& object, const World *world = 0);
+	bool parse(const char* filename, GameObject& object, const World *world = 0) const;
 
 private:
-	void parseAttributes(const Json::Value& jsonValue, GameObject& object);
-	void parseBehaviors(const Json::Value& jsonValue, GameObject& object,
-						const World &world);
+	void parseAttributes(const Json::Value &jsonValue, GameObject &object) const;
+	void parseBehaviors(const Json::Value &jsonValue, GameObject &object, const World &world) const;
 
-	Attribute* resolveType(const Json::Value& jsonValue);
+	Attribute* resolveType(const Json::Value& jsonValue) const;
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

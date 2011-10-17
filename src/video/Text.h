@@ -13,7 +13,7 @@ class Renderer;
 class ResourceManager;
 //----------------------------------------------------------------------------//
 class ENGINE_API Text
-	: public Entity
+	: public View
 {
 public:
 	Text();

@@ -8,7 +8,7 @@
 //----------------------------------------------------------------------------//
 namespace he {
 //----------------------------------------------------------------------------//
-class Entity;
+class View;
 class Renderer;
 class GameObject;
 //----------------------------------------------------------------------------//
@@ -26,12 +26,12 @@ private:
 
 /// Entity management
 public:
-	void addEntity(Entity* pEntity);
-	void removeEntity(Entity* pEntity);
+	void addEntity(View* pEntity);
+	void removeEntity(View* pEntity);
 	void clearEntities();
 
 private: // shouldn't be accessed by children classes
-	typedef std::vector<Entity*> EntityVector;
+	typedef std::vector<View*> EntityVector;
 	EntityVector _entities;
 };
 //----------------------------------------------------------------------------//

@@ -12,7 +12,7 @@ class Renderer;
 class Texture;
 //----------------------------------------------------------------------------//
 class ENGINE_API Sprite
-	: public Entity
+	: public View
 {
 public:	
 	Sprite();

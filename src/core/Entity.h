@@ -10,15 +10,14 @@ namespace he
 class Renderer;
 class World;
 //----------------------------------------------------------------------------//
-// Base class for every entity to be placed in a game Scene
+// Base class for every drawable entity to be placed in a game Scene
 // It contains information about its position, transform, etc.
 //----------------------------------------------------------------------------//
-class ENGINE_API Entity
-	: public BaseObject
+class ENGINE_API View : public BaseObject
 {
 public:
-	Entity() : _angle(0), _scale(1, 1) {}
-	virtual ~Entity() {}
+	View() : _angle(0), _scale(1, 1) {}
+	virtual ~View() {}
 
 public:
 	virtual void update(u32 elapsedMs) = 0;

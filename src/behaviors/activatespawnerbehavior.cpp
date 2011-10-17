@@ -13,7 +13,9 @@ void ActivateSpawnerBehavior::activate()
 	_pWorld->registerBehavior("Spawn", new SpawnBehavior);
 	string spawnerFilename = _pOwner->getAttributeAs<string>("spawner");
 
-	_pWorld->addObject(_pWorld->parseObject(spawnerFilename.c_str()));
+	GameObject *spawner = _pWorld->parseObject(spawnerFilename.c_str());
+	_pWorld->addObject(spawner);
+	_pWorld->getWorldSerializer().addIgnoredObject(spawner->name.c_str());
 }
 //----------------------------------------------------------------------------//
 Behavior* ActivateSpawnerBehavior::clone() const

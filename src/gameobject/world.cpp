@@ -7,6 +7,7 @@
 #include "gameobject/attribute.h"
 #include "gameobject/behavior.h"
 #include "gameobject/objectparser.h"
+#include "gameobject/worldserializer.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -22,6 +23,11 @@ public:
 		return (obj->name.compare(_name) == 0);
 	}
 };
+//----------------------------------------------------------------------------//
+World::World()
+{
+	// ...
+}
 //----------------------------------------------------------------------------//
 World::~World()
 {
@@ -151,5 +157,24 @@ GameObject* World::parseObject(const char *filename)
 	ObjectParser parser;
 	parser.parse(filename, *obj, this);
 	return obj;
+}
+//----------------------------------------------------------------------------//
+#include <fstream>
+//----------------------------------------------------------------------------//
+void World::saveState(const char *filename) const
+{
+	std::ofstream ofs(filename);
+	_worldSerializer.serialize(*this, ofs);
+}
+//----------------------------------------------------------------------------//
+void World::loadState(const char *filename)
+{
+	std::ifstream ifs(filename);
+	_worldSerializer.deserialize(*this, ifs);
+}
+//----------------------------------------------------------------------------//
+WorldSerializer& World::getWorldSerializer()
+{
+	return _worldSerializer;
 }
 //----------------------------------------------------------------------------//

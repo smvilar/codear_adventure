@@ -32,12 +32,12 @@ void Scene::render(Renderer &renderer)
 	}
 }
 //----------------------------------------------------------------------------//
-void Scene::addEntity(Entity* pEntity)
+void Scene::addEntity(View* pEntity)
 {
 	_entities.push_back(pEntity);
 }
 //----------------------------------------------------------------------------//
-void Scene::removeEntity(Entity* pEntity)
+void Scene::removeEntity(View* pEntity)
 {
 	std::remove(_entities.begin(), _entities.end(), pEntity);
 }

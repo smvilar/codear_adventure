@@ -1,0 +1,33 @@
+
+{
+	"objects" : 
+	[
+		
+		{
+			"attributes" : 
+			{
+				"pos_x" : 0,
+				"pos_y" : 0,
+				"rotation" : 0,
+				"sprite_filename" : "background.png"
+			},
+			"behaviors" : [ "Sprite" ],
+			"name" : "Background"
+		},
+		
+		{
+			"attributes" : 
+			{
+				"frames_horizontal" : 6,
+				"ms_per_frame" : 60,
+				"pos_x" : 200,
+				"pos_y" : 200,
+				"rotation" : 0,
+				"scale" : 2,
+				"sprite_filename" : "ryu_test.png"
+			},
+			"behaviors" : [ "Sprite" ],
+			"name" : "Ryu"
+		}
+	]
+}
