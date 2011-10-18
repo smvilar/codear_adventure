@@ -20,6 +20,7 @@ int main()
 
 	GameLoop gameLoop;
 	gameLoop.start(world, "game.json");
+	//world.saveState("test_scene.json");
 
 	return 0;
 }

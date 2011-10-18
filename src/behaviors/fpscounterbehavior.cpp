@@ -16,7 +16,7 @@ Behavior* FPSCounterBehavior::clone() const
 //----------------------------------------------------------------------------//
 void FPSCounterBehavior::added()
 {
-	_fpsCounter.setMaxFramerate(_pOwner->getAttributeAs<int>("maxframerate"));
+	_fpsCounter.setMaxFramerate(_pOwner->getAttributeAs<int>("max_framerate"));
 	_pOwner->addAttribute("fpscounter", new Attribute(&_fpsCounter));
 }
 //----------------------------------------------------------------------------//

@@ -8,9 +8,8 @@
 		"height" : 600,
 		"bpp" : 32,
 		"fullscreen" : 0,
-		"maxframerate" : 60,
-		"spawner" : "world.json",
-		"saved_world_state" : "world_saved_state.json"
+		"max_framerate" : 60,
+		"world_filename" : "test_scene.json"
 	},
 	"behaviors" :
 	[
@@ -18,7 +17,6 @@
 		"Window",
 		"SceneManager",
 		"Render",
-		//"ActivateSpawner",
 		"LoadWorldState"
 	]
 }

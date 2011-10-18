@@ -12,8 +12,7 @@ using namespace he;
 //----------------------------------------------------------------------------//
 void WorldSerializer::serialize(const World &world, std::ostream &os) const
 {
-	Json::Value root(Json::objectValue);
-	Json::Value jsObjects(Json::arrayValue);
+	Json::Value root(Json::arrayValue);
 
 	const World::ObjectVector& objects = world._objects;
 
@@ -27,10 +26,9 @@ void WorldSerializer::serialize(const World &world, std::ostream &os) const
 		// only serialize if it's not in the ignoredList
 		if (it == _ignoredObjects.end())
 		{
-			jsObjects.append(serializeObject(object, world));
+			root.append(serializeObject(object, world));
 		}
 	}
-	root["objects"] = jsObjects;
 
 	Json::StyledStreamWriter writer;
 	writer.write(os, root);
@@ -118,11 +116,10 @@ void WorldSerializer::deserialize(World &world, std::istream &is) const
 		return;
 	}
 
-	Json::Value objs = root["objects"];
-	for (size_t i = 0; i < objs.size(); ++i)
+	for (size_t i = 0; i < root.size(); ++i)
 	{
 		GameObject *object = new GameObject("unnamed");
-		deserializeObject(*object, objs[i], world);
+		deserializeObject(*object, root[i], world);
 		world.addObject(object);
 	}
 }

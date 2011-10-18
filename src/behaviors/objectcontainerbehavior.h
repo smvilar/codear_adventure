@@ -9,9 +9,11 @@ namespace he {
 class ENGINE_API ObjectContainerBehavior : public Behavior
 {
 public:
-	virtual void added();
-
 	virtual Behavior* clone() const;
+
+private:
+	virtual void added();
+	virtual void activate();
 };
 //----------------------------------------------------------------------------//
 } // end namespace he
