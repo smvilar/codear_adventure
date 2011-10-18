@@ -9,7 +9,7 @@
 namespace he {
 //----------------------------------------------------------------------------//
 class Scene;
-class Attribute;
+class FPSCounter;
 //----------------------------------------------------------------------------//
 class ENGINE_API SceneBehavior : public Behavior
 {
@@ -18,13 +18,10 @@ public:
 	virtual Behavior* clone() const;
 
 private:
-	virtual void added();
 	virtual void activate();
 
-	virtual void removed();
-
 private:
-	Attribute *_pFPSCounter;
+	FPSCounter *_pFPSCounter;
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

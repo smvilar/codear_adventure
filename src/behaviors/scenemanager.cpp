@@ -11,29 +11,18 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
+void SceneBehavior::activate()
+{
+	_pFPSCounter = _pOwner->getAttributeAs<FPSCounter*>("fpscounter");
+}
+//----------------------------------------------------------------------------//
 void SceneBehavior::update()
 {
-	u32 dt = _pFPSCounter->getValue<FPSCounter*>()->getDT();
-	_pWorld->getScene().update(dt);
+	_pWorld->getScene().update(_pFPSCounter->getDT());
 }
 //----------------------------------------------------------------------------//
 Behavior* SceneBehavior::clone() const
 {
 	return new SceneBehavior;
-}
-//----------------------------------------------------------------------------//
-void SceneBehavior::added()
-{
-	_pWorld->getScene().added(_pOwner);
-}
-//----------------------------------------------------------------------------//
-void SceneBehavior::activate()
-{
-	_pFPSCounter = _pOwner->getAttribute("fpscounter");
-}
-//----------------------------------------------------------------------------//
-void SceneBehavior::removed()
-{
-	_pWorld->getScene().removed();
 }
 //----------------------------------------------------------------------------//

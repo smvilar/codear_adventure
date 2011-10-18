@@ -15,14 +15,10 @@ class GameObject;
 class ENGINE_API Scene
 {
 public:
-	void added(GameObject *pGame);
-	void removed();
+	~Scene();
 
 	void update(u32 dt);
 	void render(Renderer &renderer);
-
-private:
-	GameObject* _pGame;
 
 /// Entity management
 public:
