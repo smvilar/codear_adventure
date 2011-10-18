@@ -55,6 +55,10 @@ def main():
 
 	with open(full_source_path, 'w') as source_file:
 		source_file.write(source_text(class_name, header_path))
+	
+	# update the project files
+	# TODO: use config.qtcreator_proj and config.visualstudio_proj
+	# TODO: add to hg repo
 
 if __name__ == '__main__':
 	main()
