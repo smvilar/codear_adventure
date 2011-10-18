@@ -4,7 +4,7 @@
 #include <vector>
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
-#include "core/Entity.h"
+#include "core/View.h"
 #include "video/Texture.h"
 #include "math/Vector2.h"
 #include "video/StaticVertexBuffer.h"

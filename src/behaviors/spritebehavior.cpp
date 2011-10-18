@@ -59,12 +59,12 @@ void SpriteBehavior::removed()
 //----------------------------------------------------------------------------//
 void SpriteBehavior::activate()
 {
-	_pWorld->getScene().addEntity(&_sprite);
+	_pWorld->getScene().addView(&_sprite);
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::deactivate()
 {
-	_pWorld->getScene().removeEntity(&_sprite);
+	_pWorld->getScene().removeView(&_sprite);
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::update()

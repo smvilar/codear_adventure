@@ -1,6 +1,6 @@
 #include "core/Scene.h"
 //----------------------------------------------------------------------------//
-#include "core/Entity.h"
+#include "core/View.h"
 #include "gameobject/gameobject.h"
 //----------------------------------------------------------------------------//
 using namespace he;
@@ -13,31 +13,31 @@ Scene::~Scene()
 void Scene::update(u32 dt)
 {
 	// update entities
-	for (size_t i=0; i<_entities.size(); ++i)
-		_entities[i]->update(dt);
+	for (size_t i=0; i<_views.size(); ++i)
+		_views[i]->update(dt);
 }
 //----------------------------------------------------------------------------//
 void Scene::render(Renderer &renderer)
 {
 	// render entities
-	for (size_t i=0; i<_entities.size(); ++i)
+	for (size_t i=0; i<_views.size(); ++i)
 	{
-		_entities[i]->render(renderer);
+		_views[i]->render(renderer);
 	}
 }
 //----------------------------------------------------------------------------//
-void Scene::addEntity(View* pEntity)
+void Scene::addView(View *pView)
 {
-	_entities.push_back(pEntity);
+	_views.push_back(pView);
 }
 //----------------------------------------------------------------------------//
-void Scene::removeEntity(View* pEntity)
+void Scene::removeView(View *pView)
 {
-	std::remove(_entities.begin(), _entities.end(), pEntity);
+	std::remove(_views.begin(), _views.end(), pView);
 }
 //----------------------------------------------------------------------------//
 void Scene::clearEntities()
 {
-	_entities.clear();
+	_views.clear();
 }
 //----------------------------------------------------------------------------//

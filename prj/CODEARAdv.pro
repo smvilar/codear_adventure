@@ -53,8 +53,10 @@ HEADERS += \
     ../src/core/Assert.h \
     ../src/core/Types.h \
 	../src/core/Scene.h \
-	../src/core/Entity.h \
+	../src/core/View.h \
+	../src/core/View.inl \
 	../src/core/BaseObject.h \
+	../src/core/BaseObject.inl \
 	../src/core/gameloop.h \
 	../src/gameobject/objectparser.h \
 	../src/gameobject/world.h \

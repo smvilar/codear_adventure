@@ -2,7 +2,7 @@
 #define HE_SPRITE_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
-#include "core/Entity.h"
+#include "core/View.h"
 #include "video/Texture.h"
 //----------------------------------------------------------------------------//
 namespace he

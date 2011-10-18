@@ -20,15 +20,15 @@ public:
 	void update(u32 dt);
 	void render(Renderer &renderer);
 
-/// Entity management
+/// View management
 public:
-	void addEntity(View* pEntity);
-	void removeEntity(View* pEntity);
+	void addView(View *pView);
+	void removeView(View *pView);
 	void clearEntities();
 
 private: // shouldn't be accessed by children classes
-	typedef std::vector<View*> EntityVector;
-	EntityVector _entities;
+	typedef std::vector<View*> ViewVector;
+	ViewVector _views;
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

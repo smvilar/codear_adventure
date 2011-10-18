@@ -2,7 +2,7 @@
 #define HE_SHAPE_H
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
-#include "core/Entity.h"
+#include "core/View.h"
 #include "video/Renderer.h"
 //----------------------------------------------------------------------------//
 namespace he
