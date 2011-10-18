@@ -7,23 +7,21 @@ using namespace he;
 //----------------------------------------------------------------------------//
 Scene::~Scene()
 {
-	clearEntities();
+	clearViews();
 }
 //----------------------------------------------------------------------------//
 void Scene::update(u32 dt)
 {
-	// update entities
+	// update views
 	for (size_t i=0; i<_views.size(); ++i)
 		_views[i]->update(dt);
 }
 //----------------------------------------------------------------------------//
 void Scene::render(Renderer &renderer)
 {
-	// render entities
+	// render views
 	for (size_t i=0; i<_views.size(); ++i)
-	{
 		_views[i]->render(renderer);
-	}
 }
 //----------------------------------------------------------------------------//
 void Scene::addView(View *pView)
@@ -36,7 +34,7 @@ void Scene::removeView(View *pView)
 	std::remove(_views.begin(), _views.end(), pView);
 }
 //----------------------------------------------------------------------------//
-void Scene::clearEntities()
+void Scene::clearViews()
 {
 	_views.clear();
 }
