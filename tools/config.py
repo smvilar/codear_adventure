@@ -7,7 +7,7 @@ dll_header = 'DllExport.h'
 dll_define = 'ENGINE_API'
 
 qtcreator_proj = '../prj/CODEARAdv.pro'
-visualstudio_proj '../prj/CODEARAdv.vcxproj'
+visualstudio_proj = '../prj/CODEARAdv.vcxproj'
 
 include_path = '../src'
 src_path = '../src'

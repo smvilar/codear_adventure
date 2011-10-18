@@ -1,5 +1,5 @@
-#ifndef HE_ENTITY_H
-#define HE_ENTITY_H
+#ifndef HE_VIEW_H
+#define HE_VIEW_H
 //----------------------------------------------------------------------------//
 #include "BaseObject.h"
 #include "math/Vector2.h"
@@ -44,4 +44,4 @@ protected:
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // HE_ENTITY_H
+#endif // HE_VIEW_H
