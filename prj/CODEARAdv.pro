@@ -44,7 +44,7 @@ HEADERS += \
 	../src/behaviors/scenemanager.h \
 	../src/behaviors/windowbehavior.h \
 	../src/behaviors/renderbehavior.h \
-	../src/behaviors/fpscounter.h \
+	../src/behaviors/fpscounterbehavior.h \
 	../src/behaviors/objectcontainerbehavior.h \
 	../src/behaviors/loadworldstatebehavior.h \
 	../src/behaviors/activatespawnerbehavior.h \
@@ -98,7 +98,8 @@ HEADERS += \
     ../src/video/Renderer.h \
 	../src/video/GLee.h \
     ../src/video/DynamicVertexBuffer.h \
-	../src/video/Color.h
+	../src/video/Color.h \
+	../src/video/sfmlview.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -145,4 +146,5 @@ SOURCES += \
 	../src/video/GLee.c \
 	../src/video/DynamicVertexBuffer.cpp \
 	../src/video/Color.cpp \
+	../src/video/sfmlview.cpp \
 	../src/game/main.cpp

@@ -24,9 +24,9 @@ public:
 public:
 	void addView(View *pView);
 	void removeView(View *pView);
-	void clearEntities();
+	void clearViews();
 
-private: // shouldn't be accessed by children classes
+private:
 	typedef std::vector<View*> ViewVector;
 	ViewVector _views;
 };

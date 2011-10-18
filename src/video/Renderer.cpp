@@ -33,6 +33,16 @@ bool Renderer::init(u32 width, u32 height)
 
 	setClearColor(Color::MAGENTA);
 
+	// init SFML render texture
+	_renderTexture.Create(width, height);
+	_renderTexture.Clear(sf::Color(0, 0, 0, 0));
+	_renderTexture.GetTexture().Bind();
+	glGetIntegerv(GL_TEXTURE_BINDING_2D, &_renderTextureID);
+
+	sf::Text t("HOLA MANOLA COMO LE VA");
+	t.SetColor(sf::Color::Red);
+	draw(t);
+
 	return true;
 }
 //----------------------------------------------------------------------------//
@@ -49,10 +59,17 @@ void Renderer::begin()
 	glLoadIdentity();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//_renderTexture.Clear(sf::Color(0, 0, 0, 0));
 }
 //----------------------------------------------------------------------------//
 void Renderer::end()
 {
+	// render sfml gui
+	_renderTexture.Display();
+	setTexture(_renderTextureID);
+	drawRectangle(Vector2f(0), Vector2i(_renderTexture.GetWidth(), _renderTexture.GetHeight()));
+
 	_dynamicVBO.render();
 }
 //----------------------------------------------------------------------------//
@@ -63,7 +80,12 @@ void Renderer::setClearColor(const Color& color)
 //----------------------------------------------------------------------------//
 void Renderer::setTexture(const TexturePtr texture)
 {
-	glBindTexture(GL_TEXTURE_2D, texture->getID());
+	setTexture(texture->getID());
+}
+//----------------------------------------------------------------------------//
+void Renderer::setTexture(s32 textureID)
+{
+	_bindedTextureID = textureID;
 }
 //----------------------------------------------------------------------------//
 void Renderer::drawTexture(TexturePtr texture, const Vector2f &pos,
@@ -114,5 +136,27 @@ void Renderer::drawTexture(TexturePtr texture, const Vector2f &pos,
 	_dynamicVBO.addVertex(b.x, b.y, uv1.x, uv2.y);
 	_dynamicVBO.addVertex(c.x, c.y, uv2.x, uv2.y);
 	_dynamicVBO.addVertex(d.x, d.y, uv2.x, uv1.y);
+}
+//----------------------------------------------------------------------------//
+void Renderer::drawRectangle(const Vector2f &pos, const Vector2i &size,
+							 const Vector2f &uv1, const Vector2f &uv2)
+{
+	Vector2f a(pos.x, pos.y);
+	Vector2f b(pos.x, pos.y + size.y);
+	Vector2f c(pos.x + size.x, pos.y + size.y);
+	Vector2f d(pos.x + size.x, pos.y);
+
+	_dynamicVBO.setCurrTexture(_bindedTextureID);
+
+	// Add vertexes in CCW otherwise indexing them will fail.
+	_dynamicVBO.addVertex(a.x, a.y, uv1.x, uv1.y);
+	_dynamicVBO.addVertex(b.x, b.y, uv1.x, uv2.y);
+	_dynamicVBO.addVertex(c.x, c.y, uv2.x, uv2.y);
+	_dynamicVBO.addVertex(d.x, d.y, uv2.x, uv1.y);
+}
+//----------------------------------------------------------------------------//
+void Renderer::draw(sf::Drawable &drawable)
+{
+	_renderTexture.Draw(drawable);
 }
 //----------------------------------------------------------------------------//

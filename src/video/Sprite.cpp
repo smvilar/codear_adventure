@@ -90,10 +90,14 @@ void Sprite::render(Renderer& renderer)
 	f32 frameXEndf = (f32)(frameX + _frameSize.x) / _textureSize.x;
 	f32 frameYEndf = (f32)(frameY + _frameSize.y) / _textureSize.y;
 
-	renderer.drawTexture(_pTexture, getPosition(),
-						 Vector2i(_frameSize.x, _frameSize.y), getAngle(),
-						 getScale(), Vector2f(frameXBeginf, frameYBeginf),
-						 Vector2f(frameXEndf, frameYEndf));
+	Vector2i size(_frameSize.x, _frameSize.y);
+	size.x *= getScale().x;
+	size.y *= getScale().y;
+
+	renderer.setTexture(_pTexture);
+	renderer.drawRectangle(getPosition(), size,
+						   Vector2f(frameXBeginf, frameYBeginf),
+						   Vector2f(frameXEndf, frameYEndf));
 }
 //----------------------------------------------------------------------------//
 const Vector2f& Sprite::getSize() const
