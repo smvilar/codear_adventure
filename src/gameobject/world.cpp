@@ -1,6 +1,7 @@
 #include "gameobject/world.h"
 //----------------------------------------------------------------------------//
 #include <algorithm>
+#include <fstream>
 //----------------------------------------------------------------------------//
 #include "core/Assert.h"
 #include "gameobject/gameobject.h"
@@ -159,8 +160,6 @@ GameObject* World::parseObject(const char *filename)
 	parser.parse(filename, *obj, this);
 	return obj;
 }
-//----------------------------------------------------------------------------//
-#include <fstream>
 //----------------------------------------------------------------------------//
 void World::saveState(const char *filename) const
 {
