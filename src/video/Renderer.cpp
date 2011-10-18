@@ -66,11 +66,16 @@ void Renderer::setTexture(const TexturePtr texture)
 	glBindTexture(GL_TEXTURE_2D, texture->getID());
 }
 //----------------------------------------------------------------------------//
-void Renderer::drawTexture(TexturePtr texture,
-	f32 x, f32 y, u32 w, u32 h,
-	f32 angle, const Vector2f& scale,
-	f32 texX1, f32 texX2, f32 texY1, f32 texY2)
+void Renderer::drawTexture(TexturePtr texture, const Vector2f &pos,
+						   const Vector2i &size, f32 angle,
+						   const Vector2f &scale, const Vector2f &uv1,
+						   const Vector2f &uv2)
 {
+	f32 x = pos.x;
+	f32 y = pos.y;
+	u32 w = size.x;
+	u32 h = size.y;
+
 	Vector2f pivot(x + w/2, y + h/2);
 
 	Vector2f a(x, y); 
@@ -105,9 +110,9 @@ void Renderer::drawTexture(TexturePtr texture,
 	_dynamicVBO.setCurrTexture(texture->getID());
 
 	// Add vertexes in CCW otherwise indexing them will fail.
-	_dynamicVBO.addVertex(a.x, a.y, texX1, texY1);
-	_dynamicVBO.addVertex(b.x, b.y, texX1, texY2);
-	_dynamicVBO.addVertex(c.x, c.y, texX2, texY2);
-	_dynamicVBO.addVertex(d.x, d.y, texX2, texY1);	
+	_dynamicVBO.addVertex(a.x, a.y, uv1.x, uv1.y);
+	_dynamicVBO.addVertex(b.x, b.y, uv1.x, uv2.y);
+	_dynamicVBO.addVertex(c.x, c.y, uv2.x, uv2.y);
+	_dynamicVBO.addVertex(d.x, d.y, uv2.x, uv1.y);
 }
 //----------------------------------------------------------------------------//

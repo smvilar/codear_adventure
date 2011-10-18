@@ -32,10 +32,9 @@ World::World()
 //----------------------------------------------------------------------------//
 World::~World()
 {
-	// TODO: fix crashing
-	//removeAllObjects();
-	//cleanRegisteredObjectPrototypes();
-	//cleanRegisteredBehaviors();
+	removeAllObjects();
+	cleanRegisteredObjectPrototypes();
+	cleanRegisteredBehaviors();
 }
 //----------------------------------------------------------------------------//
 void World::addObject(GameObject *object)

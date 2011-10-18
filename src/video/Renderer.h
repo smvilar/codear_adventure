@@ -29,7 +29,12 @@ public:
 	void setClearColor(const Color& color);
 	void setTexture(const TexturePtr texture);
 
-	void drawTexture(TexturePtr texture, f32 x, f32 y, u32 w, u32 h, f32 angle, const Vector2f& scale, f32 texX1 = 0.0, f32 texX2 = 1.0, f32 texY1 = 0.0, f32 texY2 = 1.0);
+	//void drawTexture(TexturePtr texture, f32 x, f32 y, u32 w, u32 h, f32 angle, const Vector2f& scale, f32 texX1 = 0.0, f32 texX2 = 1.0, f32 texY1 = 0.0, f32 texvY2 = 1.0);
+	void drawTexture(TexturePtr texture, const Vector2f &pos,
+					 const Vector2i &size, f32 angle = 0,
+					 const Vector2f &scale = Vector2f(1),
+					 const Vector2f &uv1 = Vector2f(0),
+					 const Vector2f &uv2 = Vector2f(1));
 
 private:
 	DynamicVertexBuffer _dynamicVBO;

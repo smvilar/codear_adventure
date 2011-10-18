@@ -94,10 +94,8 @@ HEADERS += \
     ../src/video/Sprite.h \
 	../src/video/Shape.h \
     ../src/video/Renderer.h \
-    ../src/video/GLee.h \
-    ../src/video/hierophantengine.h \
+	../src/video/GLee.h \
     ../src/video/DynamicVertexBuffer.h \
-    ../src/video/DllExport.h \
 	../src/video/Color.h
 
 SOURCES += \
