@@ -21,7 +21,7 @@ private:
 	virtual void added();
 
 private:
-	sf::RenderWindow *_window;
+	sf::RenderWindow *window_;
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

@@ -18,7 +18,7 @@ private:
 	virtual void removed();
 
 private:
-	FPSCounter _fpsCounter;
+	FPSCounter fpsCounter_;
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

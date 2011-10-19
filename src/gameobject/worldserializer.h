@@ -35,7 +35,7 @@ private:
 
 private:
 	typedef std::list<std::string> StringList;
-	StringList _ignoredObjects;
+	StringList ignoredObjects_;
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

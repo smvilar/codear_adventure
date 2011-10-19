@@ -20,11 +20,11 @@ void WorldSerializer::serialize(const World &world, std::ostream &os) const
 	{
 		const GameObject& object = *objects[i];
 		StringList::const_iterator it = std::find(
-					_ignoredObjects.begin(),
-					_ignoredObjects.end(),
+					ignoredObjects_.begin(),
+					ignoredObjects_.end(),
 					object.name);
 		// only serialize if it's not in the ignoredList
-		if (it == _ignoredObjects.end())
+		if (it == ignoredObjects_.end())
 		{
 			root.append(serializeObject(object, world));
 		}
@@ -217,6 +217,6 @@ void WorldSerializer::deserializeBehaviors(GameObject &object, const Json::Value
 //----------------------------------------------------------------------------//
 void WorldSerializer::addIgnoredObject(const char *name)
 {
-	_ignoredObjects.push_back(name);
+	ignoredObjects_.push_back(name);
 }
 //----------------------------------------------------------------------------//

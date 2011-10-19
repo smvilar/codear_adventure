@@ -6,7 +6,7 @@ using namespace he;
 //----------------------------------------------------------------------------//
 void FPSCounterBehavior::update()
 {
-	_fpsCounter.tick();
+	fpsCounter_.tick();
 }
 //----------------------------------------------------------------------------//
 Behavior* FPSCounterBehavior::clone() const
@@ -16,8 +16,8 @@ Behavior* FPSCounterBehavior::clone() const
 //----------------------------------------------------------------------------//
 void FPSCounterBehavior::added()
 {
-	_fpsCounter.setMaxFramerate(pOwner_->getAttributeAs<int>("max_framerate"));
-	pOwner_->addAttribute("fpscounter", new Attribute(&_fpsCounter));
+	fpsCounter_.setMaxFramerate(pOwner_->getAttributeAs<int>("max_framerate"));
+	pOwner_->addAttribute("fpscounter", new Attribute(&fpsCounter_));
 }
 //----------------------------------------------------------------------------//
 void FPSCounterBehavior::removed()

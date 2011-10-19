@@ -11,22 +11,22 @@ Scene::~Scene()
 //----------------------------------------------------------------------------//
 void Scene::render(sf::RenderTarget &renderTarget)
 {
-	for (size_t i=0; i<_drawables.size(); ++i)
-		renderTarget.Draw(*_drawables[i]);
+	for (size_t i=0; i<drawables_.size(); ++i)
+		renderTarget.Draw(*drawables_[i]);
 }
 //----------------------------------------------------------------------------//
 void Scene::addDrawable(sf::Drawable *drawable)
 {
-	_drawables.push_back(drawable);
+	drawables_.push_back(drawable);
 }
 //----------------------------------------------------------------------------//
 void Scene::removeDrawable(sf::Drawable *drawable)
 {
-	std::remove(_drawables.begin(), _drawables.end(), drawable);
+	std::remove(drawables_.begin(), drawables_.end(), drawable);
 }
 //----------------------------------------------------------------------------//
 void Scene::clearDrawables()
 {
-	_drawables.clear();
+	drawables_.clear();
 }
 //----------------------------------------------------------------------------//

@@ -29,7 +29,7 @@ public:
 
 private:
 	typedef std::vector<sf::Drawable*> ViewVector;
-	ViewVector _drawables;
+	ViewVector drawables_;
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

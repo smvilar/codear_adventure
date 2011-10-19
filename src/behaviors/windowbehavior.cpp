@@ -14,7 +14,7 @@ using namespace he;
 void WindowBehavior::update()
 {
 	sf::Event event;
-	while (_window->PollEvent(event))
+	while (window_->PollEvent(event))
 	{
 		if (event.Type == sf::Event::Closed)
 			pOwner_->getAttribute("alive")->setValue(false);
@@ -26,9 +26,9 @@ void WindowBehavior::update()
 	if (isControlPressed && isQPressed)
 		pOwner_->getAttribute("alive")->setValue(false);
 
-	_window->Clear();
-	pWorld_->getScene().render(*_window);
-	_window->Display();
+	window_->Clear();
+	pWorld_->getScene().render(*window_);
+	window_->Display();
 }
 //----------------------------------------------------------------------------//
 Behavior* WindowBehavior::clone() const
@@ -48,9 +48,9 @@ void WindowBehavior::added()
 	sf::VideoMode videoMode(width, height, bpp);
 	sf::ContextSettings contextSettings;
 
-	_window = new sf::RenderWindow(videoMode, caption,
+	window_ = new sf::RenderWindow(videoMode, caption,
 								   sf::Style::Default, contextSettings);
 
-	pOwner_->addAttribute("window", new Attribute(_window));
+	pOwner_->addAttribute("window", new Attribute(window_));
 }
 //----------------------------------------------------------------------------//
