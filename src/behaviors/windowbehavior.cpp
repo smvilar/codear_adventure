@@ -27,8 +27,6 @@ void WindowBehavior::update()
 		_pOwner->getAttribute("alive")->setValue(false);
 
 	_window->Clear();
-	sf::Text t("HOLA");
-	_window->Draw(t);
 	_pWorld->getScene().render(*_window);
 	_window->Display();
 }

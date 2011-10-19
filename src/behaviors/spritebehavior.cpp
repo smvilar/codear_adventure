@@ -32,15 +32,17 @@ void SpriteBehavior::added()
 	Attribute* msPerFrameAttr = _pOwner->getAttribute("ms_per_frame");
 	if (msPerFrameAttr)
 		msPerFrame = msPerFrameAttr->getValue<int>();
+
 	
 	//ResourceManager &resMgr = _pWorld->getResourceManager();
 	//TexturePtr texture = resMgr.get<Texture>(filename.c_str());
 	//_sprite = Sprite(texture, framesHorizontal, framesVertical, msPerFrame);
-	sf::Texture texture;
-	if (!texture.LoadFromFile(filename))
+	if (!_texture.LoadFromFile(filename))
 		std::cerr << "Error loading sprite: " << filename << std::endl;
 	//_sprite = sf::Sprite(texture);
-	_sprite.SetTexture(texture);
+	_sprite.SetTexture(_texture);
+
+	spriteAnimation_.set(_sprite, framesHorizontal, framesVertical, msPerFrame);
 
 	_posX = _pOwner->getAttribute("pos_x");
 	_posY = _pOwner->getAttribute("pos_y");
@@ -73,5 +75,8 @@ void SpriteBehavior::deactivate()
 void SpriteBehavior::update()
 {
 	_sprite.SetPosition(_posX->getValue<int>(), _posY->getValue<int>());
+
+	// TODO: unhardcode
+	spriteAnimation_.update(30);
 }
 //----------------------------------------------------------------------------//

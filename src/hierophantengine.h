@@ -14,14 +14,15 @@
 #include "math/Vector2.h"
 #include "math/Rect.h"
 //----------------------------------------------------------------------------//
-#include "video/Renderer.h"
-#include "video/Shape.h"
-#include "video/Sprite.h"
+//#include "video/Renderer.h"
+//#include "video/Shape.h"
+//#include "video/Sprite.h"
 //#include "video/Text.h"
-#include "video/Tilemap.h"
-#include "video/Texture.h"
+//#include "video/Tilemap.h"
+//#include "video/Texture.h"
+#include "video/spriteanimation.h"
 //----------------------------------------------------------------------------//
-#include "resource/ResourceManager.h"
+//#include "resource/ResourceManager.h"
 //----------------------------------------------------------------------------//
 #include "gameobject/gameobject.h"
 #include "gameobject/attribute.h"

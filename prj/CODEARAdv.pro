@@ -96,7 +96,8 @@ HEADERS += \
 	../src/video/Shape.h \
     ../src/video/Renderer.h \
 	../src/video/GLee.h \
-	../src/video/DynamicVertexBuffer.h
+	../src/video/DynamicVertexBuffer.h \
+	../src/video/spriteanimation.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -140,4 +141,5 @@ SOURCES += \
 	../src/video/Renderer.cpp \
 	../src/video/GLee.c \
 	../src/video/DynamicVertexBuffer.cpp \
+	../src/video/spriteanimation.cpp \
 	../src/game/main.cpp

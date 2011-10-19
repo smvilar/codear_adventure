@@ -8,6 +8,7 @@
 #include "DllExport.h"
 #include "core/Types.h"
 #include "gameobject/behavior.h"
+#include "video/spriteanimation.h"
 //----------------------------------------------------------------------------//
 namespace he {
 //----------------------------------------------------------------------------//
@@ -29,7 +30,9 @@ protected:
 	virtual void deactivate();
 
 private:
+	sf::Texture _texture;
 	sf::Sprite _sprite;
+	SpriteAnimation spriteAnimation_;
 	Attribute *_posX, *_posY, *_rotation, *_scale;
 };
 //----------------------------------------------------------------------------//
