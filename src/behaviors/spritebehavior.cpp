@@ -18,18 +18,18 @@ void SpriteBehavior::added()
 {
 	using std::string;
 
-	const string &filename = _pOwner->getAttributeAs<string>("sprite_filename");
+	const string &filename = pOwner_->getAttributeAs<string>("sprite_filename");
 	int framesHorizontal = 1;
 	int framesVertical = 1;
 	int msPerFrame = 0;
 
-	Attribute* framesHorizAttr = _pOwner->getAttribute("frames_horizontal");
+	Attribute* framesHorizAttr = pOwner_->getAttribute("frames_horizontal");
 	if (framesHorizAttr)
 		framesHorizontal = framesHorizAttr->getValue<int>();
-	Attribute* framesVerticAttr = _pOwner->getAttribute("frames_vertical");
+	Attribute* framesVerticAttr = pOwner_->getAttribute("frames_vertical");
 	if (framesVerticAttr)
 		framesVertical = framesVerticAttr->getValue<int>();
-	Attribute* msPerFrameAttr = _pOwner->getAttribute("ms_per_frame");
+	Attribute* msPerFrameAttr = pOwner_->getAttribute("ms_per_frame");
 	if (msPerFrameAttr)
 		msPerFrame = msPerFrameAttr->getValue<int>();
 
@@ -39,15 +39,15 @@ void SpriteBehavior::added()
 
 	spriteAnimation_.set(sprite_, framesHorizontal, framesVertical, msPerFrame);
 
-	posX_ = _pOwner->getAttribute("pos_x");
-	posY_ = _pOwner->getAttribute("pos_y");
-	rotation_ = _pOwner->getAttribute("rotation");
-	scale_ = _pOwner->getAttribute("scale");
+	posX_ = pOwner_->getAttribute("pos_x");
+	posY_ = pOwner_->getAttribute("pos_y");
+	rotation_ = pOwner_->getAttribute("rotation");
+	scale_ = pOwner_->getAttribute("scale");
 
-	if (!_pOwner->getAttribute("width"))
-		_pOwner->addAttribute("width", new Attribute(sprite_.GetSize().x));
-	if (!_pOwner->getAttribute("height"))
-		_pOwner->addAttribute("height", new Attribute(sprite_.GetSize().y));
+	if (!pOwner_->getAttribute("width"))
+		pOwner_->addAttribute("width", new Attribute(sprite_.GetSize().x));
+	if (!pOwner_->getAttribute("height"))
+		pOwner_->addAttribute("height", new Attribute(sprite_.GetSize().y));
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::removed()
@@ -57,12 +57,12 @@ void SpriteBehavior::removed()
 //----------------------------------------------------------------------------//
 void SpriteBehavior::activate()
 {
-	_pWorld->getScene().addDrawable(&sprite_);
+	pWorld_->getScene().addDrawable(&sprite_);
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::deactivate()
 {
-	_pWorld->getScene().removeDrawable(&sprite_);
+	pWorld_->getScene().removeDrawable(&sprite_);
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::update()

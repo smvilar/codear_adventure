@@ -9,19 +9,19 @@ using namespace he;
 void EditBehavior::activate()
 {
 	mode_ = SELECT;
-	objects_ = _pOwner->getAttributeAs<GameObjectVector>("objects");
-	window_ = _pWorld->getObject("Game")->getAttributeAs<sf::RenderWindow*>("window");
+	objects_ = pOwner_->getAttributeAs<GameObjectVector>("objects");
+	window_ = pWorld_->getObject("Game")->getAttributeAs<sf::RenderWindow*>("window");
 
 	initGizmo();
 	setGizmo(-10, -10, 0, 0);
-	_pWorld->getScene().addDrawable(&gizmo_);
+	pWorld_->getScene().addDrawable(&gizmo_);
 
 	mode_ = INACTIVE;
 }
 //----------------------------------------------------------------------------//
 void EditBehavior::deactivate()
 {
-	_pWorld->getScene().removeDrawable(&gizmo_);
+	pWorld_->getScene().removeDrawable(&gizmo_);
 }
 //----------------------------------------------------------------------------//
 void EditBehavior::update()

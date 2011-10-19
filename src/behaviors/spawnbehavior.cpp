@@ -17,11 +17,11 @@ void SpawnBehavior::activate()
 	typedef std::vector<GameObject*> GameObjectVector;
 
 	GameObjectVector objects =
-			_pOwner->getAttributeAs<GameObjectVector>("objects");
+			pOwner_->getAttributeAs<GameObjectVector>("objects");
 
 	for (size_t i = 0; i < objects.size(); ++i)
 	{
-		_pWorld->addObject(objects[i]);
+		pWorld_->addObject(objects[i]);
 	}
 }
 //----------------------------------------------------------------------------//

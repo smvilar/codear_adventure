@@ -77,7 +77,7 @@ public:
 	WorldSerializer& getWorldSerializer();
 
 private:
-	WorldSerializer _worldSerializer;
+	WorldSerializer worldSerializer_;
 	
 /// Type definitions
 private:
@@ -86,16 +86,16 @@ private:
 	typedef std::map<std::string, Behavior*> BehaviorMap;
 
 private:
-	ObjectVector _objects;
-	ObjectMap _objectPrototypes;
-	BehaviorMap _behaviors;
+	ObjectVector objects_;
+	ObjectMap objectPrototypes_;
+	BehaviorMap behaviors_;
 
 /// Scene (for behaviors that need to render stuff)
 public:
 	Scene& getScene();
 
 private:
-	Scene _scene;
+	Scene scene_;
 
 	friend class WorldSerializer;
 };

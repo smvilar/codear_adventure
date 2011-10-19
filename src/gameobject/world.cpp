@@ -39,36 +39,36 @@ World::~World()
 //----------------------------------------------------------------------------//
 void World::addObject(GameObject *object)
 {
-	_objects.push_back(object);
-	object->_pWorld = this;
+	objects_.push_back(object);
+	object->pWorld_ = this;
 	object->added();
 }
 //----------------------------------------------------------------------------//
 void World::removeObject(GameObject *object)
 {
-	std::remove(_objects.begin(), _objects.end(), object);
+	std::remove(objects_.begin(), objects_.end(), object);
 	object->removed();
-	object->_pWorld = 0;
+	object->pWorld_ = 0;
 }
 //----------------------------------------------------------------------------//
 GameObject* World::getObject(const char* name)
 {
-	ObjectVector::iterator it = std::find_if(_objects.begin(), _objects.end(),
+	ObjectVector::iterator it = std::find_if(objects_.begin(), objects_.end(),
 											 ObjectNamesAreEqual(name));
-	return (it != _objects.end()) ? *it : 0;
+	return (it != objects_.end()) ? *it : 0;
 }
 //----------------------------------------------------------------------------//
 void World::removeAllObjects()
 {
-	ObjectVector::iterator it = _objects.begin();
-	for (; it != _objects.end(); ++it)
+	ObjectVector::iterator it = objects_.begin();
+	for (; it != objects_.end(); ++it)
 		delete *it;
 }
 //----------------------------------------------------------------------------//
 void World::update()
 {
-	ObjectVector::iterator it = _objects.begin();
-	for (; it != _objects.end(); ++it)
+	ObjectVector::iterator it = objects_.begin();
+	for (; it != objects_.end(); ++it)
 	{
 		(*it)->update();
 	}
@@ -76,8 +76,8 @@ void World::update()
 //----------------------------------------------------------------------------//
 void World::broadcast(const char *message, void *args)
 {
-	ObjectVector::iterator it = _objects.begin();
-	for (; it != _objects.end(); ++it)
+	ObjectVector::iterator it = objects_.begin();
+	for (; it != objects_.end(); ++it)
 	{
 		(*it)->broadcast(message, args);
 	}
@@ -85,61 +85,61 @@ void World::broadcast(const char *message, void *args)
 //----------------------------------------------------------------------------//
 void World::registerObjectPrototype(const char *name, GameObject *object)
 {
-	Assert(_objectPrototypes.find(name) == _objectPrototypes.end(),
+	Assert(objectPrototypes_.find(name) == objectPrototypes_.end(),
 		   "Registering a duplicate object");
 
-	_objectPrototypes[name] = object;
+	objectPrototypes_[name] = object;
 }
 //----------------------------------------------------------------------------//
 void World::unregisterObjectPrototype(const char *name)
 {
-	Assert(_objectPrototypes.find(name) != _objectPrototypes.end(),
+	Assert(objectPrototypes_.find(name) != objectPrototypes_.end(),
 		   "Unregistering an unexistent object prototype");
 
-	delete _objectPrototypes[name];
-	_objectPrototypes.erase(name);
+	delete objectPrototypes_[name];
+	objectPrototypes_.erase(name);
 }
 //----------------------------------------------------------------------------//
 GameObject* World::createObject(const char *name) const
 {
-	ObjectMap::const_iterator it = _objectPrototypes.find(name);
-	Assert(it != _objectPrototypes.end(), "Couldn't find object prototype");
+	ObjectMap::const_iterator it = objectPrototypes_.find(name);
+	Assert(it != objectPrototypes_.end(), "Couldn't find object prototype");
 
 	return it->second->clone();
 }
 //----------------------------------------------------------------------------//
 void World::cleanRegisteredObjectPrototypes()
 {
-	ObjectMap::iterator it = _objectPrototypes.begin();
-	for (; it != _objectPrototypes.end(); ++it)
+	ObjectMap::iterator it = objectPrototypes_.begin();
+	for (; it != objectPrototypes_.end(); ++it)
 		delete it->second;
 }
 //----------------------------------------------------------------------------//
 void World::registerBehavior(const char *name, Behavior *behavior)
 {
-	Assert(_behaviors.find(name) == _behaviors.end(),
+	Assert(behaviors_.find(name) == behaviors_.end(),
 		   "Registering a duplicate behavior");
 
-	behavior->_pWorld = this;
-	_behaviors[name] = behavior;
+	behavior->pWorld_ = this;
+	behaviors_[name] = behavior;
 }
 //----------------------------------------------------------------------------//
 void World::unregisterBehavior(const char *name)
 {
-	Assert(_behaviors.find(name) != _behaviors.end(),
+	Assert(behaviors_.find(name) != behaviors_.end(),
 		   "Unregistering an unexistent behavior");
 
-	delete _behaviors[name];
-	_behaviors.erase(name);
+	delete behaviors_[name];
+	behaviors_.erase(name);
 }
 //----------------------------------------------------------------------------//
 Behavior* World::createBehavior(const char *name) const
 {
-	BehaviorMap::const_iterator it = _behaviors.find(name);
-	if (it != _behaviors.end())
+	BehaviorMap::const_iterator it = behaviors_.find(name);
+	if (it != behaviors_.end())
 	{
 		Behavior* behavior = it->second->clone();
-		behavior->_pWorld = const_cast<World*>(this);
+		behavior->pWorld_ = const_cast<World*>(this);
 		return behavior;
 	}
 	else return 0;
@@ -147,8 +147,8 @@ Behavior* World::createBehavior(const char *name) const
 //----------------------------------------------------------------------------//
 void World::cleanRegisteredBehaviors()
 {
-	BehaviorMap::iterator it = _behaviors.begin();
-	for (; it != _behaviors.end(); ++it)
+	BehaviorMap::iterator it = behaviors_.begin();
+	for (; it != behaviors_.end(); ++it)
 		delete it->second;
 }
 //----------------------------------------------------------------------------//
@@ -163,17 +163,17 @@ GameObject* World::parseObject(const char *filename)
 void World::saveState(const char *filename) const
 {
 	std::ofstream ofs(filename);
-	_worldSerializer.serialize(*this, ofs);
+	worldSerializer_.serialize(*this, ofs);
 }
 //----------------------------------------------------------------------------//
 void World::loadState(const char *filename)
 {
 	std::ifstream ifs(filename);
-	_worldSerializer.deserialize(*this, ifs);
+	worldSerializer_.deserialize(*this, ifs);
 }
 //----------------------------------------------------------------------------//
 WorldSerializer& World::getWorldSerializer()
 {
-	return _worldSerializer;
+	return worldSerializer_;
 }
 //----------------------------------------------------------------------------//

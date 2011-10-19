@@ -54,6 +54,7 @@ HEADERS += \
 	../src/core/gameloop.h \
 	../src/gameobject/objectparser.h \
 	../src/gameobject/world.h \
+	../src/gameobject/world.inl \
 	../src/gameobject/behavior.h \
 	../src/gameobject/attribute.h \
     ../src/gameobject/gameobject.h \

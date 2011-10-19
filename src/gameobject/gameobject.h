@@ -48,14 +48,14 @@ private:
 	void removed();
 
 private:
-	World* _pWorld;
+	World* pWorld_;
 
 private:
 	typedef std::vector<Behavior*> BehaviorVector;
-	BehaviorVector _behaviors;
+	BehaviorVector behaviors_;
 
 	typedef std::map<std::string, Attribute*> AttributeMap;
-	AttributeMap _attributes;
+	AttributeMap attributes_;
 
 	friend class World;
 	friend class WorldSerializer;

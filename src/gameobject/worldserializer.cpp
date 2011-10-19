@@ -14,7 +14,7 @@ void WorldSerializer::serialize(const World &world, std::ostream &os) const
 {
 	Json::Value root(Json::arrayValue);
 
-	const World::ObjectVector& objects = world._objects;
+	const World::ObjectVector& objects = world.objects_;
 
 	for (size_t i = 0; i < objects.size(); ++i)
 	{
@@ -50,7 +50,7 @@ Json::Value WorldSerializer::serializeObject(const GameObject &object, const Wor
 Json::Value WorldSerializer::serializeAttributes(const GameObject &object) const
 {
 	Json::Value attrs(Json::objectValue);
-	const GameObject::AttributeMap &attributes = object._attributes;
+	const GameObject::AttributeMap &attributes = object.attributes_;
 	GameObject::AttributeMap::const_iterator it = attributes.begin();
 	for (; it != attributes.end(); ++it)
 	{
@@ -80,8 +80,8 @@ Json::Value WorldSerializer::serializeBehaviors(const GameObject &object, const 
 {
 	Json::Value behavs(Json::arrayValue);
 
-	const World::BehaviorMap &registeredBehaviors = world._behaviors;
-	const GameObject::BehaviorVector &behaviors = object._behaviors;
+	const World::BehaviorMap &registeredBehaviors = world.behaviors_;
+	const GameObject::BehaviorVector &behaviors = object.behaviors_;
 
 	// We have to seach the registeredBehaviors map to find the names
 	// of the used behaviors in the object

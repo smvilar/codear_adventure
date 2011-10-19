@@ -52,17 +52,17 @@ void ObjectContainerBehavior::activate()
 	std::vector<GameObject*> objects;
 
 	AttributeVector objectNames =
-			_pOwner->getAttributeAs<AttributeVector>("object_names");
+			pOwner_->getAttributeAs<AttributeVector>("object_names");
 
 	for (size_t i = 0; i < objectNames.size(); ++i)
 	{
 		string objectName = objectNames[i]->getValue<string>();
-		GameObject *object = _pWorld->getObject(objectName.c_str());
+		GameObject *object = pWorld_->getObject(objectName.c_str());
 		Assert(object, "ObjectContainerBehavior issue: there's no object");
 		objects.push_back(object);
 	}
 
-	_pOwner->addAttribute("objects", new Attribute(objects));
+	pOwner_->addAttribute("objects", new Attribute(objects));
 }
 //----------------------------------------------------------------------------//
 Behavior* ObjectContainerBehavior::clone() const

@@ -17,17 +17,17 @@ void WindowBehavior::update()
 	while (_window->PollEvent(event))
 	{
 		if (event.Type == sf::Event::Closed)
-			_pOwner->getAttribute("alive")->setValue(false);
+			pOwner_->getAttribute("alive")->setValue(false);
 	}
 
 	// TODO: this should be maybe in another behavior, or gone
 	bool isControlPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::LSystem);
 	bool isQPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::Q);
 	if (isControlPressed && isQPressed)
-		_pOwner->getAttribute("alive")->setValue(false);
+		pOwner_->getAttribute("alive")->setValue(false);
 
 	_window->Clear();
-	_pWorld->getScene().render(*_window);
+	pWorld_->getScene().render(*_window);
 	_window->Display();
 }
 //----------------------------------------------------------------------------//
@@ -40,10 +40,10 @@ void WindowBehavior::added()
 {
 	using std::string;
 
-	u32 width = _pOwner->getAttributeAs<int>("width");
-	u32 height = _pOwner->getAttributeAs<int>("height");
-	u32 bpp = _pOwner->getAttributeAs<int>("bpp");
-	const string &caption = _pOwner->getAttributeAs<string>("name");
+	u32 width = pOwner_->getAttributeAs<int>("width");
+	u32 height = pOwner_->getAttributeAs<int>("height");
+	u32 bpp = pOwner_->getAttributeAs<int>("bpp");
+	const string &caption = pOwner_->getAttributeAs<string>("name");
 
 	sf::VideoMode videoMode(width, height, bpp);
 	sf::ContextSettings contextSettings;
@@ -51,6 +51,6 @@ void WindowBehavior::added()
 	_window = new sf::RenderWindow(videoMode, caption,
 								   sf::Style::Default, contextSettings);
 
-	_pOwner->addAttribute("window", new Attribute(_window));
+	pOwner_->addAttribute("window", new Attribute(_window));
 }
 //----------------------------------------------------------------------------//

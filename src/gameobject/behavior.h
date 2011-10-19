@@ -27,8 +27,8 @@ protected:
 	virtual void deactivate() {}
 
 protected:
-	GameObject *_pOwner;
-	World *_pWorld;
+	GameObject *pOwner_;
+	World *pWorld_;
 
 	friend class GameObject;
 	friend class World;

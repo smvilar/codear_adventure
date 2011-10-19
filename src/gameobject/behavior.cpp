@@ -3,8 +3,8 @@
 using namespace he;
 //----------------------------------------------------------------------------//
 Behavior::Behavior()
-: _pOwner(0)
-, _pWorld(0)
+: pOwner_(0)
+, pWorld_(0)
 {
 	// ...
 }
