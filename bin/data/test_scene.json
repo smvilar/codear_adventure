@@ -1,6 +1,7 @@
 
 [
 	{
+		"name" : "Background",
 		"attributes" : 
 		{
 			"pos_x" : 0,
@@ -8,10 +9,10 @@
 			"rotation" : 0,
 			"sprite_filename" : "background.png"
 		},
-		"behaviors" : [ "Sprite" ],
-		"name" : "Background"
+		"behaviors" : [ "Sprite" ]
 	},
 	{
+		"name" : "Ryu",
 		"attributes" : 
 		{
 			"frames_horizontal" : 6,
@@ -22,10 +23,10 @@
 			"scale" : 2,
 			"sprite_filename" : "ryu_test.png"
 		},
-		"behaviors" : [ "Sprite" ],
-		"name" : "Ryu"
+		"behaviors" : [ "Sprite" ]
 	},
 	{
+		"name" : "Editor",
 		"attributes" :
 		{
 			"object_names" :
@@ -34,7 +35,19 @@
 				"Ryu"
 			]
 		},
-		"behaviors" : [ "ObjectContainer", "Edit" ],
-		"name" : "Editor"
+		"behaviors" : [ "ObjectContainer", "Edit" ]
+	},
+	{
+		"name" : "ConversationBox",
+		"attributes" :
+		{
+			"pos_x" : 0,
+			"pos_y" : 500,
+			"width" : 1024,
+			"height" : 768,
+			"font" : "Arial",
+			"font_size" : 10
+		},
+		"behaviors" : [ "TextBox" ]
 	}
 ]

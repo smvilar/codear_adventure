@@ -38,15 +38,16 @@ HEADERS += \
 	../bin/data/ryu.json \
 	../src/hierophantengine.h \
 	../src/dllexport.h \
+	../src/behaviors/gamebehaviors.h \
+	../src/behaviors/windowbehavior.h \
+	../src/behaviors/fpscounterbehavior.h \
+	../src/behaviors/loadworldstatebehavior.h \
 	../src/behaviors/spritebehavior.h \
     ../src/behaviors/followmousebehavior.h \
 	../src/behaviors/editbehavior.h \
-	../src/behaviors/windowbehavior.h \
-	../src/behaviors/fpscounterbehavior.h \
 	../src/behaviors/objectcontainerbehavior.h \
-	../src/behaviors/loadworldstatebehavior.h \
 	../src/behaviors/spawnbehavior.h \
-	../src/behaviors/gamebehaviors.h \
+	../src/behaviors/textboxbehavior.h \
     ../src/core/Assert.h \
     ../src/core/Types.h \
 	../src/core/Scene.h \
@@ -89,6 +90,7 @@ SOURCES += \
 	../src/behaviors/objectcontainerbehavior.cpp \
 	../src/behaviors/loadworldstatebehavior.cpp \
 	../src/behaviors/spawnbehavior.cpp \
+	../src/behaviors/textboxbehavior.cpp \
 	../src/core/Scene.cpp \
 	../src/core/gameloop.cpp \
 	../src/gameobject/objectparser.cpp \
