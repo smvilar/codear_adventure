@@ -5,8 +5,6 @@
 #include "gameobject/world.h"
 #include "gameobject/gameobject.h"
 #include "gameobject/attribute.h"
-#include "resource/ResourceManager.h"
-#include "video/Texture.h"
 #include "core/Scene.h"
 //----------------------------------------------------------------------------//
 using namespace he;
@@ -35,9 +33,14 @@ void SpriteBehavior::added()
 	if (msPerFrameAttr)
 		msPerFrame = msPerFrameAttr->getValue<int>();
 	
-	ResourceManager &resMgr = _pWorld->getResourceManager();
-	TexturePtr texture = resMgr.get<Texture>(filename.c_str());
-	_sprite = Sprite(texture, framesHorizontal, framesVertical, msPerFrame);
+	//ResourceManager &resMgr = _pWorld->getResourceManager();
+	//TexturePtr texture = resMgr.get<Texture>(filename.c_str());
+	//_sprite = Sprite(texture, framesHorizontal, framesVertical, msPerFrame);
+	sf::Texture texture;
+	if (!texture.LoadFromFile(filename))
+		std::cerr << "Error loading sprite: " << filename << std::endl;
+	//_sprite = sf::Sprite(texture);
+	_sprite.SetTexture(texture);
 
 	_posX = _pOwner->getAttribute("pos_x");
 	_posY = _pOwner->getAttribute("pos_y");
@@ -47,9 +50,9 @@ void SpriteBehavior::added()
 	Attribute* width = _pOwner->getAttribute("width");
 	Attribute* height = _pOwner->getAttribute("height");
 	if (!width)
-		_pOwner->addAttribute("width", new Attribute(_sprite.getSize().x));
+		_pOwner->addAttribute("width", new Attribute(_sprite.GetSize().x));
 	if (!height)
-		_pOwner->addAttribute("height", new Attribute(_sprite.getSize().y));
+		_pOwner->addAttribute("height", new Attribute(_sprite.GetSize().y));
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::removed()
@@ -59,24 +62,16 @@ void SpriteBehavior::removed()
 //----------------------------------------------------------------------------//
 void SpriteBehavior::activate()
 {
-	_pWorld->getScene().addView(&_sprite);
+	_pWorld->getScene().addDrawable(&_sprite);
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::deactivate()
 {
-	_pWorld->getScene().removeView(&_sprite);
+	_pWorld->getScene().removeDrawable(&_sprite);
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::update()
 {
-	float posX, posY;
-	posX = (float)_posX->getValue<int>();
-	posY = (float)_posY->getValue<int>();
-	_sprite.setPosition(Vector2f(posX, posY));
-	
-	if (_rotation)
-		_sprite.setAngle((float)_rotation->getValue<int>());
-	if (_scale)
-		_sprite.setScale(Vector2f((float)_scale->getValue<int>()));
+	_sprite.SetPosition(_posX->getValue<int>(), _posY->getValue<int>());
 }
 //----------------------------------------------------------------------------//

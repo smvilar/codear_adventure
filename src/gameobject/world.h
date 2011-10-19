@@ -91,14 +91,12 @@ private:
 	ObjectMap _objectPrototypes;
 	BehaviorMap _behaviors;
 
-/// Scene and ResourceManager (for behaviors that need to render stuff)
+/// Scene (for behaviors that need to render stuff)
 public:
 	Scene& getScene();
-	ResourceManager& getResourceManager();
 
 private:
 	Scene _scene;
-	ResourceManager _resourceManager;
 
 	friend class WorldSerializer;
 };

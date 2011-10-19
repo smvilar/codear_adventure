@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------------//
 namespace sf
 {
-class Window;
+class RenderWindow;
 }
 //----------------------------------------------------------------------------//
 namespace he {
@@ -15,14 +15,13 @@ class ENGINE_API WindowBehavior : public Behavior
 {
 public:
 	virtual void update();
-	virtual void handleMessage(const char *message, void *args);
 	virtual Behavior* clone() const;
 
 private:
 	virtual void added();
 
 private:
-	sf::Window *_window;
+	sf::RenderWindow *_window;
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

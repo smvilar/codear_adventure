@@ -3,7 +3,7 @@
 //----------------------------------------------------------------------------//
 #include <vector>
 //----------------------------------------------------------------------------//
-#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "gameobject/behavior.h"
@@ -31,7 +31,7 @@ private:
 	typedef std::vector<GameObject*> GameObjectVector;
 	GameObjectVector _objects;
 
-	sf::Window* _window;
+	sf::RenderWindow* _window;
 
 	GameObject* _activeObject;
 	sf::Vector2i _lastMousePos;

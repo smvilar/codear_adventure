@@ -4,8 +4,3 @@ inline Scene& World::getScene()
 	return _scene;
 }
 //----------------------------------------------------------------------------//
-inline ResourceManager& World::getResourceManager()
-{
-	return _resourceManager;
-}
-//----------------------------------------------------------------------------//

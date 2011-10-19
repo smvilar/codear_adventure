@@ -12,7 +12,6 @@ namespace he
 {
 //----------------------------------------------------------------------------//
 class Texture;
-class Color;
 //----------------------------------------------------------------------------//
 class ENGINE_API Renderer
 {
@@ -28,7 +27,7 @@ public:
 	void begin();
 	void end();
 
-	void setClearColor(const Color& color);
+	void setClearColor(const sf::Color& color);
 	void setTexture(const TexturePtr texture);
 	void setTexture(s32 textureID);
 

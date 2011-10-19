@@ -2,33 +2,34 @@
 #define HE_SCENE_H
 //----------------------------------------------------------------------------//
 #include <vector>
-#include "DllExport.h"
 //----------------------------------------------------------------------------//
+#include "DllExport.h"
 #include "core/Types.h"
 //----------------------------------------------------------------------------//
-namespace he {
+namespace sf
+{
+class Drawable;
+class RenderTarget;
+}
 //----------------------------------------------------------------------------//
-class View;
-class Renderer;
-class GameObject;
+namespace he {
 //----------------------------------------------------------------------------//
 class ENGINE_API Scene
 {
 public:
 	~Scene();
 
-	void update(u32 dt);
-	void render(Renderer &renderer);
+	void render(sf::RenderTarget &renderTarget);
 
 /// View management
 public:
-	void addView(View *pView);
-	void removeView(View *pView);
-	void clearViews();
+	void addDrawable(sf::Drawable *drawable);
+	void removeDrawable(sf::Drawable *drawable);
+	void clearDrawables();
 
 private:
-	typedef std::vector<View*> ViewVector;
-	ViewVector _views;
+	typedef std::vector<sf::Drawable*> ViewVector;
+	ViewVector _drawables;
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

@@ -6,6 +6,7 @@
 #include <SFML/System.hpp>
 //----------------------------------------------------------------------------//
 #include "core/Types.h"
+#include "gameobject/world.h"
 #include "gameobject/gameobject.h"
 //----------------------------------------------------------------------------//
 using namespace he;
@@ -18,23 +19,18 @@ void WindowBehavior::update()
 		if (event.Type == sf::Event::Closed)
 			_pOwner->getAttribute("alive")->setValue(false);
 	}
+
 	// TODO: this should be maybe in another behavior, or gone
 	bool isControlPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::LSystem);
 	bool isQPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::Q);
 	if (isControlPressed && isQPressed)
 		_pOwner->getAttribute("alive")->setValue(false);
-}
-//----------------------------------------------------------------------------//
-void WindowBehavior::handleMessage(const char *message, void *args)
-{
-	if (strcmp(message, "window_active") == 0)
-	{
-		_window->SetActive();
-	}
-	else if (strcmp(message, "window_display") == 0)
-	{
-		_window->Display();
-	}
+
+	_window->Clear();
+	sf::Text t("HOLA");
+	_window->Draw(t);
+	_pWorld->getScene().render(*_window);
+	_window->Display();
 }
 //----------------------------------------------------------------------------//
 Behavior* WindowBehavior::clone() const
@@ -52,10 +48,10 @@ void WindowBehavior::added()
 	const string &caption = _pOwner->getAttributeAs<string>("name");
 
 	sf::VideoMode videoMode(width, height, bpp);
-	sf::ContextSettings contextSettings; // TODO: specify ogl stuff
+	sf::ContextSettings contextSettings;
 
-	_window = new sf::Window(videoMode, caption,
-							 sf::Style::Default, contextSettings);
+	_window = new sf::RenderWindow(videoMode, caption,
+								   sf::Style::Default, contextSettings);
 
 	_pOwner->addAttribute("window", new Attribute(_window));
 }

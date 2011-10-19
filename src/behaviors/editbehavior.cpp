@@ -15,7 +15,7 @@ void EditBehavior::activate()
 {
 	_mode = SELECT;
 	_objects = _pOwner->getAttributeAs<GameObjectVector>("objects");
-	_window = _pWorld->getObject("Game")->getAttributeAs<sf::Window*>("window");
+	_window = _pWorld->getObject("Game")->getAttributeAs<sf::RenderWindow*>("window");
 }
 //----------------------------------------------------------------------------//
 void EditBehavior::update()

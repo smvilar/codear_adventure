@@ -33,6 +33,7 @@ INCLUDEPATH += \
 
 HEADERS += \
 	../bin/data/game.json \
+	../bin/data/test_scene.json \
 	../bin/data/world.json \
 	../bin/data/background.json \
 	../bin/data/ryu.json \
@@ -40,10 +41,8 @@ HEADERS += \
 	../src/dllexport.h \
 	../src/behaviors/spritebehavior.h \
     ../src/behaviors/followmousebehavior.h \
-    ../src/behaviors/editbehavior.h \
-	../src/behaviors/scenemanager.h \
+	../src/behaviors/editbehavior.h \
 	../src/behaviors/windowbehavior.h \
-	../src/behaviors/renderbehavior.h \
 	../src/behaviors/fpscounterbehavior.h \
 	../src/behaviors/objectcontainerbehavior.h \
 	../src/behaviors/loadworldstatebehavior.h \
@@ -97,17 +96,13 @@ HEADERS += \
 	../src/video/Shape.h \
     ../src/video/Renderer.h \
 	../src/video/GLee.h \
-    ../src/video/DynamicVertexBuffer.h \
-	../src/video/Color.h \
-	../src/video/sfmlview.h
+	../src/video/DynamicVertexBuffer.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
 	../src/behaviors/followmousebehavior.cpp \
 	../src/behaviors/editbehavior.cpp \
-	../src/behaviors/scenemanager.cpp \
 	../src/behaviors/windowbehavior.cpp \
-	../src/behaviors/renderbehavior.cpp \
 	../src/behaviors/fpscounterbehavior.cpp \
 	../src/behaviors/objectcontainerbehavior.cpp \
 	../src/behaviors/loadworldstatebehavior.cpp \
@@ -145,6 +140,4 @@ SOURCES += \
 	../src/video/Renderer.cpp \
 	../src/video/GLee.c \
 	../src/video/DynamicVertexBuffer.cpp \
-	../src/video/Color.cpp \
-	../src/video/sfmlview.cpp \
 	../src/game/main.cpp

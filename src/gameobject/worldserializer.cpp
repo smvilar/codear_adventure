@@ -146,7 +146,7 @@ void WorldSerializer::deserializeAttributes(GameObject &object, const Json::Valu
 
 		if (attribute)
 		{
-			cout << "Adding attribute " << attrName << endl;
+			//cout << "Adding attribute " << attrName << endl;
 			object.addAttribute(attrName.c_str(), attribute);
 		}
 		else

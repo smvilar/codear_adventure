@@ -4,7 +4,6 @@
 //----------------------------------------------------------------------------//
 #include "math/MathUtil.h"
 #include "math/Vector2.h"
-#include "video/Color.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -31,17 +30,13 @@ bool Renderer::init(u32 width, u32 height)
 	glEnable(GL_BLEND);	
 	glEnable(GL_TEXTURE_2D);
 
-	setClearColor(Color::MAGENTA);
+	setClearColor(sf::Color::Magenta);
 
 	// init SFML render texture
 	_renderTexture.Create(width, height);
 	_renderTexture.Clear(sf::Color(0, 0, 0, 0));
 	_renderTexture.GetTexture().Bind();
 	glGetIntegerv(GL_TEXTURE_BINDING_2D, &_renderTextureID);
-
-	sf::Text t("HOLA MANOLA COMO LE VA");
-	t.SetColor(sf::Color::Red);
-	draw(t);
 
 	return true;
 }
@@ -60,20 +55,14 @@ void Renderer::begin()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//_renderTexture.Clear(sf::Color(0, 0, 0, 0));
 }
 //----------------------------------------------------------------------------//
 void Renderer::end()
 {
-	// render sfml gui
-	_renderTexture.Display();
-	setTexture(_renderTextureID);
-	drawRectangle(Vector2f(0), Vector2i(_renderTexture.GetWidth(), _renderTexture.GetHeight()));
-
 	_dynamicVBO.render();
 }
 //----------------------------------------------------------------------------//
-void Renderer::setClearColor(const Color& color)
+void Renderer::setClearColor(const sf::Color& color)
 {
 	glClearColor(color.r/255.0f, color.g/255.0f, color.b/255.0f, color.a);
 }
@@ -85,6 +74,7 @@ void Renderer::setTexture(const TexturePtr texture)
 //----------------------------------------------------------------------------//
 void Renderer::setTexture(s32 textureID)
 {
+	std::cout << "setting texture " << textureID << std::endl;
 	_bindedTextureID = textureID;
 }
 //----------------------------------------------------------------------------//
