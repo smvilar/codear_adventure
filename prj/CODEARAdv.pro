@@ -27,7 +27,6 @@ INCLUDEPATH += \
 	../src \
 	../lib \
 	../lib/SFML/include \
-#	../lib/freetype/include \
 	../lib/rapidxml-1.13 \
 	../lib/zlib125/include
 
@@ -74,10 +73,7 @@ HEADERS += \
     ../src/json/autolink.h \
     ../src/math/Vector2.h \
     ../src/math/Rect.h \
-    ../src/math/MathUtil.h \
-    ../src/resource/ResourceManager.h \
-    ../src/resource/IResource.h \
-    ../src/resource/Font.h \
+	../src/math/MathUtil.h \
     ../src/util/ZLib.h \
     ../src/util/Util.h \
     ../src/util/Profile.h \
@@ -86,17 +82,7 @@ HEADERS += \
     ../src/util/IStoreable.h \
     ../src/util/FPSCounter.h \
     ../src/util/FileSystem.h \
-    ../src/util/base64.h \
-    ../src/video/Vertex.h \
-    ../src/video/Tilemap.h \
-    ../src/video/Texture.h \
-    ../src/video/Text.h \
-    ../src/video/StaticVertexBuffer.h \
-    ../src/video/Sprite.h \
-	../src/video/Shape.h \
-    ../src/video/Renderer.h \
-	../src/video/GLee.h \
-	../src/video/DynamicVertexBuffer.h \
+	../src/util/base64.h \
 	../src/video/spriteanimation.h
 
 SOURCES += \
@@ -122,8 +108,6 @@ SOURCES += \
 	../src/json/json_reader.cpp \
 	../src/math/Vector2.cpp \
 	../src/math/MathUtil.cpp \
-	../src/resource/ResourceManager.cpp \
-#	../src/resource/Font.cpp \
 	../src/util/ZLib.cpp \
 	../src/util/Profile.cpp \
 	../src/util/MemoryManager.cpp \
@@ -132,14 +116,5 @@ SOURCES += \
 	../src/util/FPSCounter.cpp \
 	../src/util/FileSystem.cpp \
 	../src/util/base64.cpp \
-	../src/video/Tilemap.cpp \
-	../src/video/Texture.cpp \
-#	../src/video/Text.cpp \
-	../src/video/StaticVertexBuffer.cpp \
-	../src/video/Sprite.cpp \
-	../src/video/Shape.cpp \
-	../src/video/Renderer.cpp \
-	../src/video/GLee.c \
-	../src/video/DynamicVertexBuffer.cpp \
 	../src/video/spriteanimation.cpp \
 	../src/game/main.cpp

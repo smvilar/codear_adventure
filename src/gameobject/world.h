@@ -6,7 +6,6 @@
 #include <string>
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
-#include "resource/ResourceManager.h"
 #include "core/Scene.h"
 #include "gameobject/worldserializer.h"
 //----------------------------------------------------------------------------//

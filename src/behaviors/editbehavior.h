@@ -26,11 +26,11 @@ private:
 	{
 		SELECT,
 		DRAG
-	} _mode;
+	};
+	Mode _mode;
 
 	typedef std::vector<GameObject*> GameObjectVector;
 	GameObjectVector _objects;
-
 	sf::RenderWindow* _window;
 
 	GameObject* _activeObject;

@@ -50,6 +50,7 @@ void EditBehavior::updateSelect()
 		if (rect.contains(Vector2i(mousePos.x, mousePos.y)))
 		{
 			//std::cout << "Over object: " << object->name << std::endl;
+			// draw "gizmo"
 			if (sf::Mouse::IsButtonPressed(sf::Mouse::Left))
 			{
 				_mode = DRAG;

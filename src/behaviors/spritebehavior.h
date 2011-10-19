@@ -30,10 +30,12 @@ protected:
 	virtual void deactivate();
 
 private:
-	sf::Texture _texture;
-	sf::Sprite _sprite;
+	sf::Texture texture_;
+	sf::Sprite sprite_;
 	SpriteAnimation spriteAnimation_;
-	Attribute *_posX, *_posY, *_rotation, *_scale;
+	Attribute *posX_, *posY_, *rotation_, *scale_;
+
+	void updateOwnerSize();
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

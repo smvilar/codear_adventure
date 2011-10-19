@@ -33,28 +33,21 @@ void SpriteBehavior::added()
 	if (msPerFrameAttr)
 		msPerFrame = msPerFrameAttr->getValue<int>();
 
-	
-	//ResourceManager &resMgr = _pWorld->getResourceManager();
-	//TexturePtr texture = resMgr.get<Texture>(filename.c_str());
-	//_sprite = Sprite(texture, framesHorizontal, framesVertical, msPerFrame);
-	if (!_texture.LoadFromFile(filename))
+	if (!texture_.LoadFromFile(filename))
 		std::cerr << "Error loading sprite: " << filename << std::endl;
-	//_sprite = sf::Sprite(texture);
-	_sprite.SetTexture(_texture);
+	sprite_.SetTexture(texture_);
 
-	spriteAnimation_.set(_sprite, framesHorizontal, framesVertical, msPerFrame);
+	spriteAnimation_.set(sprite_, framesHorizontal, framesVertical, msPerFrame);
 
-	_posX = _pOwner->getAttribute("pos_x");
-	_posY = _pOwner->getAttribute("pos_y");
-	_rotation = _pOwner->getAttribute("rotation");
-	_scale = _pOwner->getAttribute("scale");
+	posX_ = _pOwner->getAttribute("pos_x");
+	posY_ = _pOwner->getAttribute("pos_y");
+	rotation_ = _pOwner->getAttribute("rotation");
+	scale_ = _pOwner->getAttribute("scale");
 
-	Attribute* width = _pOwner->getAttribute("width");
-	Attribute* height = _pOwner->getAttribute("height");
-	if (!width)
-		_pOwner->addAttribute("width", new Attribute(_sprite.GetSize().x));
-	if (!height)
-		_pOwner->addAttribute("height", new Attribute(_sprite.GetSize().y));
+	if (!_pOwner->getAttribute("width"))
+		_pOwner->addAttribute("width", new Attribute(sprite_.GetSize().x));
+	if (!_pOwner->getAttribute("height"))
+		_pOwner->addAttribute("height", new Attribute(sprite_.GetSize().y));
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::removed()
@@ -64,17 +57,19 @@ void SpriteBehavior::removed()
 //----------------------------------------------------------------------------//
 void SpriteBehavior::activate()
 {
-	_pWorld->getScene().addDrawable(&_sprite);
+	_pWorld->getScene().addDrawable(&sprite_);
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::deactivate()
 {
-	_pWorld->getScene().removeDrawable(&_sprite);
+	_pWorld->getScene().removeDrawable(&sprite_);
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::update()
 {
-	_sprite.SetPosition(_posX->getValue<int>(), _posY->getValue<int>());
+	sprite_.SetPosition(posX_->getValue<int>(), posY_->getValue<int>());
+	if (scale_)
+		sprite_.SetScale(scale_->getValue<int>(), scale_->getValue<int>());
 
 	// TODO: unhardcode
 	spriteAnimation_.update(30);
