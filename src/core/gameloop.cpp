@@ -11,7 +11,6 @@ void GameLoop::start(World &world, const char *gameFilename) const
 {
 	world.registerBehavior("Window", new WindowBehavior);
 	world.registerBehavior("FPSCounter", new FPSCounterBehavior);
-	world.registerBehavior("ActivateSpawner", new ActivateSpawnerBehavior);
 	world.registerBehavior("LoadWorldState", new LoadWorldStateBehavior);
 
 	GameObject* game = world.parseObject(gameFilename);

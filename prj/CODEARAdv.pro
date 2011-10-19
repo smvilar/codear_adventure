@@ -45,16 +45,11 @@ HEADERS += \
 	../src/behaviors/fpscounterbehavior.h \
 	../src/behaviors/objectcontainerbehavior.h \
 	../src/behaviors/loadworldstatebehavior.h \
-	../src/behaviors/activatespawnerbehavior.h \
 	../src/behaviors/spawnbehavior.h \
 	../src/behaviors/gamebehaviors.h \
     ../src/core/Assert.h \
     ../src/core/Types.h \
 	../src/core/Scene.h \
-	../src/core/View.h \
-	../src/core/View.inl \
-	../src/core/BaseObject.h \
-	../src/core/BaseObject.inl \
 	../src/core/gameloop.h \
 	../src/gameobject/objectparser.h \
 	../src/gameobject/world.h \
@@ -93,7 +88,6 @@ SOURCES += \
 	../src/behaviors/fpscounterbehavior.cpp \
 	../src/behaviors/objectcontainerbehavior.cpp \
 	../src/behaviors/loadworldstatebehavior.cpp \
-	../src/behaviors/activatespawnerbehavior.cpp \
 	../src/behaviors/spawnbehavior.cpp \
 	../src/core/Scene.cpp \
 	../src/core/gameloop.cpp \

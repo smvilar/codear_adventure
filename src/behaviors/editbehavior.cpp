@@ -26,6 +26,7 @@ void EditBehavior::deactivate()
 //----------------------------------------------------------------------------//
 void EditBehavior::update()
 {
+	// TODO: fix this so it takes only one keystroke
 	if (sf::Keyboard::IsKeyPressed(sf::Keyboard::Tab))
 	{
 		mode_ = (mode_ == INACTIVE) ? SELECT : INACTIVE;
