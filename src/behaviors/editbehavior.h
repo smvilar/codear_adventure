@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
+#include "core/Types.h"
 #include "gameobject/behavior.h"
 //----------------------------------------------------------------------------//
 namespace he {
@@ -20,25 +21,31 @@ public:
 
 private:
 	virtual void activate();
+	virtual void deactivate();
 
 private:
 	enum Mode
 	{
+		INACTIVE,
 		SELECT,
 		DRAG
 	};
-	Mode _mode;
+	Mode mode_;
 
 	typedef std::vector<GameObject*> GameObjectVector;
-	GameObjectVector _objects;
-	sf::RenderWindow* _window;
+	GameObjectVector objects_;
+	sf::RenderWindow* window_;
 
-	GameObject* _activeObject;
-	sf::Vector2i _lastMousePos;
+	sf::Shape gizmo_;
+	GameObject* activeObject_;
+	sf::Vector2i lastMousePos_;
 
 private:
 	void updateSelect();
 	void updateDrag();
+
+	void initGizmo();
+	void setGizmo(s32 x, s32 y, u32 w, u32 h);
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

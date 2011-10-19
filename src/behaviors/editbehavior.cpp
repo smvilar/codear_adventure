@@ -6,21 +6,32 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-Behavior* EditBehavior::clone() const
-{
-	return new EditBehavior;
-}
-//----------------------------------------------------------------------------//
 void EditBehavior::activate()
 {
-	_mode = SELECT;
-	_objects = _pOwner->getAttributeAs<GameObjectVector>("objects");
-	_window = _pWorld->getObject("Game")->getAttributeAs<sf::RenderWindow*>("window");
+	mode_ = SELECT;
+	objects_ = _pOwner->getAttributeAs<GameObjectVector>("objects");
+	window_ = _pWorld->getObject("Game")->getAttributeAs<sf::RenderWindow*>("window");
+
+	initGizmo();
+	setGizmo(-10, -10, 0, 0);
+	_pWorld->getScene().addDrawable(&gizmo_);
+
+	mode_ = INACTIVE;
+}
+//----------------------------------------------------------------------------//
+void EditBehavior::deactivate()
+{
+	_pWorld->getScene().removeDrawable(&gizmo_);
 }
 //----------------------------------------------------------------------------//
 void EditBehavior::update()
 {
-	switch (_mode)
+	if (sf::Keyboard::IsKeyPressed(sf::Keyboard::Tab))
+	{
+		mode_ = (mode_ == INACTIVE) ? SELECT : INACTIVE;
+	}
+
+	switch (mode_)
 	{
 	case SELECT:
 		updateSelect();
@@ -28,16 +39,25 @@ void EditBehavior::update()
 	case DRAG:
 		updateDrag();
 		break;
+	case INACTIVE:
+		setGizmo(-1, -1, 0, 0);
+		break;
 	}
+}
+//----------------------------------------------------------------------------//
+Behavior* EditBehavior::clone() const
+{
+	return new EditBehavior;
 }
 //----------------------------------------------------------------------------//
 void EditBehavior::updateSelect()
 {
-	const sf::Vector2i& mousePos = sf::Mouse::GetPosition(*_window);
+	const sf::Vector2i& mousePos = sf::Mouse::GetPosition(*window_);
 
+	setGizmo(-10, -10, 0, 0);
 	//check the topmost object that collides with the mouse
-	GameObjectVector::reverse_iterator it = _objects.rbegin();
-	for (; it != _objects.rend(); ++it)
+	GameObjectVector::reverse_iterator it = objects_.rbegin();
+	for (; it != objects_.rend(); ++it)
 	{
 		GameObject* object = *it;
 
@@ -49,13 +69,12 @@ void EditBehavior::updateSelect()
 		Recti rect(posX, posY, width, height);
 		if (rect.contains(Vector2i(mousePos.x, mousePos.y)))
 		{
-			//std::cout << "Over object: " << object->name << std::endl;
-			// draw "gizmo"
+			setGizmo(posX, posY, width, height);
 			if (sf::Mouse::IsButtonPressed(sf::Mouse::Left))
 			{
-				_mode = DRAG;
-				_activeObject = object;
-				_lastMousePos = mousePos;
+				mode_ = DRAG;
+				activeObject_ = object;
+				lastMousePos_ = mousePos;
 			}
 			break;
 		}
@@ -64,20 +83,45 @@ void EditBehavior::updateSelect()
 //----------------------------------------------------------------------------//
 void EditBehavior::updateDrag()
 {
-	const sf::Vector2i& mousePos = sf::Mouse::GetPosition(*_window);
-	sf::Vector2i movement = mousePos - _lastMousePos;
+	const sf::Vector2i& mousePos = sf::Mouse::GetPosition(*window_);
+	sf::Vector2i movement = mousePos - lastMousePos_;
 
-	Attribute *aPosX = _activeObject->getAttribute("pos_x");
-	Attribute *aPosY = _activeObject->getAttribute("pos_y");
-	aPosX->setValue(aPosX->getValue<int>()+movement.x);
-	aPosY->setValue(aPosY->getValue<int>()+movement.y);
+	Attribute *posXAttr = activeObject_->getAttribute("pos_x");
+	Attribute *posYAttr = activeObject_->getAttribute("pos_y");
+	int posX = posXAttr->getValue<int>() + movement.x;
+	int posY = posYAttr->getValue<int>() + movement.y;
+	posXAttr->setValue(posX);
+	posYAttr->setValue(posY);
 
-	_lastMousePos = mousePos;
+	gizmo_.SetPosition(posX, posY);
+
+	lastMousePos_ = mousePos;
 
 	if (!sf::Mouse::IsButtonPressed(sf::Mouse::Left))
 	{
-		_mode = SELECT;
-		_activeObject = 0;
+		mode_ = SELECT;
+		activeObject_ = 0;
 	}
+}
+//----------------------------------------------------------------------------//
+void EditBehavior::initGizmo()
+{
+	sf::Color outlineColor(255, 0, 0);
+	sf::Color color(255, 255, 255, 100);
+	gizmo_.AddPoint(0, 0, color, outlineColor);
+	gizmo_.AddPoint(1, 0, color, outlineColor);
+	gizmo_.AddPoint(1, 1, color, outlineColor);
+	gizmo_.AddPoint(0, 1, color, outlineColor);
+	gizmo_.EnableOutline(true);
+	gizmo_.SetOutlineThickness(2);
+}
+//----------------------------------------------------------------------------//
+void EditBehavior::setGizmo(s32 x, s32 y, u32 w, u32 h)
+{
+	gizmo_.SetPointPosition(0, 0, 0);
+	gizmo_.SetPointPosition(1, w, 0);
+	gizmo_.SetPointPosition(2, w, h);
+	gizmo_.SetPointPosition(3, 0, h);
+	gizmo_.SetPosition(x, y);
 }
 //----------------------------------------------------------------------------//
