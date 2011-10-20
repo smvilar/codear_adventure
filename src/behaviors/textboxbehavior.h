@@ -25,7 +25,7 @@ private:
 	sf::Font font_;
 	sf::Text text_;
 
-	Attribute *posX_, *posY_, *width_, *height_;
+	Attribute *posX_, *posY_, *width_, *height_, *fontSize_, *textAttr_;
 
 	void adjustText();
 };

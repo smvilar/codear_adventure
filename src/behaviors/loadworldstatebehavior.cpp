@@ -9,7 +9,7 @@ void LoadWorldStateBehavior::activate()
 {
 	using std::string;
 
-	string filename = pOwner_->getAttributeAs<string>("world_filename");
+	string filename = pOwner_->getAttributeAs<string>("worldFilename");
 	pWorld_->loadState(filename.c_str());
 }
 //----------------------------------------------------------------------------//

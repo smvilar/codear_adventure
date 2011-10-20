@@ -5,11 +5,11 @@
 	{
 		"name" : "CODEAR Adventure",
 		"width" : 1024,
-		"height" : 649,
+		"height" : 768,
 		"bpp" : 32,
 		"fullscreen" : 0,
-		"max_framerate" : 60,
-		"world_filename" : "test_scene.json"
+		"maxFramerate" : 60,
+		"worldFilename" : "test_scene.json"
 	},
 	"behaviors" :
 	[

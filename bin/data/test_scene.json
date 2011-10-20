@@ -4,10 +4,10 @@
 		"name" : "Background",
 		"attributes" : 
 		{
-			"pos_x" : 0,
-			"pos_y" : 0,
+			"x" : 0,
+			"y" : 0,
 			"rotation" : 0,
-			"sprite_filename" : "background.png"
+			"spriteFilename" : "background.png"
 		},
 		"behaviors" : [ "Sprite" ]
 	},
@@ -15,26 +15,40 @@
 		"name" : "Ryu",
 		"attributes" : 
 		{
-			"frames_horizontal" : 6,
-			"ms_per_frame" : 60,
-			"pos_x" : 200,
-			"pos_y" : 200,
+			"x" : 200,
+			"y" : 200,
 			"rotation" : 0,
 			"scale" : 2,
-			"sprite_filename" : "ryu_test.png"
+			"spriteFilename" : "ryu_test.png",
+			"framesHorizontal" : 6,
+			"msPerFrame" : 60
 		},
 		"behaviors" : [ "Sprite" ]
+	},
+	{
+		"name" : "RyuHadouken",
+		"attributes" :
+		{
+			"x" : 300,
+			"y" : 180,
+			"width" : 200,
+			"height" : 30,
+			"text" : "Hadouken!",
+			"font" : "robotica.ttf",
+			"fontSize" : 18
+		},
+		"behaviors" : [ "TextBox" ]
 	},
 	{
 		"name" : "ConversationBox",
 		"attributes" :
 		{
-			"pos_x" : 0,
-			"pos_y" : 500,
-			"width" : 600,
+			"x" : 30,
+			"y" : 500,
+			"width" : 800,
 			"height" : 100,
-			"font" : "Arial",
-			"font_size" : 10
+			"font" : "rough_typewriter.otf",
+			"fontSize" : 18
 		},
 		"behaviors" : [ "TextBox" ]
 	},
@@ -46,7 +60,8 @@
 			[
 				"Background",
 				"Ryu",
-				"ConversationBox"
+				"ConversationBox",
+				"RyuHadouken"
 			]
 		},
 		"behaviors" : [ "ObjectContainer", "Edit" ]

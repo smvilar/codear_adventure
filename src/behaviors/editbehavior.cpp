@@ -67,8 +67,8 @@ void EditBehavior::updateSelect()
 	{
 		GameObject* object = *it;
 
-		int posX = object->getAttributeAs<int>("pos_x");
-		int posY = object->getAttributeAs<int>("pos_y");
+		int posX = object->getAttributeAs<int>("x");
+		int posY = object->getAttributeAs<int>("y");
 		int width = object->getAttributeAs<int>("width");
 		int height = object->getAttributeAs<int>("height");
 
@@ -92,8 +92,8 @@ void EditBehavior::updateDrag()
 	const sf::Vector2i& mousePos = sf::Mouse::GetPosition(*window_);
 	sf::Vector2i movement = mousePos - lastMousePos_;
 
-	Attribute *posXAttr = activeObject_->getAttribute("pos_x");
-	Attribute *posYAttr = activeObject_->getAttribute("pos_y");
+	Attribute *posXAttr = activeObject_->getAttribute("x");
+	Attribute *posYAttr = activeObject_->getAttribute("y");
 	int posX = posXAttr->getValue<int>() + movement.x;
 	int posY = posYAttr->getValue<int>() + movement.y;
 	posXAttr->setValue(posX);

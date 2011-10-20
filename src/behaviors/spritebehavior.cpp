@@ -18,18 +18,18 @@ void SpriteBehavior::added()
 {
 	using std::string;
 
-	const string &filename = pOwner_->getAttributeAs<string>("sprite_filename");
+	const string &filename = pOwner_->getAttributeAs<string>("spriteFilename");
 	int framesHorizontal = 1;
 	int framesVertical = 1;
 	int msPerFrame = 0;
 
-	Attribute* framesHorizAttr = pOwner_->getAttribute("frames_horizontal");
+	Attribute* framesHorizAttr = pOwner_->getAttribute("framesHorizontal");
 	if (framesHorizAttr)
 		framesHorizontal = framesHorizAttr->getValue<int>();
-	Attribute* framesVerticAttr = pOwner_->getAttribute("frames_vertical");
+	Attribute* framesVerticAttr = pOwner_->getAttribute("framesVertical");
 	if (framesVerticAttr)
 		framesVertical = framesVerticAttr->getValue<int>();
-	Attribute* msPerFrameAttr = pOwner_->getAttribute("ms_per_frame");
+	Attribute* msPerFrameAttr = pOwner_->getAttribute("msPerFrame");
 	if (msPerFrameAttr)
 		msPerFrame = msPerFrameAttr->getValue<int>();
 
@@ -39,8 +39,8 @@ void SpriteBehavior::added()
 
 	spriteAnimation_.set(sprite_, framesHorizontal, framesVertical, msPerFrame);
 
-	posX_ = pOwner_->getAttribute("pos_x");
-	posY_ = pOwner_->getAttribute("pos_y");
+	posX_ = pOwner_->getAttribute("x");
+	posY_ = pOwner_->getAttribute("y");
 	rotation_ = pOwner_->getAttribute("rotation");
 	scale_ = pOwner_->getAttribute("scale");
 
