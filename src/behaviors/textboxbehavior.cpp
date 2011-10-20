@@ -11,9 +11,6 @@ void TextBoxBehavior::added()
 	const char *testText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis nulla sed massa sodales iaculis. Etiam et nisi ac massa interdum pulvinar. Aliquam eu urna mauris. Cras sit amet tortor nulla. Praesent eget nisi sit amet erat feugiat congue at et ante. Pellentesque eros justo, dignissim sed egestas et, auctor non nisl. Aliquam erat volutpat. Pellentesque aliquet, leo vel vulputate rhoncus, sapien sem laoreet leo, at egestas augue nisi at velit. Donec sollicitudin, leo id elementum rhoncus, nunc mi consectetur neque, vel placerat nulla diam a massa.";
 	text_.SetString(testText);
 
-	sf::FloatRect r = text_.GetRect();
-	std::cout << "Rect: (" << r.Left << "," << r.Top << "," << r.Width << "," << r.Height << ")" << std::endl;
-
 	posX_ = pOwner_->getAttribute("pos_x");
 	posY_ = pOwner_->getAttribute("pos_y");
 	width_ = pOwner_->getAttribute("width");
