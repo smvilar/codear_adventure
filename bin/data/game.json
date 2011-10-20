@@ -4,8 +4,8 @@
 	"attributes" :
 	{
 		"name" : "CODEAR Adventure",
-		"width" : 800,
-		"height" : 600,
+		"width" : 1024,
+		"height" : 649,
 		"bpp" : 32,
 		"fullscreen" : 0,
 		"max_framerate" : 60,

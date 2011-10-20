@@ -22,9 +22,12 @@ private:
 	virtual void deactivate();
 
 private:
+	sf::Font font_;
 	sf::Text text_;
 
 	Attribute *posX_, *posY_, *width_, *height_;
+
+	void adjustText();
 };
 //----------------------------------------------------------------------------//
 } // end namespace he
