@@ -13,6 +13,7 @@ class Attribute;
 class ENGINE_API TextBoxBehavior : public Behavior
 {
 public:
+	virtual void update();
 	virtual Behavior* clone() const { return new TextBoxBehavior; }
 
 private:

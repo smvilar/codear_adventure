@@ -45,9 +45,9 @@ void SpriteBehavior::added()
 	scale_ = pOwner_->getAttribute("scale");
 
 	if (!pOwner_->getAttribute("width"))
-		pOwner_->addAttribute("width", new Attribute(sprite_.GetSize().x));
+		pOwner_->addAttribute("width", new Attribute(static_cast<int>(sprite_.GetSize().x)));
 	if (!pOwner_->getAttribute("height"))
-		pOwner_->addAttribute("height", new Attribute(sprite_.GetSize().y));
+		pOwner_->addAttribute("height", new Attribute(static_cast<int>(sprite_.GetSize().y)));
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::removed()

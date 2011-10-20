@@ -14,7 +14,10 @@ void TextBoxBehavior::added()
 	posY_ = pOwner_->getAttribute("pos_y");
 	width_ = pOwner_->getAttribute("width");
 	height_ = pOwner_->getAttribute("height");
-
+}
+//----------------------------------------------------------------------------//
+void TextBoxBehavior::update()
+{
 	text_.SetPosition(posX_->getValue<int>(), posY_->getValue<int>());
 }
 //----------------------------------------------------------------------------//

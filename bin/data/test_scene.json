@@ -26,28 +26,29 @@
 		"behaviors" : [ "Sprite" ]
 	},
 	{
+		"name" : "ConversationBox",
+		"attributes" :
+		{
+			"pos_x" : 0,
+			"pos_y" : 500,
+			"width" : 600,
+			"height" : 100,
+			"font" : "Arial",
+			"font_size" : 10
+		},
+		"behaviors" : [ "TextBox" ]
+	},
+	{
 		"name" : "Editor",
 		"attributes" :
 		{
 			"object_names" :
 			[
 				"Background",
-				"Ryu"
+				"Ryu",
+				"ConversationBox"
 			]
 		},
 		"behaviors" : [ "ObjectContainer", "Edit" ]
-	},
-	{
-		"name" : "ConversationBox",
-		"attributes" :
-		{
-			"pos_x" : 0,
-			"pos_y" : 500,
-			"width" : 1024,
-			"height" : 768,
-			"font" : "Arial",
-			"font_size" : 10
-		},
-		"behaviors" : [ "TextBox" ]
 	}
 ]
