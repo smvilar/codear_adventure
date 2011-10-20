@@ -8,17 +8,13 @@
 #include "core/Types.h"
 #include "gameobject/world.h"
 #include "gameobject/gameobject.h"
+#include "gameobject/message.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
 void WindowBehavior::update()
 {
-	sf::Event event;
-	while (window_->PollEvent(event))
-	{
-		if (event.Type == sf::Event::Closed)
-			pOwner_->getAttribute("alive")->setValue(false);
-	}
+	pollEvents();
 
 	// TODO: this should be maybe in another behavior, or gone
 	bool isControlPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::LSystem);
@@ -52,5 +48,16 @@ void WindowBehavior::added()
 								   sf::Style::Default, contextSettings);
 
 	pOwner_->addAttribute("window", new Attribute(window_));
+}
+//----------------------------------------------------------------------------//
+void WindowBehavior::pollEvents()
+{
+	sf::Event event;
+	while (window_->PollEvent(event))
+	{
+		pWorld_->broadcast(Message("window_event", &event));
+		if (event.Type == sf::Event::Closed)
+			pOwner_->getAttribute("alive")->setValue(false);
+	}
 }
 //----------------------------------------------------------------------------//

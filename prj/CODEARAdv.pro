@@ -48,6 +48,7 @@ HEADERS += \
 	../src/behaviors/objectcontainerbehavior.h \
 	../src/behaviors/spawnbehavior.h \
 	../src/behaviors/textboxbehavior.h \
+	../src/behaviors/textinputbehavior.h \
     ../src/core/Assert.h \
     ../src/core/Types.h \
 	../src/core/Scene.h \
@@ -59,6 +60,7 @@ HEADERS += \
 	../src/gameobject/attribute.h \
     ../src/gameobject/gameobject.h \
 	../src/gameobject/worldserializer.h \
+	../src/gameobject/message.h \
     ../src/json/writer.h \
     ../src/json/value.h \
     ../src/json/reader.h \
@@ -92,6 +94,7 @@ SOURCES += \
 	../src/behaviors/loadworldstatebehavior.cpp \
 	../src/behaviors/spawnbehavior.cpp \
 	../src/behaviors/textboxbehavior.cpp \
+	../src/behaviors/textinputbehavior.cpp \
 	../src/core/Scene.cpp \
 	../src/core/gameloop.cpp \
 	../src/gameobject/objectparser.cpp \
@@ -100,6 +103,7 @@ SOURCES += \
 	../src/gameobject/attribute.cpp \
 	../src/gameobject/gameobject.cpp \
 	../src/gameobject/worldserializer.cpp \
+	../src/gameobject/message.cpp \
 	../src/json/json_writer.cpp \
 	../src/json/json_value.cpp \
 	../src/json/json_reader.cpp \

@@ -67,11 +67,11 @@ void GameObject::update()
 		(*it)->update();
 }
 //----------------------------------------------------------------------------//
-void GameObject::broadcast(const char *message, void *args)
+void GameObject::broadcast(const Message &message)
 {
 	BehaviorVector::iterator it = behaviors_.begin();
 	for (; it != behaviors_.end(); ++it)
-		(*it)->handleMessage(message, args);
+		(*it)->handleMessage(message);
 }
 //----------------------------------------------------------------------------//
 void GameObject::removeFromWorld()

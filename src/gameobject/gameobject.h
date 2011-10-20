@@ -13,6 +13,7 @@ namespace he
 //----------------------------------------------------------------------------//
 class Behavior;
 class World;
+class Message;
 //----------------------------------------------------------------------------//
 class ENGINE_API GameObject
 {
@@ -37,7 +38,7 @@ public:
 	}
 
 	void update();
-	void broadcast(const char* message, void* args = 0);
+	void broadcast(const Message &message);
 
 	void removeFromWorld();
 

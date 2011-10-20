@@ -2,14 +2,14 @@
 //----------------------------------------------------------------------------//
 #include "gameobject/world.h"
 #include "gameobject/gameobject.h"
+#include "gameobject/message.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
 void TextBoxBehavior::added()
 {
 	// fill with test text
-	const char *testText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis nulla sed massa sodales iaculis. Etiam et nisi ac massa interdum pulvinar. Aliquam eu urna mauris. Cras sit amet tortor nulla. Praesent eget nisi sit amet erat feugiat congue at et ante. Pellentesque eros justo, dignissim sed egestas et, auctor non nisl. Aliquam erat volutpat. Pellentesque aliquet, leo vel vulputate rhoncus, sapien sem laoreet leo, at egestas augue nisi at velit. Donec sollicitudin, leo id elementum rhoncus, nunc mi consectetur neque, vel placerat nulla diam a massa.";
-	text_.SetString(testText);
+	const char *loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis nulla sed massa sodales iaculis. Etiam et nisi ac massa interdum pulvinar. Aliquam eu urna mauris. Cras sit amet tortor nulla. Praesent eget nisi sit amet erat feugiat congue at et ante. Pellentesque eros justo, dignissim sed egestas et, auctor non nisl. Aliquam erat volutpat. Pellentesque aliquet, leo vel vulputate rhoncus, sapien sem laoreet leo, at egestas augue nisi at velit. Donec sollicitudin, leo id elementum rhoncus, nunc mi consectetur neque, vel placerat nulla diam a massa.";
 
 	posX_ = pOwner_->getAttribute("x");
 	posY_ = pOwner_->getAttribute("y");
@@ -32,6 +32,8 @@ void TextBoxBehavior::added()
 	textAttr_ = pOwner_->getAttribute("text");
 	if (textAttr_)
 		text_.SetString(textAttr_->getValue<std::string>());
+	else
+		text_.SetString(loremIpsum); // fallback to lorem ipsum
 
 	adjustText();
 }
@@ -39,6 +41,17 @@ void TextBoxBehavior::added()
 void TextBoxBehavior::update()
 {
 	text_.SetPosition(posX_->getValue<int>(), posY_->getValue<int>());
+}
+//----------------------------------------------------------------------------//
+void TextBoxBehavior::handleMessage(const Message &message)
+{
+	if (message.equals("update_text"))
+	{
+		textAttr_ = pOwner_->getAttribute("text");
+		if (textAttr_)
+			text_.SetString(textAttr_->getValue<std::string>());
+		adjustText();
+	}
 }
 //----------------------------------------------------------------------------//
 void TextBoxBehavior::activate()

@@ -74,12 +74,12 @@ void World::update()
 	}
 }
 //----------------------------------------------------------------------------//
-void World::broadcast(const char *message, void *args)
+void World::broadcast(const Message &message)
 {
 	ObjectVector::iterator it = objects_.begin();
 	for (; it != objects_.end(); ++it)
 	{
-		(*it)->broadcast(message, args);
+		(*it)->broadcast(message);
 	}
 }
 //----------------------------------------------------------------------------//

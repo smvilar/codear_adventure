@@ -4,6 +4,7 @@
 #include "behaviors/editbehavior.h"
 #include "behaviors/objectcontainerbehavior.h"
 #include "behaviors/textboxbehavior.h"
+#include "behaviors/textinputbehavior.h"
 
 using namespace he;
 
@@ -13,6 +14,7 @@ void setupWorld(World &world)
 	world.registerBehavior("Edit", new EditBehavior);
 	world.registerBehavior("ObjectContainer", new ObjectContainerBehavior);
 	world.registerBehavior("TextBox", new TextBoxBehavior);
+	world.registerBehavior("TextInput", new TextInputBehavior);
 }
 
 int main()

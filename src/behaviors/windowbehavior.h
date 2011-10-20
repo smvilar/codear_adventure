@@ -22,6 +22,9 @@ private:
 
 private:
 	sf::RenderWindow *window_;
+
+private:
+	void pollEvents();
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

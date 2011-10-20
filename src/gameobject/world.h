@@ -13,6 +13,7 @@ namespace he {
 //----------------------------------------------------------------------------//
 class GameObject;
 class Behavior;
+class Message;
 //----------------------------------------------------------------------------//
 // World
 //
@@ -38,7 +39,7 @@ public:
 	// Updates all the objects in the world
 	void update();
 	// Sends a message to every object in the world
-	void broadcast(const char* message, void* args);
+	void broadcast(const Message &message);
 
 /// GameObject Prototypes
 public:

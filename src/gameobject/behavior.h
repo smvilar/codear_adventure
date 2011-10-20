@@ -8,6 +8,7 @@ namespace he
 //----------------------------------------------------------------------------//
 class GameObject;
 class World;
+class Message;
 //----------------------------------------------------------------------------//
 class ENGINE_API Behavior
 {
@@ -16,7 +17,7 @@ public:
 	virtual ~Behavior() {}
 
 	virtual void update() {}
-	virtual void handleMessage(const char * /*message*/, void * /*args*/) {}
+	virtual void handleMessage(const Message &message) {}
 
 	virtual Behavior* clone() const = 0;
 

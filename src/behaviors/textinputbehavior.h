@@ -1,37 +1,32 @@
-#ifndef HE_TEXTBOXBEHAVIOR_H
-#define HE_TEXTBOXBEHAVIOR_H
+#ifndef HE_TEXTINPUTBEHAVIOR_H
+#define HE_TEXTINPUTBEHAVIOR_H
 //----------------------------------------------------------------------------//
-#include <SFML/Graphics.hpp>
+#include <string>
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "gameobject/behavior.h"
 //----------------------------------------------------------------------------//
 namespace he {
 //----------------------------------------------------------------------------//
+class Message;
 class Attribute;
 //----------------------------------------------------------------------------//
-class ENGINE_API TextBoxBehavior : public Behavior
+class ENGINE_API TextInputBehavior : public Behavior
 {
 public:
-	virtual void update();
-	virtual void handleMessage(const Message &message);
+	virtual Behavior* clone() const { return new TextInputBehavior; }
 
-	virtual Behavior* clone() const { return new TextBoxBehavior; }
+	virtual void handleMessage(const Message &message);
 
 private:
 	virtual void added();
-	virtual void activate();
-	virtual void deactivate();
 
 private:
-	sf::Font font_;
-	sf::Text text_;
+	Attribute *textAttr_;
 
-	Attribute *posX_, *posY_, *width_, *height_, *fontSize_, *textAttr_;
-
-	void adjustText();
+	void updateText(const std::string &str);
 };
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // HE_TEXTBOXBEHAVIOR_H
+#endif // HE_TEXTINPUTBEHAVIOR_H
