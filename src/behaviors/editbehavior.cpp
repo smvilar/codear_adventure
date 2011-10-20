@@ -17,6 +17,7 @@ void EditBehavior::activate()
 	pWorld_->getScene().addDrawable(&gizmo_);
 
 	mode_ = INACTIVE;
+	tabPressed_ = false;
 }
 //----------------------------------------------------------------------------//
 void EditBehavior::deactivate()
@@ -26,10 +27,14 @@ void EditBehavior::deactivate()
 //----------------------------------------------------------------------------//
 void EditBehavior::update()
 {
-	// TODO: fix this so it takes only one keystroke
-	if (sf::Keyboard::IsKeyPressed(sf::Keyboard::Tab))
+	if (!tabPressed_ && sf::Keyboard::IsKeyPressed(sf::Keyboard::Tab))
 	{
 		mode_ = (mode_ == INACTIVE) ? SELECT : INACTIVE;
+		tabPressed_ = true;
+	}
+	else if (!sf::Keyboard::IsKeyPressed(sf::Keyboard::Tab))
+	{
+		tabPressed_ = false;
 	}
 
 	switch (mode_)
@@ -64,8 +69,8 @@ void EditBehavior::updateSelect()
 
 		int posX = object->getAttributeAs<int>("pos_x");
 		int posY = object->getAttributeAs<int>("pos_y");
-		int width = object->getAttributeAs<float>("width");
-		int height = object->getAttributeAs<float>("height");
+		int width = object->getAttributeAs<int>("width");
+		int height = object->getAttributeAs<int>("height");
 
 		Recti rect(posX, posY, width, height);
 		if (rect.contains(Vector2i(mousePos.x, mousePos.y)))

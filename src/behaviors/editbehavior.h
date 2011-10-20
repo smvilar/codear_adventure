@@ -40,6 +40,8 @@ private:
 	GameObject* activeObject_;
 	sf::Vector2i lastMousePos_;
 
+	bool tabPressed_;
+
 private:
 	void updateSelect();
 	void updateDrag();
