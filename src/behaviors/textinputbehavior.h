@@ -25,6 +25,7 @@ private:
 	Attribute *textAttr_;
 
 	void updateText(const std::string &str);
+	void backspace();
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

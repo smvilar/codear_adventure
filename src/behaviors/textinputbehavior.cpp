@@ -23,6 +23,13 @@ void TextInputBehavior::handleMessage(const Message &message)
 			sf::String str = ev.Text.Unicode;
 			updateText(str.ToAnsiString());
 		}
+		else if (ev.Type == sf::Event::KeyPressed)
+		{
+			if (ev.Key.Code == sf::Keyboard::Back)
+				backspace();
+			if (ev.Key.Code == sf::Keyboard::Return)
+				updateText(std::string("\n"));
+		}
 	}
 }
 //----------------------------------------------------------------------------//
@@ -32,6 +39,17 @@ void TextInputBehavior::updateText(const std::string &str)
 	{
 		std::string text = textAttr_->getValue<std::string>();
 		text += str;
+		textAttr_->setValue(text);
+		pOwner_->broadcast(Message("update_text"));
+	}
+}
+//----------------------------------------------------------------------------//
+void TextInputBehavior::backspace()
+{
+	if (textAttr_)
+	{
+		std::string text = textAttr_->getValue<std::string>();
+		text.erase(text.end()-1);
 		textAttr_->setValue(text);
 		pOwner_->broadcast(Message("update_text"));
 	}
