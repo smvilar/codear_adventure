@@ -34,6 +34,10 @@ private:
 	Attribute* deserializeAttributeValue(const Json::Value &jsValue) const;
 
 private:
+	bool isIgnored(const GameObject &object) const;
+	void cleanWorld(World &world) const;
+
+private:
 	typedef std::list<std::string> StringList;
 	StringList ignoredObjects_;
 };

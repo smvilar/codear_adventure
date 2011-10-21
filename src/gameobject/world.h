@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <queue>
 //----------------------------------------------------------------------------//
 #include "DllExport.h"
 #include "core/Scene.h"
@@ -86,15 +87,24 @@ private:
 	typedef std::map<std::string, GameObject*> ObjectMap;
 	typedef std::map<std::string, Behavior*> BehaviorMap;
 
+/// Data
 private:
 	ObjectVector objects_;
 	ObjectMap objectPrototypes_;
 	BehaviorMap behaviors_;
 
+/// Queues
+private:
+	std::queue<GameObject*> objectsToAdd_;
+	std::queue<GameObject*> objectsToRemove_;
+
+	void processQueues();
+	void doAddObject(GameObject *object);
+	void doRemoveObject(GameObject *object);
+
 /// Scene (for behaviors that need to render stuff)
 public:
 	Scene& getScene();
-
 private:
 	Scene scene_;
 

@@ -18,16 +18,9 @@ void WorldSerializer::serialize(const World &world, std::ostream &os) const
 
 	for (size_t i = 0; i < objects.size(); ++i)
 	{
-		const GameObject& object = *objects[i];
-		StringList::const_iterator it = std::find(
-					ignoredObjects_.begin(),
-					ignoredObjects_.end(),
-					object.name);
-		// only serialize if it's not in the ignoredList
-		if (it == ignoredObjects_.end())
-		{
+		const GameObject &object = *objects[i];
+		if (!isIgnored(object))
 			root.append(serializeObject(object, world));
-		}
 	}
 
 	Json::StyledStreamWriter writer;
@@ -115,6 +108,8 @@ void WorldSerializer::deserialize(World &world, std::istream &is) const
 		std::cerr << reader.getFormatedErrorMessages() << std::endl;
 		return;
 	}
+
+	cleanWorld(world);
 
 	for (size_t i = 0; i < root.size(); ++i)
 	{
@@ -218,5 +213,24 @@ void WorldSerializer::deserializeBehaviors(GameObject &object, const Json::Value
 void WorldSerializer::addIgnoredObject(const char *name)
 {
 	ignoredObjects_.push_back(name);
+}
+//----------------------------------------------------------------------------//
+bool WorldSerializer::isIgnored(const GameObject &object) const
+{
+	StringList::const_iterator it =
+		std::find(ignoredObjects_.begin(), ignoredObjects_.end(), object.name);
+	return it != ignoredObjects_.end();
+}
+//----------------------------------------------------------------------------//
+void WorldSerializer::cleanWorld(World &world) const
+{
+	for (size_t i = 0; i < world.objects_.size(); ++i)
+	{
+		GameObject &object = *world.objects_[i];
+		if (!isIgnored(object))
+		{
+			world.removeObject(&object);
+		}
+	}
 }
 //----------------------------------------------------------------------------//

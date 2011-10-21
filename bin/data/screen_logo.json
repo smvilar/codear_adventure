@@ -1,13 +1,5 @@
 [
 	{
-		"name" : "LogoScreen",
-		"attributes" :
-		{
-			"logo_time" : 1000
-		},
-		"behaviors" : [ "Logo" ]
-	},
-	{
 		"name" : "Hierophant",
 		"attributes" :
 		{
@@ -20,5 +12,13 @@
 			"fontSize" : 22
 		},
 		"behaviors" : [ "TextBox" ]
+	},
+	{
+		"name" : "LogoScreen",
+		"attributes" :
+		{
+			"logo_time" : 1000
+		},
+		"behaviors" : [ "Logo" ]
 	}
 ]

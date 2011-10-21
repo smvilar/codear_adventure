@@ -9,6 +9,7 @@
 #include "gameobject/behavior.h"
 #include "gameobject/objectparser.h"
 #include "gameobject/worldserializer.h"
+#include "gameobject/message.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -39,16 +40,12 @@ World::~World()
 //----------------------------------------------------------------------------//
 void World::addObject(GameObject *object)
 {
-	objects_.push_back(object);
-	object->pWorld_ = this;
-	object->added();
+	objectsToAdd_.push(object);
 }
 //----------------------------------------------------------------------------//
 void World::removeObject(GameObject *object)
 {
-	std::remove(objects_.begin(), objects_.end(), object);
-	object->removed();
-	object->pWorld_ = 0;
+	objectsToRemove_.push(object);
 }
 //----------------------------------------------------------------------------//
 GameObject* World::getObject(const char* name)
@@ -72,6 +69,7 @@ void World::update()
 	{
 		(*it)->update();
 	}
+	processQueues();
 }
 //----------------------------------------------------------------------------//
 void World::broadcast(const Message &message)
@@ -175,5 +173,34 @@ void World::loadState(const char *filename)
 WorldSerializer& World::getWorldSerializer()
 {
 	return worldSerializer_;
+}
+//----------------------------------------------------------------------------//
+void World::processQueues()
+{
+	while (!objectsToAdd_.empty())
+	{
+		doAddObject(objectsToAdd_.front());
+		objectsToAdd_.pop();
+	}
+
+	while (!objectsToRemove_.empty())
+	{
+		doRemoveObject(objectsToRemove_.front());
+		objectsToRemove_.pop();
+	}
+}
+//----------------------------------------------------------------------------//
+void World::doAddObject(GameObject *object)
+{
+	objects_.push_back(object);
+	object->pWorld_ = this;
+	object->added();
+}
+//----------------------------------------------------------------------------//
+void World::doRemoveObject(GameObject *object)
+{
+	std::remove(objects_.begin(), objects_.end(), object);
+	object->removed();
+	object->pWorld_ = 0;
 }
 //----------------------------------------------------------------------------//
