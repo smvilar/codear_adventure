@@ -51,8 +51,8 @@ void World::removeObject(GameObject *object)
 //----------------------------------------------------------------------------//
 GameObject* World::getObject(const char* name)
 {
-	ObjectVector::iterator it = std::find_if(objects_.begin(), objects_.end(),
-											 ObjectNamesAreEqual(name));
+	ObjectVector::iterator it =
+		std::find_if(objects_.begin(), objects_.end(), ObjectNamesAreEqual(name));
 	return (it != objects_.end()) ? *it : 0;
 }
 //----------------------------------------------------------------------------//
@@ -200,7 +200,7 @@ void World::doAddObject(GameObject *object)
 //----------------------------------------------------------------------------//
 void World::doRemoveObject(GameObject *object)
 {
-	std::remove(objects_.begin(), objects_.end(), object);
+	objects_.erase(std::find(objects_.begin(), objects_.end(), object));
 	object->removed();
 	delete object;
 	object = 0;

@@ -22,7 +22,7 @@ void Scene::addDrawable(sf::Drawable *drawable)
 //----------------------------------------------------------------------------//
 void Scene::removeDrawable(sf::Drawable *drawable)
 {
-	std::remove(drawables_.begin(), drawables_.end(), drawable);
+	drawables_.erase(std::find(drawables_.begin(), drawables_.end(), drawable));
 }
 //----------------------------------------------------------------------------//
 void Scene::clearDrawables()

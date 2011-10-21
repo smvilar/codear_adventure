@@ -16,8 +16,8 @@ public:
 	Behavior();
 	virtual ~Behavior() {}
 
-	virtual void update() {}
-	virtual void handleMessage(const Message &/*message*/) {}
+	virtual void update();
+	virtual void handleMessage(const Message &message);
 
 	virtual Behavior* clone() const = 0;
 

@@ -36,7 +36,7 @@ void GameObject::removeBehavior(Behavior *behavior)
 {
 	behavior->removed();
 	behavior->pOwner_ = 0;
-	std::remove(behaviors_.begin(), behaviors_.end(), behavior);
+	behaviors_.erase(std::find(behaviors_.begin(), behaviors_.end(), behavior));
 }
 //----------------------------------------------------------------------------//
 void GameObject::addAttribute(const char *name, Attribute *attribute)
