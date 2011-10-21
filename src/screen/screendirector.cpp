@@ -15,7 +15,13 @@ bool ScreenDirector::parse(const char *filename)
 	std::ifstream ifs(filename);
 	Json::Reader reader;
 	Json::Value root;
-	reader.parse(ifs, root);
+
+	if (!reader.parse(ifs, root))
+	{
+		std::cerr << "Error parsing screen flow: "
+				  << reader.getFormatedErrorMessages() << std::endl;
+		return false;
+	}
 
 	for (size_t i = 0; i < root.size(); ++i)
 	{
@@ -46,6 +52,8 @@ bool ScreenDirector::parse(const char *filename)
 			std::cout << screenName << " [ " << transName << " ]-> " << toScreenName << std::endl;
 		}
 	}
+
+	return true;
 }
 //----------------------------------------------------------------------------//
 void ScreenDirector::show(const char *screenName, World &world)

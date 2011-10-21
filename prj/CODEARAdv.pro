@@ -110,7 +110,6 @@ SOURCES += \
 	../src/json/json_value.cpp \
 	../src/json/json_reader.cpp \
 	../src/math/Vector2.cpp \
-	../src/math/MathUtil.cpp \
 	../src/screen/screen.cpp \
 	../src/screen/screendirector.cpp \
 	../src/util/ZLib.cpp \

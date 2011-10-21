@@ -9,29 +9,33 @@
 namespace he
 {
 //----------------------------------------------------------------------------//
-template <typename Real>
-class Vector2;
-//----------------------------------------------------------------------------//
-class ENGINE_API MathUtil
+namespace MathUtil
 {
-public:
-	static const f32 PI;
-	static const f32 e;
+	const f32 PI = 3.14159265f;
+	const f32 e = 2.71828183f;
 
-	static f32 degToRad(f32 degrees);
-	static f32 radToDeg(f32 radians);
+	f32 degToRad(f32 degrees)
+	{
+		return degrees * 0.0174532925f;
+	}
+
+	f32 radToDeg(f32 radians)
+	{
+		return radians * 57.2957795f;
+	}
 
 	template <typename Real>
-	static void rotatePoint(Vector2<Real>& point, const f32 angle);
+	void rotatePoint(Vector2<Real>& point, const f32 angle)
+	{
+		f32 angleRad = degToRad(angle);
+		f32 cos = std::cos(angleRad);
+		f32 sin = std::sin(angleRad);
 
-private:
-	// not really meant to be instantiated
-	MathUtil() {}
-	MathUtil(const MathUtil&) {}
-	MathUtil& operator=(const MathUtil&) { return *this; }
-};
-//----------------------------------------------------------------------------//
-#include "MathUtil.inl"
+		Vector2<Real> temp(point);
+		point.x = (cos * temp.x) - (sin * temp.y);
+		point.y = (sin * temp.x) + (cos * temp.y);
+	}
+} // end namespace MathUtil
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//

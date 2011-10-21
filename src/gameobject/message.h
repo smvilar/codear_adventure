@@ -17,8 +17,7 @@ public:
 	bool equals(const char *message) const;
 
 	const boost::any& args() const { return args_; }
-	template <typename T>
-	const T& argsAs() const { return boost::any_cast<T>(args_); }
+	template <typename T> T argsAs() const { return boost::any_cast<T>(args_); }
 
 private:
 	std::string message_;
