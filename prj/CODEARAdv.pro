@@ -32,10 +32,9 @@ INCLUDEPATH += \
 
 HEADERS += \
 	../bin/data/game.json \
-	../bin/data/test_scene.json \
-	../bin/data/world.json \
-	../bin/data/background.json \
-	../bin/data/ryu.json \
+	../bin/data/screenFlow.json \
+	../bin/data/screen_game.json \
+	../bin/data/screen_logo.json \
 	../src/hierophantengine.h \
 	../src/dllexport.h \
 	../src/behaviors/gamebehaviors.h \
@@ -46,6 +45,7 @@ HEADERS += \
     ../src/behaviors/followmousebehavior.h \
 	../src/behaviors/editbehavior.h \
 	../src/behaviors/objectcontainerbehavior.h \
+	../src/behaviors/screendirectorbehavior.h \
 	../src/behaviors/spawnbehavior.h \
 	../src/behaviors/textboxbehavior.h \
 	../src/behaviors/textinputbehavior.h \
@@ -73,6 +73,8 @@ HEADERS += \
     ../src/math/Vector2.h \
     ../src/math/Rect.h \
 	../src/math/MathUtil.h \
+	../src/screen/screen.h \
+	../src/screen/screendirector.h \
     ../src/util/ZLib.h \
     ../src/util/Util.h \
     ../src/util/Profile.h \
@@ -82,7 +84,8 @@ HEADERS += \
     ../src/util/FPSCounter.h \
     ../src/util/FileSystem.h \
 	../src/util/base64.h \
-	../src/video/spriteanimation.h
+	../src/video/spriteanimation.h \
+	../src/game/logobehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -92,6 +95,7 @@ SOURCES += \
 	../src/behaviors/fpscounterbehavior.cpp \
 	../src/behaviors/objectcontainerbehavior.cpp \
 	../src/behaviors/loadworldstatebehavior.cpp \
+	../src/behaviors/screendirectorbehavior.cpp \
 	../src/behaviors/spawnbehavior.cpp \
 	../src/behaviors/textboxbehavior.cpp \
 	../src/behaviors/textinputbehavior.cpp \
@@ -109,6 +113,8 @@ SOURCES += \
 	../src/json/json_reader.cpp \
 	../src/math/Vector2.cpp \
 	../src/math/MathUtil.cpp \
+	../src/screen/screen.cpp \
+	../src/screen/screendirector.cpp \
 	../src/util/ZLib.cpp \
 	../src/util/Profile.cpp \
 	../src/util/MemoryManager.cpp \
@@ -118,4 +124,5 @@ SOURCES += \
 	../src/util/FileSystem.cpp \
 	../src/util/base64.cpp \
 	../src/video/spriteanimation.cpp \
-	../src/game/main.cpp
+	../src/game/main.cpp \
+	../src/game/logobehavior.cpp

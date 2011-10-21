@@ -1,0 +1,24 @@
+[
+	{
+		"name" : "LogoScreen",
+		"attributes" :
+		{
+			"logo_time" : 1000
+		},
+		"behaviors" : [ "Logo" ]
+	},
+	{
+		"name" : "Hierophant",
+		"attributes" :
+		{
+			"x" : 300,
+			"y" : 180,
+			"width" : 200,
+			"height" : 30,
+			"text" : "Hierophant Team",
+			"font" : "rough_typewriter.otf",
+			"fontSize" : 22
+		},
+		"behaviors" : [ "TextBox" ]
+	}
+]

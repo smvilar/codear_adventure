@@ -9,13 +9,15 @@ using namespace he;
 //----------------------------------------------------------------------------//
 void GameLoop::start(World &world, const char *gameFilename) const
 {
-	world.registerBehavior("Window", new WindowBehavior);
-	world.registerBehavior("FPSCounter", new FPSCounterBehavior);
-	world.registerBehavior("LoadWorldState", new LoadWorldStateBehavior);
-
 	GameObject* game = world.parseObject(gameFilename);
+	game->name = "Game";
 	Attribute* isGameAlive = new Attribute(true);
 	game->addAttribute("alive", isGameAlive);
+	game->addBehavior(new WindowBehavior);
+	game->addBehavior(new FPSCounterBehavior);
+	//game->addBehavior(new LoadWorldStateBehavior);
+	game->addBehavior(new ScreenDirectorBehavior);
+
 	world.addObject(game);
 	world.getWorldSerializer().addIgnoredObject(game->name.c_str());
 

@@ -39,13 +39,14 @@ void WindowBehavior::added()
 	u32 width = pOwner_->getAttributeAs<int>("width");
 	u32 height = pOwner_->getAttributeAs<int>("height");
 	u32 bpp = pOwner_->getAttributeAs<int>("bpp");
+	bool fullscreen = pOwner_->getAttributeAs<bool>("fullscreen");
 	const string &caption = pOwner_->getAttributeAs<string>("name");
 
 	sf::VideoMode videoMode(width, height, bpp);
 	sf::ContextSettings contextSettings;
+	u32 style = fullscreen ? sf::Style::Fullscreen : sf::Style::Default;
 
-	window_ = new sf::RenderWindow(videoMode, caption,
-								   sf::Style::Default, contextSettings);
+	window_ = new sf::RenderWindow(videoMode, caption, style, contextSettings);
 
 	pOwner_->addAttribute("window", new Attribute(window_));
 }

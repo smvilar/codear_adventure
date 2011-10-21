@@ -1,0 +1,16 @@
+// Screen Flow
+[
+	{
+		"name" : "Logo",
+		"filename" : "screen_logo.json",
+		"transitions" :
+		{
+			"timeout" : "Game"
+		}
+	},
+	{
+		"name" : "Game",
+		"filename" : "screen_game.json",
+		"transitions" : {}
+	}
+]

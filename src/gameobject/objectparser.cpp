@@ -22,7 +22,8 @@ bool ObjectParser::parse(const char *filename, GameObject &object, const World *
 		return false;
 	}
 
-	object.name = root["name"].asCString();
+	if (!root["name"].isNull())
+		object.name = root["name"].asCString();
 
 	parseAttributes(root["attributes"], object);
 
@@ -55,7 +56,7 @@ void ObjectParser::parseAttributes(const Json::Value &attrsValue, GameObject &ob
 
 		if (attribute)
 		{
-			cout << "Adding attribute " << attrName << endl;
+			//cout << "Adding attribute " << attrName << endl;
 			object.addAttribute(attrName.c_str(), attribute);
 		}
 		else

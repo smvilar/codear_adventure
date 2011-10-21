@@ -113,7 +113,7 @@ void EditBehavior::updateDrag()
 void EditBehavior::initGizmo()
 {
 	sf::Color outlineColor(255, 0, 0);
-	sf::Color color(255, 255, 255, 100);
+	sf::Color color(255, 255, 255, 50);
 	gizmo_.AddPoint(0, 0, color, outlineColor);
 	gizmo_.AddPoint(1, 0, color, outlineColor);
 	gizmo_.AddPoint(1, 1, color, outlineColor);

@@ -12,20 +12,6 @@
 		"behaviors" : [ "Sprite" ]
 	},
 	{
-		"name" : "Ryu",
-		"attributes" : 
-		{
-			"x" : 200,
-			"y" : 200,
-			"rotation" : 0,
-			"scale" : 2,
-			"spriteFilename" : "ryu_test.png",
-			"framesHorizontal" : 6,
-			"msPerFrame" : 60
-		},
-		"behaviors" : [ "Sprite" ]
-	},
-	{
 		"name" : "RyuHadouken",
 		"attributes" :
 		{
@@ -59,7 +45,6 @@
 			"object_names" :
 			[
 				"Background",
-				"Ryu",
 				"ConversationBox",
 				"RyuHadouken"
 			]

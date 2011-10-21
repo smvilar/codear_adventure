@@ -105,7 +105,11 @@ void GameObject::added()
 {
 	BehaviorVector::iterator it = behaviors_.begin();
 	for (; it != behaviors_.end(); ++it)
-		(*it)->activate();
+	{
+		Behavior* behavior = *it;
+		behavior->pWorld_ = pWorld_;
+		behavior->activate();
+	}
 }
 //----------------------------------------------------------------------------//
 void GameObject::removed()

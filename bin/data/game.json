@@ -1,21 +1,16 @@
 // This is a "game" object
 {
-	"name" : "Game",
 	"attributes" :
 	{
 		"name" : "CODEAR Adventure",
 		"width" : 1024,
 		"height" : 768,
 		"bpp" : 32,
-		"fullscreen" : 0,
+		"fullscreen" : false,
 		"maxFramerate" : 60,
-		"worldFilename" : "test_scene.json"
-	},
-	"behaviors" :
-	[
-		"FPSCounter",
-		"Window",
-		"LoadWorldState"
-	]
+		"worldFilename" : "test_scene.json",
+		"screenFlow" : "screenflow.json",
+		"initialScreen" : "Logo"
+	}
 }
 
