@@ -49,7 +49,8 @@ void TextInputBehavior::backspace()
 	if (textAttr_)
 	{
 		std::string text = textAttr_->getValue<std::string>();
-		text.erase(text.end()-1);
+		if (!text.empty())
+			text.erase(text.end()-1);
 		textAttr_->setValue(text);
 		pOwner_->broadcast(Message("update_text"));
 	}
