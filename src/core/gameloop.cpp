@@ -15,7 +15,6 @@ void GameLoop::start(World &world, const char *gameFilename) const
 	game->addAttribute("alive", isGameAlive);
 	game->addBehavior(new WindowBehavior);
 	game->addBehavior(new FPSCounterBehavior);
-	//game->addBehavior(new LoadWorldStateBehavior);
 	game->addBehavior(new ScreenDirectorBehavior);
 
 	world.addObject(game);

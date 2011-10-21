@@ -33,6 +33,7 @@ World::World()
 //----------------------------------------------------------------------------//
 World::~World()
 {
+	processQueues();
 	removeAllObjects();
 	cleanRegisteredObjectPrototypes();
 	cleanRegisteredBehaviors();
@@ -201,6 +202,7 @@ void World::doRemoveObject(GameObject *object)
 {
 	std::remove(objects_.begin(), objects_.end(), object);
 	object->removed();
-	object->pWorld_ = 0;
+	delete object;
+	object = 0;
 }
 //----------------------------------------------------------------------------//

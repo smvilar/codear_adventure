@@ -19,8 +19,7 @@ void LogoBehavior::update()
 	timer_ += fpsCounter_->getDT();
 	if (timer_ > logoTime_)
 	{
-		Message m("screen_transition", boost::any(std::string("timeout")));
-		pWorld_->broadcast(m);
+		pWorld_->broadcast(Message("screen_transition", boost::any(std::string("timeout"))));
 	}
 }
 //----------------------------------------------------------------------------//

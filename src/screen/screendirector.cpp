@@ -64,8 +64,11 @@ void ScreenDirector::show(const char *screenName, World &world)
 //----------------------------------------------------------------------------//
 void ScreenDirector::transition(const char *transitionName, World &world)
 {
-	currentScreen_ = currentScreen_->resolveTransition(transitionName);
-	if (currentScreen_)
+	Screen *nextScreen = currentScreen_->resolveTransition(transitionName);
+	if (nextScreen)
+	{
+		currentScreen_ = nextScreen;
 		world.loadState(currentScreen_->filename.c_str());
+	}
 }
 //----------------------------------------------------------------------------//

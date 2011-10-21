@@ -32,7 +32,7 @@ INCLUDEPATH += \
 
 HEADERS += \
 	../bin/data/game.json \
-	../bin/data/screenFlow.json \
+	../bin/data/screen_flow.json \
 	../bin/data/screen_game.json \
 	../bin/data/screen_logo.json \
 	../src/hierophantengine.h \
@@ -40,7 +40,6 @@ HEADERS += \
 	../src/behaviors/gamebehaviors.h \
 	../src/behaviors/windowbehavior.h \
 	../src/behaviors/fpscounterbehavior.h \
-	../src/behaviors/loadworldstatebehavior.h \
 	../src/behaviors/spritebehavior.h \
     ../src/behaviors/followmousebehavior.h \
 	../src/behaviors/editbehavior.h \
@@ -94,7 +93,6 @@ SOURCES += \
 	../src/behaviors/windowbehavior.cpp \
 	../src/behaviors/fpscounterbehavior.cpp \
 	../src/behaviors/objectcontainerbehavior.cpp \
-	../src/behaviors/loadworldstatebehavior.cpp \
 	../src/behaviors/screendirectorbehavior.cpp \
 	../src/behaviors/spawnbehavior.cpp \
 	../src/behaviors/textboxbehavior.cpp \
