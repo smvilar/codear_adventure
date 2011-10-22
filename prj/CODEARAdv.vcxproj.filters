@@ -123,6 +123,12 @@
     <ClCompile Include="..\src\video\spriteanimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\behaviors\musicplayerbehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\behaviors\soundplayerbehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\behaviors\editbehavior.h">
@@ -276,6 +282,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\video\spriteanimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\behaviors\musicplayerbehavior.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\behaviors\soundplayerbehavior.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

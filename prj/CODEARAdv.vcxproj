@@ -92,8 +92,10 @@
     <ClCompile Include="..\src\behaviors\editbehavior.cpp" />
     <ClCompile Include="..\src\behaviors\followmousebehavior.cpp" />
     <ClCompile Include="..\src\behaviors\fpscounterbehavior.cpp" />
+    <ClCompile Include="..\src\behaviors\musicplayerbehavior.cpp" />
     <ClCompile Include="..\src\behaviors\objectcontainerbehavior.cpp" />
     <ClCompile Include="..\src\behaviors\screendirectorbehavior.cpp" />
+    <ClCompile Include="..\src\behaviors\soundplayerbehavior.cpp" />
     <ClCompile Include="..\src\behaviors\spawnbehavior.cpp" />
     <ClCompile Include="..\src\behaviors\spritebehavior.cpp" />
     <ClCompile Include="..\src\behaviors\textboxbehavior.cpp" />
@@ -131,8 +133,10 @@
     <ClInclude Include="..\src\behaviors\followmousebehavior.h" />
     <ClInclude Include="..\src\behaviors\fpscounterbehavior.h" />
     <ClInclude Include="..\src\behaviors\gamebehaviors.h" />
+    <ClInclude Include="..\src\behaviors\musicplayerbehavior.h" />
     <ClInclude Include="..\src\behaviors\objectcontainerbehavior.h" />
     <ClInclude Include="..\src\behaviors\screendirectorbehavior.h" />
+    <ClInclude Include="..\src\behaviors\soundplayerbehavior.h" />
     <ClInclude Include="..\src\behaviors\spawnbehavior.h" />
     <ClInclude Include="..\src\behaviors\spritebehavior.h" />
     <ClInclude Include="..\src\behaviors\textboxbehavior.h" />
