@@ -1,0 +1,6 @@
+
+1. Install ffmpeg:
+	sudo port install ffmpeg
+2. Convert file:
+	ffmpeg -i input.mp3 -acodec libvorbis output.ogg
+

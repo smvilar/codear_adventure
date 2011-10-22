@@ -48,6 +48,8 @@ HEADERS += \
 	../src/behaviors/spawnbehavior.h \
 	../src/behaviors/textboxbehavior.h \
 	../src/behaviors/textinputbehavior.h \
+	../src/behaviors/soundplayerbehavior.h \
+	../src/behaviors/musicplayerbehavior.h \
     ../src/core/Assert.h \
     ../src/core/Types.h \
 	../src/core/Scene.h \
@@ -97,6 +99,8 @@ SOURCES += \
 	../src/behaviors/spawnbehavior.cpp \
 	../src/behaviors/textboxbehavior.cpp \
 	../src/behaviors/textinputbehavior.cpp \
+	../src/behaviors/soundplayerbehavior.cpp \
+	../src/behaviors/musicplayerbehavior.cpp \
 	../src/core/Scene.cpp \
 	../src/core/gameloop.cpp \
 	../src/gameobject/objectparser.cpp \

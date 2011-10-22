@@ -1,10 +1,12 @@
 #include "hierophantengine.h"
-//#include "behaviors/gamebehaviors.h"
+
 #include "behaviors/spritebehavior.h"
 #include "behaviors/editbehavior.h"
 #include "behaviors/objectcontainerbehavior.h"
 #include "behaviors/textboxbehavior.h"
 #include "behaviors/textinputbehavior.h"
+#include "behaviors/soundplayerbehavior.h"
+#include "behaviors/musicplayerbehavior.h"
 
 #include "logobehavior.h"
 
@@ -17,6 +19,10 @@ void setupWorld(World &world)
 	world.registerBehavior("ObjectContainer", new ObjectContainerBehavior);
 	world.registerBehavior("TextBox", new TextBoxBehavior);
 	world.registerBehavior("TextInput", new TextInputBehavior);
+	world.registerBehavior("SoundPlayer", new SoundPlayerBehavior);
+	world.registerBehavior("MusicPlayer", new MusicPlayerBehavior);
+
+	// game specific
 	world.registerBehavior("Logo", new LogoBehavior);
 }
 

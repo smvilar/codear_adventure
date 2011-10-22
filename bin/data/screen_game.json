@@ -50,5 +50,15 @@
 			]
 		},
 		"behaviors" : [ "ObjectContainer", "Edit" ]
+	},
+	{
+		"name" : "BackgroundMusic",
+		"attributes" :
+		{
+			"musicFilename" : "bgmusic.ogg",
+			"musicLoop" : true,
+			"musicAutoPlay" : true
+		},
+		"behaviors" : [ "MusicPlayer" ]
 	}
 ]
