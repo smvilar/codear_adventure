@@ -78,7 +78,7 @@ void DialogueControlBehavior::nextSpeech()
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::selectAnswer(size_t index)
 {
-	if (displayingAnswers_)
+	if (displayingAnswers_ && dialogue_.isValidAnswer(index))
 	{
 		displayingAnswers_ = false;
 		dialogue_.selectAnswer(index);

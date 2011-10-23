@@ -16,6 +16,7 @@ public:
 	DialogueNode* getCurrentNode() { return currentNode_; }
 
 	void selectAnswer(size_t index);
+	bool isValidAnswer(size_t index) const { return index < currentNode_->answers.size(); }
 	bool hasEnded() const { return hasEnded_; }
 
 private:
