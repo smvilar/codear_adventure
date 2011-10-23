@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 //----------------------------------------------------------------------------//
+#include "core/Types.h"
+//----------------------------------------------------------------------------//
 class DialogueNode
 {
 public:
@@ -19,9 +21,25 @@ public:
 		}
 	};
 
+public:
 	std::string id;
 	std::vector<std::string> speech;
 	std::vector<Answer> answers;
+
+public:
+	DialogueNode();
+
+	void nextSpeech();
+
+	const std::string& getCurrentSpeech() const { return speech[currentSpeechIndex_]; }
+	bool hasSpeechEnded() const { return currentSpeechIndex_ == speech.size() - 1; }
+	const std::string& getAnswer(size_t index) const { return answers[index].answer; }
+	const size_t& getAnswerQuantity() const { return answers.size(); }
+
+	const std::string& getNextDialogueNodeId(size_t answerIndex) const { return answers[answerIndex].gotoId; }
+
+private:
+	he::u32 currentSpeechIndex_;
 };
 //----------------------------------------------------------------------------//
 #endif // HE_DIALOGUENODE_H

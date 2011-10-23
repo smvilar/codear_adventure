@@ -13,6 +13,8 @@ public:
 	DialogueNode* getNodeById(const char *id);
 	DialogueNode* getCurrentNode() { return currentNode_; }
 
+	void selectAnswer(size_t index);
+
 private:
 	typedef std::vector<DialogueNode*> DialogueNodeVector;
 	DialogueNodeVector dialogueNodes_;

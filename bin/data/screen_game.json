@@ -12,27 +12,13 @@
 		"behaviors" : [ "Sprite" ]
 	},
 	{
-		"name" : "RyuHadouken",
-		"attributes" :
-		{
-			"x" : 300,
-			"y" : 180,
-			"width" : 200,
-			"height" : 30,
-			"text" : "Hadouken!",
-			"font" : "robotica.ttf",
-			"fontSize" : 18
-		},
-		"behaviors" : [ "TextBox", "TextInput" ]
-	},
-	{
 		"name" : "DialogueBox",
 		"attributes" :
 		{
 			"dialogueFilename" : "test_dialogue.json",
 			"x" : 20,
-			"y" : 500,
-			"width" : 600,
+			"y" : 600,
+			"width" : 800,
 			"height" : 100,
 			"font" : "rough_typewriter.otf",
 			"fontSize" : 16
@@ -46,8 +32,7 @@
 			"object_names" :
 			[
 				"Background",
-				"DialogueBox",
-				"RyuHadouken"
+				"DialogueBox"
 			]
 		},
 		"behaviors" : [ "ObjectContainer", "Edit" ]

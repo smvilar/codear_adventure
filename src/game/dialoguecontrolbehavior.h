@@ -17,6 +17,12 @@ private:
 private:
 	Dialogue dialogue_;
 	he::Attribute *textAttr_;
+
+	bool displayingAnswers_;
+
+private:
+	void updateText(const std::string &text);
+	void displayAnswers();
 };
 //----------------------------------------------------------------------------//
 #endif // DIALOGUECONTROLBEHAVIOR_H

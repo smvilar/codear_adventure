@@ -62,3 +62,8 @@ DialogueNode* Dialogue::getNodeById(const char *id)
 	return it != dialogueNodes_.end() ? *it : 0;
 }
 //----------------------------------------------------------------------------//
+void Dialogue::selectAnswer(size_t index)
+{
+	currentNode_ = getNodeById(currentNode_->getNextDialogueNodeId(index).c_str());
+}
+//----------------------------------------------------------------------------//

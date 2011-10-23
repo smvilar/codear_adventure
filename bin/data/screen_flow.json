@@ -13,7 +13,7 @@
 		"filename" : "screen_game.json",
 		"transitions" :
 		{
-
+			"restart" : "Logo"
 		}
 	}
 ]
