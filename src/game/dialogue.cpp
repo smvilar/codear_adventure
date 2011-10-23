@@ -64,6 +64,10 @@ DialogueNode* Dialogue::getNodeById(const char *id)
 //----------------------------------------------------------------------------//
 void Dialogue::selectAnswer(size_t index)
 {
-	currentNode_ = getNodeById(currentNode_->getNextDialogueNodeId(index).c_str());
+	const std::string &gotoId = currentNode_->getNextDialogueNodeId(index);
+	if (gotoId == "end")
+		hasEnded_ = true;
+	else
+		currentNode_ = getNodeById(gotoId.c_str());
 }
 //----------------------------------------------------------------------------//

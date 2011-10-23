@@ -1,6 +1,10 @@
 #include "dialoguecontrolbehavior.h"
 //----------------------------------------------------------------------------//
+#include <sstream>
+//----------------------------------------------------------------------------//
 #include <SFML/Window.hpp>
+//----------------------------------------------------------------------------//
+#include "gameobject/message.h"
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::activate()
 {
@@ -18,28 +22,23 @@ void DialogueControlBehavior::activate()
 	displayingAnswers_ = false;
 }
 //----------------------------------------------------------------------------//
-void DialogueControlBehavior::update()
+void DialogueControlBehavior::handleMessage(const he::Message &message)
 {
-	if (sf::Mouse::IsButtonPressed(sf::Mouse::Left))
+	if (message.equals("window_event"))
 	{
-		std::cout << "clic!" << std::endl;
-		if (dialogue_.getCurrentNode()->hasSpeechEnded())
+		sf::Event event = *message.argsAs<sf::Event*>();
+		if (event.Type == sf::Event::KeyReleased)
 		{
-			if (displayingAnswers_)
+			sf::Keyboard::Key keyCode = event.Key.Code;
+			if (keyCode == sf::Keyboard::Space)
 			{
-				displayingAnswers_ = false;
-				dialogue_.selectAnswer(0);
+				nextSpeech();
 			}
-			else
+			else if (keyCode > sf::Keyboard::Num0 &&
+					 keyCode < sf::Keyboard::Num5)
 			{
-				displayingAnswers_ = true;
-				displayAnswers();
+				selectAnswer(keyCode - sf::Keyboard::Num1);
 			}
-		}
-		else
-		{
-			dialogue_.getCurrentNode()->nextSpeech();
-			updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
 		}
 	}
 }
@@ -52,12 +51,41 @@ void DialogueControlBehavior::updateText(const std::string &text)
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::displayAnswers()
 {
-	std::string answersText;
+	std::stringstream answersText;
 	const size_t num = dialogue_.getCurrentNode()->getAnswerQuantity();
 	for (size_t i = 0; i < num; ++i)
 	{
-		answersText += dialogue_.getCurrentNode()->getAnswer(i);
+		answersText << (i + 1) << ". ";
+		answersText << dialogue_.getCurrentNode()->getAnswer(i);
+		answersText << std::endl;
 	}
-	updateText(answersText);
+	updateText(answersText.str());
+	displayingAnswers_ = true;
+}
+//----------------------------------------------------------------------------//
+void DialogueControlBehavior::nextSpeech()
+{
+	if (!dialogue_.getCurrentNode()->hasSpeechEnded())
+	{
+		dialogue_.getCurrentNode()->nextSpeech();
+		updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
+	}
+	else
+	{
+		displayAnswers();
+	}
+}
+//----------------------------------------------------------------------------//
+void DialogueControlBehavior::selectAnswer(size_t index)
+{
+	if (displayingAnswers_)
+	{
+		displayingAnswers_ = false;
+		dialogue_.selectAnswer(index);
+		if (!dialogue_.hasEnded())
+			updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
+		else
+			pOwner_->removeFromWorld();
+	}
 }
 //----------------------------------------------------------------------------//
