@@ -86,7 +86,8 @@ HEADERS += \
     ../src/util/FileSystem.h \
 	../src/util/base64.h \
 	../src/video/spriteanimation.h \
-	../src/game/logobehavior.h
+	../src/game/logobehavior.h \
+    ../src/behaviors/behaviors.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -127,3 +128,4 @@ SOURCES += \
 	../src/video/spriteanimation.cpp \
 	../src/game/main.cpp \
 	../src/game/logobehavior.cpp
+

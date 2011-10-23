@@ -10,6 +10,7 @@
 #include "gameobject/objectparser.h"
 #include "gameobject/worldserializer.h"
 #include "gameobject/message.h"
+#include "behaviors/behaviors.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -28,7 +29,7 @@ public:
 //----------------------------------------------------------------------------//
 World::World()
 {
-	// ...
+	Behaviors::registerToWorld(*this);
 }
 //----------------------------------------------------------------------------//
 World::~World()

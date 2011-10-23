@@ -3,7 +3,9 @@
 #include "gameobject/world.h"
 #include "gameobject/gameobject.h"
 #include "gameobject/attribute.h"
-#include "behaviors/gamebehaviors.h"
+#include "behaviors/windowbehavior.h"
+#include "behaviors/fpscounterbehavior.h"
+#include "behaviors/screendirectorbehavior.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
