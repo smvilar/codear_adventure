@@ -12,6 +12,7 @@ class ENGINE_API MusicPlayerBehavior : public Behavior
 {
 public:
 	virtual Behavior* clone() const { return new MusicPlayerBehavior; }
+	virtual void handleMessage(const Message &message);
 
 private:
 	virtual void activate();

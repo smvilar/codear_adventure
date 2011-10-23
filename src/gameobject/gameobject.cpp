@@ -9,6 +9,7 @@ using namespace he;
 //----------------------------------------------------------------------------//
 GameObject::GameObject(const char *name)
 : name(name)
+, pWorld_(0)
 {
 }
 //----------------------------------------------------------------------------//
@@ -30,13 +31,21 @@ void GameObject::addBehavior(Behavior *behavior)
 	behaviors_.push_back(behavior);
 	behavior->pOwner_ = this;
 	behavior->added();
+	if (pWorld_)
+	{
+		behavior->pWorld_ = pWorld_;
+		behavior->activate();
+	}
 }
 //----------------------------------------------------------------------------//
 void GameObject::removeBehavior(Behavior *behavior)
 {
+	if (pWorld_)
+		behavior->deactivate();
 	behavior->removed();
-	behavior->pOwner_ = 0;
 	behaviors_.erase(std::find(behaviors_.begin(), behaviors_.end(), behavior));
+	delete behavior;
+	behavior = 0;
 }
 //----------------------------------------------------------------------------//
 void GameObject::addAttribute(const char *name, Attribute *attribute)
