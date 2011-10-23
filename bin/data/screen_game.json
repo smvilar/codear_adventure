@@ -26,17 +26,18 @@
 		"behaviors" : [ "TextBox", "TextInput" ]
 	},
 	{
-		"name" : "ConversationBox",
+		"name" : "DialogueBox",
 		"attributes" :
 		{
-			"x" : 30,
+			"dialogueFilename" : "test_dialogue.json",
+			"x" : 20,
 			"y" : 500,
-			"width" : 800,
+			"width" : 600,
 			"height" : 100,
 			"font" : "rough_typewriter.otf",
-			"fontSize" : 18
+			"fontSize" : 16
 		},
-		"behaviors" : [ "TextBox" ]
+		"behaviors" : [ "DialogueControl", "TextBox" ]
 	},
 	{
 		"name" : "Editor",
@@ -45,7 +46,7 @@
 			"object_names" :
 			[
 				"Background",
-				"ConversationBox",
+				"DialogueBox",
 				"RyuHadouken"
 			]
 		},

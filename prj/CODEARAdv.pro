@@ -35,9 +35,9 @@ HEADERS += \
 	../bin/data/screen_flow.json \
 	../bin/data/screen_game.json \
 	../bin/data/screen_logo.json \
+	../bin/data/test_dialogue.json \
 	../src/hierophantengine.h \
 	../src/dllexport.h \
-	../src/behaviors/gamebehaviors.h \
 	../src/behaviors/windowbehavior.h \
 	../src/behaviors/fpscounterbehavior.h \
 	../src/behaviors/spritebehavior.h \
@@ -50,6 +50,7 @@ HEADERS += \
 	../src/behaviors/textinputbehavior.h \
 	../src/behaviors/soundplayerbehavior.h \
 	../src/behaviors/musicplayerbehavior.h \
+	../src/behaviors/behaviors.h \
     ../src/core/Assert.h \
     ../src/core/Types.h \
 	../src/core/Scene.h \
@@ -87,7 +88,9 @@ HEADERS += \
 	../src/util/base64.h \
 	../src/video/spriteanimation.h \
 	../src/game/logobehavior.h \
-    ../src/behaviors/behaviors.h
+	../src/game/dialogue.h \
+	../src/game/dialoguenode.h \
+    ../src/game/dialoguecontrolbehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -127,5 +130,9 @@ SOURCES += \
 	../src/util/base64.cpp \
 	../src/video/spriteanimation.cpp \
 	../src/game/main.cpp \
-	../src/game/logobehavior.cpp
+	../src/game/logobehavior.cpp \
+	../src/game/dialogue.cpp \
+	../src/game/dialoguenode.cpp \
+    ../src/game/dialoguecontrolbehavior.cpp
+
 

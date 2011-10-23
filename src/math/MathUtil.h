@@ -6,35 +6,37 @@
 //----------------------------------------------------------------------------//
 #include "core/Types.h"
 //----------------------------------------------------------------------------//
-namespace he
-{
+namespace he {
 //----------------------------------------------------------------------------//
-namespace MathUtil
+namespace MathUtil {
+//----------------------------------------------------------------------------//
+const f32 PI = 3.14159265f;
+const f32 e = 2.71828183f;
+
+template <typename Real>
+Real degToRad(Real degrees)
 {
-	const f32 PI = 3.14159265f;
-	const f32 e = 2.71828183f;
+	return degrees * 0.0174532925;
+}
 
-	f32 degToRad(f32 degrees)
-	{
-		return degrees * 0.0174532925f;
-	}
+template <typename Real>
+Real radToDeg(Real radians)
+{
+	return radians * 57.2957795;
+}
 
-	f32 radToDeg(f32 radians)
-	{
-		return radians * 57.2957795f;
-	}
+template <typename Real>
+void rotatePoint(Vector2<Real>& point, const f32 angle)
+{
+	f32 angleRad = degToRad(angle);
+	f32 cos = std::cos(angleRad);
+	f32 sin = std::sin(angleRad);
 
-	template <typename Real>
-	void rotatePoint(Vector2<Real>& point, const f32 angle)
-	{
-		f32 angleRad = degToRad(angle);
-		f32 cos = std::cos(angleRad);
-		f32 sin = std::sin(angleRad);
-
-		Vector2<Real> temp(point);
-		point.x = (cos * temp.x) - (sin * temp.y);
-		point.y = (sin * temp.x) + (cos * temp.y);
-	}
+	Vector2<Real> temp(point);
+	point.x = (cos * temp.x) - (sin * temp.y);
+	point.y = (sin * temp.x) + (cos * temp.y);
+}
+//----------------------------------------------------------------------------//
 } // end namespace MathUtil
 //----------------------------------------------------------------------------//
 } // end namespace he

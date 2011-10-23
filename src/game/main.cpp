@@ -1,5 +1,6 @@
 #include "hierophantengine.h"
 #include "logobehavior.h"
+#include "dialoguecontrolbehavior.h"
 
 using namespace he;
 
@@ -7,6 +8,7 @@ void setupWorld(World &world)
 {
 	// game specific
 	world.registerBehavior("Logo", new LogoBehavior);
+	world.registerBehavior("DialogueControl", new DialogueControlBehavior);
 }
 
 int main()
@@ -16,7 +18,6 @@ int main()
 
 	GameLoop gameLoop;
 	gameLoop.start(world, "game.json");
-	//world.saveState("test_scene.json");
 
 	return 0;
 }

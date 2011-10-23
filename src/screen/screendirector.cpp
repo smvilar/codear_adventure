@@ -18,7 +18,7 @@ bool ScreenDirector::parse(const char *filename)
 
 	if (!reader.parse(ifs, root))
 	{
-		std::cerr << "Error parsing screen flow: "
+		std::cerr << "Error parsing screenflow " << filename << ": " << std::endl
 				  << reader.getFormatedErrorMessages() << std::endl;
 		return false;
 	}
@@ -44,10 +44,10 @@ bool ScreenDirector::parse(const char *filename)
 		Json::Value::Members transNames = jsTransitions.getMemberNames();
 		for (size_t j = 0; j < transNames.size(); ++j)
 		{
-			const string &transName = transNames[i];
+			const string &transName = transNames[j];
 			const string &toScreenName = jsTransitions[transName].asString();
-			screens_[screenName]->addTransition(
-						transNames[i].c_str(), screens_[toScreenName]);
+			screens_[screenName]->addTransition(transName.c_str(),
+												screens_[toScreenName]);
 
 			std::cout << screenName << " [ " << transName << " ]-> " << toScreenName << std::endl;
 		}

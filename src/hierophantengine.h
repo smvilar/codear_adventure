@@ -21,5 +21,6 @@
 #include "gameobject/attribute.h"
 #include "gameobject/behavior.h"
 #include "gameobject/world.h"
+#include "gameobject/message.h"
 //----------------------------------------------------------------------------//
 #endif // HE_HIEROPHANTENGINE_H
