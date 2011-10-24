@@ -6,7 +6,7 @@
 #include <string>
 #include <queue>
 //----------------------------------------------------------------------------//
-#include "DllExport.h"
+#include "dllexport.h"
 #include "core/Scene.h"
 #include "gameobject/worldserializer.h"
 //----------------------------------------------------------------------------//

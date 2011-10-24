@@ -4,7 +4,7 @@
 #include <iosfwd>
 #include <list>
 //----------------------------------------------------------------------------//
-#include "DllExport.h"
+#include "dllexport.h"
 #include "json/json.h"
 //----------------------------------------------------------------------------//
 namespace he {

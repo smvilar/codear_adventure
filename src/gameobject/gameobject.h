@@ -5,7 +5,7 @@
 #include <vector>
 #include <map>
 //----------------------------------------------------------------------------//
-#include "DllExport.h"
+#include "dllexport.h"
 #include "gameobject/attribute.h"
 //----------------------------------------------------------------------------//
 namespace he

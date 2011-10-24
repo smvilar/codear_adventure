@@ -2,7 +2,7 @@
 #define HE_FPSCOUNTER_H
 //----------------------------------------------------------------------------//
 #include <string>
-#include "DllExport.h"
+#include "dllexport.h"
 #include "core/Types.h"
 //----------------------------------------------------------------------------//
 namespace he

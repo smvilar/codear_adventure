@@ -1,7 +1,7 @@
 #ifndef HE_SCREENDIRECTORBEHAVIOR_H
 #define HE_SCREENDIRECTORBEHAVIOR_H
 //----------------------------------------------------------------------------//
-#include "DllExport.h"
+#include "dllexport.h"
 #include "gameobject/behavior.h"
 #include "screen/screendirector.h"
 //----------------------------------------------------------------------------//

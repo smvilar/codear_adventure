@@ -5,7 +5,7 @@
 //----------------------------------------------------------------------------//
 #include <SFML/Graphics.hpp>
 //----------------------------------------------------------------------------//
-#include "DllExport.h"
+#include "dllexport.h"
 #include "core/Types.h"
 #include "gameobject/behavior.h"
 #include "video/spriteanimation.h"

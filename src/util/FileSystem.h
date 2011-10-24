@@ -3,7 +3,7 @@
 //----------------------------------------------------------------------------//
 #include <string>
 #include <vector>
-#include "DllExport.h"
+#include "dllexport.h"
 #include "core/Types.h"
 //----------------------------------------------------------------------------//
 namespace he

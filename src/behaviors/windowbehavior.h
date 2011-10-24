@@ -1,7 +1,7 @@
 #ifndef HE_WINDOWBEHAVIOR_H
 #define HE_WINDOWBEHAVIOR_H
 //----------------------------------------------------------------------------//
-#include "DllExport.h"
+#include "dllexport.h"
 #include "gameobject/behavior.h"
 //----------------------------------------------------------------------------//
 namespace sf

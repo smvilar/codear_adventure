@@ -1,7 +1,7 @@
 #ifndef HE_FPSCOUNTERBEHAVIOR_H
 #define HE_FPSCOUNTERBEHAVIOR_H
 //----------------------------------------------------------------------------//
-#include "DllExport.h"
+#include "dllexport.h"
 #include "gameobject/behavior.h"
 #include "util/FPSCounter.h"
 //----------------------------------------------------------------------------//

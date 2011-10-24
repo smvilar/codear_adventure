@@ -26,9 +26,7 @@ LIBS += \
 INCLUDEPATH += \
 	../src \
 	../lib \
-	../lib/SFML/include \
-	../lib/rapidxml-1.13 \
-	../lib/zlib125/include
+	../lib/SFML/include
 
 HEADERS += \
 	../bin/data/game.json \
@@ -41,7 +39,6 @@ HEADERS += \
 	../src/behaviors/windowbehavior.h \
 	../src/behaviors/fpscounterbehavior.h \
 	../src/behaviors/spritebehavior.h \
-    ../src/behaviors/followmousebehavior.h \
 	../src/behaviors/editbehavior.h \
 	../src/behaviors/objectcontainerbehavior.h \
 	../src/behaviors/screendirectorbehavior.h \
@@ -82,7 +79,6 @@ HEADERS += \
     ../src/util/Profile.h \
     ../src/util/MemoryManager.h \
     ../src/util/Logger.h \
-    ../src/util/IStoreable.h \
     ../src/util/FPSCounter.h \
     ../src/util/FileSystem.h \
 	../src/util/base64.h \
@@ -94,7 +90,6 @@ HEADERS += \
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
-	../src/behaviors/followmousebehavior.cpp \
 	../src/behaviors/editbehavior.cpp \
 	../src/behaviors/windowbehavior.cpp \
 	../src/behaviors/fpscounterbehavior.cpp \
@@ -124,7 +119,6 @@ SOURCES += \
 	../src/util/Profile.cpp \
 	../src/util/MemoryManager.cpp \
 	../src/util/Logger.cpp \
-	../src/util/IStoreable.cpp \
 	../src/util/FPSCounter.cpp \
 	../src/util/FileSystem.cpp \
 	../src/util/base64.cpp \
@@ -134,5 +128,3 @@ SOURCES += \
 	../src/game/dialogue.cpp \
 	../src/game/dialoguenode.cpp \
     ../src/game/dialoguecontrolbehavior.cpp
-
-

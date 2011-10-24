@@ -1,7 +1,7 @@
 #ifndef HE_ZLIB_H
 #define HE_ZLIB_H
 //----------------------------------------------------------------------------//
-#include "DllExport.h"
+#include "dllexport.h"
 #include "core/Types.h"
 //----------------------------------------------------------------------------//
 namespace he

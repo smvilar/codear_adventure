@@ -2,7 +2,7 @@
 #define HE_UTIL_H
 //----------------------------------------------------------------------------//
 #include <sstream>
-#include "DllExport.h"
+#include "dllexport.h"
 #include "core/Types.h"
 //----------------------------------------------------------------------------//
 namespace he

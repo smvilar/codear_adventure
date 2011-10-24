@@ -3,7 +3,7 @@
 Contains the common configuration for the tools of the engine'''
 
 namespace = 'he'
-dll_header = 'DllExport.h'
+dll_header = 'dllexport.h'
 dll_define = 'ENGINE_API'
 
 qtcreator_proj = '../prj/CODEARAdv.pro'
