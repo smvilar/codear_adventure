@@ -88,7 +88,7 @@ HEADERS += \
 	../src/game/dialogue.h \
 	../src/game/dialoguenode.h \
     ../src/game/dialoguecontrolbehavior.h \
-	../src/game/conditiononclickbehavior.h \ \
+	../src/game/conditiononclickbehavior.h \
 	../src/game/addbehaviorbehavior.h
 
 SOURCES += \
