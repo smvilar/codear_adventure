@@ -12,6 +12,20 @@
 		"behaviors" : [ "Sprite" ]
 	},
 	{
+		"name" : "MC",
+		"attributes" :
+		{
+			"x": 100,
+			"y": 100,
+			"rotation" : 0,
+			"spriteFilename" : "walk.png",
+			"framesHorizontal" : 5,
+			"framesVertical" : 3,
+			"msPerFrame" : 600
+		},
+		"behaviors" : [ "Sprite" ]
+	},
+	{
 		"name" : "DialogueBox",
 		"attributes" :
 		{
@@ -32,7 +46,8 @@
 			"object_names" :
 			[
 				"Background",
-				"DialogueBox"
+				"DialogueBox",
+				"MC"
 			]
 		},
 		"behaviors" : [ "ObjectContainer", "Edit" ]
