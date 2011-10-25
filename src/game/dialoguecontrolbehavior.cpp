@@ -14,7 +14,7 @@ void DialogueControlBehavior::activate()
 	textAttr_ = pOwner_->getAttribute("text");
 	if (!textAttr_)
 	{
-		textAttr_ = new he::Attribute(std::string());
+		textAttr_ = new Attribute(std::string());
 		pOwner_->addAttribute("text", textAttr_);
 		updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
 	}
@@ -22,7 +22,7 @@ void DialogueControlBehavior::activate()
 	displayingAnswers_ = false;
 }
 //----------------------------------------------------------------------------//
-void DialogueControlBehavior::handleMessage(const he::Message &message)
+void DialogueControlBehavior::handleMessage(const Message &message)
 {
 	if (message.equals("window_event"))
 	{
@@ -46,7 +46,7 @@ void DialogueControlBehavior::handleMessage(const he::Message &message)
 void DialogueControlBehavior::updateText(const std::string &text)
 {
 	textAttr_->setValue(text);
-	pOwner_->broadcast(he::Message("update_text"));
+	pOwner_->broadcast(Message("update_text"));
 }
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::displayAnswers()

@@ -4,19 +4,21 @@
 #include "hierophantengine.h"
 #include "dialogue.h"
 //----------------------------------------------------------------------------//
-class DialogueControlBehavior : public he::Behavior
+using namespace he;
+//----------------------------------------------------------------------------//
+class DialogueControlBehavior : public Behavior
 {
 public:
-	virtual he::Behavior* clone() const { return new DialogueControlBehavior; }
+	virtual Behavior* clone() const { return new DialogueControlBehavior; }
 
-	virtual void handleMessage(const he::Message &message);
+	virtual void handleMessage(const Message &message);
 
 private:
 	virtual void activate();
 
 private:
 	Dialogue dialogue_;
-	he::Attribute *textAttr_;
+	Attribute *textAttr_;
 
 	bool displayingAnswers_;
 

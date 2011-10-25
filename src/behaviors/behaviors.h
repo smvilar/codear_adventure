@@ -8,6 +8,7 @@
 #include "textinputbehavior.h"
 #include "soundplayerbehavior.h"
 #include "musicplayerbehavior.h"
+#include "triggerbehavior.h"
 //----------------------------------------------------------------------------//
 #include "gameobject/world.h"
 //----------------------------------------------------------------------------//
@@ -24,6 +25,7 @@ void registerToWorld(World& world)
 	world.registerBehavior("TextInput", new TextInputBehavior);
 	world.registerBehavior("SoundPlayer", new SoundPlayerBehavior);
 	world.registerBehavior("MusicPlayer", new MusicPlayerBehavior);
+	world.registerBehavior("Trigger", new TriggerBehavior);
 }
 //----------------------------------------------------------------------------//
 } // end namespace Behaviors

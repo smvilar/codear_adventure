@@ -58,7 +58,7 @@ Behavior* EditBehavior::clone() const
 //----------------------------------------------------------------------------//
 void EditBehavior::updateSelect()
 {
-	const sf::Vector2i& mousePos = sf::Mouse::GetPosition(*window_);
+	const sf::Vector2i &mousePos = sf::Mouse::GetPosition(*window_);
 
 	setGizmo(-10, -10, 0, 0);
 	//check the topmost object that collides with the mouse

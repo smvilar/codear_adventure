@@ -47,6 +47,7 @@ HEADERS += \
 	../src/behaviors/textinputbehavior.h \
 	../src/behaviors/soundplayerbehavior.h \
 	../src/behaviors/musicplayerbehavior.h \
+	../src/behaviors/triggerbehavior.h \
 	../src/behaviors/behaviors.h \
     ../src/core/Assert.h \
     ../src/core/Types.h \
@@ -86,7 +87,9 @@ HEADERS += \
 	../src/game/logobehavior.h \
 	../src/game/dialogue.h \
 	../src/game/dialoguenode.h \
-    ../src/game/dialoguecontrolbehavior.h
+    ../src/game/dialoguecontrolbehavior.h \
+	../src/game/conditiononclickbehavior.h \ \
+	../src/game/addbehaviorbehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -100,6 +103,7 @@ SOURCES += \
 	../src/behaviors/textinputbehavior.cpp \
 	../src/behaviors/soundplayerbehavior.cpp \
 	../src/behaviors/musicplayerbehavior.cpp \
+	../src/behaviors/triggerbehavior.cpp \
 	../src/core/Scene.cpp \
 	../src/core/gameloop.cpp \
 	../src/gameobject/objectparser.cpp \
@@ -127,4 +131,8 @@ SOURCES += \
 	../src/game/logobehavior.cpp \
 	../src/game/dialogue.cpp \
 	../src/game/dialoguenode.cpp \
-    ../src/game/dialoguecontrolbehavior.cpp
+    ../src/game/dialoguecontrolbehavior.cpp \
+	../src/game/conditiononclickbehavior.cpp \
+	../src/game/addbehaviorbehavior.cpp
+
+
