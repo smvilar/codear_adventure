@@ -19,6 +19,8 @@ namespace he {
 class ENGINE_API AnimatedSprite
 {
 public:
+	AnimatedSprite() : currentAnimation_(0) {}
+
 	bool parse(const std::string &filename);
 	void update(u32 elapsedMs);
 

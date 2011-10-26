@@ -32,8 +32,7 @@ bool AnimatedSprite::parse(const std::string &filename)
 	for (size_t i = 0; i < animsArray.size(); ++i)
 		parseAnimation(animsArray[i], framesHorizontal, framesVertical);
 
-	const std::string &initialAnimation = root["initialAnimation"].asString();
-	play(initialAnimation);
+	play(root["defaultAnimation"].asString());
 
 	return true;
 }
@@ -54,11 +53,14 @@ void AnimatedSprite::parseAnimation(Json::Value &root, u32 framesHoriz, u32 fram
 //----------------------------------------------------------------------------//
 void AnimatedSprite::update(u32 elapsedMs)
 {
-	currentAnimation_->update(elapsedMs);
+	if (currentAnimation_)
+		currentAnimation_->update(elapsedMs);
 }
 //----------------------------------------------------------------------------//
 void AnimatedSprite::play(const std::string &animation)
 {
-	currentAnimation_ = &animations_[animation];
+	Animations::iterator it = animations_.find(animation);
+	if (it != animations_.end())
+		currentAnimation_ = &animations_[animation];
 }
 //----------------------------------------------------------------------------//
