@@ -34,6 +34,8 @@ HEADERS += \
 	../bin/data/screen_game.json \
 	../bin/data/screen_logo.json \
 	../bin/data/test_dialogue.json \
+	../bin/data/sprite_info_mc.json \
+	../bin/data/sprite_info_bkg.json \
 	../src/hierophantengine.h \
 	../src/dllexport.h \
 	../src/behaviors/windowbehavior.h \
@@ -49,8 +51,8 @@ HEADERS += \
 	../src/behaviors/musicplayerbehavior.h \
 	../src/behaviors/triggerbehavior.h \
 	../src/behaviors/behaviors.h \
-    ../src/core/Assert.h \
-    ../src/core/Types.h \
+	../src/core/Assert.h \
+	../src/core/Types.h \
 	../src/core/Scene.h \
 	../src/core/gameloop.h \
 	../src/gameobject/objectparser.h \
@@ -58,36 +60,37 @@ HEADERS += \
 	../src/gameobject/world.inl \
 	../src/gameobject/behavior.h \
 	../src/gameobject/attribute.h \
-    ../src/gameobject/gameobject.h \
+	../src/gameobject/gameobject.h \
 	../src/gameobject/worldserializer.h \
 	../src/gameobject/message.h \
-    ../src/json/writer.h \
-    ../src/json/value.h \
-    ../src/json/reader.h \
-    ../src/json/json.h \
-    ../src/json/json_batchallocator.h \
-    ../src/json/forwards.h \
-    ../src/json/features.h \
-    ../src/json/config.h \
-    ../src/json/autolink.h \
-    ../src/math/Vector2.h \
-    ../src/math/Rect.h \
+	../src/json/writer.h \
+	../src/json/value.h \
+	../src/json/reader.h \
+	../src/json/json.h \
+	../src/json/json_batchallocator.h \
+	../src/json/forwards.h \
+	../src/json/features.h \
+	../src/json/config.h \
+	../src/json/autolink.h \
+	../src/math/Vector2.h \
+	../src/math/Rect.h \
 	../src/math/MathUtil.h \
 	../src/screen/screen.h \
 	../src/screen/screendirector.h \
-    ../src/util/ZLib.h \
-    ../src/util/Util.h \
-    ../src/util/Profile.h \
-    ../src/util/MemoryManager.h \
-    ../src/util/Logger.h \
-    ../src/util/FPSCounter.h \
-    ../src/util/FileSystem.h \
+	../src/util/ZLib.h \
+	../src/util/Util.h \
+	../src/util/Profile.h \
+	../src/util/MemoryManager.h \
+	../src/util/Logger.h \
+	../src/util/FPSCounter.h \
+	../src/util/FileSystem.h \
 	../src/util/base64.h \
 	../src/video/spriteanimation.h \
+	../src/video/animatedsprite.h \
 	../src/game/logobehavior.h \
 	../src/game/dialogue.h \
 	../src/game/dialoguenode.h \
-    ../src/game/dialoguecontrolbehavior.h \
+	../src/game/dialoguecontrolbehavior.h \
 	../src/game/conditiononclickbehavior.h \
 	../src/game/addbehaviorbehavior.h
 
@@ -127,11 +130,12 @@ SOURCES += \
 	../src/util/FileSystem.cpp \
 	../src/util/base64.cpp \
 	../src/video/spriteanimation.cpp \
+	../src/video/animatedsprite.cpp \
 	../src/game/main.cpp \
 	../src/game/logobehavior.cpp \
 	../src/game/dialogue.cpp \
 	../src/game/dialoguenode.cpp \
-    ../src/game/dialoguecontrolbehavior.cpp \
+	../src/game/dialoguecontrolbehavior.cpp \
 	../src/game/conditiononclickbehavior.cpp \
 	../src/game/addbehaviorbehavior.cpp
 

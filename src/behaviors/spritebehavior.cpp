@@ -16,36 +16,19 @@ Behavior* SpriteBehavior::clone() const
 //----------------------------------------------------------------------------//
 void SpriteBehavior::added()
 {
-	using std::string;
-
-	const string &filename = pOwner_->getAttributeAs<string>("spriteFilename");
-
-	int framesHorizontal = 1, framesVertical = 1;
-	int msPerFrame = 0, firstFrame = 0,	 lastFrame = 0, loopFromFrame = 0;
-
-	readAnimAttr("framesHorizontal", framesHorizontal);
-	readAnimAttr("framesVertical", framesVertical);
-	readAnimAttr("msPerFrame", msPerFrame);
-	readAnimAttr("firstFrame", firstFrame);
-	readAnimAttr("lastFrame", lastFrame);
-	readAnimAttr("loopFromFrame", loopFromFrame);
-
-	if (!texture_.LoadFromFile(filename))
-		std::cerr << "Error loading sprite: " << filename << std::endl;
-	sprite_.SetTexture(texture_);
-
-	spriteAnimation_.set(sprite_, framesHorizontal, framesVertical,
-						 msPerFrame, firstFrame, lastFrame, loopFromFrame);
+	animatedSprite_.parse(pOwner_->getAttributeAs<std::string>("spriteInfo"));
 
 	posX_ = pOwner_->getAttribute("x");
 	posY_ = pOwner_->getAttribute("y");
 	rotation_ = pOwner_->getAttribute("rotation");
 	scale_ = pOwner_->getAttribute("scale");
 
+	sf::Sprite &sprite = animatedSprite_.getSprite();
+
 	if (!pOwner_->getAttribute("width"))
-		pOwner_->addAttribute("width", new Attribute(static_cast<int>(sprite_.GetSize().x)));
+		pOwner_->addAttribute("width", new Attribute(static_cast<int>(sprite.GetSize().x)));
 	if (!pOwner_->getAttribute("height"))
-		pOwner_->addAttribute("height", new Attribute(static_cast<int>(sprite_.GetSize().y)));
+		pOwner_->addAttribute("height", new Attribute(static_cast<int>(sprite.GetSize().y)));
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::removed()
@@ -55,27 +38,21 @@ void SpriteBehavior::removed()
 //----------------------------------------------------------------------------//
 void SpriteBehavior::activate()
 {
-	pWorld_->getScene().addDrawable(&sprite_);
+	pWorld_->getScene().addDrawable(&animatedSprite_.getSprite());
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::deactivate()
 {
-	pWorld_->getScene().removeDrawable(&sprite_);
+	pWorld_->getScene().removeDrawable(&animatedSprite_.getSprite());
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::update()
 {
-	sprite_.SetPosition(posX_->getValue<int>(), posY_->getValue<int>());
+	animatedSprite_.getSprite().SetPosition(posX_->getValue<int>(), posY_->getValue<int>());
 	if (scale_)
-		sprite_.SetScale(scale_->getValue<int>(), scale_->getValue<int>());
+		animatedSprite_.getSprite().SetScale(scale_->getValue<int>(), scale_->getValue<int>());
 
 	// TODO: unhardcode
-	spriteAnimation_.update(30);
-}
-//----------------------------------------------------------------------------//
-void SpriteBehavior::readAnimAttr(const char *attrName, int &animAttr)
-{
-	Attribute* attr = pOwner_->getAttribute(attrName);
-	if (attr) animAttr = attr->getValue<int>();
+	animatedSprite_.update(30);
 }
 //----------------------------------------------------------------------------//

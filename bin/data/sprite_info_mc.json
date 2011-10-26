@@ -1,0 +1,21 @@
+{
+	"textureFilename" : "walk.png",
+	"framesHorizontal" : 5,
+	"framesVertical" : 3,
+	"initialAnimation" : "walk",
+	"animations" :
+	[
+		{
+			"name" : "idle",
+			"firstFrame" : 0
+		},
+		{
+			"name" : "walk",
+			"msPerFrame" : 240,
+			"firstFrame" : 0,
+			"lastFrame" : 10,
+			"loopCount" : 0,
+			"loopFromFrame" : 2
+		}
+	]
+}

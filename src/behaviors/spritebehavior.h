@@ -1,14 +1,10 @@
 #ifndef HE_SPRITEBEHAVIOR_H
 #define HE_SPRITEBEHAVIOR_H
 //----------------------------------------------------------------------------//
-#include <string>
-//----------------------------------------------------------------------------//
-#include <SFML/Graphics.hpp>
-//----------------------------------------------------------------------------//
 #include "dllexport.h"
 #include "core/Types.h"
 #include "gameobject/behavior.h"
-#include "video/spriteanimation.h"
+#include "video/animatedsprite.h"
 //----------------------------------------------------------------------------//
 namespace he {
 //----------------------------------------------------------------------------//
@@ -30,12 +26,8 @@ protected:
 	virtual void deactivate();
 
 private:
-	sf::Texture texture_;
-	sf::Sprite sprite_;
-	SpriteAnimation spriteAnimation_;
+	AnimatedSprite animatedSprite_;
 	Attribute *posX_, *posY_, *rotation_, *scale_;
-
-	void readAnimAttr(const char *attrName, int &animAttr);
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

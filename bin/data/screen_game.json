@@ -1,4 +1,3 @@
-
 [
 	{
 		"name" : "Background",
@@ -7,7 +6,7 @@
 			"x" : 0,
 			"y" : 0,
 			"rotation" : 0,
-			"spriteFilename" : "background.png"
+			"spriteInfo" : "sprite_info_bkg.json"
 		},
 		"behaviors" : [ "Sprite" ]
 	},
@@ -18,13 +17,7 @@
 			"x": 100,
 			"y": 100,
 			"rotation" : 0,
-			"spriteFilename" : "walk.png",
-			"framesHorizontal" : 5,
-			"framesVertical" : 3,
-			"msPerFrame" : 200,
-			"firstFrame" : 0,
-			"lastFrame" : 10,
-			"loopFromFrame": 2
+			"spriteInfo" : "sprite_info_mc.json"
 		},
 		"behaviors" : [ "Sprite" ]
 	},
