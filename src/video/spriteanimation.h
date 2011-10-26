@@ -16,10 +16,10 @@ class ENGINE_API SpriteAnimation
 public:
 	SpriteAnimation();
 	SpriteAnimation(sf::Sprite& sprite, u32 framesHorizontal, u32 framesVertical,
-					u32 msPerFrame, u32 firstFrame = 0, u32 lastFrame = 0);
+					u32 msPerFrame, u32 firstFrame, u32 lastFrame, u32 loopFromFrame);
 
 	void set(sf::Sprite& sprite, u32 framesHorizontal, u32 framesVertical,
-			 u32 msPerFrame, u32 firstFrame = 0, u32 lastFrame = 0);
+			 u32 msPerFrame, u32 firstFrame, u32 lastFrame, u32 loopFromFrame);
 
 	void update(u32 elapsedMs);
 
@@ -31,6 +31,7 @@ private:
 	u32 msPerFrame_;
 	u32 firstFrame_;
 	u32 lastFrame_;
+	u32 loopFromFrame_;
 
 	u32 currentFrame_;
 	u32 timer_;

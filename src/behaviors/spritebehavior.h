@@ -35,7 +35,7 @@ private:
 	SpriteAnimation spriteAnimation_;
 	Attribute *posX_, *posY_, *rotation_, *scale_;
 
-	void updateOwnerSize();
+	void readAnimAttr(const char *attrName, int &animAttr);
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

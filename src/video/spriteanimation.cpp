@@ -13,20 +13,21 @@ SpriteAnimation::SpriteAnimation()
 //----------------------------------------------------------------------------//
 SpriteAnimation::SpriteAnimation(sf::Sprite &sprite, u32 framesHorizontal,
 								 u32 framesVertical, u32 msPerFrame,
-								 u32 firstFrame, u32 lastFrame)
+								 u32 firstFrame, u32 lastFrame, u32 loopFromFrame)
 : sprite_(&sprite)
 , framesHorizontal_(framesHorizontal)
 , framesVertical_(framesVertical)
 , msPerFrame_(msPerFrame)
 , firstFrame_(firstFrame)
 , lastFrame_(lastFrame)
+, loopFromFrame_(loopFromFrame)
 {
 	// ...
 }
 //----------------------------------------------------------------------------//
 void SpriteAnimation::set(sf::Sprite &sprite, u32 framesHorizontal,
 						  u32 framesVertical, u32 msPerFrame,
-						  u32 firstFrame, u32 lastFrame)
+						  u32 firstFrame, u32 lastFrame, u32 loopFromFrame)
 {
 	sprite_ = &sprite;
 	framesHorizontal_ = framesHorizontal;
@@ -34,6 +35,7 @@ void SpriteAnimation::set(sf::Sprite &sprite, u32 framesHorizontal,
 	msPerFrame_ = msPerFrame;
 	firstFrame_ = firstFrame;
 	lastFrame_ = lastFrame;
+	loopFromFrame_ = loopFromFrame;
 
 	currentFrame_ = firstFrame_;
 	updateRect();
@@ -51,7 +53,7 @@ void SpriteAnimation::update(u32 elapsedMs)
 				: (framesHorizontal_ * framesVertical_ - 1);
 		currentFrame_++;
 		if (currentFrame_ > maxFrame)
-			currentFrame_ = firstFrame_;
+			currentFrame_ = loopFromFrame_;
 		updateRect();
 	}
 }

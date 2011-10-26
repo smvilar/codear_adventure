@@ -19,25 +19,23 @@ void SpriteBehavior::added()
 	using std::string;
 
 	const string &filename = pOwner_->getAttributeAs<string>("spriteFilename");
-	int framesHorizontal = 1;
-	int framesVertical = 1;
-	int msPerFrame = 0;
 
-	Attribute* framesHorizAttr = pOwner_->getAttribute("framesHorizontal");
-	if (framesHorizAttr)
-		framesHorizontal = framesHorizAttr->getValue<int>();
-	Attribute* framesVerticAttr = pOwner_->getAttribute("framesVertical");
-	if (framesVerticAttr)
-		framesVertical = framesVerticAttr->getValue<int>();
-	Attribute* msPerFrameAttr = pOwner_->getAttribute("msPerFrame");
-	if (msPerFrameAttr)
-		msPerFrame = msPerFrameAttr->getValue<int>();
+	int framesHorizontal = 1, framesVertical = 1;
+	int msPerFrame = 0, firstFrame = 0,	 lastFrame = 0, loopFromFrame = 0;
+
+	readAnimAttr("framesHorizontal", framesHorizontal);
+	readAnimAttr("framesVertical", framesVertical);
+	readAnimAttr("msPerFrame", msPerFrame);
+	readAnimAttr("firstFrame", firstFrame);
+	readAnimAttr("lastFrame", lastFrame);
+	readAnimAttr("loopFromFrame", loopFromFrame);
 
 	if (!texture_.LoadFromFile(filename))
 		std::cerr << "Error loading sprite: " << filename << std::endl;
 	sprite_.SetTexture(texture_);
 
-	spriteAnimation_.set(sprite_, framesHorizontal, framesVertical, msPerFrame);
+	spriteAnimation_.set(sprite_, framesHorizontal, framesVertical,
+						 msPerFrame, firstFrame, lastFrame, loopFromFrame);
 
 	posX_ = pOwner_->getAttribute("x");
 	posY_ = pOwner_->getAttribute("y");
@@ -73,5 +71,11 @@ void SpriteBehavior::update()
 
 	// TODO: unhardcode
 	spriteAnimation_.update(30);
+}
+//----------------------------------------------------------------------------//
+void SpriteBehavior::readAnimAttr(const char *attrName, int &animAttr)
+{
+	Attribute* attr = pOwner_->getAttribute(attrName);
+	if (attr) animAttr = attr->getValue<int>();
 }
 //----------------------------------------------------------------------------//
