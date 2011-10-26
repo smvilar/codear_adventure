@@ -18,12 +18,12 @@ using namespace he;
 //----------------------------------------------------------------------------//
 class ObjectNamesAreEqual
 {
-	const char* _name;
+	const std::string &name_;
 public:
-	ObjectNamesAreEqual(const char* name) : _name(name) {}
+	ObjectNamesAreEqual(const std::string &name) : name_(name) {}
 	bool operator()(GameObject* obj)
 	{
-		return (obj->name.compare(_name) == 0);
+		return obj->name == name_;
 	}
 };
 //----------------------------------------------------------------------------//
@@ -50,7 +50,7 @@ void World::removeObject(GameObject *object)
 	objectsToRemove_.push(object);
 }
 //----------------------------------------------------------------------------//
-GameObject* World::getObject(const char* name)
+GameObject* World::getObject(const std::string &name)
 {
 	ObjectVector::iterator it =
 		std::find_if(objects_.begin(), objects_.end(), ObjectNamesAreEqual(name));
@@ -83,7 +83,7 @@ void World::broadcast(const Message &message)
 	}
 }
 //----------------------------------------------------------------------------//
-void World::registerObjectPrototype(const char *name, GameObject *object)
+void World::registerObjectPrototype(const std::string &name, GameObject *object)
 {
 	Assert(objectPrototypes_.find(name) == objectPrototypes_.end(),
 		   "Registering a duplicate object");
@@ -91,7 +91,7 @@ void World::registerObjectPrototype(const char *name, GameObject *object)
 	objectPrototypes_[name] = object;
 }
 //----------------------------------------------------------------------------//
-void World::unregisterObjectPrototype(const char *name)
+void World::unregisterObjectPrototype(const std::string &name)
 {
 	Assert(objectPrototypes_.find(name) != objectPrototypes_.end(),
 		   "Unregistering an unexistent object prototype");
@@ -100,7 +100,7 @@ void World::unregisterObjectPrototype(const char *name)
 	objectPrototypes_.erase(name);
 }
 //----------------------------------------------------------------------------//
-GameObject* World::createObject(const char *name) const
+GameObject* World::createObject(const std::string &name) const
 {
 	ObjectMap::const_iterator it = objectPrototypes_.find(name);
 	Assert(it != objectPrototypes_.end(), "Couldn't find object prototype");
@@ -115,7 +115,7 @@ void World::cleanRegisteredObjectPrototypes()
 		delete it->second;
 }
 //----------------------------------------------------------------------------//
-void World::registerBehavior(const char *name, Behavior *behavior)
+void World::registerBehavior(const std::string &name, Behavior *behavior)
 {
 	Assert(behaviors_.find(name) == behaviors_.end(),
 		   "Registering a duplicate behavior");
@@ -124,7 +124,7 @@ void World::registerBehavior(const char *name, Behavior *behavior)
 	behaviors_[name] = behavior;
 }
 //----------------------------------------------------------------------------//
-void World::unregisterBehavior(const char *name)
+void World::unregisterBehavior(const std::string &name)
 {
 	Assert(behaviors_.find(name) != behaviors_.end(),
 		   "Unregistering an unexistent behavior");
@@ -133,7 +133,7 @@ void World::unregisterBehavior(const char *name)
 	behaviors_.erase(name);
 }
 //----------------------------------------------------------------------------//
-Behavior* World::createBehavior(const char *name) const
+Behavior* World::createBehavior(const std::string &name) const
 {
 	BehaviorMap::const_iterator it = behaviors_.find(name);
 	if (it != behaviors_.end())
@@ -152,7 +152,7 @@ void World::cleanRegisteredBehaviors()
 		delete it->second;
 }
 //----------------------------------------------------------------------------//
-GameObject* World::parseObject(const char *filename)
+GameObject* World::parseObject(const std::string &filename)
 {
 	GameObject* obj = new GameObject("unnamed");
 	ObjectParser parser;
@@ -160,15 +160,15 @@ GameObject* World::parseObject(const char *filename)
 	return obj;
 }
 //----------------------------------------------------------------------------//
-void World::saveState(const char *filename) const
+void World::saveState(const std::string &filename) const
 {
-	std::ofstream ofs(filename);
+	std::ofstream ofs(filename.c_str());
 	worldSerializer_.serialize(*this, ofs);
 }
 //----------------------------------------------------------------------------//
-void World::loadState(const char *filename)
+void World::loadState(const std::string &filename)
 {
-	std::ifstream ifs(filename);
+	std::ifstream ifs(filename.c_str());
 	worldSerializer_.deserialize(*this, ifs);
 }
 //----------------------------------------------------------------------------//

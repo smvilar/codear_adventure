@@ -9,9 +9,9 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-bool ObjectParser::parse(const char *filename, GameObject &object, const World *world) const
+bool ObjectParser::parse(const std::string &filename, GameObject &object, const World *world) const
 {
-	std::ifstream ifs(filename);
+	std::ifstream ifs(filename.c_str());
 
 	Json::Reader reader;
 	Json::Value root;

@@ -1,6 +1,7 @@
 #include "behaviors/triggerbehavior.h"
 //----------------------------------------------------------------------------//
 #include <iostream>
+#include <map>
 //----------------------------------------------------------------------------//
 #include "gameobject/gameobject.h"
 #include "gameobject/message.h"
@@ -34,6 +35,7 @@ void TriggerBehavior::handleMessage(const Message &message)
 void TriggerBehavior::activate()
 {
 	typedef std::vector<Attribute*> AttributeVector;
+	typedef std::map<std::string, Attribute*> AttributeMap;
 
 	AttributeVector conditions = pOwner_->getAttributeAs<AttributeVector>("conditions");
 	conditions_.reserve(conditions.size());
@@ -46,7 +48,13 @@ void TriggerBehavior::activate()
 	actions_.reserve(actions.size());
 	for (size_t i = 0; i < actions.size(); ++i)
 	{
-		actions_.push_back(actions[i]->getValue<std::string>());
+		AttributeMap actionObj = actions[i]->getValue<AttributeMap>();
+		AttributeMap::iterator it = actionObj.begin();
+		for (; it != actionObj.end(); ++it)
+		{
+			actions_.push_back(Action(actionObj["action"]->getValue<std::string>(),
+									  actionObj["args"]->getValue<AttributeVector>()));
+		}
 	}
 }
 //----------------------------------------------------------------------------//
@@ -63,6 +71,8 @@ void TriggerBehavior::doActions()
 {
 	std::cout << "Doing actions" << std::endl;
 	for (size_t i = 0; i < actions_.size(); ++i)
-		pWorld_->broadcast(Message(actions_[i].c_str()));
+	{
+		pWorld_->broadcast(Message(actions_[i].name, actions_[i].args));
+	}
 }
 //----------------------------------------------------------------------------//

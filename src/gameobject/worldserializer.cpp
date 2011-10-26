@@ -65,7 +65,7 @@ Json::Value WorldSerializer::serializeAttributeValue(const Attribute &attribute)
 		return Json::Value(attribute.getValue<bool>());
 	else if (anyValue.type() == typeid(std::string))
 		return Json::Value(attribute.getValue<std::string>());
-	// TODO: array!
+	// TODO: arrays, objects
 	return Json::Value();
 }
 //----------------------------------------------------------------------------//
@@ -176,10 +176,24 @@ Attribute* WorldSerializer::deserializeAttributeValue(const Json::Value &jsValue
 	{
 		std::vector<Attribute*> vec;
 		vec.reserve(jsValue.size());
-		// recurse
 		for (size_t i = 0; i < jsValue.size(); ++i)
+		{
+			//recurse
 			vec.push_back(deserializeAttributeValue(jsValue[i]));
+		}
 		attribute = new Attribute(vec);
+	}
+	else if (jsValue.isObject())
+	{
+		std::map<std::string, Attribute*> dict;
+		Json::Value::Members memberNames = jsValue.getMemberNames();
+		for (size_t i = 0; i < jsValue.size(); ++i)
+		{
+			//recurse
+			const std::string &memberName = memberNames[i];
+			dict[memberName] = deserializeAttributeValue(jsValue[memberName]);
+		}
+		attribute = new Attribute(dict);
 	}
 
 	return attribute;

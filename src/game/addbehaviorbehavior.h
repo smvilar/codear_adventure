@@ -16,10 +16,6 @@ public:
 
 private:
 	virtual void added();
-
-private:
-	std::string target_;
-	std::string behaviorToAdd_;
 };
 //----------------------------------------------------------------------------//
 #endif // HE_ADDBEHAVIORBEHAVIOR_H

@@ -11,8 +11,12 @@ namespace he {
 class ENGINE_API Message
 {
 public:
-	Message(const char *message);
-	Message(const char *message, const boost::any &args);
+	Message(const std::string &message) : message_(message) {}
+	Message(const char *message) : message_(message) {}
+	Message(const std::string &message, const boost::any &args) :
+		message_(message), args_(args) {}
+	Message(const char *message, const boost::any &args) :
+		message_(message), args_(args) {}
 
 	bool equals(const char *message) const;
 

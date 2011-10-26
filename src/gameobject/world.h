@@ -33,7 +33,7 @@ public:
 	// Removes a GameObject from the list of objects in the world
 	void removeObject(GameObject *object);
 	// Gets a GameObject by its name, returns 0 if not found
-	GameObject* getObject(const char* name);
+	GameObject* getObject(const std::string &name);
 
 	void removeAllObjects();
 
@@ -45,42 +45,42 @@ public:
 /// GameObject Prototypes
 public:
 	// Registers a GameObject as a prototype to create more objects like it
-	void registerObjectPrototype(const char* name, GameObject* object);
+	void registerObjectPrototype(const std::string &name, GameObject *object);
 	// Unregisters a GameObject as a prototype
-	void unregisterObjectPrototype(const char* name);
+	void unregisterObjectPrototype(const std::string &name);
 	// Creates a GameObject from a prototype
-	GameObject* createObject(const char* name) const;
+	GameObject* createObject(const std::string &name) const;
 
 	void cleanRegisteredObjectPrototypes();
 
 /// GameObject Behavior Management
 public:
 	// Registers a behavior in a list so it can be recognized later when constructing a new object
-	void registerBehavior(const char* name, Behavior* behavior);
+	void registerBehavior(const std::string &name, Behavior *behavior);
 	// Unregisters a behavior
-	void unregisterBehavior(const char* name);
+	void unregisterBehavior(const std::string &name);
 	// Returns a copy of a registered behavior
-	Behavior* createBehavior(const char* name) const;
+	Behavior* createBehavior(const std::string &name) const;
 
 	void cleanRegisteredBehaviors();
 
 /// GameObject Parsing
 public:
 	// Creates an object from a json file
-	GameObject* parseObject(const char* filename);
+	GameObject* parseObject(const std::string &filename);
 
 /// Persistence
 public:
 	// Saves the state of the world in a json file
-	void saveState(const char* filename) const;
+	void saveState(const std::string &filename) const;
 	// Loads the state of the world from a json file
-	void loadState(const char* filename);
+	void loadState(const std::string &filename);
 
 	WorldSerializer& getWorldSerializer();
 
 private:
 	WorldSerializer worldSerializer_;
-	
+
 /// Type definitions
 private:
 	typedef std::vector<GameObject*> ObjectVector;

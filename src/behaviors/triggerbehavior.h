@@ -3,6 +3,7 @@
 //----------------------------------------------------------------------------//
 #include <vector>
 #include <string>
+#include <boost/any.hpp>
 //----------------------------------------------------------------------------//
 #include "dllexport.h"
 #include "gameobject/behavior.h"
@@ -33,7 +34,16 @@ private:
 	std::vector<Condition> conditions_;
 
 private:
-	std::vector<std::string> actions_;
+	struct Action
+	{
+		std::string name;
+		std::vector<Attribute*> args;
+
+		Action(const std::string &name, const std::vector<Attribute*> args)
+			: name(name), args(args) {}
+	};
+
+	std::vector<Action> actions_;
 
 private:
 	bool allConditionsMet() const;

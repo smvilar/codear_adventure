@@ -2,7 +2,7 @@
 [
 	{
 		"name" : "Background",
-		"attributes" : 
+		"attributes" :
 		{
 			"x" : 0,
 			"y" : 0,
@@ -90,18 +90,16 @@
 			],
 			"actions" :
 			[
-				"action_add_behavior"
+				{
+					"action" : "ActionAddBehavior",
+					"args" : [ "DialogueBox", "DialogueControl" ]
+				}
 			]
 		},
 		"behaviors" : [ "Trigger" ]
 	},
 	{
-		"name" : "ActionConversation",
-		"attributes" :
-		{
-			"target" : "DialogueBox",
-			"behaviorToAdd" : "DialogueControl"
-		},
+		"name" : "ActionAddBehavior",
 		"behaviors" : [ "AddBehavior" ]
 	}
 ]
