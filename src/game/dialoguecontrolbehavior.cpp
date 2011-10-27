@@ -16,8 +16,8 @@ void DialogueControlBehavior::activate()
 	{
 		textAttr_ = new Attribute(std::string());
 		pOwner_->addAttribute("text", textAttr_);
-		updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
 	}
+	updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
 
 	displayingAnswers_ = false;
 }
