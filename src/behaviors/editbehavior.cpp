@@ -46,7 +46,7 @@ void EditBehavior::update()
 		updateDrag();
 		break;
 	case INACTIVE:
-		setGizmo(-1, -1, 0, 0);
+		setGizmo(-10, -10, 0, 0);
 		break;
 	}
 }
@@ -103,6 +103,8 @@ void EditBehavior::updateDrag()
 
 	lastMousePos_ = mousePos;
 
+	std::cout << posX << ", " << posY << std::endl;
+
 	if (!sf::Mouse::IsButtonPressed(sf::Mouse::Left))
 	{
 		mode_ = SELECT;
@@ -112,8 +114,8 @@ void EditBehavior::updateDrag()
 //----------------------------------------------------------------------------//
 void EditBehavior::initGizmo()
 {
-	sf::Color outlineColor(255, 0, 0);
-	sf::Color color(255, 255, 255, 50);
+	sf::Color outlineColor(255, 255, 0);
+	sf::Color color(255, 255, 255, 25);
 	gizmo_.AddPoint(0, 0, color, outlineColor);
 	gizmo_.AddPoint(1, 0, color, outlineColor);
 	gizmo_.AddPoint(1, 1, color, outlineColor);

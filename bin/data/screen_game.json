@@ -29,7 +29,8 @@
 			"width" : 800,
 			"height" : 100,
 			"font" : "rough_typewriter.otf",
-			"fontSize" : 16
+			"fontSize" : 16,
+			"text" : ""
 		},
 		"behaviors" :
 		[
@@ -41,14 +42,17 @@
 		"name" : "Phone",
 		"attributes" :
 		{
-			"x" : 0,
-			"y" : 0,
-			"width" : 10,
-			"height" : 10,
-			"color" : [255, 0, 0, 255],
-			"condition" : "phone_used"
+			"x" : 390,
+			"y" : 260,
+			"width" : 50,
+			"height" : 50,
+			"color" : [255, 128, 0, 255],
+			"condition" : "phone_used",
+			"font" : "rough_typewriter.otf",
+			"fontSize" : 14,
+			"text" : "phone"
 		},
-		"behaviors" : [ "ConditionOnClick", "Shape" ]
+		"behaviors" : [ "ConditionOnClick", "Shape", "TextBox" ]
 	},
 
 	{
