@@ -14,6 +14,7 @@ class ENGINE_API ShapeBehavior : public Behavior
 {
 public:
 	virtual Behavior* clone() const { return new ShapeBehavior; }
+	virtual void update();
 
 private:
 	virtual void added();

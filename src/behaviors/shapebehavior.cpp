@@ -21,9 +21,13 @@ void ShapeBehavior::added()
 					array[2]->getValue<int>(),
 					array[3]->getValue<int>());
 
-	sf::FloatRect rect(posX_->getValue<int>(), posY_->getValue<int>(),
-					   width_->getValue<int>(), height_->getValue<int>());
+	sf::FloatRect rect(0, 0, width_->getValue<int>(), height_->getValue<int>());
 	shape_ = sf::Shape::Rectangle(rect, color);
+}
+//----------------------------------------------------------------------------//
+void ShapeBehavior::update()
+{
+	shape_.SetPosition(posX_->getValue<int>(), posY_->getValue<int>());
 }
 //----------------------------------------------------------------------------//
 void ShapeBehavior::activate()
