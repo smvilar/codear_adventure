@@ -2,6 +2,7 @@
 #define HE_BEHAVIORS_H
 //----------------------------------------------------------------------------//
 #include "spritebehavior.h"
+#include "shapebehavior.h"
 #include "editbehavior.h"
 #include "objectcontainerbehavior.h"
 #include "textboxbehavior.h"
@@ -19,6 +20,7 @@ namespace Behaviors {
 void registerToWorld(World& world)
 {
 	world.registerBehavior("Sprite", new SpriteBehavior);
+	world.registerBehavior("Shape", new ShapeBehavior);
 	world.registerBehavior("Edit", new EditBehavior);
 	world.registerBehavior("ObjectContainer", new ObjectContainerBehavior);
 	world.registerBehavior("TextBox", new TextBoxBehavior);

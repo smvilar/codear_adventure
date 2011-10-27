@@ -38,12 +38,12 @@ void SpriteBehavior::removed()
 //----------------------------------------------------------------------------//
 void SpriteBehavior::activate()
 {
-	pWorld_->getScene().addDrawable(&animatedSprite_.getSprite());
+	pWorld_->getScene().addDrawable(animatedSprite_.getSprite());
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::deactivate()
 {
-	pWorld_->getScene().removeDrawable(&animatedSprite_.getSprite());
+	pWorld_->getScene().removeDrawable(animatedSprite_.getSprite());
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::update()

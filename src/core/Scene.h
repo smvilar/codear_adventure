@@ -23,8 +23,8 @@ public:
 
 /// View management
 public:
-	void addDrawable(sf::Drawable *drawable);
-	void removeDrawable(sf::Drawable *drawable);
+	void addDrawable(sf::Drawable &drawable);
+	void removeDrawable(sf::Drawable &drawable);
 	void clearDrawables();
 
 private:

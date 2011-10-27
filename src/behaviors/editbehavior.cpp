@@ -14,7 +14,7 @@ void EditBehavior::activate()
 
 	initGizmo();
 	setGizmo(-10, -10, 0, 0);
-	pWorld_->getScene().addDrawable(&gizmo_);
+	pWorld_->getScene().addDrawable(gizmo_);
 
 	mode_ = INACTIVE;
 	tabPressed_ = false;
@@ -22,7 +22,7 @@ void EditBehavior::activate()
 //----------------------------------------------------------------------------//
 void EditBehavior::deactivate()
 {
-	pWorld_->getScene().removeDrawable(&gizmo_);
+	pWorld_->getScene().removeDrawable(gizmo_);
 }
 //----------------------------------------------------------------------------//
 void EditBehavior::update()

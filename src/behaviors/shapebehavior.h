@@ -1,32 +1,31 @@
-#include "core/Scene.h"
+#ifndef HE_SHAPEBEHAVIOR_H
+#define HE_SHAPEBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include <SFML/Graphics.hpp>
 //----------------------------------------------------------------------------//
-using namespace he;
+#include "dllexport.h"
+#include "gameobject/behavior.h"
 //----------------------------------------------------------------------------//
-Scene::~Scene()
+namespace he {
+//----------------------------------------------------------------------------//
+class Attribute;
+//----------------------------------------------------------------------------//
+class ENGINE_API ShapeBehavior : public Behavior
 {
-	clearDrawables();
-}
+public:
+	virtual Behavior* clone() const { return new ShapeBehavior; }
+
+private:
+	virtual void added();
+	virtual void activate();
+	virtual void deactivate();
+
+private:
+	sf::Shape shape_;
+	Attribute *posX_, *posY_, *width_, *height_;
+	Attribute *rotation_, *color_;
+};
 //----------------------------------------------------------------------------//
-void Scene::render(sf::RenderTarget &renderTarget)
-{
-	for (size_t i=0; i<drawables_.size(); ++i)
-		renderTarget.Draw(*drawables_[i]);
-}
+} // end namespace he
 //----------------------------------------------------------------------------//
-void Scene::addDrawable(sf::Drawable &drawable)
-{
-	drawables_.push_back(&drawable);
-}
-//----------------------------------------------------------------------------//
-void Scene::removeDrawable(sf::Drawable &drawable)
-{
-	drawables_.erase(std::find(drawables_.begin(), drawables_.end(), &drawable));
-}
-//----------------------------------------------------------------------------//
-void Scene::clearDrawables()
-{
-	drawables_.clear();
-}
-//----------------------------------------------------------------------------//
+#endif // HE_SHAPEBEHAVIOR_H

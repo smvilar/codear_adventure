@@ -41,6 +41,7 @@ HEADERS += \
 	../src/behaviors/windowbehavior.h \
 	../src/behaviors/fpscounterbehavior.h \
 	../src/behaviors/spritebehavior.h \
+	../src/behaviors/shapebehavior.h \
 	../src/behaviors/editbehavior.h \
 	../src/behaviors/objectcontainerbehavior.h \
 	../src/behaviors/screendirectorbehavior.h \
@@ -96,6 +97,7 @@ HEADERS += \
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
+	../src/behaviors/shapebehavior.cpp \
 	../src/behaviors/editbehavior.cpp \
 	../src/behaviors/windowbehavior.cpp \
 	../src/behaviors/fpscounterbehavior.cpp \

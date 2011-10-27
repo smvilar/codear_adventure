@@ -5,7 +5,6 @@
 		{
 			"x" : 0,
 			"y" : 0,
-			"rotation" : 0,
 			"spriteInfo" : "sprite_info_bkg.json"
 		},
 		"behaviors" : [ "Sprite" ]
@@ -16,7 +15,6 @@
 		{
 			"x": 100,
 			"y": 100,
-			"rotation" : 0,
 			"spriteInfo" : "sprite_info_mc.json"
 		},
 		"behaviors" : [ "Sprite" ]
@@ -47,9 +45,10 @@
 			"y" : 0,
 			"width" : 10,
 			"height" : 10,
+			"color" : [255, 0, 0, 255],
 			"condition" : "phone_used"
 		},
-		"behaviors" : [ "ConditionOnClick" ]
+		"behaviors" : [ "ConditionOnClick", "Shape" ]
 	},
 
 	{
