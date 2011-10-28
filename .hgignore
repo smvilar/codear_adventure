@@ -1,4 +1,5 @@
 relre:obj/
+relre:\.app/
 relre:/ipch/
 relre:\.suo$
 relre:\.ncb$
