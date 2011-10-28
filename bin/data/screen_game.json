@@ -83,10 +83,7 @@
 		"name" : "TriggerConversation",
 		"attributes" :
 		{
-			"conditions" :
-			[
-				"phone_used"
-			],
+			"conditions" : [ "phone_used" ],
 			"actions" :
 			[
 				{
@@ -100,5 +97,9 @@
 	{
 		"name" : "ActionAddBehavior",
 		"behaviors" : [ "AddBehavior" ]
+	},
+	{
+		"name" : "PhoneController",
+		"behaviors" : [ "PhoneController" ]
 	}
 ]

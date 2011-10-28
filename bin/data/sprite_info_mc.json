@@ -2,7 +2,7 @@
 	"textureFilename" : "walk.png",
 	"framesHorizontal" : 5,
 	"framesVertical" : 3,
-	"defaultAnimation" : "walk",
+	"defaultAnimation" : "idle",
 	"animations" :
 	[
 		{
