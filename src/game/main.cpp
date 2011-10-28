@@ -1,8 +1,7 @@
-#if 0
+#if 1
 
 #include <fstream>
 #include <iostream>
-#include <util/easyzlib.h>
 
 using namespace std;
 
@@ -14,47 +13,22 @@ int main()
 
 	while (ifs.good())
 	{
-		char filename[64];
-		int filesize;
-		unsigned char *compressedFile;
+		const size_t TEMP_BUFFER_SIZE = 512;
+		char filename[TEMP_BUFFER_SIZE];
+		int dataSize;
+		char *packedData;
 		// get the filename
-		ifs.getline(filename, 64);
-		cout << filename << ": " << ifs.gcount() << endl;
+		ifs.getline(filename, TEMP_BUFFER_SIZE);
+		if (ifs.eof()) break;
+		cout << filename << endl;
 		// now get the filesize
-		ifs.read((char*)&filesize, sizeof(filesize));
-		cout << filesize << ": " << ifs.gcount() << endl;
+		ifs.read((char*)&dataSize, sizeof(dataSize));
+		cout << dataSize << endl;
 		// now get the compressed file!
-		compressedFile = new unsigned char[filesize];
-		ifs.read((char*)compressedFile, filesize);
+		packedData = new char[dataSize];
+		ifs.read(packedData, dataSize);
 
-		ezbuffer bufSrc(filesize);
-		bufSrc.pBuf = compressedFile;
-		ezbuffer bufDest;
-		ezuncompress(bufDest, bufSrc);
-
-		string fn(filename);
-		if (fn.find("json") != string::npos)
-		{
-			cout << bufDest.pBuf << endl;
-		}
-
-		/*
-		ofstream ofs("temp.gz");
-		ofs << compressedFile;
-		ofs.close();
-
-		igzstream igzs("temp.gz");
-		string fn(filename);
-		if (fn.find("json") != string::npos)
-		{
-			while (igzs.good())
-			{
-				char line[128];
-				igzs.getline(line, 128);
-				cout << line << endl;
-			}
-		}
-		*/
+		delete [] packedData;
 	}
 
 	return 0;

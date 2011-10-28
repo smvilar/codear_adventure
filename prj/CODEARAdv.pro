@@ -108,7 +108,7 @@ HEADERS += \
 	../src/game/dialoguecontrolbehavior.h \
 	../src/game/conditiononclickbehavior.h \
 	../src/game/addbehaviorbehavior.h \
-    ../src/game/phonecontrollerbehavior.h
+	../src/game/phonecontrollerbehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -155,7 +155,7 @@ SOURCES += \
 	../src/game/dialoguecontrolbehavior.cpp \
 	../src/game/conditiononclickbehavior.cpp \
 	../src/game/addbehaviorbehavior.cpp \
-    ../src/game/phonecontrollerbehavior.cpp
+	../src/game/phonecontrollerbehavior.cpp
 
 
 
