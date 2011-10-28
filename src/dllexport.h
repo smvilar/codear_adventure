@@ -1,5 +1,5 @@
-#ifndef HE_dllexport_H
-#define HE_dllexport_H
+#ifndef HE_DLLEXPORT_H
+#define HE_DLLEXPORT_H
 //----------------------------------------------------------------------------//
 // For the DLL library.
 #ifdef BUILD_DLL
@@ -15,4 +15,4 @@
 #	define ENGINE_API
 #endif // BUILD_DLL
 //----------------------------------------------------------------------------//
-#endif // HE_dllexport_H
+#endif // HE_DLLEXPORT_H
