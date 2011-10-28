@@ -6,11 +6,25 @@ CONFIG(debug) {
 	DEFINES += _DEBUG
 }
 
+# Here we should set all the files we want
+# to include in the bundle
+#GAME_DATA.files = ../bin/data/walk.png
+#GAME_DATA.path = Contents/MacOS
+#QMAKE_BUNDLE_DATA += GAME_DATA
+
+# Here we can specify the icon for the bundle
+#ICON =
+
+# this is supposed to force the compilation
+# when a header has changed...
+DEPENDPATH += ../include
+
 OBJECTS_DIR = ../obj
 
 mac:LIBS += \
 	-framework CoreFoundation \
-	-framework OpenGL
+	-framework OpenGL \
+	-lz
 
 win32:LIBS += \
 	-L../lib/SFML/lib/mingw \
@@ -78,7 +92,6 @@ HEADERS += \
 	../src/math/MathUtil.h \
 	../src/screen/screen.h \
 	../src/screen/screendirector.h \
-	../src/util/ZLib.h \
 	../src/util/Util.h \
 	../src/util/Profile.h \
 	../src/util/MemoryManager.h \
@@ -86,6 +99,7 @@ HEADERS += \
 	../src/util/FPSCounter.h \
 	../src/util/FileSystem.h \
 	../src/util/base64.h \
+	../src/util/gzstream.h \
 	../src/video/spriteanimation.h \
 	../src/video/animatedsprite.h \
 	../src/game/logobehavior.h \
@@ -93,7 +107,8 @@ HEADERS += \
 	../src/game/dialoguenode.h \
 	../src/game/dialoguecontrolbehavior.h \
 	../src/game/conditiononclickbehavior.h \
-	../src/game/addbehaviorbehavior.h
+	../src/game/addbehaviorbehavior.h \
+    ../src/game/phonecontrollerbehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -124,13 +139,13 @@ SOURCES += \
 	../src/math/Vector2.cpp \
 	../src/screen/screen.cpp \
 	../src/screen/screendirector.cpp \
-	../src/util/ZLib.cpp \
 	../src/util/Profile.cpp \
 	../src/util/MemoryManager.cpp \
 	../src/util/Logger.cpp \
 	../src/util/FPSCounter.cpp \
 	../src/util/FileSystem.cpp \
 	../src/util/base64.cpp \
+	../src/util/gzstream.cpp \
 	../src/video/spriteanimation.cpp \
 	../src/video/animatedsprite.cpp \
 	../src/game/main.cpp \
@@ -139,6 +154,9 @@ SOURCES += \
 	../src/game/dialoguenode.cpp \
 	../src/game/dialoguecontrolbehavior.cpp \
 	../src/game/conditiononclickbehavior.cpp \
-	../src/game/addbehaviorbehavior.cpp
+	../src/game/addbehaviorbehavior.cpp \
+    ../src/game/phonecontrollerbehavior.cpp
+
+
 
 
