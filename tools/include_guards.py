@@ -86,8 +86,7 @@ def walk_dir(path):
 		# convert to filepaths
 		files = map(lambda f:os.path.join(root, f), files)
 		# process them!
-		for filename in files:
-			process_header(filename)
+		map(process_header, files)
 		# remove exclude dirs
 		for exclude_dir in config.include_guard_exclude_dirs:
 			if exclude_dir in dirs:
