@@ -5,7 +5,6 @@
 #include "util/FileSystem.h"
 #include "util/Logger.h"
 #include "util/Profile.h"
-#include "util/resourcepack.h"
 //----------------------------------------------------------------------------//
 #include "core/Types.h"
 #include "core/Assert.h"
@@ -15,6 +14,8 @@
 #include "math/Vector2.h"
 #include "math/Rect.h"
 #include "math/MathUtil.h"
+//----------------------------------------------------------------------------//
+#include "resource/resourcepack.h"
 //----------------------------------------------------------------------------//
 #include "video/spriteanimation.h"
 //----------------------------------------------------------------------------//

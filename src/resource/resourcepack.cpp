@@ -1,4 +1,4 @@
-#include "util/resourcepack.h"
+#include "resource/resourcepack.h"
 //----------------------------------------------------------------------------//
 #include <iostream>
 #include <fstream>

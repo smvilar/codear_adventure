@@ -65,7 +65,6 @@ HEADERS += \
 	../src/behaviors/soundplayerbehavior.h \
 	../src/behaviors/musicplayerbehavior.h \
 	../src/behaviors/triggerbehavior.h \
-	../src/behaviors/resourcepackloaderbehavior.h \
 	../src/behaviors/behaviors.h \
 	../src/core/Assert.h \
 	../src/core/Types.h \
@@ -91,6 +90,8 @@ HEADERS += \
 	../src/math/Vector2.h \
 	../src/math/Rect.h \
 	../src/math/MathUtil.h \
+	../src/resource/resourcepack.h \
+	../src/resource/resourcemanager.h \
 	../src/screen/screen.h \
 	../src/screen/screendirector.h \
 	../src/util/Util.h \
@@ -101,7 +102,6 @@ HEADERS += \
 	../src/util/FileSystem.h \
 	../src/util/base64.h \
 	../src/util/gzstream.h \
-	../src/util/resourcepack.h \
 	../src/video/spriteanimation.h \
 	../src/video/animatedsprite.h \
 	../src/game/logobehavior.h \
@@ -126,7 +126,6 @@ SOURCES += \
 	../src/behaviors/soundplayerbehavior.cpp \
 	../src/behaviors/musicplayerbehavior.cpp \
 	../src/behaviors/triggerbehavior.cpp \
-	../src/behaviors/resourcepackloaderbehavior.cpp \
 	../src/core/Scene.cpp \
 	../src/core/gameloop.cpp \
 	../src/gameobject/objectparser.cpp \
@@ -140,6 +139,8 @@ SOURCES += \
 	../src/json/json_value.cpp \
 	../src/json/json_reader.cpp \
 	../src/math/Vector2.cpp \
+	../src/resource/resourcepack.cpp \
+	../src/resource/resourcemanager.cpp \
 	../src/screen/screen.cpp \
 	../src/screen/screendirector.cpp \
 	../src/util/Profile.cpp \
@@ -149,7 +150,6 @@ SOURCES += \
 	../src/util/FileSystem.cpp \
 	../src/util/base64.cpp \
 	../src/util/gzstream.cpp \
-	../src/util/resourcepack.cpp \
 	../src/video/spriteanimation.cpp \
 	../src/video/animatedsprite.cpp \
 	../src/game/main.cpp \

@@ -21,7 +21,7 @@ void setupWorld(World &world)
 int main()
 {
 	World world;
-	world.addResourcePack("data.pack");
+	world.getResourceManager().addResourcePack("data.pack");
 	setupWorld(world);
 
 	GameLoop gameLoop;
