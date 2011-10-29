@@ -5,7 +5,7 @@
 #include "gameobject/world.h"
 #include "gameobject/gameobject.h"
 #include "gameobject/attribute.h"
-#include "core/Scene.h"
+#include "core/scene.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//

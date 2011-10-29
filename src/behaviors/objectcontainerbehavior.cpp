@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 //----------------------------------------------------------------------------//
-#include "core/Assert.h"
+#include "core/assert.h"
 #include "gameobject/world.h"
 #include "gameobject/gameobject.h"
 //----------------------------------------------------------------------------//

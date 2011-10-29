@@ -6,7 +6,7 @@
 #include <SFML/Graphics.hpp>
 //----------------------------------------------------------------------------//
 #include "dllexport.h"
-#include "core/Types.h"
+#include "core/types.h"
 #include "gameobject/behavior.h"
 //----------------------------------------------------------------------------//
 namespace he {

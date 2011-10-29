@@ -2,8 +2,8 @@
 #define HE_VECTOR2_H
 //----------------------------------------------------------------------------//
 #include <cmath>
-#include "core/Types.h"
-#include "core/Assert.h"
+#include "core/types.h"
+#include "core/assert.h"
 //----------------------------------------------------------------------------//
 namespace he
 {
@@ -62,7 +62,7 @@ public:
 	static const Vector2 UNIT_Y;
 };
 //----------------------------------------------------------------------------//
-#include "Vector2.inl"
+#include "vector2.inl"
 //----------------------------------------------------------------------------//
 typedef Vector2<f32> Vector2f;
 typedef Vector2<f64> Vector2d;

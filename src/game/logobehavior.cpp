@@ -3,7 +3,7 @@
 #include "gameobject/world.h"
 #include "gameobject/message.h"
 #include "gameobject/gameobject.h"
-#include "util/FPSCounter.h"
+#include "util/fpscounter.h"
 //----------------------------------------------------------------------------//
 void LogoBehavior::activate()
 {

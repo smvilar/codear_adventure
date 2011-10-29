@@ -1,20 +1,20 @@
 #ifndef HE_HIEROPHANTENGINE_H
 #define HE_HIEROPHANTENGINE_H
 //----------------------------------------------------------------------------//
-#include "util/MemoryManager.h"
-#include "util/FileSystem.h"
-#include "util/Logger.h"
-#include "util/Profile.h"
+#include "util/memorymanager.h"
+#include "util/filesystem.h"
+#include "util/logger.h"
+#include "util/profile.h"
 #include "util/resourcepack.h"
 //----------------------------------------------------------------------------//
-#include "core/Types.h"
-#include "core/Assert.h"
-#include "core/Scene.h"
+#include "core/types.h"
+#include "core/assert.h"
+#include "core/scene.h"
 #include "core/gameloop.h"
 //----------------------------------------------------------------------------//
-#include "math/Vector2.h"
-#include "math/Rect.h"
-#include "math/MathUtil.h"
+#include "math/vector2.h"
+#include "math/rect.h"
+#include "math/mathutil.h"
 //----------------------------------------------------------------------------//
 #include "video/spriteanimation.h"
 //----------------------------------------------------------------------------//

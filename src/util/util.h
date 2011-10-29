@@ -1,39 +1,32 @@
-#ifndef HE_FPSCOUNTER_H
-#define HE_FPSCOUNTER_H
+#ifndef HE_UTIL_H
+#define HE_UTIL_H
 //----------------------------------------------------------------------------//
-#include <string>
+#include <sstream>
 #include "dllexport.h"
-#include "core/Types.h"
+#include "core/types.h"
 //----------------------------------------------------------------------------//
 namespace he
 {
 //----------------------------------------------------------------------------//
-class ENGINE_API FPSCounter
+template <class T>
+inline std::string toString(const T& t)
 {
-public:
-	FPSCounter(u32 maxFramerate = 0);
-
-	void tick();
-
-	u32 getFPS() const;
-	u32 getDT() const;
-
-	void setMaxFramerate(u32 maxFramerate);
-	u32 getMaxFramerate() const;
-
-private:
-	u32 _fps;
-	u32 _dt;
-	u32 _maxFramerate;
-
-	u32 _lastFrameTime;
-	u32 _lastSecondTime;
-	u32 _frameCount;
-};
+	std::stringstream ss;
+	ss << t;
+	return ss.str();
+}
 //----------------------------------------------------------------------------//
-#include "FPSCounter.inl"
+template <class T>
+inline T fromString(const char* str)
+{
+	std::stringstream ss;
+	ss << str;
+	T value;
+	ss >> value;
+	return value;
+}
 //----------------------------------------------------------------------------//
 } // end namespace he
 //----------------------------------------------------------------------------//
-#endif // HE_FPSCOUNTER_H
+#endif // HE_UTIL_H
 //----------------------------------------------------------------------------//

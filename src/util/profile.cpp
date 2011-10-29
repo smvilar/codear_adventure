@@ -1,10 +1,10 @@
-#include "util/Profile.h"
+#include "util/profile.h"
 //----------------------------------------------------------------------------//
 #include <sstream>
 #include <algorithm>
 #include <SFML/System.hpp> // for the clock functionality
 //----------------------------------------------------------------------------//
-#include "util/Logger.h"
+#include "util/logger.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//

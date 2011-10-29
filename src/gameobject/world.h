@@ -7,7 +7,7 @@
 #include <queue>
 //----------------------------------------------------------------------------//
 #include "dllexport.h"
-#include "core/Scene.h"
+#include "core/scene.h"
 #include "util/resourcepack.h"
 #include "gameobject/worldserializer.h"
 //----------------------------------------------------------------------------//

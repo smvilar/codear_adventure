@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include "dllexport.h"
-#include "core/Types.h"
+#include "core/types.h"
 //----------------------------------------------------------------------------//
 namespace he
 {

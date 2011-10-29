@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 //----------------------------------------------------------------------------//
-#include "core/Types.h"
+#include "core/types.h"
 #include "gameobject/world.h"
 #include "gameobject/gameobject.h"
 #include "gameobject/message.h"

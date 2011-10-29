@@ -65,11 +65,10 @@ HEADERS += \
 	../src/behaviors/soundplayerbehavior.h \
 	../src/behaviors/musicplayerbehavior.h \
 	../src/behaviors/triggerbehavior.h \
-	../src/behaviors/resourcepackloaderbehavior.h \
 	../src/behaviors/behaviors.h \
-	../src/core/Assert.h \
-	../src/core/Types.h \
-	../src/core/Scene.h \
+	../src/core/assert.h \
+	../src/core/types.h \
+	../src/core/scene.h \
 	../src/core/gameloop.h \
 	../src/gameobject/objectparser.h \
 	../src/gameobject/world.h \
@@ -88,17 +87,17 @@ HEADERS += \
 	../src/json/features.h \
 	../src/json/config.h \
 	../src/json/autolink.h \
-	../src/math/Vector2.h \
-	../src/math/Rect.h \
-	../src/math/MathUtil.h \
+	../src/math/vector2.h \
+	../src/math/rect.h \
+	../src/math/mathutil.h \
 	../src/screen/screen.h \
 	../src/screen/screendirector.h \
-	../src/util/Util.h \
-	../src/util/Profile.h \
-	../src/util/MemoryManager.h \
-	../src/util/Logger.h \
-	../src/util/FPSCounter.h \
-	../src/util/FileSystem.h \
+	../src/util/util.h \
+	../src/util/profile.h \
+	../src/util/memorymanager.h \
+	../src/util/logger.h \
+	../src/util/fpscounter.h \
+	../src/util/filesystem.h \
 	../src/util/base64.h \
 	../src/util/gzstream.h \
 	../src/util/resourcepack.h \
@@ -126,8 +125,7 @@ SOURCES += \
 	../src/behaviors/soundplayerbehavior.cpp \
 	../src/behaviors/musicplayerbehavior.cpp \
 	../src/behaviors/triggerbehavior.cpp \
-	../src/behaviors/resourcepackloaderbehavior.cpp \
-	../src/core/Scene.cpp \
+	../src/core/scene.cpp \
 	../src/core/gameloop.cpp \
 	../src/gameobject/objectparser.cpp \
 	../src/gameobject/world.cpp \
@@ -139,14 +137,14 @@ SOURCES += \
 	../src/json/json_writer.cpp \
 	../src/json/json_value.cpp \
 	../src/json/json_reader.cpp \
-	../src/math/Vector2.cpp \
+	../src/math/vector2.cpp \
 	../src/screen/screen.cpp \
 	../src/screen/screendirector.cpp \
-	../src/util/Profile.cpp \
-	../src/util/MemoryManager.cpp \
-	../src/util/Logger.cpp \
-	../src/util/FPSCounter.cpp \
-	../src/util/FileSystem.cpp \
+	../src/util/profile.cpp \
+	../src/util/memorymanager.cpp \
+	../src/util/logger.cpp \
+	../src/util/fpscounter.cpp \
+	../src/util/filesystem.cpp \
 	../src/util/base64.cpp \
 	../src/util/gzstream.cpp \
 	../src/util/resourcepack.cpp \

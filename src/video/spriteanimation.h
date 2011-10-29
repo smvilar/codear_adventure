@@ -2,7 +2,7 @@
 #define HE_SPRITEANIMATION_H
 //----------------------------------------------------------------------------//
 #include "dllexport.h"
-#include "core/Types.h"
+#include "core/types.h"
 //----------------------------------------------------------------------------//
 namespace sf
 {

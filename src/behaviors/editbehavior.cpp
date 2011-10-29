@@ -1,6 +1,6 @@
 #include "behaviors/editbehavior.h"
 //----------------------------------------------------------------------------//
-#include "math/Rect.h"
+#include "math/rect.h"
 #include "gameobject/gameobject.h"
 #include "gameobject/world.h"
 //----------------------------------------------------------------------------//

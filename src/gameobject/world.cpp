@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <fstream>
 //----------------------------------------------------------------------------//
-#include "core/Assert.h"
+#include "core/assert.h"
 #include "gameobject/gameobject.h"
 #include "gameobject/attribute.h"
 #include "gameobject/behavior.h"

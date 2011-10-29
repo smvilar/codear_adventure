@@ -3,7 +3,7 @@
 #include "gameobject/world.h"
 #include "gameobject/attribute.h"
 #include "gameobject/behavior.h"
-#include "core/Assert.h"
+#include "core/assert.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//

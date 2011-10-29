@@ -2,7 +2,7 @@
 #define HE_SPRITEBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include "dllexport.h"
-#include "core/Types.h"
+#include "core/types.h"
 #include "gameobject/behavior.h"
 #include "video/animatedsprite.h"
 //----------------------------------------------------------------------------//
