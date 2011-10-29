@@ -207,3 +207,20 @@ void World::doRemoveObject(GameObject *object)
 	object = 0;
 }
 //----------------------------------------------------------------------------//
+void World::addResourcePack(const std::string &name)
+{
+	resPacks_[name].load(name);
+}
+//----------------------------------------------------------------------------//
+void World::removeResourcePack(const std::string &name)
+{
+	resPacks_.erase(name);
+}
+//----------------------------------------------------------------------------//
+ResourcePack& World::getResourcePack(const std::string &name)
+{
+	Assert(resPacks_.find(name) != resPacks_.end(),
+		   "ResourcePack not found");
+	return resPacks_[name];
+}
+//----------------------------------------------------------------------------//

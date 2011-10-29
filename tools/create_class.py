@@ -52,9 +52,11 @@ def main():
 
 	with open(full_header_path, 'w') as header_file:
 		header_file.write(header_text(class_name))
+	print full_header_path + ' created'
 
 	with open(full_source_path, 'w') as source_file:
 		source_file.write(source_text(class_name, header_path))
+	print full_source_path + ' created'
 	
 	# update the project files
 	# TODO: use config.qtcreator_proj and config.visualstudio_proj

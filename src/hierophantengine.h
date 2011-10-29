@@ -5,6 +5,7 @@
 #include "util/FileSystem.h"
 #include "util/Logger.h"
 #include "util/Profile.h"
+#include "util/resourcepack.h"
 //----------------------------------------------------------------------------//
 #include "core/Types.h"
 #include "core/Assert.h"
