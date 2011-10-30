@@ -1,8 +1,6 @@
 #ifndef HE_OBJECTPARSER_H
 #define HE_OBJECTPARSER_H
 //----------------------------------------------------------------------------//
-// This is a "inner" header file, it won't be visible to the library user
-//----------------------------------------------------------------------------//
 #include "gameobject/world.h"
 #include "json/json.h"
 //----------------------------------------------------------------------------//

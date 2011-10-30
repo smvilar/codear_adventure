@@ -90,6 +90,8 @@ HEADERS += \
 	../src/math/vector2.h \
 	../src/math/rect.h \
 	../src/math/mathutil.h \
+	../src/resource/resourcepack.h \
+	../src/resource/resourcemanager.h \
 	../src/screen/screen.h \
 	../src/screen/screendirector.h \
 	../src/util/util.h \
@@ -100,7 +102,6 @@ HEADERS += \
 	../src/util/filesystem.h \
 	../src/util/base64.h \
 	../src/util/gzstream.h \
-	../src/util/resourcepack.h \
 	../src/video/spriteanimation.h \
 	../src/video/animatedsprite.h \
 	../src/game/logobehavior.h \
@@ -138,6 +139,8 @@ SOURCES += \
 	../src/json/json_value.cpp \
 	../src/json/json_reader.cpp \
 	../src/math/vector2.cpp \
+	../src/resource/resourcepack.cpp \
+	../src/resource/resourcemanager.cpp \
 	../src/screen/screen.cpp \
 	../src/screen/screendirector.cpp \
 	../src/util/profile.cpp \
@@ -147,7 +150,6 @@ SOURCES += \
 	../src/util/filesystem.cpp \
 	../src/util/base64.cpp \
 	../src/util/gzstream.cpp \
-	../src/util/resourcepack.cpp \
 	../src/video/spriteanimation.cpp \
 	../src/video/animatedsprite.cpp \
 	../src/game/main.cpp \
@@ -158,7 +160,4 @@ SOURCES += \
 	../src/game/conditiononclickbehavior.cpp \
 	../src/game/addbehaviorbehavior.cpp \
 	../src/game/phonecontrollerbehavior.cpp
-
-
-
 

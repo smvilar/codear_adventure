@@ -8,7 +8,7 @@
 //----------------------------------------------------------------------------//
 #include "dllexport.h"
 #include "core/scene.h"
-#include "util/resourcepack.h"
+#include "resource/resourcemanager.h"
 #include "gameobject/worldserializer.h"
 //----------------------------------------------------------------------------//
 namespace he {
@@ -109,14 +109,11 @@ public:
 private:
 	Scene scene_;
 
-/// Resources
+/// ResourceManager
 public:
-	void addResourcePack(const std::string &name);
-	void removeResourcePack(const std::string &name);
-	ResourcePack& getResourcePack(const std::string &name);
+	ResourceManager& getResourceManager();
 private:
-	typedef std::map<std::string, ResourcePack> ResourcePackMap;
-	ResourcePackMap resPacks_;
+	ResourceManager resourceManager_;
 
 private:
 	friend class WorldSerializer;
