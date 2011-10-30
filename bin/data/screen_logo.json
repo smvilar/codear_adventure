@@ -8,7 +8,7 @@
 			"width" : 200,
 			"height" : 30,
 			"text" : "Hierophant Team",
-			"font" : "rough_typewriter.otf",
+			"font" : "fonts/rough_typewriter.otf",
 			"fontSize" : 22
 		},
 		"behaviors" : [ "TextBox" ]
@@ -17,7 +17,7 @@
 		"name" : "LogoScreen",
 		"attributes" :
 		{
-			"logo_time" : 100
+			"logo_time" : 1000
 		},
 		"behaviors" : [ "Logo" ]
 	}

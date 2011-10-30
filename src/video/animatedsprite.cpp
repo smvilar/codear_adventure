@@ -3,10 +3,11 @@
 #include <fstream>
 //----------------------------------------------------------------------------//
 #include "json/json.h"
+#include "resource/resourcepack.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-bool AnimatedSprite::parse(const std::string &filename)
+bool AnimatedSprite::parse(const std::string &filename, ResourcePack &resPack)
 {
 	std::ifstream ifs(filename.c_str());
 	Json::Reader reader;
@@ -20,8 +21,10 @@ bool AnimatedSprite::parse(const std::string &filename)
 	}
 
 	const std::string &textureFilename = root["textureFilename"].asString();
-	if (!texture_.LoadFromFile(textureFilename))
-		std::cerr << "Error loading sprite: " << textureFilename << std::endl;
+	ResourceData res = resPack.getResource(textureFilename);
+
+	if (!texture_.LoadFromMemory(res.data, res.size))
+		std::cerr << "Error loading texture: " << textureFilename << std::endl;
 	sprite_.SetTexture(texture_);
 
 	u32 framesHorizontal = root["framesHorizontal"].asInt();

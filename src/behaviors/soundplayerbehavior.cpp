@@ -2,12 +2,17 @@
 //----------------------------------------------------------------------------//
 #include "gameobject/gameobject.h"
 #include "gameobject/message.h"
+#include "gameobject/world.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
 void SoundPlayerBehavior::activate()
 {
-	soundBuffer_.LoadFromFile(pOwner_->getAttributeAs<std::string>("soundFilename"));
+	std::string filename = pOwner_->getAttributeAs<std::string>("soundFilename");
+	ResourceData res = pWorld_->getResourceManager().getResourcePack("data.pack").getResource(filename);
+
+	soundBuffer_.LoadFromMemory(res.data, res.size);
+
 	sound_.SetBuffer(soundBuffer_);
 	if (Attribute* attr = pOwner_->getAttribute("soundLoop"))
 		sound_.SetLoop(attr->getValue<bool>());

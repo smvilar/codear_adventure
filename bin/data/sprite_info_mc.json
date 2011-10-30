@@ -1,5 +1,5 @@
 {
-	"textureFilename" : "walk.png",
+	"textureFilename" : "textures/walk.png",
 	"framesHorizontal" : 5,
 	"framesVertical" : 3,
 	"defaultAnimation" : "idle",

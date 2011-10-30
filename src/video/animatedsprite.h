@@ -16,12 +16,14 @@ class Value;
 //----------------------------------------------------------------------------//
 namespace he {
 //----------------------------------------------------------------------------//
+class ResourcePack;
+//----------------------------------------------------------------------------//
 class ENGINE_API AnimatedSprite
 {
 public:
 	AnimatedSprite() : currentAnimation_(0) {}
 
-	bool parse(const std::string &filename);
+	bool parse(const std::string &filename, ResourcePack &resPack);
 	void update(u32 elapsedMs);
 
 	void play(const std::string &animation);

@@ -38,7 +38,7 @@ bool ResourcePack::load(const std::string &filename)
 		char *packedData = new char[dataSize];
 		ifs.read(packedData, dataSize);
 
-		resMap_[filename] = Resource(packedData, dataSize);
+		resMap_[filename] = ResourceData(packedData, dataSize);
 	}
 
 	loaded_ = true;
@@ -58,18 +58,18 @@ void ResourcePack::unload()
 	loaded_ = false;
 }
 //----------------------------------------------------------------------------//
-ResourcePack::Resource ResourcePack::getResource(const std::string &name) const
+ResourceData ResourcePack::getResource(const std::string &name) const
 {
 	ResourceMap::const_iterator it = resMap_.find(name);
 	if (it != resMap_.end())
 		return it->second;
 	else
-		return Resource();
+		return ResourceData();
 }
 //----------------------------------------------------------------------------//
 std::string ResourcePack::getTextResource(const std::string &name) const
 {
-	Resource res = getResource(name);
+	ResourceData res = getResource(name);
 	return std::string(res.data);
 }
 //----------------------------------------------------------------------------//

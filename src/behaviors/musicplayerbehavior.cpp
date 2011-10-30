@@ -2,12 +2,17 @@
 //----------------------------------------------------------------------------//
 #include "gameobject/gameobject.h"
 #include "gameobject/message.h"
+#include "gameobject/world.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
 void MusicPlayerBehavior::activate()
 {
-	music_.OpenFromFile(pOwner_->getAttributeAs<std::string>("musicFilename"));
+	std::string filename = pOwner_->getAttributeAs<std::string>("musicFilename");
+	ResourceData res = pWorld_->getResourceManager().getResourcePack("data.pack").getResource(filename);
+
+	music_.OpenFromMemory(res.data, res.size);
+
 	if (Attribute* attr = pOwner_->getAttribute("musicLoop"))
 		music_.SetLoop(attr->getValue<bool>());
 	if (Attribute* attr = pOwner_->getAttribute("musicAutoPlay"))

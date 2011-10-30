@@ -28,7 +28,7 @@
 			"y" : 600,
 			"width" : 800,
 			"height" : 100,
-			"font" : "rough_typewriter.otf",
+			"font" : "fonts/rough_typewriter.otf",
 			"fontSize" : 16,
 			"text" : ""
 		},
@@ -48,7 +48,7 @@
 			"height" : 50,
 			"color" : [255, 128, 0, 255],
 			"condition" : "phone_used",
-			"font" : "rough_typewriter.otf",
+			"font" : "fonts/rough_typewriter.otf",
 			"fontSize" : 14,
 			"text" : "phone"
 		},
@@ -73,7 +73,7 @@
 		"name" : "BackgroundMusic",
 		"attributes" :
 		{
-			"musicFilename" : "bgmusic.ogg",
+			"musicFilename" : "music/bgmusic.ogg",
 			"musicLoop" : true,
 			"musicAutoPlay" : true
 		},
