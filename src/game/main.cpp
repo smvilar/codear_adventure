@@ -3,8 +3,8 @@
 #include "logobehavior.h"
 #include "dialoguecontrolbehavior.h"
 #include "conditiononclickbehavior.h"
-#include "addbehaviorbehavior.h"
 #include "phonecontrollerbehavior.h"
+#include "actionsendmessagebehavior.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -14,8 +14,8 @@ void setupWorld(World &world)
 	world.registerBehavior("Logo", new LogoBehavior);
 	world.registerBehavior("DialogueControl", new DialogueControlBehavior);
 	world.registerBehavior("ConditionOnClick", new ConditionOnClickBehavior);
-	world.registerBehavior("AddBehavior", new AddBehaviorBehavior);
 	world.registerBehavior("PhoneController", new PhoneControllerBehavior);
+	world.registerBehavior("ActionSendMessage", new ActionSendMessageBehavior);
 }
 //----------------------------------------------------------------------------//
 int main()

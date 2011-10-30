@@ -16,7 +16,9 @@
 #include "math/mathutil.h"
 //----------------------------------------------------------------------------//
 #include "resource/resourcepack.h"
+#include "resource/resourcemanager.h"
 //----------------------------------------------------------------------------//
+#include "video/animatedsprite.h"
 #include "video/spriteanimation.h"
 //----------------------------------------------------------------------------//
 #include "gameobject/gameobject.h"

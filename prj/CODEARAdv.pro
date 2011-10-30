@@ -48,6 +48,7 @@ HEADERS += \
 	../bin/data/screen_game.json \
 	../bin/data/screen_logo.json \
 	../bin/data/test_dialogue.json \
+	../bin/data/phone_dialogue1.json \
 	../bin/data/sprite_info_mc.json \
 	../bin/data/sprite_info_bkg.json \
 	../src/hierophantengine.h \
@@ -109,8 +110,8 @@ HEADERS += \
 	../src/game/dialoguenode.h \
 	../src/game/dialoguecontrolbehavior.h \
 	../src/game/conditiononclickbehavior.h \
-	../src/game/addbehaviorbehavior.h \
-	../src/game/phonecontrollerbehavior.h
+	../src/game/phonecontrollerbehavior.h \
+    ../src/game/actionsendmessagebehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -158,6 +159,6 @@ SOURCES += \
 	../src/game/dialoguenode.cpp \
 	../src/game/dialoguecontrolbehavior.cpp \
 	../src/game/conditiononclickbehavior.cpp \
-	../src/game/addbehaviorbehavior.cpp \
-	../src/game/phonecontrollerbehavior.cpp
+	../src/game/phonecontrollerbehavior.cpp \
+    ../src/game/actionsendmessagebehavior.cpp
 

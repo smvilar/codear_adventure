@@ -85,7 +85,7 @@ void DialogueControlBehavior::selectAnswer(size_t index)
 		if (!dialogue_.hasEnded())
 			updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
 		else
-			pOwner_->removeFromWorld();
+			; // TODO: do something
 	}
 }
 //----------------------------------------------------------------------------//

@@ -28,24 +28,12 @@ GameObject::~GameObject()
 //----------------------------------------------------------------------------//
 void GameObject::addBehavior(Behavior *behavior)
 {
-	behaviors_.push_back(behavior);
-	behavior->pOwner_ = this;
-	behavior->added();
-	if (pWorld_)
-	{
-		behavior->pWorld_ = pWorld_;
-		behavior->activate();
-	}
+	behaviorsToAdd_.push(behavior);
 }
 //----------------------------------------------------------------------------//
 void GameObject::removeBehavior(Behavior *behavior)
 {
-	if (pWorld_)
-		behavior->deactivate();
-	behavior->removed();
-	behaviors_.erase(std::find(behaviors_.begin(), behaviors_.end(), behavior));
-	delete behavior;
-	behavior = 0;
+	behaviorsToRemove_.push(behavior);
 }
 //----------------------------------------------------------------------------//
 void GameObject::addAttribute(const char *name, Attribute *attribute)
@@ -74,6 +62,7 @@ void GameObject::update()
 	BehaviorVector::iterator it = behaviors_.begin();
 	for (; it != behaviors_.end(); ++it)
 		(*it)->update();
+	processQueues();
 }
 //----------------------------------------------------------------------------//
 void GameObject::broadcast(const Message &message)
@@ -126,5 +115,42 @@ void GameObject::removed()
 	BehaviorVector::iterator it = behaviors_.begin();
 	for (; it != behaviors_.end(); ++it)
 		(*it)->deactivate();
+}
+//----------------------------------------------------------------------------//
+void GameObject::processQueues()
+{
+	while (!behaviorsToAdd_.empty())
+	{
+		doAddBehavior(behaviorsToAdd_.front());
+		behaviorsToAdd_.pop();
+	}
+
+	while (!behaviorsToRemove_.empty())
+	{
+		doRemoveBehavior(behaviorsToRemove_.front());
+		behaviorsToRemove_.pop();
+	}
+}
+//----------------------------------------------------------------------------//
+void GameObject::doAddBehavior(Behavior *behavior)
+{
+	behaviors_.push_back(behavior);
+	behavior->pOwner_ = this;
+	behavior->added();
+	if (pWorld_)
+	{
+		behavior->pWorld_ = pWorld_;
+		behavior->activate();
+	}
+}
+//----------------------------------------------------------------------------//
+void GameObject::doRemoveBehavior(Behavior *behavior)
+{
+	if (pWorld_)
+		behavior->deactivate();
+	behavior->removed();
+	behaviors_.erase(std::find(behaviors_.begin(), behaviors_.end(), behavior));
+	delete behavior;
+	behavior = 0;
 }
 //----------------------------------------------------------------------------//

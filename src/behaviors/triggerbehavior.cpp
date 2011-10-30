@@ -72,7 +72,11 @@ void TriggerBehavior::doActions()
 	std::cout << "Doing actions" << std::endl;
 	for (size_t i = 0; i < actions_.size(); ++i)
 	{
-		pWorld_->broadcast(Message(actions_[i].name, actions_[i].args));
+		GameObject *actionObject = pWorld_->getObject(actions_[i].name);
+		if (actionObject)
+			actionObject->broadcast(Message("action_triggered", actions_[i].args));
+		else
+			pWorld_->broadcast(Message(actions_[i].name, actions_[i].args));
 	}
 }
 //----------------------------------------------------------------------------//

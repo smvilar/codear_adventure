@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <queue>
 //----------------------------------------------------------------------------//
 #include "dllexport.h"
 #include "gameobject/attribute.h"
@@ -21,18 +22,18 @@ public:
 	std::string name;
 
 public:
-	GameObject(const char* name);
+	GameObject(const char *name);
 	~GameObject();
 
-	void addBehavior(Behavior* behavior);
-	void removeBehavior(Behavior* behavior);
+	void addBehavior(Behavior *behavior);
+	void removeBehavior(Behavior *behavior);
 
-	void addAttribute(const char* name, Attribute* attribute);
-	void removeAttribute(const char* name);
-	Attribute* getAttribute(const char* name);
+	void addAttribute(const char *name, Attribute *attribute);
+	void removeAttribute(const char *name);
+	Attribute* getAttribute(const char *name);
 
 	template <typename T>
-	T getAttributeAs(const char* name)
+	T getAttributeAs(const char *name)
 	{
 		return getAttribute(name)->getValue<T>();
 	}
@@ -49,7 +50,7 @@ private:
 	void removed();
 
 private:
-	World* pWorld_;
+	World *pWorld_;
 
 private:
 	typedef std::vector<Behavior*> BehaviorVector;
@@ -58,6 +59,15 @@ private:
 	typedef std::map<std::string, Attribute*> AttributeMap;
 	AttributeMap attributes_;
 
+private:
+	std::queue<Behavior*> behaviorsToAdd_;
+	std::queue<Behavior*> behaviorsToRemove_;
+
+	void processQueues();
+	void doAddBehavior(Behavior *behavior);
+	void doRemoveBehavior(Behavior *behavior);
+
+private:
 	friend class World;
 	friend class WorldSerializer;
 };

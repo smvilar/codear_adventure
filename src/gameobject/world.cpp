@@ -68,9 +68,7 @@ void World::update()
 {
 	ObjectVector::iterator it = objects_.begin();
 	for (; it != objects_.end(); ++it)
-	{
 		(*it)->update();
-	}
 	processQueues();
 }
 //----------------------------------------------------------------------------//
