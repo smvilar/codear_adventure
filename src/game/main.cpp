@@ -25,7 +25,7 @@ int main()
 	setupWorld(world);
 
 	GameLoop gameLoop;
-	gameLoop.start(world, "game.json");
+	gameLoop.start(world, "config/game.json");
 
 	return 0;
 }

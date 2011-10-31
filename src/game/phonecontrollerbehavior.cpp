@@ -3,8 +3,8 @@
 #include "dialoguecontrolbehavior.h"
 //----------------------------------------------------------------------------//
 static const char * DIALOGUE_FILENAMES[] = {
-	"phone_dialogue1.json",
-	"phone_dialogue2.json"
+	"dialogues/phone_dialogue1.json",
+	"dialogues/phone_dialogue2.json"
 };
 //----------------------------------------------------------------------------//
 PhoneControllerBehavior::PhoneControllerBehavior()

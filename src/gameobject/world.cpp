@@ -154,7 +154,8 @@ GameObject* World::parseObject(const std::string &filename)
 {
 	GameObject* obj = new GameObject("unnamed");
 	ObjectParser parser;
-	parser.parse(filename, *obj, this);
+	parser.parse(resourceManager_.getResourcePack("data.pack").getTextResource(filename),
+				 *obj, this);
 	return obj;
 }
 //----------------------------------------------------------------------------//
@@ -166,8 +167,7 @@ void World::saveState(const std::string &filename) const
 //----------------------------------------------------------------------------//
 void World::loadState(const std::string &filename)
 {
-	std::ifstream ifs(filename.c_str());
-	worldSerializer_.deserialize(*this, ifs);
+	worldSerializer_.deserialize(*this, resourceManager_.getResourcePack("data.pack").getTextResource(filename));
 }
 //----------------------------------------------------------------------------//
 WorldSerializer& World::getWorldSerializer()

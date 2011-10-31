@@ -69,6 +69,8 @@ bool TriggerBehavior::allConditionsMet() const
 //----------------------------------------------------------------------------//
 void TriggerBehavior::doActions()
 {
+	if (!active_) return;
+	active_ = false;
 	std::cout << "Doing actions" << std::endl;
 	for (size_t i = 0; i < actions_.size(); ++i)
 	{

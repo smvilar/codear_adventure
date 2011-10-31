@@ -15,6 +15,7 @@ class Attribute;
 class ENGINE_API TriggerBehavior : public Behavior
 {
 public:
+	TriggerBehavior() : active_(true) {}
 	virtual Behavior* clone() const { return new TriggerBehavior; }
 
 	virtual void handleMessage(const Message &message);
@@ -46,6 +47,8 @@ private:
 	std::vector<Action> actions_;
 
 private:
+	bool active_;
+
 	bool allConditionsMet() const;
 	void doActions();
 };

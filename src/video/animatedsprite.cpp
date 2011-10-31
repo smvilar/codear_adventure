@@ -9,11 +9,11 @@ using namespace he;
 //----------------------------------------------------------------------------//
 bool AnimatedSprite::parse(const std::string &filename, ResourcePack &resPack)
 {
-	std::ifstream ifs(filename.c_str());
+	std::string text = resPack.getTextResource(filename);
 	Json::Reader reader;
 	Json::Value root;
 
-	if (!reader.parse(ifs, root))
+	if (!reader.parse(text, root))
 	{
 		std::cerr << "Error parsing AnimatedSprite: "
 				  << reader.getFormatedErrorMessages() << std::endl;

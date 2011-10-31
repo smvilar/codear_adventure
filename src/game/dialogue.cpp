@@ -5,16 +5,14 @@
 //----------------------------------------------------------------------------//
 #include "json/json.h"
 //----------------------------------------------------------------------------//
-bool Dialogue::parse(const char *filename)
+bool Dialogue::parse(const std::string &text)
 {
 	Json::Reader reader;
 	Json::Value root;
 
-	std::ifstream ifs(filename);
-
-	if (!reader.parse(ifs, root))
+	if (!reader.parse(text, root))
 	{
-		std::cerr << "Error parsing dialogue " << filename << ": " << std::endl
+		std::cerr << "Error parsing dialogue: "
 				  << reader.getFormatedErrorMessages() << std::endl;
 		return false;
 	}

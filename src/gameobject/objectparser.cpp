@@ -1,7 +1,5 @@
 #include "objectparser.h"
 //----------------------------------------------------------------------------//
-#include <fstream>
-//----------------------------------------------------------------------------//
 #include "json/json.h"
 #include "gameobject/gameobject.h"
 #include "gameobject/attribute.h"
@@ -9,13 +7,11 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-bool ObjectParser::parse(const std::string &filename, GameObject &object, const World *world) const
+bool ObjectParser::parse(const std::string &document, GameObject &object, const World *world) const
 {
-	std::ifstream ifs(filename.c_str());
-
 	Json::Reader reader;
 	Json::Value root;
-	bool parsed = reader.parse(ifs, root);
+	bool parsed = reader.parse(document, root);
 	if (!parsed)
 	{
 		std::cerr << reader.getFormatedErrorMessages() << std::endl;

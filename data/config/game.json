@@ -8,7 +8,7 @@
 		"bpp" : 32,
 		"fullscreen" : false,
 		"maxFramerate" : 60,
-		"screenFlow" : "screen_flow.json",
+		"screenFlow" : "screens/screen_flow.json",
 		"initialScreen" : "Logo"
 	}
 }

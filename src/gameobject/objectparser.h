@@ -13,7 +13,7 @@ class Attribute;
 class ObjectParser
 {
 public:
-	bool parse(const std::string &filename, GameObject& object, const World *world = 0) const;
+	bool parse(const std::string &document, GameObject &object, const World *world = 0) const;
 
 private:
 	void parseAttributes(const Json::Value &jsonValue, GameObject &object) const;

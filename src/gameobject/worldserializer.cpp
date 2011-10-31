@@ -97,12 +97,12 @@ Json::Value WorldSerializer::serializeBehaviors(const GameObject &object, const 
 	return behavs;
 }
 //----------------------------------------------------------------------------//
-void WorldSerializer::deserialize(World &world, std::istream &is) const
+void WorldSerializer::deserialize(World &world, const std::string &text) const
 {
 	Json::Value root;
 	Json::Reader reader;
 
-	bool parsed = reader.parse(is, root, false);
+	bool parsed = reader.parse(text, root, false);
 	if (!parsed)
 	{
 		std::cerr << reader.getFormatedErrorMessages() << std::endl;

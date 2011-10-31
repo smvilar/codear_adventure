@@ -1,7 +1,7 @@
 #ifndef CONDITIONONCLICKBEHAVIOR_H
 #define CONDITIONONCLICKBEHAVIOR_H
 //----------------------------------------------------------------------------//
-#include "hierophantengine.h"
+#include <hierophantengine.h>
 //----------------------------------------------------------------------------//
 namespace sf
 {

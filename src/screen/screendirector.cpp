@@ -8,17 +8,16 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-bool ScreenDirector::parse(const char *filename)
+bool ScreenDirector::parse(const std::string &text)
 {
 	using std::string;
 
-	std::ifstream ifs(filename);
 	Json::Reader reader;
 	Json::Value root;
 
-	if (!reader.parse(ifs, root))
+	if (!reader.parse(text, root))
 	{
-		std::cerr << "Error parsing screenflow " << filename << ": " << std::endl
+		std::cerr << "Error parsing screenflow: " << std::endl
 				  << reader.getFormatedErrorMessages() << std::endl;
 		return false;
 	}

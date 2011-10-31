@@ -5,7 +5,7 @@
 		{
 			"x" : 0,
 			"y" : 0,
-			"spriteInfo" : "sprite_info_bkg.json"
+			"spriteInfo" : "sprites/sprite_info_bkg.json"
 		},
 		"behaviors" : [ "Sprite" ]
 	},
@@ -15,7 +15,7 @@
 		{
 			"x": 100,
 			"y": 100,
-			"spriteInfo" : "sprite_info_mc.json"
+			"spriteInfo" : "sprites/sprite_info_mc.json"
 		},
 		"behaviors" : [ "Sprite" ]
 	},

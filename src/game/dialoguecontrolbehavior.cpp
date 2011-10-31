@@ -4,12 +4,14 @@
 //----------------------------------------------------------------------------//
 #include <SFML/Window.hpp>
 //----------------------------------------------------------------------------//
+#include "gameobject/world.h"
 #include "gameobject/message.h"
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::activate()
 {
-	dialogue_.parse(
-		pOwner_->getAttributeAs<std::string>("dialogueFilename").c_str());
+	const std::string &filename = pOwner_->getAttributeAs<std::string>("dialogueFilename");
+	const std::string &text = pWorld_->getResourceManager().getResourcePack("data.pack").getTextResource(filename);
+	dialogue_.parse(text);
 
 	textAttr_ = pOwner_->getAttribute("text");
 	if (!textAttr_)

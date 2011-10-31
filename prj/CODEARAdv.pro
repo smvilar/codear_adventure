@@ -43,14 +43,14 @@ INCLUDEPATH += \
 	../lib/SFML/include
 
 HEADERS += \
-	../bin/data/game.json \
-	../bin/data/screen_flow.json \
-	../bin/data/screen_game.json \
-	../bin/data/screen_logo.json \
-	../bin/data/test_dialogue.json \
-	../bin/data/phone_dialogue1.json \
-	../bin/data/sprite_info_mc.json \
-	../bin/data/sprite_info_bkg.json \
+	../data/config/game.json \
+	../data/screens/screen_flow.json \
+	../data/screens/screen_game.json \
+	../data/screens/screen_logo.json \
+	../data/dialogues/test_dialogue.json \
+	../data/dialogues/phone_dialogue1.json \
+	../data/sprites/sprite_info_mc.json \
+	../data/sprites/sprite_info_bkg.json \
 	../src/hierophantengine.h \
 	../src/dllexport.h \
 	../src/behaviors/windowbehavior.h \
@@ -111,7 +111,7 @@ HEADERS += \
 	../src/game/dialoguecontrolbehavior.h \
 	../src/game/conditiononclickbehavior.h \
 	../src/game/phonecontrollerbehavior.h \
-    ../src/game/actionsendmessagebehavior.h
+	../src/game/actionsendmessagebehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -160,5 +160,5 @@ SOURCES += \
 	../src/game/dialoguecontrolbehavior.cpp \
 	../src/game/conditiononclickbehavior.cpp \
 	../src/game/phonecontrollerbehavior.cpp \
-    ../src/game/actionsendmessagebehavior.cpp
+	../src/game/actionsendmessagebehavior.cpp
 

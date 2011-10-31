@@ -14,7 +14,7 @@ class World;
 class ENGINE_API ScreenDirector
 {
 public:
-	bool parse(const char *filename);
+	bool parse(const std::string &text);
 
 	void show(const char *screenName, World &world);
 	void transition(const char *transitionName, World &world);

@@ -10,7 +10,7 @@ class Dialogue
 public:
 	Dialogue() : hasEnded_(false) {}
 
-	bool parse(const char *filename);
+	bool parse(const std::string &text);
 
 	DialogueNode* getNodeById(const char *id);
 	DialogueNode* getCurrentNode() { return currentNode_; }

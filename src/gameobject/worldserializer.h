@@ -17,7 +17,7 @@ class ENGINE_API WorldSerializer
 {
 public:
 	void serialize(const World &world, std::ostream &os) const;
-	void deserialize(World &world, std::istream &is) const;
+	void deserialize(World &world, const std::string &text) const;
 
 	void addIgnoredObject(const char *name);
 

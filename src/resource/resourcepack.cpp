@@ -3,6 +3,8 @@
 #include <iostream>
 #include <fstream>
 //----------------------------------------------------------------------------//
+#include "core/assert.h"
+//----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
 ResourcePack::ResourcePack()
@@ -38,6 +40,7 @@ bool ResourcePack::load(const std::string &filename)
 		char *packedData = new char[dataSize];
 		ifs.read(packedData, dataSize);
 
+		std::cout << "ResourcePack: added " << filename << std::endl;
 		resMap_[filename] = ResourceData(packedData, dataSize);
 	}
 
@@ -70,6 +73,8 @@ ResourceData ResourcePack::getResource(const std::string &name) const
 std::string ResourcePack::getTextResource(const std::string &name) const
 {
 	ResourceData res = getResource(name);
+	Assert(res.data, "Resource data shouldn't be null");
+	std::cout << name << ":" << res.data << std::endl;
 	return std::string(res.data);
 }
 //----------------------------------------------------------------------------//

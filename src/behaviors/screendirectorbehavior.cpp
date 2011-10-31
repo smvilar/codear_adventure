@@ -4,6 +4,7 @@
 //----------------------------------------------------------------------------//
 #include "gameobject/gameobject.h"
 #include "gameobject/message.h"
+#include "gameobject/world.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -13,7 +14,8 @@ void ScreenDirectorBehavior::activate()
 
 	// Get the screen flow
 	string screenFlow = pOwner_->getAttributeAs<string>("screenFlow");
-	screenDirector_.parse(screenFlow.c_str());
+	string text = pWorld_->getResourceManager().getResourcePack("data.pack").getTextResource(screenFlow);
+	screenDirector_.parse(text);
 
 	// Get the initial screen
 	string initialScreen = pOwner_->getAttributeAs<string>("initialScreen");

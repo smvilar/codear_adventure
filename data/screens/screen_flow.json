@@ -2,7 +2,7 @@
 [
 	{
 		"name" : "Logo",
-		"filename" : "screen_logo.json",
+		"filename" : "screens/screen_logo.json",
 		"transitions" :
 		{
 			"timeout" : "Game"
@@ -10,7 +10,7 @@
 	},
 	{
 		"name" : "Game",
-		"filename" : "screen_game.json",
+		"filename" : "screens/screen_game.json",
 		"transitions" :
 		{
 			"restart" : "Logo"
