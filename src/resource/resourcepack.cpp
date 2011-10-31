@@ -74,7 +74,6 @@ std::string ResourcePack::getTextResource(const std::string &name) const
 {
 	ResourceData res = getResource(name);
 	Assert(res.data, "Resource data shouldn't be null");
-	std::cout << name << ":" << res.data << std::endl;
 	return std::string(res.data);
 }
 //----------------------------------------------------------------------------//
