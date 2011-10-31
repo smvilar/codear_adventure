@@ -13,8 +13,8 @@
 		"name" : "MC",
 		"attributes" :
 		{
-			"x": 100,
-			"y": 100,
+			"x": 222,
+			"y": 138,
 			"spriteInfo" : "sprites/sprite_info_mc.json"
 		},
 		"behaviors" : [ "Sprite" ]
@@ -23,16 +23,18 @@
 		"name" : "DialogueBox",
 		"attributes" :
 		{
-			"x" : 20,
+			"x" : 40,
 			"y" : 600,
-			"width" : 800,
+			"width" : 1200,
 			"height" : 100,
 			"font" : "fonts/rough_typewriter.otf",
 			"fontSize" : 16,
-			"text" : ""
+			"text" : "",
+			"color" : [0, 0, 0, 64]
 		},
 		"behaviors" :
 		[
+			"Shape",
 			"TextBox",
 			"PhoneController"
 		]
@@ -41,17 +43,16 @@
 		"name" : "Phone",
 		"attributes" :
 		{
-			"x" : 390,
-			"y" : 260,
+			"x" : 558,
+			"y" : 350,
 			"width" : 50,
 			"height" : 50,
-			"color" : [255, 128, 0, 255],
-			"condition" : "phone_used",
-			"font" : "fonts/rough_typewriter.otf",
-			"fontSize" : 14,
-			"text" : "phone"
+			"condition" : "phone_used"
 		},
-		"behaviors" : [ "ConditionOnClick", "Shape", "TextBox" ]
+		"behaviors" :
+		[
+			"ConditionOnClick"
+		]
 	},
 
 	{

@@ -50,8 +50,13 @@ void TextBoxBehavior::handleMessage(const Message &message)
 	{
 		textAttr_ = pOwner_->getAttribute("text");
 		if (textAttr_)
-			text_.SetString(textAttr_->getValue<std::string>());
-		adjustText();
+		{
+			const std::string &text = textAttr_->getValue<std::string>();
+			std::wstring wtext;
+			sf::Utf8::ToUtf16(text.begin(), text.end(), std::back_inserter(wtext));
+			text_.SetString(wtext);
+			adjustText();
+		}
 	}
 }
 //----------------------------------------------------------------------------//

@@ -21,7 +21,7 @@
 	},
 	{
 		"id" : "2",
-		"speech" : [ "Mi identidad no es importante por el momento. Verá, hay personas en este mundo que son intocables y que van a asegurarse de mantenerse así para siempre y yo demostré intenciones de perturbar esa condición. Ahora la seguridad mía y de mi familia está en riesgo, pero más allá de mi ser egoísta están en peligro muchas otras vidas y es en estas condiciones que me vi obligado a tomar medidas desesperadas." ],
+		"speech" : [ "Mi identidad no es importante por el momento.", "Verá, hay personas en este mundo que son intocables y que van a asegurarse de mantenerse así para siempre y yo demostré intenciones de perturbar esa condición.", "Ahora la seguridad mía y de mi familia está en riesgo, pero más allá de mi ser egoísta están en peligro muchas otras vidas y es en estas condiciones que me vi obligado a tomar medidas desesperadas." ],
 		"answers" : [
 			{
 				"answer" : "¿Qué tipo de medidas?",
@@ -31,7 +31,7 @@
 	},
 	{
 		"id" : "3",
-		"speech" : [ "Como sabrá estoy en el cuarto piso y tengo en mi poder la vida de ocho. Tengo un interruptor conectado a cuatro contenedores de codearxis v9, un virus muy peligroso para el ser humano. Si llego a presionar mi interruptor el virus se liberará, infectando a los ocho empleados que tengo encerrados en uno de los laboratorios del piso. No es mi intención hacerlo, pero aquí hay en peligro algo mucho más allá de una u ocho vidas." ],
+		"speech" : [ "Como sabrá estoy en el cuarto piso y tengo en mi poder la vida de ocho personas.", "Tengo un interruptor conectado a cuatro contenedores de codearxis v9, un virus muy peligroso para el ser humano.", "Si llego a presionar mi interruptor el virus se liberará, infectando a los ocho empleados que tengo encerrados en uno de los laboratorios del piso. No es mi intención hacerlo, pero aquí hay en peligro algo mucho más allá de una u ocho vidas." ],
 		"answers" : [
 			{
 				"answer" : "Nadie va a morir hoy, amigo mío. Aunque todavía no tengo claro que es lo que usted quiere y para poder ayudarlo necesito más información.",
@@ -41,10 +41,10 @@
 	},
 	{
 		"id" : "4",
-		"speech" : [ "Le daré toda la información pertinente en su debido momento. Pero antes necesito que pruebe que verdaderamente tiene capacidades y acceso a recursos y que no es solo un oficial puesto para hacerme perder tiempo mientras SWAT resuelve cual es la mejor manera de entrar a volarme la cabeza. Lo que necesito que haga es que me diga quien soy. Y no hablo de interrogantes metafísicos. Dígame solamente mi nombre y apellido. Luego hablaremos." ],
+		"speech" : [ "Le daré toda la información pertinente en su debido momento. Pero antes necesito que pruebe que verdaderamente tiene capacidades y acceso a recursos y que no es sólo un oficial puesto para hacerme perder tiempo mientras SWAT resuelve cual es la mejor manera de entrar a volarme la cabeza.", "Lo que necesito que haga es que me diga quien soy. Y no hablo de interrogantes metafísicos. Dígame solamente mi nombre y apellido.", "Luego hablaremos." ],
 		"answers" : [
 			{
-				"answer" : "Muy bien.",
+				"answer" : "*corta la línea*",
 				"goto" : "end"
 			}
 		]

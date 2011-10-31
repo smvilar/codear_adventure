@@ -14,12 +14,16 @@ void ShapeBehavior::added()
 	rotation_ = pOwner_->getAttribute("rotation");
 	color_ = pOwner_->getAttribute("color");
 
-	typedef std::vector<Attribute*> AttributeVector;
-	const AttributeVector &array = color_->getValue<AttributeVector>();
-	sf::Color color(array[0]->getValue<int>(),
-					array[1]->getValue<int>(),
-					array[2]->getValue<int>(),
-					array[3]->getValue<int>());
+	sf::Color color;
+	if (color_)
+	{
+		typedef std::vector<Attribute*> AttributeVector;
+		const AttributeVector &array = color_->getValue<AttributeVector>();
+		color.r = array[0]->getValue<int>();
+		color.g = array[1]->getValue<int>();
+		color.b = array[2]->getValue<int>();
+		color.a = array[3]->getValue<int>();
+	}
 
 	sf::FloatRect rect(0, 0, width_->getValue<int>(), height_->getValue<int>());
 	shape_ = sf::Shape::Rectangle(rect, color);
