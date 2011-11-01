@@ -80,7 +80,7 @@
 		"behaviors" : [ "MusicPlayer" ]
 	},
 	{
-		"name" : "TriggerConversation",
+		"name" : "TriggerStartConversation",
 		"attributes" :
 		{
 			"conditions" : [ "phone_used" ],
@@ -89,6 +89,25 @@
 				{
 					"action" : "SendMessage",
 					"args" : [ "DialogueBox", "start_conversation" ]
+				},
+				{
+					"action" : "SwitchTrigger",
+					"args" : [ "TriggerStartConversation", false ]
+				}
+			]
+		},
+		"behaviors" : [ "Trigger" ]
+	},
+	{
+		"name" : "TriggerEndConversation",
+		"attributes" :
+		{
+			"conditions" : [ "phone_hang" ],
+			"actions" :
+			[
+				{
+					"action" : "SwitchTrigger",
+					"args" : [ "TriggerStartConversation", true ]
 				}
 			]
 		},
@@ -97,5 +116,9 @@
 	{
 		"name" : "SendMessage",
 		"behaviors" : [ "ActionSendMessage" ]
+	},
+	{
+		"name" : "SwitchTrigger",
+		"behaviors" : [ "ActionSwitchTrigger" ]
 	}
 ]

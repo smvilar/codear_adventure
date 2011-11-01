@@ -5,6 +5,7 @@
 #include "conditiononclickbehavior.h"
 #include "phonecontrollerbehavior.h"
 #include "actionsendmessagebehavior.h"
+#include "actionswitchtriggerbehavior.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -16,6 +17,7 @@ void setupWorld(World &world)
 	world.registerBehavior("ConditionOnClick", new ConditionOnClickBehavior);
 	world.registerBehavior("PhoneController", new PhoneControllerBehavior);
 	world.registerBehavior("ActionSendMessage", new ActionSendMessageBehavior);
+	world.registerBehavior("ActionSwitchTrigger", new ActionSwitchTriggerBehavior);
 }
 //----------------------------------------------------------------------------//
 int main()

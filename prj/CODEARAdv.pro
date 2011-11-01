@@ -112,6 +112,7 @@ HEADERS += \
 	../src/game/dialoguecontrolbehavior.h \
 	../src/game/conditiononclickbehavior.h \
 	../src/game/phonecontrollerbehavior.h \
+	../src/game/actionswitchtriggerbehavior.h \
 	../src/game/actionsendmessagebehavior.h
 
 SOURCES += \
@@ -162,5 +163,6 @@ SOURCES += \
 	../src/game/dialoguecontrolbehavior.cpp \
 	../src/game/conditiononclickbehavior.cpp \
 	../src/game/phonecontrollerbehavior.cpp \
+	../src/game/actionswitchtriggerbehavior.cpp \
 	../src/game/actionsendmessagebehavior.cpp
 

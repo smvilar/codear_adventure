@@ -15,7 +15,10 @@ public:
 	DialogueNode* getNodeById(const char *id);
 	DialogueNode* getCurrentNode() { return currentNode_; }
 
-	void selectAnswer(size_t index);
+	// Selects the specified answer
+	// Returns a custom event that it may have
+	std::string selectAnswer(size_t index);
+
 	bool isValidAnswer(size_t index) const { return index < currentNode_->answers.size(); }
 	bool hasEnded() const { return hasEnded_; }
 

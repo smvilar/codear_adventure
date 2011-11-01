@@ -13,9 +13,11 @@ public:
 	{
 		std::string answer;
 		std::string gotoId;
+		std::string event;
 
-		Answer(const std::string &answer, const std::string &gotoId)
-			: answer(answer), gotoId(gotoId)
+		Answer(const std::string &answer, const std::string &gotoId,
+			   const std::string &event)
+			: answer(answer), gotoId(gotoId), event(event)
 		{
 			// ...
 		}
@@ -37,6 +39,7 @@ public:
 	size_t getAnswerQuantity() const { return answers.size(); }
 
 	const std::string& getNextDialogueNodeId(size_t answerIndex) const { return answers[answerIndex].gotoId; }
+	const std::string& getAnswerEvent(size_t answerIndex) const { return answers[answerIndex].event; }
 
 private:
 	he::u32 currentSpeechIndex_;

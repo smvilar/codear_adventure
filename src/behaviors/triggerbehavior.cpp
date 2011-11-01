@@ -14,7 +14,7 @@ void TriggerBehavior::handleMessage(const Message &message)
 	if (message.equals("trigger_condition"))
 	{
 		std::string condition = message.argsAs<std::string>();
-		std::cout << "Condition " << condition << " triggered." << std::endl;
+		std::cout << "Condition " << condition << " happened." << std::endl;
 
 		for (size_t i = 0; i < conditions_.size(); ++i)
 		{
@@ -29,6 +29,11 @@ void TriggerBehavior::handleMessage(const Message &message)
 		{
 			doActions();
 		}
+	}
+	else if (message.equals("trigger_switch"))
+	{
+		active_ = message.argsAs<bool>();
+		std::cout << "Switching trigger " << pOwner_->name << ": " << active_ << std::endl;
 	}
 }
 //----------------------------------------------------------------------------//

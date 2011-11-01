@@ -23,6 +23,8 @@ public:
 	const boost::any& args() const { return args_; }
 	template <typename T> T argsAs() const { return boost::any_cast<T>(args_); }
 
+	const std::string& getMessage() const { return message_; }
+
 private:
 	std::string message_;
 	boost::any args_;

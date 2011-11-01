@@ -83,11 +83,16 @@ void DialogueControlBehavior::selectAnswer(size_t index)
 	if (displayingAnswers_ && dialogue_.isValidAnswer(index))
 	{
 		displayingAnswers_ = false;
-		dialogue_.selectAnswer(index);
+		const std::string &event = dialogue_.selectAnswer(index);
 		if (!dialogue_.hasEnded())
 			updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
 		else
-			; // TODO: do something
+			updateText("");
+
+		if (event != "")
+		{
+			pWorld_->broadcast(Message("trigger_condition", event));
+		}
 	}
 }
 //----------------------------------------------------------------------------//

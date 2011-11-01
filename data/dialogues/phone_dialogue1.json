@@ -45,7 +45,8 @@
 		"answers" : [
 			{
 				"answer" : "*corta la línea*",
-				"goto" : "end"
+				"goto" : "end",
+				"event" : "phone_hang"
 			}
 		]
 	}

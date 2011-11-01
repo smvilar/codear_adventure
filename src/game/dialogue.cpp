@@ -36,7 +36,8 @@ bool Dialogue::parse(const std::string &text)
 			const Json::Value &jsAns = jsAnswers[j];
 			const char *ans = jsAns["answer"].asCString();
 			const char *gotoId = jsAns["goto"].asCString();
-			dialogueNode->answers.push_back(DialogueNode::Answer(ans, gotoId));
+			const char *event = !jsAns["event"] ? "" : jsAns["event"].asCString();
+			dialogueNode->answers.push_back(DialogueNode::Answer(ans, gotoId, event));
 		}
 
 		dialogueNodes_.push_back(dialogueNode);
@@ -61,12 +62,14 @@ DialogueNode* Dialogue::getNodeById(const char *id)
 	return it != dialogueNodes_.end() ? *it : 0;
 }
 //----------------------------------------------------------------------------//
-void Dialogue::selectAnswer(size_t index)
+std::string Dialogue::selectAnswer(size_t index)
 {
 	const std::string &gotoId = currentNode_->getNextDialogueNodeId(index);
 	if (gotoId == "end")
 		hasEnded_ = true;
 	else
 		currentNode_ = getNodeById(gotoId.c_str());
+
+	return currentNode_->getAnswerEvent(index);
 }
 //----------------------------------------------------------------------------//
