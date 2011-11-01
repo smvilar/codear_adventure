@@ -16,6 +16,12 @@ void WindowBehavior::update()
 {
 	pollEvents();
 
+	const sf::Vector2i &mousePos = sf::Mouse::GetPosition(*window_);
+	mouseUtil_.setPosition(mousePos.x, mousePos.y);
+	mouseUtil_.setPressed(0, sf::Mouse::IsButtonPressed(sf::Mouse::Left));
+	mouseUtil_.setPressed(1, sf::Mouse::IsButtonPressed(sf::Mouse::Right));
+	mouseUtil_.setPressed(2, sf::Mouse::IsButtonPressed(sf::Mouse::Middle));
+
 	// TODO: this should be maybe in another behavior, or gone
 	bool isControlPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::LSystem);
 	bool isQPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::Q);
@@ -47,8 +53,9 @@ void WindowBehavior::added()
 	u32 style = fullscreen ? sf::Style::Fullscreen : sf::Style::Default;
 
 	window_ = new sf::RenderWindow(videoMode, caption, style, contextSettings);
-
 	pOwner_->addAttribute("window", new Attribute(window_));
+
+	pOwner_->addAttribute("mouse", new Attribute(&mouseUtil_));
 }
 //----------------------------------------------------------------------------//
 void WindowBehavior::pollEvents()

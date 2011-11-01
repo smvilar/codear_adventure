@@ -12,6 +12,7 @@
 namespace he {
 //----------------------------------------------------------------------------//
 class GameObject;
+class MouseUtil;
 //----------------------------------------------------------------------------//
 class ENGINE_API EditBehavior : public Behavior
 {
@@ -34,13 +35,13 @@ private:
 
 	typedef std::vector<GameObject*> GameObjectVector;
 	GameObjectVector objects_;
-	sf::RenderWindow* window_;
 
 	sf::Shape gizmo_;
 	GameObject* activeObject_;
-	sf::Vector2i lastMousePos_;
 
 	bool tabPressed_;
+
+	MouseUtil* mouseUtil_;
 
 private:
 	void updateSelect();

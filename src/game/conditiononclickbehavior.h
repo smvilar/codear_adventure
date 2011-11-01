@@ -10,6 +10,8 @@ class RenderWindow;
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
+class he::MouseUtil;
+//----------------------------------------------------------------------------//
 class ConditionOnClickBehavior : public Behavior
 {
 public:
@@ -21,7 +23,7 @@ private:
 	virtual void activate();
 
 private:
-	sf::RenderWindow* window_;
+	MouseUtil *mouseUtil_;
 	int posX_, posY_, width_, height_;
 	std::string condition_;
 };

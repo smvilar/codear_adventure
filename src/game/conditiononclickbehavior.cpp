@@ -1,26 +1,16 @@
 #include "conditiononclickbehavior.h"
 //----------------------------------------------------------------------------//
-#include <SFML/Graphics.hpp>
-//----------------------------------------------------------------------------//
-#include "gameobject/world.h"
-#include "gameobject/gameobject.h"
-//----------------------------------------------------------------------------//
 void ConditionOnClickBehavior::update()
 {
-	if (sf::Mouse::IsButtonPressed(sf::Mouse::Left))
+	if (mouseUtil_->justPressedBox(0, posX_, posY_, width_, height_))
 	{
-		const sf::Vector2i &mousePos = sf::Mouse::GetPosition(*window_);
-		Recti rect(posX_, posY_, width_, height_);
-		if (rect.contains(Vector2i(mousePos.x, mousePos.y)))
-		{
-			pWorld_->broadcast(Message("trigger_condition", condition_));
-		}
+		pWorld_->broadcast(Message("trigger_condition", condition_));
 	}
 }
 //----------------------------------------------------------------------------//
 void ConditionOnClickBehavior::activate()
 {
-	window_ = pWorld_->getObject("Game")->getAttributeAs<sf::RenderWindow*>("window");
+	mouseUtil_ = pWorld_->getObject("Game")->getAttributeAs<MouseUtil*>("mouse");
 
 	posX_ = pOwner_->getAttributeAs<int>("x");
 	posY_ = pOwner_->getAttributeAs<int>("y");

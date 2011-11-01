@@ -3,6 +3,7 @@
 //----------------------------------------------------------------------------//
 #include "dllexport.h"
 #include "gameobject/behavior.h"
+#include "util/mouseutil.h"
 //----------------------------------------------------------------------------//
 namespace sf
 {
@@ -22,6 +23,7 @@ private:
 
 private:
 	sf::RenderWindow *window_;
+	MouseUtil mouseUtil_;
 
 private:
 	void pollEvents();

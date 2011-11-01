@@ -103,6 +103,7 @@ HEADERS += \
 	../src/util/filesystem.h \
 	../src/util/base64.h \
 	../src/util/gzstream.h \
+	../src/util/mouseutil.h \
 	../src/video/spriteanimation.h \
 	../src/video/animatedsprite.h \
 	../src/game/logobehavior.h \
@@ -151,6 +152,7 @@ SOURCES += \
 	../src/util/filesystem.cpp \
 	../src/util/base64.cpp \
 	../src/util/gzstream.cpp \
+	../src/util/mouseutil.cpp \
 	../src/video/spriteanimation.cpp \
 	../src/video/animatedsprite.cpp \
 	../src/game/main.cpp \

@@ -3,6 +3,7 @@
 #include "math/rect.h"
 #include "gameobject/gameobject.h"
 #include "gameobject/world.h"
+#include "util/mouseutil.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -10,7 +11,7 @@ void EditBehavior::activate()
 {
 	mode_ = SELECT;
 	objects_ = pOwner_->getAttributeAs<GameObjectVector>("objects");
-	window_ = pWorld_->getObject("Game")->getAttributeAs<sf::RenderWindow*>("window");
+	mouseUtil_ = pWorld_->getObject("Game")->getAttributeAs<MouseUtil*>("mouse");
 
 	initGizmo();
 	setGizmo(-10, -10, 0, 0);
@@ -58,8 +59,6 @@ Behavior* EditBehavior::clone() const
 //----------------------------------------------------------------------------//
 void EditBehavior::updateSelect()
 {
-	const sf::Vector2i &mousePos = sf::Mouse::GetPosition(*window_);
-
 	setGizmo(-10, -10, 0, 0);
 	//check the topmost object that collides with the mouse
 	GameObjectVector::reverse_iterator it = objects_.rbegin();
@@ -72,15 +71,13 @@ void EditBehavior::updateSelect()
 		int width = object->getAttributeAs<int>("width");
 		int height = object->getAttributeAs<int>("height");
 
-		Recti rect(posX, posY, width, height);
-		if (rect.contains(Vector2i(mousePos.x, mousePos.y)))
+		if (mouseUtil_->isInBox(posX, posY, width, height))
 		{
 			setGizmo(posX, posY, width, height);
-			if (sf::Mouse::IsButtonPressed(sf::Mouse::Left))
+			if (mouseUtil_->isPressed(0))
 			{
 				mode_ = DRAG;
 				activeObject_ = object;
-				lastMousePos_ = mousePos;
 			}
 			break;
 		}
@@ -89,23 +86,18 @@ void EditBehavior::updateSelect()
 //----------------------------------------------------------------------------//
 void EditBehavior::updateDrag()
 {
-	const sf::Vector2i& mousePos = sf::Mouse::GetPosition(*window_);
-	sf::Vector2i movement = mousePos - lastMousePos_;
-
 	Attribute *posXAttr = activeObject_->getAttribute("x");
 	Attribute *posYAttr = activeObject_->getAttribute("y");
-	int posX = posXAttr->getValue<int>() + movement.x;
-	int posY = posYAttr->getValue<int>() + movement.y;
+	int posX = posXAttr->getValue<int>() + mouseUtil_->getMovementX();
+	int posY = posYAttr->getValue<int>() + mouseUtil_->getMovementY();
 	posXAttr->setValue(posX);
 	posYAttr->setValue(posY);
 
 	gizmo_.SetPosition(posX, posY);
 
-	lastMousePos_ = mousePos;
-
 	std::cout << posX << ", " << posY << std::endl;
 
-	if (!sf::Mouse::IsButtonPressed(sf::Mouse::Left))
+	if (!mouseUtil_->isPressed(0))
 	{
 		mode_ = SELECT;
 		activeObject_ = 0;

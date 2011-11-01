@@ -5,6 +5,7 @@
 #include "util/filesystem.h"
 #include "util/logger.h"
 #include "util/profile.h"
+#include "util/mouseutil.h"
 //----------------------------------------------------------------------------//
 #include "core/types.h"
 #include "core/assert.h"
