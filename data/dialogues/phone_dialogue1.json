@@ -14,17 +14,17 @@
 		"speech" : [ "Está hablando con ella. ¿Es usted el encargado de resolver el lío que armé de este lado?" ],
 		"answers" : [
 			{
-				"answer" : "Soy un negociador, tal como lo pidió. Mi nombre es Richard Solomon y estoy aquí para ayudar a que usted y sus rehenes salgan intactos del edificio. Pero para hacer eso necesito que me cuente quién es y qué es lo que necesita.",
+				"answer" : "Soy el negociador que pidió. Mi nombre es Richard Solomon y mi trabajo es asegurar que usted y sus rehenes salgan intactos del edificio. Pero para hacer eso necesito que me diga quién es.",
 				"goto" : "2"
 			}
 		]
 	},
 	{
 		"id" : "2",
-		"speech" : [ "Mi identidad no es importante por el momento.", "Verá, hay personas en este mundo que son intocables y que van a asegurarse de mantenerse así para siempre y yo demostré intenciones de perturbar esa condición.", "Ahora la seguridad mía y de mi familia está en riesgo, pero más allá de mi ser egoísta están en peligro muchas otras vidas y es en estas condiciones que me vi obligado a tomar medidas desesperadas." ],
+		"speech" : [ "Mi identidad no es importante por el momento.", "Hay personas en este mundo que son intocables y van a asegurarse de mantenerse así para siempre. Yo tuve la mala suerte de dar con algunas de ellas.", "Ahora la seguridad mía y de mi familia están en riesgo, pero hay mucho más en juego; muchas otras vidas inocentes están en peligro y es por esto que me vi obligado a tomar medidas desesperadas." ],
 		"answers" : [
 			{
-				"answer" : "¿Qué tipo de medidas?",
+				"answer" : "¿De qué está hablando?",
 				"goto" : "3"
 			}
 		]

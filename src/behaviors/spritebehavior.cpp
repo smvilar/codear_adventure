@@ -17,7 +17,7 @@ Behavior* SpriteBehavior::clone() const
 void SpriteBehavior::added()
 {
 	animatedSprite_.parse(pOwner_->getAttributeAs<std::string>("spriteInfo"),
-						  pWorld_->getResourceManager().getResourcePack("data.pack"));
+						  pWorld_->getResourceManager().getDefaultResourcePack());
 
 	posX_ = pOwner_->getAttribute("x");
 	posY_ = pOwner_->getAttribute("y");

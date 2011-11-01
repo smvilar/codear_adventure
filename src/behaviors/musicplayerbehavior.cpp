@@ -9,7 +9,7 @@ using namespace he;
 void MusicPlayerBehavior::activate()
 {
 	std::string filename = pOwner_->getAttributeAs<std::string>("musicFilename");
-	ResourceData res = pWorld_->getResourceManager().getResourcePack("data.pack").getResource(filename);
+	ResourceData res = pWorld_->getResourceManager().getResource(filename);
 
 	music_.OpenFromMemory(res.data, res.size);
 

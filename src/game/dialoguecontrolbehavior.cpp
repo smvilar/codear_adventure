@@ -10,7 +10,7 @@
 void DialogueControlBehavior::activate()
 {
 	const std::string &filename = pOwner_->getAttributeAs<std::string>("dialogueFilename");
-	const std::string &text = pWorld_->getResourceManager().getResourcePack("data.pack").getTextResource(filename);
+	const std::string &text = pWorld_->getResourceManager().getTextResource(filename);
 	dialogue_.parse(text);
 
 	textAttr_ = pOwner_->getAttribute("text");
@@ -43,6 +43,13 @@ void DialogueControlBehavior::handleMessage(const Message &message)
 			}
 		}
 	}
+	if (message.equals("answer_shown"))
+	{
+		if (!dialogue_.hasEnded())
+			updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
+		else
+			updateText("");
+	}
 }
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::updateText(const std::string &text)
@@ -55,13 +62,20 @@ void DialogueControlBehavior::displayAnswers()
 {
 	std::stringstream answersText;
 	const size_t num = dialogue_.getCurrentNode()->getAnswerQuantity();
-	for (size_t i = 0; i < num; ++i)
+	if (num == 1)
 	{
-		answersText << (i + 1) << ". ";
-		answersText << dialogue_.getCurrentNode()->getAnswer(i);
-		answersText << std::endl;
+		selectAnswer(0);
 	}
-	updateText(answersText.str());
+	else
+	{
+		for (size_t i = 0; i < num; ++i)
+		{
+			answersText << (i + 1) << ". ";
+			answersText << dialogue_.getCurrentNode()->getAnswer(i);
+			answersText << std::endl;
+		}
+		updateText(answersText.str());
+	}
 	displayingAnswers_ = true;
 }
 //----------------------------------------------------------------------------//
@@ -83,16 +97,17 @@ void DialogueControlBehavior::selectAnswer(size_t index)
 	if (displayingAnswers_ && dialogue_.isValidAnswer(index))
 	{
 		displayingAnswers_ = false;
+		const std::string &answerText = dialogue_.getCurrentNode()->getAnswer(index);
 		const std::string &event = dialogue_.selectAnswer(index);
-		if (!dialogue_.hasEnded())
-			updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
-		else
-			updateText("");
+
+		updateText("");
 
 		if (event != "")
 		{
 			pWorld_->broadcast(Message("trigger_condition", event));
 		}
+
+		pWorld_->broadcast(Message("show_answer", answerText));
 	}
 }
 //----------------------------------------------------------------------------//

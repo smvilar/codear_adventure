@@ -28,7 +28,6 @@ public:
 	void unload();
 
 	ResourceData getResource(const std::string &name) const;
-
 	std::string getTextResource(const std::string &name) const;
 
 private:

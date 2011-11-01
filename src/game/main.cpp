@@ -4,6 +4,7 @@
 #include "dialoguecontrolbehavior.h"
 #include "conditiononclickbehavior.h"
 #include "phonecontrollerbehavior.h"
+#include "dialogueactorbehavior.h"
 #include "actionsendmessagebehavior.h"
 #include "actionswitchtriggerbehavior.h"
 //----------------------------------------------------------------------------//
@@ -16,6 +17,7 @@ void setupWorld(World &world)
 	world.registerBehavior("DialogueControl", new DialogueControlBehavior);
 	world.registerBehavior("ConditionOnClick", new ConditionOnClickBehavior);
 	world.registerBehavior("PhoneController", new PhoneControllerBehavior);
+	world.registerBehavior("DialogueActor", new DialogueActorBehavior);
 	world.registerBehavior("ActionSendMessage", new ActionSendMessageBehavior);
 	world.registerBehavior("ActionSwitchTrigger", new ActionSwitchTriggerBehavior);
 }

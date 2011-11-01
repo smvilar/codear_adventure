@@ -15,9 +15,13 @@
 		{
 			"x": 222,
 			"y": 138,
-			"spriteInfo" : "sprites/sprite_info_mc.json"
+			"spriteInfo" : "sprites/sprite_info_mc.json",
+			"dialogueOffsetX" : 180,
+			"dialogueOffsetY" : 0,
+			"font" : "fonts/rough_typewriter.otf",
+			"fontSize" : 16
 		},
-		"behaviors" : [ "Sprite" ]
+		"behaviors" : [ "Sprite", "DialogueActor" ]
 	},
 	{
 		"name" : "DialogueBox",

@@ -4,11 +4,11 @@
 		"attributes" :
 		{
 			"x" : 300,
-			"y" : 180,
-			"width" : 200,
-			"height" : 30,
+			"y" : 300,
+			"width" : 500,
+			"height" : 100,
 			"text" : "Hierophant Team",
-			"font" : "fonts/rough_typewriter.otf",
+			"font" : "fonts/Robotica.ttf",
 			"fontSize" : 22
 		},
 		"behaviors" : [ "TextBox" ]

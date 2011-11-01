@@ -20,7 +20,7 @@ void TextBoxBehavior::added()
 	if (fontAttr)
 	{
 		std::string fontFilename = fontAttr->getValue<std::string>();
-		ResourceData res = pWorld_->getResourceManager().getResourcePack("data.pack").getResource(fontFilename);
+		ResourceData res = pWorld_->getResourceManager().getResource(fontFilename);
 		if (!font_.LoadFromMemory(res.data, res.size))
 			std::cerr << "Couldn't load font: " << fontFilename << std::endl;
 	}

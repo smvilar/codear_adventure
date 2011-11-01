@@ -14,7 +14,7 @@ void ScreenDirectorBehavior::activate()
 
 	// Get the screen flow
 	string screenFlow = pOwner_->getAttributeAs<string>("screenFlow");
-	string text = pWorld_->getResourceManager().getResourcePack("data.pack").getTextResource(screenFlow);
+	string text = pWorld_->getResourceManager().getTextResource(screenFlow);
 	screenDirector_.parse(text);
 
 	// Get the initial screen
