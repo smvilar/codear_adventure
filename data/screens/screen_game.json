@@ -9,16 +9,18 @@
 		},
 		"behaviors" : [ "Sprite" ]
 	},
-	{
-		"name" : "MC",
-		"attributes" :
-		{
-			"x" : 900,
-			"y" : 168,
-			"spriteInfo" : "sprites/sprite_info_mc.json"
-		},
-		"behaviors" : [ "Sprite" ]
-	},
+    {
+        "name" : "Registry",
+        "attributes" :
+        {
+            "objects" :
+            [
+                "objects/mc_walk.json",
+                "objects/mc_on_phone.json"
+            ]
+        },
+        "behaviors" : [ "RegisterObjects" ]
+    },
 	{
 		"name" : "MCAnswerBox",
 		"attributes" :

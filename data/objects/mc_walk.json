@@ -1,0 +1,11 @@
+
+{
+    "name" : "MC",
+	"attributes" :
+	{
+		"x" : 900,
+		"y" : 168,
+		"spriteInfo" : "sprites/sprite_info_mc.json"
+	},
+	"behaviors" : [ "Sprite" ]
+}
