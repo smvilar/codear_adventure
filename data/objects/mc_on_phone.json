@@ -1,0 +1,13 @@
+{
+	"name" : "MCOnPhone",
+	"attributes" :
+	{
+		"x" : 432,
+		"y" : 132,
+		"spriteInfo" : "sprites/sprite_mc_onphone.json",
+		"answerBox" : "MCAnswerBox",
+		"boxOffsetX" : 180,
+		"boxOffsetY" : 0
+	},
+	"behaviors" : [ "Sprite", "DialogueActor" ]
+}

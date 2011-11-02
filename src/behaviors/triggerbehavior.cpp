@@ -50,16 +50,13 @@ void TriggerBehavior::activate()
 	}
 
 	AttributeVector actions = pOwner_->getAttributeAs<AttributeVector>("actions");
+	std::cout << "registering " << actions.size() << " actions" << std::endl;
 	actions_.reserve(actions.size());
 	for (size_t i = 0; i < actions.size(); ++i)
 	{
 		AttributeMap actionObj = actions[i]->getValue<AttributeMap>();
-		AttributeMap::iterator it = actionObj.begin();
-		for (; it != actionObj.end(); ++it)
-		{
-			actions_.push_back(Action(actionObj["action"]->getValue<std::string>(),
-									  actionObj["args"]->getValue<AttributeVector>()));
-		}
+		actions_.push_back(Action(actionObj["action"]->getValue<std::string>(),
+								  actionObj["args"]->getValue<AttributeVector>()));
 	}
 }
 //----------------------------------------------------------------------------//
@@ -76,9 +73,10 @@ void TriggerBehavior::doActions()
 {
 	if (!active_) return;
 	active_ = false;
-	std::cout << "Doing actions" << std::endl;
+	std::cout << "Doing actions (" << actions_.size() << ")" << std::endl;
 	for (size_t i = 0; i < actions_.size(); ++i)
 	{
+		std::cout << "Action: " << actions_[i].name << std::endl;
 		GameObject *actionObject = pWorld_->getObject(actions_[i].name);
 		if (actionObject)
 			actionObject->broadcast(Message("action_triggered", actions_[i].args));

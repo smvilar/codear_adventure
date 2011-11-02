@@ -33,6 +33,8 @@ public:
 	void addObject(GameObject *object);
 	// Removes a GameObject from the list of objects in the world
 	void removeObject(GameObject *object);
+	// Removes a GameObject from the list of objects in the world
+	void removeObject(const std::string &name);
 	// Gets a GameObject by its name, returns 0 if not found
 	GameObject* getObject(const std::string &name);
 

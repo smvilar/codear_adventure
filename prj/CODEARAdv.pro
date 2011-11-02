@@ -43,15 +43,6 @@ INCLUDEPATH += \
 	../lib/SFML/include
 
 HEADERS += \
-	../data/config/game.json \
-	../data/screens/screen_flow.json \
-	../data/screens/screen_game.json \
-	../data/screens/screen_logo.json \
-	../data/dialogues/test_dialogue.json \
-	../data/dialogues/phone_dialogue1.json \
-	../data/sprites/sprite_info_mc.json \
-	../data/sprites/sprite_mc_onphone.json \
-	../data/sprites/sprite_info_bkg.json \
 	../src/hierophantengine.h \
 	../src/dllexport.h \
 	../src/behaviors/windowbehavior.h \
@@ -115,7 +106,9 @@ HEADERS += \
 	../src/game/phonecontrollerbehavior.h \
 	../src/game/actionswitchtriggerbehavior.h \
 	../src/game/actionsendmessagebehavior.h \
-    ../src/game/dialogueactorbehavior.h
+    ../src/game/dialogueactorbehavior.h \
+    ../src/game/actionaddobjectbehavior.h \
+    ../src/game/actionremoveobjectbehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -167,7 +160,11 @@ SOURCES += \
 	../src/game/phonecontrollerbehavior.cpp \
 	../src/game/actionswitchtriggerbehavior.cpp \
 	../src/game/actionsendmessagebehavior.cpp \
-    ../src/game/dialogueactorbehavior.cpp
+    ../src/game/dialogueactorbehavior.cpp \
+    ../src/game/actionaddobjectbehavior.cpp \
+    ../src/game/actionremoveobjectbehavior.cpp
+
+
 
 
 

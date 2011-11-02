@@ -3,10 +3,6 @@
 #include <vector>
 #include <iostream>
 //----------------------------------------------------------------------------//
-#include <gameobject/world.h>
-#include <gameobject/gameobject.h>
-#include <gameobject/message.h>
-//----------------------------------------------------------------------------//
 void ActionSendMessageBehavior::handleMessage(const Message &message)
 {
 	typedef std::vector<Attribute*> AttributeVector;

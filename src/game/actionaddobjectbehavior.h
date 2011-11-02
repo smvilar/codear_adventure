@@ -1,15 +1,15 @@
-#ifndef ACTIONSENDMESSAGEBEHAVIOR_H
-#define ACTIONSENDMESSAGEBEHAVIOR_H
+#ifndef ACTIONADDOBJECTBEHAVIOR_H
+#define ACTIONADDOBJECTBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include <hierophantengine.h>
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-class ActionSendMessageBehavior : public Behavior
+class ActionAddObjectBehavior : public Behavior
 {
 public:
-	Behavior* clone() const { return new ActionSendMessageBehavior; }
+	Behavior* clone() const { return new ActionAddObjectBehavior; }
 	void handleMessage(const Message &message);
 };
 //----------------------------------------------------------------------------//
-#endif // ACTIONSENDMESSAGEBEHAVIOR_H
+#endif // ACTIONADDOBJECTBEHAVIOR_H

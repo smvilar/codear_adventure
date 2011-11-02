@@ -7,6 +7,8 @@
 #include "dialogueactorbehavior.h"
 #include "actionsendmessagebehavior.h"
 #include "actionswitchtriggerbehavior.h"
+#include "actionaddobjectbehavior.h"
+#include "actionremoveobjectbehavior.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -20,6 +22,8 @@ void setupWorld(World &world)
 	world.registerBehavior("DialogueActor", new DialogueActorBehavior);
 	world.registerBehavior("ActionSendMessage", new ActionSendMessageBehavior);
 	world.registerBehavior("ActionSwitchTrigger", new ActionSwitchTriggerBehavior);
+	world.registerBehavior("ActionAddObject", new ActionAddObjectBehavior);
+	world.registerBehavior("ActionRemoveObject", new ActionRemoveObjectBehavior);
 }
 //----------------------------------------------------------------------------//
 int main()

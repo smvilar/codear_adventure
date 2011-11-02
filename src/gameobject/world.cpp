@@ -50,6 +50,11 @@ void World::removeObject(GameObject *object)
 	objectsToRemove_.push(object);
 }
 //----------------------------------------------------------------------------//
+void World::removeObject(const std::string &name)
+{
+	removeObject(getObject(name));
+}
+//----------------------------------------------------------------------------//
 GameObject* World::getObject(const std::string &name)
 {
 	ObjectVector::iterator it =
@@ -192,6 +197,7 @@ void World::processQueues()
 //----------------------------------------------------------------------------//
 void World::doAddObject(GameObject *object)
 {
+	Assert(object, "Object to add shouldn't be null");
 	objects_.push_back(object);
 	object->pWorld_ = this;
 	object->added();
@@ -199,7 +205,11 @@ void World::doAddObject(GameObject *object)
 //----------------------------------------------------------------------------//
 void World::doRemoveObject(GameObject *object)
 {
-	objects_.erase(std::find(objects_.begin(), objects_.end(), object));
+	Assert(object, "Object to remove shouldn't be null");
+	ObjectVector::iterator it =
+			std::find(objects_.begin(), objects_.end(), object);
+	Assert(it != objects_.end(), "Object to remove should be in the list");
+	objects_.erase(it);
 	object->removed();
 	delete object;
 	object = 0;
