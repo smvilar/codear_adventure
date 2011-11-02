@@ -1,7 +1,8 @@
 #ifndef DIALOGUECONTROLBEHAVIOR_H
 #define DIALOGUECONTROLBEHAVIOR_H
 //----------------------------------------------------------------------------//
-#include "hierophantengine.h"
+#include <hierophantengine.h>
+//----------------------------------------------------------------------------//
 #include "dialogue.h"
 //----------------------------------------------------------------------------//
 using namespace he;
@@ -11,6 +12,7 @@ class DialogueControlBehavior : public Behavior
 public:
 	virtual Behavior* clone() const { return new DialogueControlBehavior; }
 
+	virtual void update();
 	virtual void handleMessage(const Message &message);
 
 private:
@@ -19,6 +21,7 @@ private:
 private:
 	Dialogue dialogue_;
 	Attribute *textAttr_;
+	MouseUtil *mouseUtil_;
 
 	bool displayingAnswers_;
 

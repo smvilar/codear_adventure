@@ -13,9 +13,19 @@
 		"name" : "MC",
 		"attributes" :
 		{
-			"x" : 222,
-			"y" : 138,
-			"spriteInfo" : "sprites/sprite_info_mc.json",
+			"x" : 900,
+			"y" : 168,
+			"spriteInfo" : "sprites/sprite_info_mc.json"
+		},
+		"behaviors" : [ "Sprite" ]
+	},
+	{
+		"name" : "MCOnPhone",
+		"attributes" :
+		{
+			"x" : 432,
+			"y" : 132,
+			"spriteInfo" : "sprites/sprite_mc_onphone.json",
 			"answerBox" : "MCAnswerBox",
 			"boxOffsetX" : 180,
 			"boxOffsetY" : 0
@@ -82,6 +92,7 @@
 				"Background",
 				"DialogueBox",
 				"MC",
+				"MCOnPhone",
 				"Phone"
 			]
 		},

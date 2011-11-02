@@ -1,25 +1,24 @@
 #ifndef HE_LOGOBEHAVIOR_H
 #define HE_LOGOBEHAVIOR_H
 //----------------------------------------------------------------------------//
-#include "gameobject/behavior.h"
+#include <hierophantengine.h>
 //----------------------------------------------------------------------------//
-namespace he {
+using namespace he;
+//----------------------------------------------------------------------------//
 class FPSCounter;
 class ScreenDirector;
-} // end namespace he
 //----------------------------------------------------------------------------//
-class LogoBehavior : public he::Behavior
+class LogoBehavior : public Behavior
 {
 public:
-	virtual he::Behavior* clone() const { return new LogoBehavior; }
-	virtual void update();
+	Behavior* clone() const { return new LogoBehavior; }
+	void update();
 
 private:
-	virtual void activate();
+	void activate();
 
-	int logoTime_;
-	int timer_;
-	he::FPSCounter *fpsCounter_;
+	u32 logoTime_;
+	sf::Clock clock_;
 };
 //----------------------------------------------------------------------------//
 #endif // HE_LOGOBEHAVIOR_H

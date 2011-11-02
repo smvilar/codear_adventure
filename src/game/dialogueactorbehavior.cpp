@@ -24,8 +24,7 @@ void DialogueActorBehavior::update()
 	answerTextBox_->getAttribute("x")->setValue(x);
 	answerTextBox_->getAttribute("y")->setValue(y);
 
-	const int answerTime = 3000;
-	if (showingAnswer_ && answerClock_.GetElapsedTime() > answerTime)
+	if (showingAnswer_ && answerClock_.GetElapsedTime() > answerTime_)
 	{
 		setText("");
 		pWorld_->broadcast(Message("answer_shown"));
@@ -45,6 +44,7 @@ void DialogueActorBehavior::handleMessage(const Message &message)
 //----------------------------------------------------------------------------//
 void DialogueActorBehavior::setText(const std::string &text)
 {
+	answerTime_ = text.length() * 30;
 	answerTextBox_->getAttribute("text")->setValue(text);
 	answerTextBox_->broadcast(Message("update_text"));
 

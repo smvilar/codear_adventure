@@ -9,8 +9,11 @@
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::activate()
 {
-	const std::string &filename = pOwner_->getAttributeAs<std::string>("dialogueFilename");
-	const std::string &text = pWorld_->getResourceManager().getTextResource(filename);
+	const std::string &filename =
+			pOwner_->getAttributeAs<std::string>("dialogueFilename");
+	const std::string &text =
+			pWorld_->getResourceManager().getTextResource(filename);
+
 	dialogue_.parse(text);
 
 	textAttr_ = pOwner_->getAttribute("text");
@@ -22,27 +25,20 @@ void DialogueControlBehavior::activate()
 	updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
 
 	displayingAnswers_ = false;
+
+	mouseUtil_ = pWorld_->getObject("Game")->getAttributeAs<MouseUtil*>("mouse");
+}
+//----------------------------------------------------------------------------//
+void DialogueControlBehavior::update()
+{
+	if (mouseUtil_->justPressed(0))
+	{
+		nextSpeech();
+	}
 }
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::handleMessage(const Message &message)
 {
-	if (message.equals("window_event"))
-	{
-		sf::Event event = *message.argsAs<sf::Event*>();
-		if (event.Type == sf::Event::KeyReleased)
-		{
-			sf::Keyboard::Key keyCode = event.Key.Code;
-			if (keyCode == sf::Keyboard::Space)
-			{
-				nextSpeech();
-			}
-			else if (keyCode > sf::Keyboard::Num0 &&
-					 keyCode < sf::Keyboard::Num5)
-			{
-				selectAnswer(keyCode - sf::Keyboard::Num1);
-			}
-		}
-	}
 	if (message.equals("answer_shown"))
 	{
 		if (!dialogue_.hasEnded())
@@ -60,7 +56,8 @@ void DialogueControlBehavior::updateText(const std::string &text)
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::displayAnswers()
 {
-	std::stringstream answersText;
+	displayingAnswers_ = true;
+
 	const size_t num = dialogue_.getCurrentNode()->getAnswerQuantity();
 	if (num == 1)
 	{
@@ -68,6 +65,7 @@ void DialogueControlBehavior::displayAnswers()
 	}
 	else
 	{
+		std::stringstream answersText;
 		for (size_t i = 0; i < num; ++i)
 		{
 			answersText << (i + 1) << ". ";
@@ -76,7 +74,6 @@ void DialogueControlBehavior::displayAnswers()
 		}
 		updateText(answersText.str());
 	}
-	displayingAnswers_ = true;
 }
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::nextSpeech()

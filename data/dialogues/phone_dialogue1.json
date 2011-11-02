@@ -1,7 +1,7 @@
 [
 	{
 		"id" : "0",
-		"speech" : [ "Sí?" ],
+		"speech" : [ "¿Diga?" ],
 		"answers" : [
 			{
 				"answer" : "Me gustaría hablar con la persona a cargo de la situación",
@@ -11,7 +11,7 @@
 	},
 	{
 		"id" : "1",
-		"speech" : [ "Está hablando con ella. ¿Es usted el encargado de resolver el lío que armé de este lado?" ],
+		"speech" : [ "Está hablando con ella. ¿Es usted el encargado de resolver el lío que armé?" ],
 		"answers" : [
 			{
 				"answer" : "Soy el negociador que pidió. Mi nombre es Richard Solomon y mi trabajo es asegurar que usted y sus rehenes salgan intactos del edificio. Pero para hacer eso necesito que me diga quién es.",

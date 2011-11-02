@@ -1,0 +1,17 @@
+{
+	"textureFilename" : "textures/phone_pickup.png",
+	"framesHorizontal" : 6,
+	"framesVertical" : 2,
+	"defaultAnimation" : "pickup",
+	"animations" :
+	[
+		{
+			"name" : "pickup",
+			"msPerFrame" : 240,
+			"firstFrame" : 0,
+			"lastFrame" : 11,
+			"loopCount" : 0,
+			"loopFromFrame" : 9
+		}
+	]
+}

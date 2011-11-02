@@ -50,6 +50,7 @@ HEADERS += \
 	../data/dialogues/test_dialogue.json \
 	../data/dialogues/phone_dialogue1.json \
 	../data/sprites/sprite_info_mc.json \
+	../data/sprites/sprite_mc_onphone.json \
 	../data/sprites/sprite_info_bkg.json \
 	../src/hierophantengine.h \
 	../src/dllexport.h \
