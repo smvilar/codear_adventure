@@ -14,20 +14,20 @@ void TriggerBehavior::handleMessage(const Message &message)
 	if (message.equals("trigger_condition"))
 	{
 		std::string condition = message.argsAs<std::string>();
-		std::cout << "Condition " << condition << " happened." << std::endl;
 
 		for (size_t i = 0; i < conditions_.size(); ++i)
 		{
 			Condition &c = conditions_[i];
 			if (!c.met && c.name == condition)
 			{
+				std::cout << "Condition " << condition << " met." << std::endl;
 				c.met = true;
+				if (allConditionsMet())
+				{
+					doActions();
+				}
 				break;
 			}
-		}
-		if (allConditionsMet())
-		{
-			doActions();
 		}
 	}
 	else if (message.equals("trigger_switch"))
@@ -50,7 +50,6 @@ void TriggerBehavior::activate()
 	}
 
 	AttributeVector actions = pOwner_->getAttributeAs<AttributeVector>("actions");
-	std::cout << "registering " << actions.size() << " actions" << std::endl;
 	actions_.reserve(actions.size());
 	for (size_t i = 0; i < actions.size(); ++i)
 	{

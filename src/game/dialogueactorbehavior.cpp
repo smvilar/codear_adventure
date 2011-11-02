@@ -15,6 +15,8 @@ void DialogueActorBehavior::activate()
 	answerTextBox_ = pWorld_->getObject(textBoxName);
 	textBoxColor_ = answerTextBox_->getAttribute("color");
 	setText("");
+
+	mouseUtil_ = pWorld_->getObject("Game")->getAttributeAs<MouseUtil*>("mouse");
 }
 //----------------------------------------------------------------------------//
 void DialogueActorBehavior::update()
@@ -24,7 +26,10 @@ void DialogueActorBehavior::update()
 	answerTextBox_->getAttribute("x")->setValue(x);
 	answerTextBox_->getAttribute("y")->setValue(y);
 
-	if (showingAnswer_ && answerClock_.GetElapsedTime() > answerTime_)
+	bool ready = mouseUtil_->justPressed(0) ||
+			answerClock_.GetElapsedTime() > answerTime_;
+
+	if (showingAnswer_ && ready)
 	{
 		setText("");
 		pWorld_->broadcast(Message("answer_shown"));
@@ -37,13 +42,13 @@ void DialogueActorBehavior::handleMessage(const Message &message)
 	if (message.equals("show_answer"))
 	{
 		setText(message.argsAs<std::string>());
-		answerClock_.Reset();
 		showingAnswer_ = true;
 	}
 }
 //----------------------------------------------------------------------------//
 void DialogueActorBehavior::setText(const std::string &text)
 {
+	answerClock_.Reset();
 	answerTime_ = text.length() * 30;
 	answerTextBox_->getAttribute("text")->setValue(text);
 	answerTextBox_->broadcast(Message("update_text"));

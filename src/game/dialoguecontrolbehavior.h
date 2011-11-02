@@ -23,13 +23,17 @@ private:
 	Attribute *textAttr_;
 	MouseUtil *mouseUtil_;
 
-	bool displayingAnswers_;
+	bool displayingAnswers_; // for the option list
+	bool showingAnswer_; // for the main actor's speech
+
+	sf::Clock textClock_;
+	u32 textTime_;
 
 private:
 	void updateText(const std::string &text);
-	void displayAnswers();
 
 	void nextSpeech();
+	void displayAnswers();
 	void selectAnswer(size_t index);
 };
 //----------------------------------------------------------------------------//

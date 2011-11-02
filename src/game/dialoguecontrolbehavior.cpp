@@ -25,33 +25,57 @@ void DialogueControlBehavior::activate()
 	updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
 
 	displayingAnswers_ = false;
+	showingAnswer_ = false;
 
 	mouseUtil_ = pWorld_->getObject("Game")->getAttributeAs<MouseUtil*>("mouse");
 }
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::update()
 {
-	if (mouseUtil_->justPressed(0))
-	{
+	if (dialogue_.hasEnded()) return;
+
+	bool textReady = mouseUtil_->justPressed(0) ||
+			textClock_.GetElapsedTime() > textTime_;
+
+	if (!showingAnswer_ && textReady)
 		nextSpeech();
-	}
 }
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::handleMessage(const Message &message)
 {
 	if (message.equals("answer_shown"))
 	{
+		showingAnswer_ = false;
 		if (!dialogue_.hasEnded())
 			updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
 		else
+		{
 			updateText("");
+			pOwner_->removeBehavior(this);
+		}
 	}
 }
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::updateText(const std::string &text)
 {
+	textTime_ = text.length() * 30;
+	textClock_.Reset();
+
 	textAttr_->setValue(text);
 	pOwner_->broadcast(Message("update_text"));
+}
+//----------------------------------------------------------------------------//
+void DialogueControlBehavior::nextSpeech()
+{
+	if (!dialogue_.getCurrentNode()->hasSpeechEnded())
+	{
+		dialogue_.getCurrentNode()->nextSpeech();
+		updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
+	}
+	else
+	{
+		displayAnswers();
+	}
 }
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::displayAnswers()
@@ -76,19 +100,6 @@ void DialogueControlBehavior::displayAnswers()
 	}
 }
 //----------------------------------------------------------------------------//
-void DialogueControlBehavior::nextSpeech()
-{
-	if (!dialogue_.getCurrentNode()->hasSpeechEnded())
-	{
-		dialogue_.getCurrentNode()->nextSpeech();
-		updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
-	}
-	else
-	{
-		displayAnswers();
-	}
-}
-//----------------------------------------------------------------------------//
 void DialogueControlBehavior::selectAnswer(size_t index)
 {
 	if (displayingAnswers_ && dialogue_.isValidAnswer(index))
@@ -104,6 +115,7 @@ void DialogueControlBehavior::selectAnswer(size_t index)
 			pWorld_->broadcast(Message("trigger_condition", event));
 		}
 
+		showingAnswer_ = true;
 		pWorld_->broadcast(Message("show_answer", answerText));
 	}
 }

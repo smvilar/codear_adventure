@@ -50,11 +50,6 @@ void World::removeObject(GameObject *object)
 	objectsToRemove_.push(object);
 }
 //----------------------------------------------------------------------------//
-void World::removeObject(const std::string &name)
-{
-	removeObject(getObject(name));
-}
-//----------------------------------------------------------------------------//
 GameObject* World::getObject(const std::string &name)
 {
 	ObjectVector::iterator it =
