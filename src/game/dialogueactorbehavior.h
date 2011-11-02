@@ -16,16 +16,17 @@ public:
 private:
 	void added();
 	void activate();
-	void deactivate();
 
 private:
-	sf::Font font_;
-	sf::Text text_;
+	GameObject *answerTextBox_;
 
 	bool showingAnswer_;
 	sf::Clock answerClock_;
 
-	Attribute *posX_, *posY_, *offsetX_, *offsetY_;
+	Attribute *posX_, *posY_, *offsetX_, *offsetY_, *textBoxColor_;
+
+private:
+	void setText(const std::string &text);
 };
 //----------------------------------------------------------------------------//
 #endif // DIALOGUEACTORBEHAVIOR_H

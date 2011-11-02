@@ -25,6 +25,9 @@ private:
 	sf::Shape shape_;
 	Attribute *posX_, *posY_, *width_, *height_;
 	Attribute *rotation_, *color_;
+
+private:
+	void updateColor();
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

@@ -13,15 +13,29 @@
 		"name" : "MC",
 		"attributes" :
 		{
-			"x": 222,
-			"y": 138,
+			"x" : 222,
+			"y" : 138,
 			"spriteInfo" : "sprites/sprite_info_mc.json",
-			"dialogueOffsetX" : 180,
-			"dialogueOffsetY" : 0,
-			"font" : "fonts/rough_typewriter.otf",
-			"fontSize" : 16
+			"answerBox" : "MCAnswerBox",
+			"boxOffsetX" : 180,
+			"boxOffsetY" : 0
 		},
 		"behaviors" : [ "Sprite", "DialogueActor" ]
+	},
+	{
+		"name" : "MCAnswerBox",
+		"attributes" :
+		{
+			"x" : 0,
+			"y" : 0,
+			"width" : 400,
+			"height" : 120,
+			"font" : "fonts/rough_typewriter.otf",
+			"fontSize" : 16,
+			"text" : "",
+			"color" : [0, 0, 0, 64]
+		},
+		"behaviors" : [ "Shape", "TextBox" ]
 	},
 	{
 		"name" : "DialogueBox",
