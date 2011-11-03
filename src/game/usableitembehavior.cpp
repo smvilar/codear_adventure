@@ -12,6 +12,20 @@ void UsableItemBehavior::activate()
 	condition_ = pOwner_->getAttribute("condition");
 	textToShow_ = pOwner_->getAttribute("overText");
 
+	Attribute *fontAttr = pOwner_->getAttribute("font");
+	if (fontAttr)
+	{
+		std::string fontFilename = fontAttr->getValue<std::string>();
+		ResourceData res = pWorld_->getResourceManager().getResource(fontFilename);
+		if (!font_.LoadFromMemory(res.data, res.size))
+			std::cerr << "Couldn't load font: " << fontFilename << std::endl;
+	}
+	text_.SetFont(font_);
+
+	Attribute *fontSize = pOwner_->getAttribute("fontSize");
+	if (fontSize)
+		text_.SetCharacterSize(fontSize->getValue<int>());
+
 	overText_ = false;
 }
 //----------------------------------------------------------------------------//
@@ -23,7 +37,7 @@ void UsableItemBehavior::update()
 							height_->getValue<int>()))
 	{
 		text_.SetString(textToShow_->getValue<std::string>());
-		text_.SetPosition(mouseUtil_->x, mouseUtil_->y);
+		text_.SetPosition(mouseUtil_->x, mouseUtil_->y - 30);
 		if (!overText_)
 		{
 			pWorld_->getScene().addDrawable(text_);
@@ -39,5 +53,11 @@ void UsableItemBehavior::update()
 		pWorld_->getScene().removeDrawable(text_);
 		overText_ = false;
 	}
+}
+//----------------------------------------------------------------------------//
+void UsableItemBehavior::deactivate()
+{
+	if (overText_)
+		pWorld_->getScene().removeDrawable(text_);
 }
 //----------------------------------------------------------------------------//

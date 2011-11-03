@@ -30,3 +30,8 @@ void Scene::clearDrawables()
 	drawables_.clear();
 }
 //----------------------------------------------------------------------------//
+bool Scene::hasDrawable(sf::Drawable &drawable)
+{
+	return std::find(drawables_.begin(), drawables_.end(), &drawable) != drawables_.end();
+}
+//----------------------------------------------------------------------------//

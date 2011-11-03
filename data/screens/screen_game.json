@@ -65,7 +65,9 @@
 			"width" : 50,
 			"height" : 50,
 			"condition" : "phone_used",
-            "overText" : "Use phone"
+            "overText" : "Use phone",
+			"font" : "fonts/rough_typewriter.otf",
+			"fontSize" : 16
 		},
 		"behaviors" :
 		[
@@ -119,6 +121,10 @@
                 {
                     "action" : "RemoveObject",
                     "args" : [ "MC" ]
+                },
+                {
+                    "action" : "RemoveBehavior",
+                    "args" : [ "Phone", "UsableItem" ]
                 }
 			]
 		},
@@ -138,6 +144,10 @@
                 {
                     "action" : "SendMessage",
                     "args" : [ "MCOnPhone", "play_animation", "hang" ]
+                },
+                {
+                    "action" : "AddBehavior",
+                    "args" : [ "Phone", "UsableItem" ]
                 }
 			]
 		},
@@ -159,6 +169,15 @@
         "name" : "RemoveObject",
         "behaviors" : [ "ActionRemoveObject" ]
     },
+    {
+        "name" : "AddBehavior",
+        "behaviors" : [ "ActionAddBehavior" ]
+    },
+    {
+        "name" : "RemoveBehavior",
+        "behaviors" : [ "ActionRemoveBehavior" ]
+    },
+    
     {
         "name" : "GameScreen",
         "behaviors" : [ "GameScreen" ]

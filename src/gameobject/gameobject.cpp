@@ -40,6 +40,27 @@ void GameObject::removeBehavior(Behavior *behavior)
 	behaviorsToRemove_.push(behavior);
 }
 //----------------------------------------------------------------------------//
+Behavior* GameObject::getBehaviorByName(const std::string &name)
+{
+	Assert(pWorld_, "GameObject should be added to World");
+
+	Behavior *prototype = pWorld_->createBehavior(name);
+	Behavior *toFind = 0;
+
+	for (size_t i = 0; i < behaviors_.size(); ++i)
+	{
+		if (typeid(*prototype) == typeid(*behaviors_[i]))
+		{
+			toFind = behaviors_[i];
+			break;
+		}
+	}
+
+	delete prototype;
+
+	return toFind;
+}
+//----------------------------------------------------------------------------//
 void GameObject::addAttribute(const char *name, Attribute *attribute)
 {
 	Assert(attributes_.find(name) == attributes_.end(),

@@ -14,6 +14,7 @@ public:
 
 private:
 	void activate();
+	void deactivate();
 
 private:
 	MouseUtil *mouseUtil_;

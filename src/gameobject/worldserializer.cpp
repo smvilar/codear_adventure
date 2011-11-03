@@ -76,7 +76,7 @@ Json::Value WorldSerializer::serializeBehaviors(const GameObject &object, const 
 	const World::BehaviorMap &registeredBehaviors = world.behaviors_;
 	const GameObject::BehaviorVector &behaviors = object.behaviors_;
 
-	// We have to seach the registeredBehaviors map to find the names
+	// We have to search the registeredBehaviors map to find the names
 	// of the used behaviors in the object
 	GameObject::BehaviorVector::const_iterator it = behaviors.begin();
 	for (; it != behaviors.end(); ++it)

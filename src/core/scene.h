@@ -27,6 +27,8 @@ public:
 	void removeDrawable(sf::Drawable &drawable);
 	void clearDrawables();
 
+	bool hasDrawable(sf::Drawable &drawable);
+
 private:
 	typedef std::vector<sf::Drawable*> ViewVector;
 	ViewVector drawables_;

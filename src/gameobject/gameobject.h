@@ -29,6 +29,11 @@ public:
 
 	void addBehavior(Behavior *behavior);
 	void removeBehavior(Behavior *behavior);
+	Behavior* getBehaviorByName(const std::string &name);
+	void removeBehaviorByName(const std::string &name)
+	{
+		removeBehavior(getBehaviorByName(name));
+	}
 
 	void addAttribute(const char *name, Attribute *attribute);
 	void removeAttribute(const char *name);
