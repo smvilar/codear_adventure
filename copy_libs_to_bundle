@@ -6,3 +6,4 @@ cp /usr/local/lib/libsfml-graphics.2.dylib $DEST_DIR
 cp /usr/local/lib/libsfml-audio.2.dylib $DEST_DIR
 cp /opt/local/lib/libfreetype.6.dylib $DEST_DIR
 cp -R /Library/Frameworks/sndfile.framework $DEST_DIR
+install_name_tool -change "/opt/local/lib/libfreetype.6.dylib" "@executable_path/../Frameworks/libfreetype.6.dylib" $DEST_DIR/libsfml-graphics.2.dylib
