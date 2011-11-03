@@ -10,6 +10,7 @@
 #include "soundplayerbehavior.h"
 #include "musicplayerbehavior.h"
 #include "triggerbehavior.h"
+#include "objectregistrybehavior.h"
 //----------------------------------------------------------------------------//
 #include "gameobject/world.h"
 //----------------------------------------------------------------------------//
@@ -28,6 +29,7 @@ void registerToWorld(World& world)
 	world.registerBehavior("SoundPlayer", new SoundPlayerBehavior);
 	world.registerBehavior("MusicPlayer", new MusicPlayerBehavior);
 	world.registerBehavior("Trigger", new TriggerBehavior);
+	world.registerBehavior("ObjectRegistry", new ObjectRegistryBehavior);
 }
 //----------------------------------------------------------------------------//
 } // end namespace Behaviors

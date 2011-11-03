@@ -1,5 +1,7 @@
 #include "gameobject/gameobject.h"
 //----------------------------------------------------------------------------//
+#include <sstream>
+//----------------------------------------------------------------------------//
 #include "gameobject/world.h"
 #include "gameobject/attribute.h"
 #include "gameobject/behavior.h"
@@ -23,7 +25,9 @@ GameObject::~GameObject()
 	// clean attributes
 	AttributeMap::iterator itAttribute = attributes_.begin();
 	for (; itAttribute != attributes_.end(); ++itAttribute)
+	{
 		delete itAttribute->second;
+	}
 }
 //----------------------------------------------------------------------------//
 void GameObject::addBehavior(Behavior *behavior)
@@ -74,7 +78,7 @@ void GameObject::broadcast(const Message &message)
 //----------------------------------------------------------------------------//
 void GameObject::removeFromWorld()
 {
-	Assert(pWorld_, "Error removing from world: pWorld is a null pointer");
+	Assert(pWorld_, "Error removing from world: pWorld is null");
 	pWorld_->removeObject(this);
 }
 //----------------------------------------------------------------------------//
@@ -82,18 +86,20 @@ GameObject* GameObject::clone() const
 {
 	GameObject* copy = new GameObject(name.c_str());
 
-	// clone behaviors
-	BehaviorVector::const_iterator itBehavior = behaviors_.begin();
-	for (; itBehavior != behaviors_.end(); ++itBehavior)
-	{
-		copy->addBehavior((*itBehavior)->clone());
-	}
-
 	// clone attributes
 	AttributeMap::const_iterator itAttribute = attributes_.begin();
 	for (; itAttribute != attributes_.end(); ++itAttribute)
 	{
-		copy->addAttribute(itAttribute->first.c_str(), itAttribute->second);
+		Attribute *attr = new Attribute(*itAttribute->second);
+		copy->addAttribute(itAttribute->first.c_str(), attr);
+	}
+
+	// clone behaviors
+	BehaviorVector::const_iterator itBehavior = behaviors_.begin();
+	for (; itBehavior != behaviors_.end(); ++itBehavior)
+	{
+		// note we're calling 'doAdd'
+		copy->doAddBehavior((*itBehavior)->clone());
 	}
 
 	return copy;
@@ -152,5 +158,19 @@ void GameObject::doRemoveBehavior(Behavior *behavior)
 	behaviors_.erase(std::find(behaviors_.begin(), behaviors_.end(), behavior));
 	delete behavior;
 	behavior = 0;
+}
+//----------------------------------------------------------------------------//
+std::string GameObject::debugToString() const
+{
+	std::stringstream ss;
+	ss << "- name: " << name << std::endl;
+	ss << "- attributes: " << std::endl;
+	AttributeMap::const_iterator it = attributes_.begin();
+	for (; it != attributes_.end(); ++it)
+		ss << "-- " << it->first << std::endl;
+	ss << "- behaviors:" << std::endl;
+	for (size_t i=0; i<behaviors_.size(); ++i)
+		ss << "-- " << typeid(*behaviors_[i]).name() << std::endl;
+	return ss.str();
 }
 //----------------------------------------------------------------------------//

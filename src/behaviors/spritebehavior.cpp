@@ -16,13 +16,17 @@ Behavior* SpriteBehavior::clone() const
 //----------------------------------------------------------------------------//
 void SpriteBehavior::added()
 {
-	animatedSprite_.parse(pOwner_->getAttributeAs<std::string>("spriteInfo"),
-						  pWorld_->getResourceManager().getDefaultResourcePack());
-
 	posX_ = pOwner_->getAttribute("x");
 	posY_ = pOwner_->getAttribute("y");
 	rotation_ = pOwner_->getAttribute("rotation");
 	scale_ = pOwner_->getAttribute("scale");
+}
+//----------------------------------------------------------------------------//
+void SpriteBehavior::activate()
+{
+	Assert(pOwner_->getAttribute("spriteInfo"), "Sprite must have the info");
+	animatedSprite_.parse(pOwner_->getAttributeAs<std::string>("spriteInfo"),
+						 pWorld_->getResourceManager().getDefaultResourcePack());
 
 	sf::Sprite &sprite = animatedSprite_.getSprite();
 
@@ -30,15 +34,7 @@ void SpriteBehavior::added()
 		pOwner_->addAttribute("width", new Attribute(static_cast<int>(sprite.GetSize().x)));
 	if (!pOwner_->getAttribute("height"))
 		pOwner_->addAttribute("height", new Attribute(static_cast<int>(sprite.GetSize().y)));
-}
-//----------------------------------------------------------------------------//
-void SpriteBehavior::removed()
-{
-	// clean texture?
-}
-//----------------------------------------------------------------------------//
-void SpriteBehavior::activate()
-{
+
 	pWorld_->getScene().addDrawable(animatedSprite_.getSprite());
 }
 //----------------------------------------------------------------------------//

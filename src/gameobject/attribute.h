@@ -11,7 +11,6 @@ class ENGINE_API Attribute
 {
 public:
 	Attribute(boost::any value);
-	Attribute* clone() const;
 
 	template<typename T>
 	T getValue() const

@@ -19,7 +19,7 @@
                 "objects/mc_on_phone.json"
             ]
         },
-        "behaviors" : [ "RegisterObjects" ]
+        "behaviors" : [ "ObjectRegistry" ]
     },
 	{
 		"name" : "MCAnswerBox",
@@ -72,20 +72,20 @@
 		]
 	},
 
-	{
-		"name" : "Editor",
-		"attributes" :
-		{
-			"object_names" :
-			[
-				"Background",
-				"DialogueBox",
-				"MC",
-				"Phone"
-			]
-		},
-		"behaviors" : [ "ObjectContainer", "Edit" ]
-	},
+//	{
+//		"name" : "Editor",
+//		"attributes" :
+//		{
+//			"object_names" :
+//			[
+//				"Background",
+//				"DialogueBox",
+//				"MC",
+//				"Phone"
+//			]
+//		},
+//		"behaviors" : [ "ObjectContainer", "Edit" ]
+//	},
 	{
 		"name" : "BackgroundMusic",
 		"attributes" :
@@ -113,12 +113,12 @@
 				},
                 {
                     "action" : "AddObject",
-                    "args" : [ "objects/mc_on_phone.json" ]
-                },
-                {
-                    "action" : "RemoveObject",
-                    "args" : [ "MC" ]
-                }
+                    "args" : [ "MCOnPhone" ]
+                }//,
+                //{
+                    //"action" : "RemoveObject",
+                    //"args" : [ "MC" ]
+                //}
 			]
 		},
 		"behaviors" : [ "Trigger" ]

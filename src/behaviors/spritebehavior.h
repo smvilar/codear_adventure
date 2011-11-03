@@ -21,7 +21,6 @@ public:
 
 protected:
 	virtual void added();
-	virtual void removed();
 	virtual void activate();
 	virtual void deactivate();
 

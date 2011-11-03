@@ -25,6 +25,8 @@ public:
 	GameObject(const char *name);
 	~GameObject();
 
+	std::string debugToString() const;
+
 	void addBehavior(Behavior *behavior);
 	void removeBehavior(Behavior *behavior);
 
@@ -68,6 +70,7 @@ private:
 	void doRemoveBehavior(Behavior *behavior);
 
 private:
+	friend class ObjectParser;
 	friend class World;
 	friend class WorldSerializer;
 };

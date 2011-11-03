@@ -58,6 +58,7 @@ HEADERS += \
 	../src/behaviors/soundplayerbehavior.h \
 	../src/behaviors/musicplayerbehavior.h \
 	../src/behaviors/triggerbehavior.h \
+	../src/behaviors/objectregistrybehavior.h \
 	../src/behaviors/behaviors.h \
 	../src/core/assert.h \
 	../src/core/types.h \
@@ -124,6 +125,7 @@ SOURCES += \
 	../src/behaviors/soundplayerbehavior.cpp \
 	../src/behaviors/musicplayerbehavior.cpp \
 	../src/behaviors/triggerbehavior.cpp \
+	../src/behaviors/objectregistrybehavior.cpp \
 	../src/core/scene.cpp \
 	../src/core/gameloop.cpp \
 	../src/gameobject/objectparser.cpp \

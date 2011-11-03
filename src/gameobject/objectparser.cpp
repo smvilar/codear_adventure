@@ -81,7 +81,7 @@ void ObjectParser::parseBehaviors(const Json::Value &behaviorsValue, GameObject 
 		Behavior* behavior = world.createBehavior(behaviorName);
 		if (behavior)
 		{
-			object.addBehavior(behavior);
+			object.doAddBehavior(behavior);
 		}
 		else
 			cerr << behaviorName << " not found" << endl;
