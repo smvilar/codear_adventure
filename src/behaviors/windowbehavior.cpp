@@ -50,7 +50,7 @@ void WindowBehavior::added()
 
 	sf::VideoMode videoMode(width, height, bpp);
 	sf::ContextSettings contextSettings;
-	u32 style = fullscreen ? sf::Style::Fullscreen : sf::Style::Default;
+	u32 style = fullscreen ? sf::Style::Fullscreen : sf::Style::Close;
 
 	window_ = new sf::RenderWindow(videoMode, caption, style, contextSettings);
 	pOwner_->addAttribute("window", new Attribute(window_));
