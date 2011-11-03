@@ -109,7 +109,8 @@ HEADERS += \
 	../src/game/actionsendmessagebehavior.h \
     ../src/game/dialogueactorbehavior.h \
     ../src/game/actionaddobjectbehavior.h \
-    ../src/game/actionremoveobjectbehavior.h
+    ../src/game/actionremoveobjectbehavior.h \
+    ../src/game/gamescreenbehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -164,7 +165,10 @@ SOURCES += \
 	../src/game/actionsendmessagebehavior.cpp \
     ../src/game/dialogueactorbehavior.cpp \
     ../src/game/actionaddobjectbehavior.cpp \
-    ../src/game/actionremoveobjectbehavior.cpp
+    ../src/game/actionremoveobjectbehavior.cpp \
+    ../src/game/gamescreenbehavior.cpp
+
+
 
 
 

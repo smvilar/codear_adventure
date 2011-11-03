@@ -114,11 +114,11 @@
                 {
                     "action" : "AddObject",
                     "args" : [ "MCOnPhone" ]
-                }//,
-                //{
-                    //"action" : "RemoveObject",
-                    //"args" : [ "MC" ]
-                //}
+                },
+                {
+                    "action" : "RemoveObject",
+                    "args" : [ "MC" ]
+                }
 			]
 		},
 		"behaviors" : [ "Trigger" ]
@@ -157,5 +157,9 @@
     {
         "name" : "RemoveObject",
         "behaviors" : [ "ActionRemoveObject" ]
+    },
+    {
+        "name" : "GameScreen",
+        "behaviors" : [ "GameScreen" ]
     }
 ]

@@ -9,6 +9,7 @@
 #include "actionswitchtriggerbehavior.h"
 #include "actionaddobjectbehavior.h"
 #include "actionremoveobjectbehavior.h"
+#include "gamescreenbehavior.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -16,6 +17,7 @@ void setupWorld(World &world)
 {
 	// game specific
 	world.registerBehavior("Logo", new LogoBehavior);
+	world.registerBehavior("GameScreen", new GameScreenBehavior);
 	world.registerBehavior("DialogueControl", new DialogueControlBehavior);
 	world.registerBehavior("ConditionOnClick", new ConditionOnClickBehavior);
 	world.registerBehavior("PhoneController", new PhoneControllerBehavior);

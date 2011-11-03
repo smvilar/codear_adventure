@@ -6,7 +6,7 @@
 		"width" : 1280,
 		"height" : 720,
 		"bpp" : 32,
-		"fullscreen" : true,
+		"fullscreen" : false,
 		"maxFramerate" : 60,
 		"screenFlow" : "screens/screen_flow.json",
 		"initialScreen" : "Logo"
