@@ -1,5 +1,8 @@
 #include "resource/resourcepack.h"
 //----------------------------------------------------------------------------//
+#ifdef __MAC_OS_X_VERSION_MIN_REQUIRED
+#include <CoreFoundation/CoreFoundation.h>
+#endif __MAC_OS_X_VERSION_MIN_REQUIRED
 #include <iostream>
 #include <fstream>
 //----------------------------------------------------------------------------//
@@ -19,7 +22,28 @@ ResourcePack::~ResourcePack()
 //----------------------------------------------------------------------------//
 bool ResourcePack::load(const std::string &filename)
 {
+#ifdef __MAC_OS_X_VERSION_MIN_REQUIRED
+	CFBundleRef bundle = CFBundleGetMainBundle();
+	CFStringRef location = CFStringCreateWithBytes(kCFAllocatorDefault,
+												   (const UInt8*)filename.c_str(),
+												   filename.size(),
+												   kCFStringEncodingUTF8,
+												   false); // this is for BOM checking
+
+	CFURLRef fileUrl = CFBundleCopyResourceURL(bundle, location, NULL, NULL);
+	CFRelease(location);
+
+	// open the file in the bundle
+	const size_t BUF_SIZE = 256;
+	char buf[BUF_SIZE];
+	CFURLGetFileSystemRepresentation(fileUrl, true, (UInt8*)buf, BUF_SIZE);
+	CFRelease(fileUrl);
+
+	std::ifstream ifs(buf, std::ios::binary);
+#else
 	std::ifstream ifs(filename.c_str(), std::ios::binary);
+#endif
+
 	if (!ifs.is_open())
 	{
 		std::cerr << "Error opening ResourcePack: " << filename << std::endl;

@@ -8,9 +8,9 @@ CONFIG(debug) {
 
 # Here we should set all the files we want
 # to include in the bundle
-#GAME_DATA.files = ../bin/data/walk.png
-#GAME_DATA.path = Contents/MacOS
-#QMAKE_BUNDLE_DATA += GAME_DATA
+GAME_DATA.files = ../bin/data/data.pack
+GAME_DATA.path = Contents/Resources
+QMAKE_BUNDLE_DATA += GAME_DATA
 
 # Here we can specify the icon for the bundle
 #ICON =
@@ -107,10 +107,10 @@ HEADERS += \
 	../src/game/phonecontrollerbehavior.h \
 	../src/game/actionswitchtriggerbehavior.h \
 	../src/game/actionsendmessagebehavior.h \
-    ../src/game/dialogueactorbehavior.h \
-    ../src/game/actionaddobjectbehavior.h \
-    ../src/game/actionremoveobjectbehavior.h \
-    ../src/game/gamescreenbehavior.h
+	../src/game/dialogueactorbehavior.h \
+	../src/game/actionaddobjectbehavior.h \
+	../src/game/actionremoveobjectbehavior.h \
+	../src/game/gamescreenbehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -163,10 +163,10 @@ SOURCES += \
 	../src/game/phonecontrollerbehavior.cpp \
 	../src/game/actionswitchtriggerbehavior.cpp \
 	../src/game/actionsendmessagebehavior.cpp \
-    ../src/game/dialogueactorbehavior.cpp \
-    ../src/game/actionaddobjectbehavior.cpp \
-    ../src/game/actionremoveobjectbehavior.cpp \
-    ../src/game/gamescreenbehavior.cpp
+	../src/game/dialogueactorbehavior.cpp \
+	../src/game/actionaddobjectbehavior.cpp \
+	../src/game/actionremoveobjectbehavior.cpp \
+	../src/game/gamescreenbehavior.cpp
 
 
 
