@@ -103,7 +103,6 @@ HEADERS += \
 	../src/game/dialogue.h \
 	../src/game/dialoguenode.h \
 	../src/game/dialoguecontrolbehavior.h \
-	../src/game/conditiononclickbehavior.h \
 	../src/game/phonecontrollerbehavior.h \
 	../src/game/actionswitchtriggerbehavior.h \
 	../src/game/actionsendmessagebehavior.h \
@@ -111,7 +110,7 @@ HEADERS += \
 	../src/game/actionaddobjectbehavior.h \
 	../src/game/actionremoveobjectbehavior.h \
 	../src/game/gamescreenbehavior.h \
-    ../src/game/overtextbehavior.h
+	../src/game/usableitembehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -160,7 +159,6 @@ SOURCES += \
 	../src/game/dialogue.cpp \
 	../src/game/dialoguenode.cpp \
 	../src/game/dialoguecontrolbehavior.cpp \
-	../src/game/conditiononclickbehavior.cpp \
 	../src/game/phonecontrollerbehavior.cpp \
 	../src/game/actionswitchtriggerbehavior.cpp \
 	../src/game/actionsendmessagebehavior.cpp \
@@ -168,7 +166,7 @@ SOURCES += \
 	../src/game/actionaddobjectbehavior.cpp \
 	../src/game/actionremoveobjectbehavior.cpp \
 	../src/game/gamescreenbehavior.cpp \
-    ../src/game/overtextbehavior.cpp
+	../src/game/usableitembehavior.cpp
 
 
 

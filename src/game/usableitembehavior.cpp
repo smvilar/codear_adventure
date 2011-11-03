@@ -1,6 +1,6 @@
-#include "overtextbehavior.h"
+#include "usableitembehavior.h"
 //----------------------------------------------------------------------------//
-void OverTextBehavior::activate()
+void UsableItemBehavior::activate()
 {
 	mouseUtil_ = pWorld_->getObject("Game")->getAttributeAs<MouseUtil*>("mouse");
 
@@ -9,12 +9,13 @@ void OverTextBehavior::activate()
 	width_ = pOwner_->getAttribute("width");
 	height_ = pOwner_->getAttribute("height");
 
+	condition_ = pOwner_->getAttribute("condition");
 	textToShow_ = pOwner_->getAttribute("overText");
 
 	overText_ = false;
 }
 //----------------------------------------------------------------------------//
-void OverTextBehavior::update()
+void UsableItemBehavior::update()
 {
 	if (mouseUtil_->isInBox(posX_->getValue<int>(),
 							posY_->getValue<int>(),
@@ -28,6 +29,10 @@ void OverTextBehavior::update()
 			pWorld_->getScene().addDrawable(text_);
 			overText_ = true;
 		}
+
+		if (mouseUtil_->justPressed(0))
+			pWorld_->broadcast(Message("trigger_condition",
+									   condition_->getValue<std::string>()));
 	}
 	else if (overText_)
 	{

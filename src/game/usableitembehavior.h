@@ -5,10 +5,10 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-class OverTextBehavior : public Behavior
+class UsableItemBehavior : public Behavior
 {
 public:
-	Behavior* clone() const { return new OverTextBehavior; }
+	Behavior* clone() const { return new UsableItemBehavior; }
 
 	void update();
 
@@ -18,6 +18,7 @@ private:
 private:
 	MouseUtil *mouseUtil_;
 	Attribute *posX_, *posY_, *width_, *height_;
+	Attribute *condition_;
 	Attribute *textToShow_;
 
 	bool overText_;

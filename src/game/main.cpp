@@ -2,7 +2,6 @@
 //----------------------------------------------------------------------------//
 #include "logobehavior.h"
 #include "dialoguecontrolbehavior.h"
-#include "conditiononclickbehavior.h"
 #include "phonecontrollerbehavior.h"
 #include "dialogueactorbehavior.h"
 #include "actionsendmessagebehavior.h"
@@ -10,7 +9,7 @@
 #include "actionaddobjectbehavior.h"
 #include "actionremoveobjectbehavior.h"
 #include "gamescreenbehavior.h"
-#include "overtextbehavior.h"
+#include "usableitembehavior.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -20,14 +19,13 @@ void setupWorld(World &world)
 	world.registerBehavior("Logo", new LogoBehavior);
 	world.registerBehavior("GameScreen", new GameScreenBehavior);
 	world.registerBehavior("DialogueControl", new DialogueControlBehavior);
-	world.registerBehavior("ConditionOnClick", new ConditionOnClickBehavior);
 	world.registerBehavior("PhoneController", new PhoneControllerBehavior);
 	world.registerBehavior("DialogueActor", new DialogueActorBehavior);
 	world.registerBehavior("ActionSendMessage", new ActionSendMessageBehavior);
 	world.registerBehavior("ActionSwitchTrigger", new ActionSwitchTriggerBehavior);
 	world.registerBehavior("ActionAddObject", new ActionAddObjectBehavior);
 	world.registerBehavior("ActionRemoveObject", new ActionRemoveObjectBehavior);
-	world.registerBehavior("OverText", new OverTextBehavior);
+	world.registerBehavior("UsableItem", new UsableItemBehavior);
 }
 //----------------------------------------------------------------------------//
 int main()
