@@ -1,14 +1,14 @@
-#ifndef CONDITIONONCLICKBEHAVIOR_H
-#define CONDITIONONCLICKBEHAVIOR_H
+#ifndef OVERTEXTBEHAVIOR_H
+#define OVERTEXTBEHAVIOR_H
 //----------------------------------------------------------------------------//
 #include <hierophantengine.h>
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-class ConditionOnClickBehavior : public Behavior
+class OverTextBehavior : public Behavior
 {
 public:
-	Behavior* clone() const { return new ConditionOnClickBehavior; }
+	Behavior* clone() const { return new OverTextBehavior; }
 
 	void update();
 
@@ -17,8 +17,12 @@ private:
 
 private:
 	MouseUtil *mouseUtil_;
-	int posX_, posY_, width_, height_;
-	std::string condition_;
+	Attribute *posX_, *posY_, *width_, *height_;
+	Attribute *textToShow_;
+
+	bool overText_;
+	sf::Font font_;
+	sf::Text text_;
 };
 //----------------------------------------------------------------------------//
-#endif // CONDITIONONCLICKBEHAVIOR_H
+#endif // OVERTEXTBEHAVIOR_H

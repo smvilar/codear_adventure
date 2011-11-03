@@ -1,4 +1,4 @@
-TARGET = CODEARAdv
+TARGET = DamageControl
 QT -= core gui
 TEMPLATE = app
 
@@ -110,7 +110,8 @@ HEADERS += \
 	../src/game/dialogueactorbehavior.h \
 	../src/game/actionaddobjectbehavior.h \
 	../src/game/actionremoveobjectbehavior.h \
-	../src/game/gamescreenbehavior.h
+	../src/game/gamescreenbehavior.h \
+    ../src/game/overtextbehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -166,7 +167,10 @@ SOURCES += \
 	../src/game/dialogueactorbehavior.cpp \
 	../src/game/actionaddobjectbehavior.cpp \
 	../src/game/actionremoveobjectbehavior.cpp \
-	../src/game/gamescreenbehavior.cpp
+	../src/game/gamescreenbehavior.cpp \
+    ../src/game/overtextbehavior.cpp
+
+
 
 
 

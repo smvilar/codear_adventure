@@ -64,11 +64,12 @@
 			"y" : 350,
 			"width" : 50,
 			"height" : 50,
-			"condition" : "phone_used"
+			"condition" : "phone_used",
+            "overText" : "Use phone"
 		},
 		"behaviors" :
 		[
-			"ConditionOnClick"
+			"ConditionOnClick", "OverText"
 		]
 	},
 

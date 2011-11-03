@@ -10,6 +10,7 @@
 #include "actionaddobjectbehavior.h"
 #include "actionremoveobjectbehavior.h"
 #include "gamescreenbehavior.h"
+#include "overtextbehavior.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -26,6 +27,7 @@ void setupWorld(World &world)
 	world.registerBehavior("ActionSwitchTrigger", new ActionSwitchTriggerBehavior);
 	world.registerBehavior("ActionAddObject", new ActionAddObjectBehavior);
 	world.registerBehavior("ActionRemoveObject", new ActionRemoveObjectBehavior);
+	world.registerBehavior("OverText", new OverTextBehavior);
 }
 //----------------------------------------------------------------------------//
 int main()
