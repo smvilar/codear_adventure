@@ -25,6 +25,7 @@ SpriteAnimation::SpriteAnimation(sf::Sprite &sprite,
 , loopFromFrame_(loopFromFrame)
 , currentFrame_(firstFrame)
 , timer_(0)
+, loopCounter_(0)
 {
 	updateRect();
 }
@@ -54,14 +55,29 @@ void SpriteAnimation::update(u32 elapsedMs)
 	if (msPerFrame_ && timer_ > msPerFrame_)
 	{
 		timer_ -= msPerFrame_;
+
 		u32 maxFrame = lastFrame_
 				? lastFrame_
 				: (framesHorizontal_ * framesVertical_ - 1);
-		currentFrame_++;
+
+		++currentFrame_;
+
 		if (currentFrame_ > maxFrame)
-			currentFrame_ = loopFromFrame_;
+		{
+			++loopCounter_;
+			currentFrame_ = loopCount_ && loopCounter_ > loopCount_
+							? loopFromFrame_ : lastFrame_;
+		}
 		updateRect();
 	}
+}
+//----------------------------------------------------------------------------//
+void SpriteAnimation::reset()
+{
+	currentFrame_ = firstFrame_;
+	timer_ = 0;
+	loopCounter_ = 0;
+	updateRect();
 }
 //----------------------------------------------------------------------------//
 void SpriteAnimation::updateRect()

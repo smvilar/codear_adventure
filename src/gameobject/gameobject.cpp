@@ -113,6 +113,7 @@ void GameObject::added()
 		Behavior* behavior = *it;
 		behavior->pWorld_ = pWorld_;
 		behavior->activate();
+		behavior->update();
 	}
 }
 //----------------------------------------------------------------------------//

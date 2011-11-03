@@ -13,16 +13,14 @@ class Attribute;
 class ENGINE_API SpriteBehavior : public Behavior
 {
 public:
-	virtual ~SpriteBehavior() {}
-
-	virtual void update();
-
-	virtual Behavior* clone() const;
+	Behavior* clone() const;
+	void update();
+	void handleMessage(const Message &message);
 
 protected:
-	virtual void added();
-	virtual void activate();
-	virtual void deactivate();
+	void added();
+	void activate();
+	void deactivate();
 
 private:
 	AnimatedSprite animatedSprite_;

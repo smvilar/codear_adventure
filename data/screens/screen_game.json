@@ -136,7 +136,7 @@
 				},
                 {
                     "action" : "SendMessage",
-                    "args" : [ "MCOnPhone", "stop_animation" ]
+                    "args" : [ "MCOnPhone", "play_animation", "hang" ]
                 }
 			]
 		},

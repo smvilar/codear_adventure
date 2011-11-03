@@ -5,6 +5,7 @@
 #include "gameobject/world.h"
 #include "gameobject/gameobject.h"
 #include "gameobject/attribute.h"
+#include "gameobject/message.h"
 #include "core/scene.h"
 //----------------------------------------------------------------------------//
 using namespace he;
@@ -51,5 +52,14 @@ void SpriteBehavior::update()
 
 	// TODO: unhardcode
 	animatedSprite_.update(30);
+}
+//----------------------------------------------------------------------------//
+void SpriteBehavior::handleMessage(const Message &message)
+{
+	if (message.equals("play_animation"))
+	{
+		const std::string &name = message.argsAs<std::string>();
+		animatedSprite_.play(name);
+	}
 }
 //----------------------------------------------------------------------------//

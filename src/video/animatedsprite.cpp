@@ -1,7 +1,5 @@
 #include "video/animatedsprite.h"
 //----------------------------------------------------------------------------//
-#include <fstream>
-//----------------------------------------------------------------------------//
 #include "json/json.h"
 #include "resource/resourcepack.h"
 //----------------------------------------------------------------------------//
@@ -31,16 +29,18 @@ bool AnimatedSprite::parse(const std::string &filename, ResourcePack &resPack)
 	u32 framesVertical = root["framesVertical"].asInt();
 	if (framesHorizontal == 0) framesHorizontal = 1;
 	if (framesVertical == 0) framesVertical = 1;
-	Json::Value &animsArray = root["animations"];
+	const Json::Value &animsArray = root["animations"];
 	for (size_t i = 0; i < animsArray.size(); ++i)
 		parseAnimation(animsArray[i], framesHorizontal, framesVertical);
 
-	play(root["defaultAnimation"].asString());
+	const Json::Value &defAnim = root["defaultAnimation"];
+	if (!defAnim.isNull())
+		play(defAnim.asString());
 
 	return true;
 }
 //----------------------------------------------------------------------------//
-void AnimatedSprite::parseAnimation(Json::Value &root, u32 framesHoriz, u32 framesVert)
+void AnimatedSprite::parseAnimation(const Json::Value &root, u32 framesHoriz, u32 framesVert)
 {
 	const std::string &animName = root["name"].asString();
 	u32 msPerFrame = root["msPerFrame"].asInt();
@@ -64,6 +64,11 @@ void AnimatedSprite::play(const std::string &animation)
 {
 	Animations::iterator it = animations_.find(animation);
 	if (it != animations_.end())
+	{
 		currentAnimation_ = &animations_[animation];
+		currentAnimation_->reset();
+	}
+	else
+		std::cerr << "Couldn't play animation: '" << animation << "'" << std::endl;
 }
 //----------------------------------------------------------------------------//

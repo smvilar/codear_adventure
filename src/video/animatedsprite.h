@@ -31,7 +31,7 @@ public:
 	sf::Sprite& getSprite() { return sprite_; }
 
 private:
-	void parseAnimation(Json::Value &root, u32 framesHoriz, u32 framesVert);
+	void parseAnimation(const Json::Value &root, u32 framesHoriz, u32 framesVert);
 
 private:
 	sf::Sprite sprite_;

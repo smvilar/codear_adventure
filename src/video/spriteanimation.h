@@ -25,6 +25,8 @@ public:
 
 	void update(u32 elapsedMs);
 
+	void reset();
+
 private:
 	sf::Sprite* sprite_;
 
@@ -38,6 +40,7 @@ private:
 
 	u32 currentFrame_;
 	u32 timer_;
+	u32 loopCounter_;
 
 private:
 	void updateRect();

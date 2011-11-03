@@ -9,9 +9,25 @@
 			"name" : "pickup",
 			"msPerFrame" : 240,
 			"firstFrame" : 0,
-			"lastFrame" : 11,
+			"lastFrame" : 9,
 			"loopCount" : 0,
-			"loopFromFrame" : 9
-		}
+			"loopFromFrame" : 0
+		},
+        {
+            "name" : "idle",
+            "firstFrame" : 9
+        },
+        {
+            "name" : "talk",
+            "msPerFrame" : 200,
+            "firstFrame" : 9,
+            "lastFrame" : 11,
+            "loopCount" : 0,
+            "loopFromFrame" : 9
+        },
+        {
+            "name" : "hang",
+            "firstFrame" : 0
+        }
 	]
 }
