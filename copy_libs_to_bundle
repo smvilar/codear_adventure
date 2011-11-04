@@ -1,4 +1,4 @@
-DEST_DIR=bin/CODEARAdv.app/Contents/Frameworks
+DEST_DIR=bin/DamageControl.app/Contents/Frameworks
 mkdir $DEST_DIR 
 cp /usr/local/lib/libsfml-system.2.dylib $DEST_DIR
 cp /usr/local/lib/libsfml-window.2.dylib $DEST_DIR
