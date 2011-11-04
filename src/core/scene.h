@@ -2,6 +2,7 @@
 #define HE_SCENE_H
 //----------------------------------------------------------------------------//
 #include <vector>
+#include <map>
 //----------------------------------------------------------------------------//
 #include "dllexport.h"
 #include "core/types.h"
@@ -23,15 +24,15 @@ public:
 
 /// View management
 public:
-	void addDrawable(sf::Drawable &drawable);
+	void addDrawable(sf::Drawable &drawable, s32 layer = 0);
 	void removeDrawable(sf::Drawable &drawable);
 	void clearDrawables();
 
 	bool hasDrawable(sf::Drawable &drawable);
 
 private:
-	typedef std::vector<sf::Drawable*> ViewVector;
-	ViewVector drawables_;
+	typedef std::multimap<s32, sf::Drawable*> Drawables;
+	Drawables drawables_;
 };
 //----------------------------------------------------------------------------//
 } // end namespace he

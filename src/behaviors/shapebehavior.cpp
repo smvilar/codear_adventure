@@ -27,7 +27,7 @@ void ShapeBehavior::update()
 //----------------------------------------------------------------------------//
 void ShapeBehavior::activate()
 {
-	pWorld_->getScene().addDrawable(shape_);
+	pWorld_->getScene().addDrawable(shape_, 1);
 }
 //----------------------------------------------------------------------------//
 void ShapeBehavior::deactivate()

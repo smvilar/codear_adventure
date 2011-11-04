@@ -1,6 +1,7 @@
 #include "core/scene.h"
 //----------------------------------------------------------------------------//
 #include <SFML/Graphics.hpp>
+#include <iostream>
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -11,18 +12,29 @@ Scene::~Scene()
 //----------------------------------------------------------------------------//
 void Scene::render(sf::RenderTarget &renderTarget)
 {
-	for (size_t i=0; i<drawables_.size(); ++i)
-		renderTarget.Draw(*drawables_[i]);
+	Drawables::iterator it = drawables_.begin();
+	for (; it != drawables_.end(); ++it)
+	{
+		renderTarget.Draw(*it->second);
+	}
 }
 //----------------------------------------------------------------------------//
-void Scene::addDrawable(sf::Drawable &drawable)
+void Scene::addDrawable(sf::Drawable &drawable, s32 layer)
 {
-	drawables_.push_back(&drawable);
+	drawables_.insert(std::make_pair(layer, &drawable));
 }
 //----------------------------------------------------------------------------//
 void Scene::removeDrawable(sf::Drawable &drawable)
 {
-	drawables_.erase(std::find(drawables_.begin(), drawables_.end(), &drawable));
+	Drawables::iterator it = drawables_.begin();
+	for (; it != drawables_.end(); ++it)
+	{
+		if (it->second == &drawable)
+		{
+			drawables_.erase(it);
+			return;
+		}
+	}
 }
 //----------------------------------------------------------------------------//
 void Scene::clearDrawables()
@@ -32,6 +44,12 @@ void Scene::clearDrawables()
 //----------------------------------------------------------------------------//
 bool Scene::hasDrawable(sf::Drawable &drawable)
 {
-	return std::find(drawables_.begin(), drawables_.end(), &drawable) != drawables_.end();
+	Drawables::iterator it = drawables_.begin();
+	for (; it != drawables_.end(); ++it)
+	{
+		if (it->second == &drawable)
+			return true;
+	}
+	return false;
 }
 //----------------------------------------------------------------------------//

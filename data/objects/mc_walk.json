@@ -3,7 +3,7 @@
     "name" : "MC",
 	"attributes" :
 	{
-		"x" : 900,
+		"x" : 200,
 		"y" : 168,
 		"spriteInfo" : "sprites/sprite_info_mc.json",
 		"answerBox" : "MCAnswerBox",

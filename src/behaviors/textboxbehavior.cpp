@@ -62,7 +62,7 @@ void TextBoxBehavior::handleMessage(const Message &message)
 //----------------------------------------------------------------------------//
 void TextBoxBehavior::activate()
 {
-	pWorld_->getScene().addDrawable(text_);
+	pWorld_->getScene().addDrawable(text_, 1);
 }
 //----------------------------------------------------------------------------//
 void TextBoxBehavior::deactivate()

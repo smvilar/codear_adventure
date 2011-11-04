@@ -37,7 +37,7 @@ void UsableItemBehavior::update()
 		text_.SetString(textToShow_->getValue<std::string>());
 		text_.SetPosition(mouseUtil_->x, mouseUtil_->y - 30);
 		if (!pWorld_->getScene().hasDrawable(text_))
-			pWorld_->getScene().addDrawable(text_);
+			pWorld_->getScene().addDrawable(text_, 1);
 
 		if (mouseUtil_->justPressed(0))
 			pWorld_->broadcast(Message("trigger_condition",
