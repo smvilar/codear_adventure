@@ -59,6 +59,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../lib/SFML/lib/win32;../lib/zlib125/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OpenGL32.lib;zdll.lib;sfml-main-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(ProjectDir)..\lib\SFML\lib\win32\*.dll" "$(ProjectDir)..\bin"
@@ -81,6 +82,7 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>../lib/SFML/lib/win32;../lib/zlib125/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OpenGL32.lib;zdll.lib;sfml-main.lib;sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(ProjectDir)..\lib\SFML\lib\win32\*.dll" "$(ProjectDir)..\bin"
@@ -95,6 +97,7 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
     <ClCompile Include="..\src\behaviors\fpscounterbehavior.cpp" />
     <ClCompile Include="..\src\behaviors\musicplayerbehavior.cpp" />
     <ClCompile Include="..\src\behaviors\objectcontainerbehavior.cpp" />
+    <ClCompile Include="..\src\behaviors\objectregistrybehavior.cpp" />
     <ClCompile Include="..\src\behaviors\screendirectorbehavior.cpp" />
     <ClCompile Include="..\src\behaviors\shapebehavior.cpp" />
     <ClCompile Include="..\src\behaviors\soundplayerbehavior.cpp" />
@@ -113,14 +116,21 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
     <ClCompile Include="..\src\gameobject\objectparser.cpp" />
     <ClCompile Include="..\src\gameobject\world.cpp" />
     <ClCompile Include="..\src\gameobject\worldserializer.cpp" />
+    <ClCompile Include="..\src\game\actionaddbehaviorbehavior.cpp" />
+    <ClCompile Include="..\src\game\actionaddobjectbehavior.cpp" />
+    <ClCompile Include="..\src\game\actionremovebehaviorbehavior.cpp" />
+    <ClCompile Include="..\src\game\actionremoveobjectbehavior.cpp" />
     <ClCompile Include="..\src\game\actionsendmessagebehavior.cpp" />
-    <ClCompile Include="..\src\game\conditiononclickbehavior.cpp" />
+    <ClCompile Include="..\src\game\actionswitchtriggerbehavior.cpp" />
     <ClCompile Include="..\src\game\dialogue.cpp" />
+    <ClCompile Include="..\src\game\dialogueactorbehavior.cpp" />
     <ClCompile Include="..\src\game\dialoguecontrolbehavior.cpp" />
     <ClCompile Include="..\src\game\dialoguenode.cpp" />
+    <ClCompile Include="..\src\game\gamescreenbehavior.cpp" />
     <ClCompile Include="..\src\game\logobehavior.cpp" />
     <ClCompile Include="..\src\game\main.cpp" />
     <ClCompile Include="..\src\game\phonecontrollerbehavior.cpp" />
+    <ClCompile Include="..\src\game\usableitembehavior.cpp" />
     <ClCompile Include="..\src\json\json_reader.cpp" />
     <ClCompile Include="..\src\json\json_value.cpp" />
     <ClCompile Include="..\src\json\json_writer.cpp" />
@@ -135,6 +145,7 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
     <ClCompile Include="..\src\util\gzstream.cpp" />
     <ClCompile Include="..\src\util\Logger.cpp" />
     <ClCompile Include="..\src\util\MemoryManager.cpp" />
+    <ClCompile Include="..\src\util\mouseutil.cpp" />
     <ClCompile Include="..\src\util\Profile.cpp" />
     <ClCompile Include="..\src\video\animatedsprite.cpp" />
     <ClCompile Include="..\src\video\spriteanimation.cpp" />
@@ -146,6 +157,7 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
     <ClInclude Include="..\src\behaviors\gamebehaviors.h" />
     <ClInclude Include="..\src\behaviors\musicplayerbehavior.h" />
     <ClInclude Include="..\src\behaviors\objectcontainerbehavior.h" />
+    <ClInclude Include="..\src\behaviors\objectregistrybehavior.h" />
     <ClInclude Include="..\src\behaviors\screendirectorbehavior.h" />
     <ClInclude Include="..\src\behaviors\shapebehavior.h" />
     <ClInclude Include="..\src\behaviors\soundplayerbehavior.h" />
@@ -168,13 +180,20 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
     <ClInclude Include="..\src\gameobject\objectparser.h" />
     <ClInclude Include="..\src\gameobject\world.h" />
     <ClInclude Include="..\src\gameobject\worldserializer.h" />
+    <ClInclude Include="..\src\game\actionaddbehaviorbehavior.h" />
+    <ClInclude Include="..\src\game\actionaddobjectbehavior.h" />
+    <ClInclude Include="..\src\game\actionremovebehaviorbehavior.h" />
+    <ClInclude Include="..\src\game\actionremoveobjectbehavior.h" />
     <ClInclude Include="..\src\game\actionsendmessagebehavior.h" />
-    <ClInclude Include="..\src\game\conditiononclickbehavior.h" />
+    <ClInclude Include="..\src\game\actionswitchtriggerbehavior.h" />
     <ClInclude Include="..\src\game\dialogue.h" />
+    <ClInclude Include="..\src\game\dialogueactorbehavior.h" />
     <ClInclude Include="..\src\game\dialoguecontrolbehavior.h" />
     <ClInclude Include="..\src\game\dialoguenode.h" />
+    <ClInclude Include="..\src\game\gamescreenbehavior.h" />
     <ClInclude Include="..\src\game\logobehavior.h" />
     <ClInclude Include="..\src\game\phonecontrollerbehavior.h" />
+    <ClInclude Include="..\src\game\usableitembehavior.h" />
     <ClInclude Include="..\src\hierophantengine.h" />
     <ClInclude Include="..\src\json\autolink.h" />
     <ClInclude Include="..\src\json\config.h" />
@@ -198,6 +217,7 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
     <ClInclude Include="..\src\util\gzstream.h" />
     <ClInclude Include="..\src\util\Logger.h" />
     <ClInclude Include="..\src\util\MemoryManager.h" />
+    <ClInclude Include="..\src\util\mouseutil.h" />
     <ClInclude Include="..\src\util\Profile.h" />
     <ClInclude Include="..\src\util\Util.h" />
     <ClInclude Include="..\src\video\animatedsprite.h" />

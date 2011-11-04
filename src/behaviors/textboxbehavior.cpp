@@ -1,5 +1,7 @@
 #include "behaviors/textboxbehavior.h"
 //----------------------------------------------------------------------------//
+#include <iterator>
+//----------------------------------------------------------------------------//
 #include "gameobject/world.h"
 #include "gameobject/gameobject.h"
 #include "gameobject/message.h"
