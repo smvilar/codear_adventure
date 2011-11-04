@@ -223,9 +223,9 @@
 		{
 			"object_names" :
 			[
-				"MC",
-				"Phone",
-                "Jimmy"
+				"MC"//,
+				//"Phone",
+                //"Jimmy"
 			]
 		},
 		"behaviors" : [ "ObjectContainer", "Edit" ]
