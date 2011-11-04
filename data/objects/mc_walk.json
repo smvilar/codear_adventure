@@ -5,7 +5,10 @@
 	{
 		"x" : 900,
 		"y" : 168,
-		"spriteInfo" : "sprites/sprite_info_mc.json"
+		"spriteInfo" : "sprites/sprite_info_mc.json",
+		"answerBox" : "MCAnswerBox",
+		"boxOffsetX" : 180,
+		"boxOffsetY" : 0
 	},
-	"behaviors" : [ "Sprite" ]
+	"behaviors" : [ "Sprite", "DialogueActor" ]
 }

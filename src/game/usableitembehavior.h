@@ -22,7 +22,6 @@ private:
 	Attribute *condition_;
 	Attribute *textToShow_;
 
-	bool overText_;
 	sf::Font font_;
 	sf::Text text_;
 };

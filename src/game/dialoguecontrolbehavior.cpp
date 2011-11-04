@@ -58,7 +58,7 @@ void DialogueControlBehavior::handleMessage(const Message &message)
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::updateText(const std::string &text)
 {
-	textTime_ = text.length() * 30;
+	textTime_ = Dialogue::getSpeechTime(text);
 	textClock_.Reset();
 
 	textAttr_->setValue(text);

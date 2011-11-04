@@ -58,8 +58,8 @@ void ObjectContainerBehavior::activate()
 	{
 		string objectName = objectNames[i]->getValue<string>();
 		GameObject *object = pWorld_->getObject(objectName.c_str());
-		Assert(object, "ObjectContainerBehavior issue: there's no object");
-		objects.push_back(object);
+		if (object)
+			objects.push_back(object);
 	}
 
 	pOwner_->addAttribute("objects", new Attribute(objects));

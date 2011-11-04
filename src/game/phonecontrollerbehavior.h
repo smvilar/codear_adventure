@@ -17,8 +17,25 @@ private:
 	virtual void added();
 
 private:
+	struct Conversation
+	{
+		u32 state;
+		std::vector<std::string> filenames;
+
+		const std::string& step()
+		{
+			const std::string &text = filenames[state];
+			if (state < filenames.size() - 1)
+				++state;
+			return text;
+		}
+	};
+
+	typedef std::map<std::string, Conversation> ConversationStates;
+	ConversationStates conversationStates_;
+
 	Attribute *dialogueFilenameAttr_;
-	u32 dialogueIndex_;
+
 	bool conversationStarted_;
 };
 //----------------------------------------------------------------------------//

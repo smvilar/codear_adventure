@@ -3,7 +3,11 @@
 //----------------------------------------------------------------------------//
 #include <vector>
 //----------------------------------------------------------------------------//
+#include <hierophantengine.h>
+//----------------------------------------------------------------------------//
 #include "dialoguenode.h"
+//----------------------------------------------------------------------------//
+using namespace he;
 //----------------------------------------------------------------------------//
 class Dialogue
 {
@@ -21,6 +25,8 @@ public:
 
 	bool isValidAnswer(size_t index) const { return index < currentNode_->answers.size(); }
 	bool hasEnded() const { return hasEnded_; }
+
+	static u32 getSpeechTime(const std::string &text);
 
 private:
 	typedef std::vector<DialogueNode*> DialogueNodeVector;

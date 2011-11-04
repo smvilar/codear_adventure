@@ -25,8 +25,6 @@ void UsableItemBehavior::activate()
 	Attribute *fontSize = pOwner_->getAttribute("fontSize");
 	if (fontSize)
 		text_.SetCharacterSize(fontSize->getValue<int>());
-
-	overText_ = false;
 }
 //----------------------------------------------------------------------------//
 void UsableItemBehavior::update()
@@ -38,26 +36,22 @@ void UsableItemBehavior::update()
 	{
 		text_.SetString(textToShow_->getValue<std::string>());
 		text_.SetPosition(mouseUtil_->x, mouseUtil_->y - 30);
-		if (!overText_)
-		{
+		if (!pWorld_->getScene().hasDrawable(text_))
 			pWorld_->getScene().addDrawable(text_);
-			overText_ = true;
-		}
 
 		if (mouseUtil_->justPressed(0))
 			pWorld_->broadcast(Message("trigger_condition",
 									   condition_->getValue<std::string>()));
 	}
-	else if (overText_)
+	else if (pWorld_->getScene().hasDrawable(text_))
 	{
 		pWorld_->getScene().removeDrawable(text_);
-		overText_ = false;
 	}
 }
 //----------------------------------------------------------------------------//
 void UsableItemBehavior::deactivate()
 {
-	if (overText_)
+	if (pWorld_->getScene().hasDrawable(text_))
 		pWorld_->getScene().removeDrawable(text_);
 }
 //----------------------------------------------------------------------------//

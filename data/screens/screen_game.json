@@ -69,26 +69,23 @@
 			"font" : "fonts/rough_typewriter.otf",
 			"fontSize" : 16
 		},
-		"behaviors" :
-		[
-			"UsableItem"
-		]
+		"behaviors" : [ "UsableItem" ]
 	},
-
-//	{
-//		"name" : "Editor",
-//		"attributes" :
-//		{
-//			"object_names" :
-//			[
-//				"Background",
-//				"DialogueBox",
-//				"MC",
-//				"Phone"
-//			]
-//		},
-//		"behaviors" : [ "ObjectContainer", "Edit" ]
-//	},
+    {
+        "name" : "Jimmy",
+        "attributes" :
+        {
+            "x" : 650,
+            "y" : 240,
+            "width" : 200,
+            "height" : 360,
+            "condition" : "jimmy_talk",
+            "overText" : "Talk to Jimmy",
+            "font" : "fonts/rough_typewriter.otf",
+			"fontSize" : 16
+        },
+        "behaviors" : [ "UsableItem" ]
+    },
 	{
 		"name" : "BackgroundMusic",
 		"attributes" :
@@ -99,6 +96,48 @@
 		},
 		"behaviors" : [ "MusicPlayer" ]
 	},
+    {
+        "name" : "TriggerJimmy",
+        "attributes" :
+        {
+            "conditions" : [ "jimmy_talk" ],
+            "actions" :
+            [
+                {
+                    "action" : "SendMessage",
+                    "args" : [ "DialogueBox", "start_conversation", "jimmy" ]
+                },
+                {
+                    "action" : "RemoveBehavior",
+                    "args" : [ "Phone", "UsableItem" ]
+                },
+                {
+                    "action" : "RemoveBehavior",
+                    "args" : [ "Jimmy", "UsableItem" ]
+                }
+            ]
+        },
+        "behaviors" : [ "Trigger" ]
+    },
+    {
+        "name" : "TriggerJimmyEnd",
+        "attributes" :
+        {
+            "conditions" : [ "jimmy_end" ],
+            "actions" :
+            [
+                {
+                    "action" : "AddBehavior",
+                    "args" : [ "Phone", "UsableItem" ]
+                },
+                {
+                    "action" : "AddBehavior",
+                    "args" : [ "Jimmy", "UsableItem" ]
+                }
+            ]
+        },
+        "behaviors" : [ "Trigger" ]
+    },
 	{
 		"name" : "TriggerStartConversation",
 		"attributes" :
@@ -108,11 +147,7 @@
 			[
 				{
 					"action" : "SendMessage",
-					"args" : [ "DialogueBox", "start_conversation" ]
-				},
-				{
-					"action" : "SwitchTrigger",
-					"args" : [ "TriggerStartConversation", false ]
+					"args" : [ "DialogueBox", "start_conversation", "phone" ]
 				},
                 {
                     "action" : "AddObject",
@@ -125,11 +160,15 @@
                 {
                     "action" : "RemoveBehavior",
                     "args" : [ "Phone", "UsableItem" ]
+                },
+                {
+                    "action" : "RemoveBehavior",
+                    "args" : [ "Jimmy", "UsableItem" ]
                 }
 			]
 		},
 		"behaviors" : [ "Trigger" ]
-	},
+    },
 	{
 		"name" : "TriggerEndConversation",
 		"attributes" :
@@ -137,10 +176,6 @@
 			"conditions" : [ "phone_hang" ],
 			"actions" :
 			[
-				{
-					"action" : "SwitchTrigger",
-					"args" : [ "TriggerStartConversation", true ]
-				},
                 {
                     "action" : "SendMessage",
                     "args" : [ "MCOnPhone", "play_animation", "hang" ]
@@ -181,5 +216,18 @@
     {
         "name" : "GameScreen",
         "behaviors" : [ "GameScreen" ]
-    }
+    },
+	{
+		"name" : "Editor",
+		"attributes" :
+		{
+			"object_names" :
+			[
+				"MC",
+				"Phone",
+                "Jimmy"
+			]
+		},
+		"behaviors" : [ "ObjectContainer", "Edit" ]
+	}
 ]

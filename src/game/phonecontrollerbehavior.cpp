@@ -2,16 +2,14 @@
 //----------------------------------------------------------------------------//
 #include "dialoguecontrolbehavior.h"
 //----------------------------------------------------------------------------//
-static const char * DIALOGUE_FILENAMES[] = {
-	"dialogues/phone_dialogue1.json",
-	"dialogues/phone_dialogue2.json"
-};
-//----------------------------------------------------------------------------//
 PhoneControllerBehavior::PhoneControllerBehavior()
-: dialogueIndex_(0)
-, conversationStarted_(false)
+: conversationStarted_(false)
 {
-
+	conversationStates_["phone"].state = 0;
+	conversationStates_["phone"].filenames.push_back("dialogues/phone_dialogue1.json");
+	conversationStates_["jimmy"].state = 0;
+	conversationStates_["jimmy"].filenames.push_back("dialogues/jimmy_dialogue1.json");
+	conversationStates_["jimmy"].filenames.push_back("dialogues/jimmy_dialogue2.json");
 }
 //----------------------------------------------------------------------------//
 void PhoneControllerBehavior::added()
@@ -30,10 +28,11 @@ void PhoneControllerBehavior::handleMessage(const Message &message)
 
 	if (message.equals("start_conversation"))
 	{
-		// add a dialogue control with some dialogue
-		std::string dialogueFilename = DIALOGUE_FILENAMES[dialogueIndex_];
-		dialogueFilenameAttr_->setValue(dialogueFilename);
+		const std::string &convId = message.argsAs<std::string>();
+		const std::string &filename = conversationStates_[convId].step();
 
+		dialogueFilenameAttr_->setValue(filename);
+		// add the DialogueControlBehavior
 		pOwner_->addBehavior(new DialogueControlBehavior);
 	}
 }

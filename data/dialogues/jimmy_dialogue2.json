@@ -1,0 +1,44 @@
+[
+	{
+     		"id" : "0",
+        	"speech" : [ "No hablamos con él desde que nos comunicamos por primera vez. Es totalmente imprescindible para él hablar con alguien de afuera. Ahí es donde entras tú, Rick." ],
+     		"answers" : 
+            [
+          		{
+            		"answer" : "¿Y cuál sería tu función aquí, James?",
+              		"goto" : "1"
+        		}
+    		]
+	},
+	{
+     		"id" : "1",
+        	"speech" : [ "Yo soy tu enlace con el mundo de la información, Rick. O al menos a toda la información que tengamos en nuestras bases de datos.", "Si lo necesitas puedo buscar cualquier término en nuestra base a través de esta consola que ves en frente mío.", "También voy a ir guardando pedazos de información relevantes para que puedas analizarlos y hasta quizá combinarlos para obtener nueva información." ],
+     		"answers" : [
+          		{
+                    "answer" : "Muy bien, empecemos de una vez.",
+              		"goto" : "2"
+        		}
+    		]
+	},
+	{
+     		"id" : "2",
+        	"speech" : [ "Puedes usar el teléfono que está a mi lado." ],
+     		"answers" : [
+          		{
+                    "answer" : "Gracias James.",
+              		"goto" : "3"
+        		}
+    		]
+	},
+	{
+     		"id" : "3",
+        	"speech" : [ "Hey Rick, dime Jimmy." ],
+     		"answers" : [
+          		{
+                    "answer" : "Lo pensaré.",
+              		"goto" : "end",
+                    "event" : "jimmy_end"
+        		}
+    		]
+	}
+]

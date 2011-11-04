@@ -74,3 +74,8 @@ std::string Dialogue::selectAnswer(size_t index)
 	return event;
 }
 //----------------------------------------------------------------------------//
+u32 Dialogue::getSpeechTime(const std::string &text)
+{
+	return std::max<int>(1000, text.length() * 30);
+}
+//----------------------------------------------------------------------------//

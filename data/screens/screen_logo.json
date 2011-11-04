@@ -3,21 +3,17 @@
 		"name" : "Hierophant",
 		"attributes" :
 		{
-			"x" : 300,
-			"y" : 300,
-			"width" : 500,
-			"height" : 100,
-			"text" : "Hierophant Team",
-			"font" : "fonts/Robotica.ttf",
-			"fontSize" : 22
+			"x" : 0,
+			"y" : 0,
+			"spriteInfo" : "sprites/hierophant_logo.json"
 		},
-		"behaviors" : [ "TextBox" ]
+		"behaviors" : [ "Sprite" ]
 	},
 	{
 		"name" : "LogoScreen",
 		"attributes" :
 		{
-			"logo_time" : 1000
+			"logo_time" : 2000
 		},
 		"behaviors" : [ "Logo" ]
 	}
