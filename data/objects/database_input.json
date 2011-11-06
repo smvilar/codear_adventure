@@ -1,0 +1,14 @@
+{
+    "name" : "DatabaseInput",
+	"attributes" :
+	{
+		"x" : 670,
+		"y" : 70,
+		"width" : 300,
+		"height" : 100,
+        //"font" : "fonts/rough_typewriter.otf",
+		"fontSize" : 16,
+		"text" : ""
+	},
+	"behaviors" : [ "TextBox", "TextInput" ]
+}

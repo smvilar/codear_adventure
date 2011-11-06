@@ -13,26 +13,35 @@ void TextBoxBehavior::added()
 	// fill with test text
 	const char *loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis nulla sed massa sodales iaculis. Etiam et nisi ac massa interdum pulvinar. Aliquam eu urna mauris. Cras sit amet tortor nulla. Praesent eget nisi sit amet erat feugiat congue at et ante. Pellentesque eros justo, dignissim sed egestas et, auctor non nisl. Aliquam erat volutpat. Pellentesque aliquet, leo vel vulputate rhoncus, sapien sem laoreet leo, at egestas augue nisi at velit. Donec sollicitudin, leo id elementum rhoncus, nunc mi consectetur neque, vel placerat nulla diam a massa.";
 
-	posX_ = pOwner_->getAttribute("x");
-	posY_ = pOwner_->getAttribute("y");
-	width_ = pOwner_->getAttribute("width");
-	height_ = pOwner_->getAttribute("height");
+	GameObject &owner = *pOwner_;
 
-	Attribute *fontAttr = pOwner_->getAttribute("font");
+	posX_ = owner["x"];
+	posY_ = owner["y"];
+	width_ = owner["width"];
+	height_ = owner["height"];
+
+	Attribute *fontAttr = owner["font"];
 	if (fontAttr)
 	{
 		std::string fontFilename = fontAttr->get<std::string>();
-		ResourceData res = pWorld_->getResourceManager().getResource(fontFilename);
+		ResourceManager &rm = pWorld_->getResourceManager();
+		ResourceData res = rm.getResource(fontFilename);
 		if (!font_.LoadFromMemory(res.data, res.size))
 			std::cerr << "Couldn't load font: " << fontFilename << std::endl;
 	}
+	else
+	{
+		font_ = sf::Font::GetDefaultFont();
+	}
 	text_.SetFont(font_);
 
-	fontSize_ = pOwner_->getAttribute("fontSize");
+	fontSize_ = owner["fontSize"];
 	if (fontSize_)
 		text_.SetCharacterSize(fontSize_->get<int>());
+	else
+		text_.SetCharacterSize(12);
 
-	textAttr_ = pOwner_->getAttribute("text");
+	textAttr_ = owner["text"];
 	if (textAttr_)
 		text_.SetString(textAttr_->get<std::string>());
 	else

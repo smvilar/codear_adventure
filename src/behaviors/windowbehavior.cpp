@@ -12,6 +12,27 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
+void WindowBehavior::added()
+{
+	GameObject &owner = *pOwner_;
+
+	u32 width = owner["width"]->get<int>();
+	u32 height = owner["height"]->get<int>();
+	u32 bpp = owner["bpp"]->get<int>();
+	bool fullscreen = owner["fullscreen"]->get<bool>();
+	const std::string &caption = owner["name"]->get<std::string>();
+
+	sf::VideoMode videoMode(width, height, bpp);
+	sf::ContextSettings contextSettings;
+	u32 style = fullscreen ? sf::Style::Fullscreen : sf::Style::Close;
+
+	window_ = new sf::RenderWindow(videoMode, caption, style, contextSettings);
+	window_->SetPosition(0, 0);
+
+	pOwner_->addAttribute("window", new Attribute(window_));
+	pOwner_->addAttribute("mouse", new Attribute(&mouseUtil_));
+}
+//----------------------------------------------------------------------------//
 void WindowBehavior::update()
 {
 	pollEvents();
@@ -33,37 +54,12 @@ void WindowBehavior::update()
 	window_->Display();
 }
 //----------------------------------------------------------------------------//
-Behavior* WindowBehavior::clone() const
-{
-	return new WindowBehavior;
-}
-//----------------------------------------------------------------------------//
-void WindowBehavior::added()
-{
-	using std::string;
-
-	u32 width = pOwner_->getAttributeAs<int>("width");
-	u32 height = pOwner_->getAttributeAs<int>("height");
-	u32 bpp = pOwner_->getAttributeAs<int>("bpp");
-	bool fullscreen = pOwner_->getAttributeAs<bool>("fullscreen");
-	const string &caption = pOwner_->getAttributeAs<string>("name");
-
-	sf::VideoMode videoMode(width, height, bpp);
-	sf::ContextSettings contextSettings;
-	u32 style = fullscreen ? sf::Style::Fullscreen : sf::Style::Close;
-
-	window_ = new sf::RenderWindow(videoMode, caption, style, contextSettings);
-	pOwner_->addAttribute("window", new Attribute(window_));
-
-	pOwner_->addAttribute("mouse", new Attribute(&mouseUtil_));
-}
-//----------------------------------------------------------------------------//
 void WindowBehavior::pollEvents()
 {
 	sf::Event event;
 	while (window_->PollEvent(event))
 	{
-		pWorld_->broadcast(Message("window_event", &event));
+		pWorld_->broadcast(Message("window_event", event));
 		if (event.Type == sf::Event::Closed)
 			pOwner_->getAttribute("alive")->set(false);
 	}

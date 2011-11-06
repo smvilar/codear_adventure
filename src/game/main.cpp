@@ -12,6 +12,7 @@
 #include "actionaddbehaviorbehavior.h"
 #include "actionremovebehaviorbehavior.h"
 #include "usableitembehavior.h"
+#include "databasebehavior.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -30,6 +31,7 @@ void setupWorld(World &world)
 	world.registerBehavior("ActionAddBehavior", new ActionAddBehaviorBehavior);
 	world.registerBehavior("ActionRemoveBehavior", new ActionRemoveBehaviorBehavior);
 	world.registerBehavior("UsableItem", new UsableItemBehavior);
+	world.registerBehavior("Database", new DatabaseBehavior);
 }
 //----------------------------------------------------------------------------//
 int main()

@@ -1,5 +1,7 @@
 #include "behaviors/textinputbehavior.h"
 //----------------------------------------------------------------------------//
+#include <iostream>
+//----------------------------------------------------------------------------//
 #include <SFML/Window.hpp>
 //----------------------------------------------------------------------------//
 #include "gameobject/message.h"
@@ -10,14 +12,14 @@ using namespace he;
 //----------------------------------------------------------------------------//
 void TextInputBehavior::added()
 {
-	textAttr_ = pOwner_->getAttribute("text");
+	textAttr_ = (*pOwner_)["text"];
 }
 //----------------------------------------------------------------------------//
 void TextInputBehavior::handleMessage(const Message &message)
 {
 	if (message.equals("window_event"))
 	{
-		const sf::Event &ev = *message.argsAs<sf::Event*>();
+		const sf::Event &ev = message.argsAs<sf::Event>();
 		if (ev.Type == sf::Event::TextEntered)
 		{
 			sf::String str = ev.Text.Unicode;

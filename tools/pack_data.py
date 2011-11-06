@@ -28,15 +28,14 @@ class DataPacker(object):
 
 	def pack_file(self, filepath):
 		# remove the input_dir from the filepath to get the filename
-		filename = filepath.replace(self.input_dir, '')
+		filename = filepath.replace(self.input_dir, '', 1)
 		if filename[0] == os.sep:
 			filename = filename[1:]
 		
-		print 'Packing ' + filename
 		with open(filepath, 'rb') as f:
 			data_to_pack = self.prepare_data(f.read())
 			data_size = len(data_to_pack)
-			print os.path.getsize(filepath), '->', data_size
+			print 'Packing', filename, '[', os.path.getsize(filepath), '->', data_size, ']'
 			self.output_data += filename
 			self.output_data += '\n' # this way we can use getline() to get the filename
 			self.output_data += struct.pack('i', data_size)

@@ -112,7 +112,8 @@ HEADERS += \
 	../src/game/gamescreenbehavior.h \
 	../src/game/usableitembehavior.h \
 	../src/game/actionaddbehaviorbehavior.h \
-	../src/game/actionremovebehaviorbehavior.h
+	../src/game/actionremovebehaviorbehavior.h \
+    ../src/game/databasebehavior.h
 
 SOURCES += \
 	../src/behaviors/spritebehavior.cpp \
@@ -170,4 +171,7 @@ SOURCES += \
 	../src/game/gamescreenbehavior.cpp \
 	../src/game/usableitembehavior.cpp \
 	../src/game/actionaddbehaviorbehavior.cpp \
-	../src/game/actionremovebehaviorbehavior.cpp
+	../src/game/actionremovebehaviorbehavior.cpp \
+    ../src/game/databasebehavior.cpp
+
+

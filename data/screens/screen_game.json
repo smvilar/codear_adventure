@@ -16,7 +16,8 @@
             "objects" :
             [
                 "objects/mc_walk.json",
-                "objects/mc_on_phone.json"
+                "objects/mc_on_phone.json",
+				"objects/database_input.json"
             ]
         },
         "behaviors" : [ "ObjectRegistry" ]
@@ -104,7 +105,7 @@
             "y" : 55,
             "spriteInfo" : "sprites/screen_big.json"
         },
-        "behaviors" : [ "Sprite" ]
+        "behaviors" : [ "Sprite", "Database" ]
     },
     {
         "name" : "SearchScreen",
@@ -113,6 +114,7 @@
             "x" : 531,
             "y" : 39,
             "spriteInfo" : "sprites/screen_1.json",
+            "condition" : "search_clicked",
             "overText" : "Search database",
             "font" : "fonts/rough_typewriter.otf",
 			"fontSize" : 16
@@ -131,6 +133,16 @@
 			"fontSize" : 16
         },
         "behaviors" : [ "Sprite", "UsableItem" ]
+    },
+    {
+        "name" : "EmptyScreen",
+        "attributes" :
+        {
+            "x" : 531,
+            "y" : 230,
+            "spriteInfo" : "sprites/screen_3.json"
+        },
+        "behaviors" : [ "Sprite" ]
     },
 	{
 		"name" : "JimmyAnswerBox",
@@ -257,6 +269,21 @@
 		},
 		"behaviors" : [ "Trigger" ]
 	},
+    {
+        "name" : "TriggerDatabaseSearch",
+        "attributes" :
+        {
+            "conditions" : [ "search_clicked" ],
+            "actions" :
+            [
+                {
+					"action" : "SendMessage",
+					"args" : [ "BigScreen", "database_prepare_input" ]
+                }
+            ]
+        },
+        "behaviors" : [ "Trigger" ]
+    },
 	{
 		"name" : "SendMessage",
 		"behaviors" : [ "ActionSendMessage" ]
@@ -285,7 +312,7 @@
     {
         "name" : "GameScreen",
         "behaviors" : [ "GameScreen" ]
-    },
+    }/*,
 	{
 		"name" : "Editor",
 		"attributes" :
@@ -297,9 +324,10 @@
                 "Jimmy",
                 "BigScreen",
                 "SearchScreen",
-                "InfoScreen"
+                "InfoScreen",
+                "EmptyScreen"
 			]
 		},
 		"behaviors" : [ "ObjectContainer", "Edit" ]
-	}
+	}*/
 ]

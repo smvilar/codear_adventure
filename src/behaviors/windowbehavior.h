@@ -15,11 +15,11 @@ namespace he {
 class ENGINE_API WindowBehavior : public Behavior
 {
 public:
-	virtual void update();
-	virtual Behavior* clone() const;
+	Behavior* clone() const { return new WindowBehavior; }
+	void update();
 
 private:
-	virtual void added();
+	void added();
 
 private:
 	sf::RenderWindow *window_;
