@@ -16,14 +16,14 @@ class Value;
 //----------------------------------------------------------------------------//
 namespace he {
 //----------------------------------------------------------------------------//
-class ResourcePack;
+class ResourceManager;
 //----------------------------------------------------------------------------//
 class ENGINE_API AnimatedSprite
 {
 public:
 	AnimatedSprite() : currentAnimation_(0) {}
 
-	bool parse(const std::string &filename, ResourcePack &resPack);
+	bool parse(const std::string &filename, ResourceManager &resMgr);
 	void update(u32 elapsedMs);
 
 	void play(const std::string &animation);
@@ -35,7 +35,6 @@ private:
 
 private:
 	sf::Sprite sprite_;
-	sf::Texture texture_;
 
 	typedef std::map<std::string, SpriteAnimation> Animations;
 	Animations animations_;

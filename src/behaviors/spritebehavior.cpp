@@ -21,16 +21,17 @@ void SpriteBehavior::added()
 //----------------------------------------------------------------------------//
 void SpriteBehavior::activate()
 {
-	Assert((*pOwner_)["spriteInfo"], "Sprite must have the info");
+	GameObject &owner = *pOwner_;
+	Assert(owner["spriteInfo"], "Sprite must have the info");
 
-	animatedSprite_.parse(pOwner_->getAttributeAs<std::string>("spriteInfo"),
-						 pWorld_->getResourceManager().getDefaultResourcePack());
+	animatedSprite_.parse(owner["spriteInfo"]->get<std::string>(),
+						 pWorld_->getResourceManager());
 
 	sf::Sprite &sprite = animatedSprite_.getSprite();
 
-	if (!(*pOwner_)["width"])
+	if (!owner["width"])
 		pOwner_->addAttribute("width", new Attribute(static_cast<int>(sprite.GetSize().x)));
-	if (!(*pOwner_)["height"])
+	if (!owner["height"])
 		pOwner_->addAttribute("height", new Attribute(static_cast<int>(sprite.GetSize().y)));
 
 	pWorld_->getScene().addDrawable(animatedSprite_.getSprite());

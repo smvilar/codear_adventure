@@ -9,11 +9,8 @@ using namespace he;
 void SoundPlayerBehavior::activate()
 {
 	std::string filename = pOwner_->getAttributeAs<std::string>("soundFilename");
-	ResourceData res = pWorld_->getResourceManager().getResource(filename);
 
-	soundBuffer_.LoadFromMemory(res.data, res.size);
-
-	sound_.SetBuffer(soundBuffer_);
+	sound_.SetBuffer(pWorld_->getResourceManager().getSoundBuffer(filename));
 	if (Attribute* attr = pOwner_->getAttribute("soundLoop"))
 		sound_.SetLoop(attr->get<bool>());
 	if (Attribute* attr = pOwner_->getAttribute("soundAutoPlay"))

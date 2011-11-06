@@ -18,11 +18,10 @@ void UsableItemBehavior::activate()
 	if (fontAttr)
 	{
 		std::string fontFilename = fontAttr->get<std::string>();
-		ResourceData res = pWorld_->getResourceManager().getResource(fontFilename);
-		if (!font_.LoadFromMemory(res.data, res.size))
-			std::cerr << "Couldn't load font: " << fontFilename << std::endl;
+		text_.SetFont(pWorld_->getResourceManager().getFont(fontFilename));
 	}
-	text_.SetFont(font_);
+	else
+		text_.SetFont(sf::Font::GetDefaultFont());
 
 	Attribute *fontSize = owner["fontSize"];
 	if (fontSize)

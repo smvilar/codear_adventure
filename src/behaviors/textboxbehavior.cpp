@@ -24,16 +24,10 @@ void TextBoxBehavior::added()
 	if (fontAttr)
 	{
 		std::string fontFilename = fontAttr->get<std::string>();
-		ResourceManager &rm = pWorld_->getResourceManager();
-		ResourceData res = rm.getResource(fontFilename);
-		if (!font_.LoadFromMemory(res.data, res.size))
-			std::cerr << "Couldn't load font: " << fontFilename << std::endl;
+		text_.SetFont(pWorld_->getResourceManager().getFont(fontFilename));
 	}
 	else
-	{
-		font_ = sf::Font::GetDefaultFont();
-	}
-	text_.SetFont(font_);
+		text_.SetFont(sf::Font::GetDefaultFont());
 
 	fontSize_ = owner["fontSize"];
 	if (fontSize_)
@@ -94,7 +88,7 @@ void TextBoxBehavior::adjustText()
 	{
 		std::string substr = str.substr(0, i);
 		t.SetString(substr);
-		t.SetFont(font_);
+		t.SetFont(text_.GetFont());
 		if (fontSize_)
 			t.SetCharacterSize(fontSize_->get<int>());
 		if (t.GetRect().Width > width)

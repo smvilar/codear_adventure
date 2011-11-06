@@ -1,6 +1,9 @@
 #ifndef HE_RESOURCEMANAGER_H
 #define HE_RESOURCEMANAGER_H
 //----------------------------------------------------------------------------//
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+//----------------------------------------------------------------------------//
 #include "dllexport.h"
 #include "core/assert.h"
 #include "resource/resourcepack.h"
@@ -24,11 +27,22 @@ public:
 	ResourceData getResource(const std::string &name) const;
 	std::string getTextResource(const std::string &name) const;
 
+	sf::Texture& getTexture(const std::string &name);
+	sf::Font& getFont(const std::string &name);
+	sf::SoundBuffer& getSoundBuffer(const std::string &name);
+
 private:
 	typedef std::map<std::string, ResourcePack> ResourcePackMap;
 	ResourcePackMap resPacks_;
 
 	ResourcePack *defaultResPack_;
+
+	typedef std::map<std::string, sf::Texture> Textures;
+	Textures textures_;
+	typedef std::map<std::string, sf::Font> Fonts;
+	Fonts fonts_;
+	typedef std::map<std::string, sf::SoundBuffer> SoundBuffers;
+	SoundBuffers soundBuffers_;
 };
 //----------------------------------------------------------------------------//
 inline ResourcePack& ResourceManager::getDefaultResourcePack() const

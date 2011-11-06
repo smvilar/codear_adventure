@@ -18,7 +18,6 @@ private:
 	virtual void activate();
 
 private:
-	sf::SoundBuffer soundBuffer_;
 	sf::Sound sound_;
 };
 //----------------------------------------------------------------------------//

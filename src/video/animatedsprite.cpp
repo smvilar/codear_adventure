@@ -1,13 +1,13 @@
 #include "video/animatedsprite.h"
 //----------------------------------------------------------------------------//
 #include "json/json.h"
-#include "resource/resourcepack.h"
+#include "resource/resourcemanager.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-bool AnimatedSprite::parse(const std::string &filename, ResourcePack &resPack)
+bool AnimatedSprite::parse(const std::string &filename, ResourceManager &resMgr)
 {
-	std::string text = resPack.getTextResource(filename);
+	std::string text = resMgr.getTextResource(filename);
 	Json::Reader reader;
 	Json::Value root;
 
@@ -19,11 +19,8 @@ bool AnimatedSprite::parse(const std::string &filename, ResourcePack &resPack)
 	}
 
 	const std::string &textureFilename = root["textureFilename"].asString();
-	ResourceData res = resPack.getResource(textureFilename);
 
-	if (!texture_.LoadFromMemory(res.data, res.size))
-		std::cerr << "Error loading texture: " << textureFilename << std::endl;
-	sprite_.SetTexture(texture_);
+	sprite_.SetTexture(resMgr.getTexture(textureFilename));
 
 	u32 framesHorizontal = root["framesHorizontal"].asInt();
 	u32 framesVertical = root["framesVertical"].asInt();
