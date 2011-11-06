@@ -14,7 +14,7 @@ void ObjectRegistryBehavior::activate()
 
 	for (size_t i = 0; i < objs.size(); ++i)
 	{
-		std::string objectFilename = objs[i]->getValue<std::string>();
+		std::string objectFilename = objs[i]->get<std::string>();
 		GameObject *obj = pWorld_->parseObject(objectFilename);
 		pWorld_->registerObjectPrototype(obj->name, obj);
 		std::cout << "Registering " << obj->name << std::endl;

@@ -15,8 +15,8 @@ void ActionSwitchTriggerBehavior::handleMessage(const Message &message)
 	{
 		// read the args
 		const AttributeVector &args = message.argsAs<AttributeVector>();
-		GameObject *object = pWorld_->getObject(args[0]->getValue<std::string>());
-		object->broadcast(Message("trigger_switch", args[1]->getValue<bool>()));
+		GameObject *object = pWorld_->getObject(args[0]->get<std::string>());
+		object->broadcast(Message("trigger_switch", args[1]->get<bool>()));
 	}
 }
 //----------------------------------------------------------------------------//

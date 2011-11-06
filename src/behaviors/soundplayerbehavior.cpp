@@ -15,9 +15,9 @@ void SoundPlayerBehavior::activate()
 
 	sound_.SetBuffer(soundBuffer_);
 	if (Attribute* attr = pOwner_->getAttribute("soundLoop"))
-		sound_.SetLoop(attr->getValue<bool>());
+		sound_.SetLoop(attr->get<bool>());
 	if (Attribute* attr = pOwner_->getAttribute("soundAutoPlay"))
-		if (attr->getValue<bool>())
+		if (attr->get<bool>())
 			sound_.Play();
 }
 //----------------------------------------------------------------------------//

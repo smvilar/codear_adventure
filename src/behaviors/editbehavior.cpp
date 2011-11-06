@@ -88,10 +88,10 @@ void EditBehavior::updateDrag()
 {
 	Attribute *posXAttr = activeObject_->getAttribute("x");
 	Attribute *posYAttr = activeObject_->getAttribute("y");
-	int posX = posXAttr->getValue<int>() + mouseUtil_->getMovementX();
-	int posY = posYAttr->getValue<int>() + mouseUtil_->getMovementY();
-	posXAttr->setValue(posX);
-	posYAttr->setValue(posY);
+	int posX = posXAttr->get<int>() + mouseUtil_->getMovementX();
+	int posY = posYAttr->get<int>() + mouseUtil_->getMovementY();
+	posXAttr->set(posX);
+	posYAttr->set(posY);
 
 	gizmo_.SetPosition(posX, posY);
 

@@ -10,30 +10,27 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-Behavior* SpriteBehavior::clone() const
-{
-	return new SpriteBehavior;
-}
-//----------------------------------------------------------------------------//
 void SpriteBehavior::added()
 {
-	posX_ = pOwner_->getAttribute("x");
-	posY_ = pOwner_->getAttribute("y");
-	rotation_ = pOwner_->getAttribute("rotation");
-	scale_ = pOwner_->getAttribute("scale");
+	GameObject &owner = *pOwner_;
+	posX_ = owner["x"];
+	posY_ = owner["y"];
+	rotation_ = owner["rotation"];
+	scale_ = owner["scale"];
 }
 //----------------------------------------------------------------------------//
 void SpriteBehavior::activate()
 {
-	Assert(pOwner_->getAttribute("spriteInfo"), "Sprite must have the info");
+	Assert((*pOwner_)["spriteInfo"], "Sprite must have the info");
+
 	animatedSprite_.parse(pOwner_->getAttributeAs<std::string>("spriteInfo"),
 						 pWorld_->getResourceManager().getDefaultResourcePack());
 
 	sf::Sprite &sprite = animatedSprite_.getSprite();
 
-	if (!pOwner_->getAttribute("width"))
+	if (!(*pOwner_)["width"])
 		pOwner_->addAttribute("width", new Attribute(static_cast<int>(sprite.GetSize().x)));
-	if (!pOwner_->getAttribute("height"))
+	if (!(*pOwner_)["height"])
 		pOwner_->addAttribute("height", new Attribute(static_cast<int>(sprite.GetSize().y)));
 
 	pWorld_->getScene().addDrawable(animatedSprite_.getSprite());
@@ -46,9 +43,11 @@ void SpriteBehavior::deactivate()
 //----------------------------------------------------------------------------//
 void SpriteBehavior::update()
 {
-	animatedSprite_.getSprite().SetPosition(posX_->getValue<int>(), posY_->getValue<int>());
+	animatedSprite_.getSprite().SetPosition(posX_->get<int>(), posY_->get<int>());
+	if (rotation_)
+		animatedSprite_.getSprite().SetRotation(rotation_->get<int>());
 	if (scale_)
-		animatedSprite_.getSprite().SetScale(scale_->getValue<int>(), scale_->getValue<int>());
+		animatedSprite_.getSprite().SetScale(scale_->get<int>(), scale_->get<int>());
 
 	// TODO: unhardcode
 	animatedSprite_.update(30);

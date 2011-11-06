@@ -14,14 +14,14 @@ void ShapeBehavior::added()
 	rotation_ = pOwner_->getAttribute("rotation");
 	color_ = pOwner_->getAttribute("color");
 
-	sf::FloatRect rect(0, 0, width_->getValue<int>(), height_->getValue<int>());
+	sf::FloatRect rect(0, 0, width_->get<int>(), height_->get<int>());
 	shape_ = sf::Shape::Rectangle(rect, sf::Color());
 	updateColor();
 }
 //----------------------------------------------------------------------------//
 void ShapeBehavior::update()
 {
-	shape_.SetPosition(posX_->getValue<int>(), posY_->getValue<int>());
+	shape_.SetPosition(posX_->get<int>(), posY_->get<int>());
 	updateColor();
 }
 //----------------------------------------------------------------------------//
@@ -41,11 +41,11 @@ void ShapeBehavior::updateColor()
 	if (color_)
 	{
 		typedef std::vector<Attribute*> AttributeVector;
-		const AttributeVector &array = color_->getValue<AttributeVector>();
-		color.r = array[0]->getValue<int>();
-		color.g = array[1]->getValue<int>();
-		color.b = array[2]->getValue<int>();
-		color.a = array[3]->getValue<int>();
+		const AttributeVector &array = color_->get<AttributeVector>();
+		color.r = array[0]->get<int>();
+		color.g = array[1]->get<int>();
+		color.b = array[2]->get<int>();
+		color.a = array[3]->get<int>();
 	}
 	shape_.SetColor(color);
 }

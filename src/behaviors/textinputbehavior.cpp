@@ -37,9 +37,9 @@ void TextInputBehavior::updateText(const std::string &str)
 {
 	if (textAttr_)
 	{
-		std::string text = textAttr_->getValue<std::string>();
+		std::string text = textAttr_->get<std::string>();
 		text += str;
-		textAttr_->setValue(text);
+		textAttr_->set(text);
 		pOwner_->broadcast(Message("update_text"));
 	}
 }
@@ -48,10 +48,10 @@ void TextInputBehavior::backspace()
 {
 	if (textAttr_)
 	{
-		std::string text = textAttr_->getValue<std::string>();
+		std::string text = textAttr_->get<std::string>();
 		if (!text.empty())
 			text.erase(text.end()-1);
-		textAttr_->setValue(text);
+		textAttr_->set(text);
 		pOwner_->broadcast(Message("update_text"));
 	}
 }

@@ -14,9 +14,9 @@ void MusicPlayerBehavior::activate()
 	music_.OpenFromMemory(res.data, res.size);
 
 	if (Attribute* attr = pOwner_->getAttribute("musicLoop"))
-		music_.SetLoop(attr->getValue<bool>());
+		music_.SetLoop(attr->get<bool>());
 	if (Attribute* attr = pOwner_->getAttribute("musicAutoPlay"))
-		if (attr->getValue<bool>())
+		if (attr->get<bool>())
 			music_.Play();
 }
 //----------------------------------------------------------------------------//

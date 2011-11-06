@@ -26,10 +26,10 @@ void DialogueActorBehavior::activate()
 //----------------------------------------------------------------------------//
 void DialogueActorBehavior::update()
 {
-	int x = posX_->getValue<int>() + offsetX_->getValue<int>();
-	int y = posY_->getValue<int>() + offsetY_->getValue<int>();
-	(*answerTextBox_)["x"]->setValue(x);
-	(*answerTextBox_)["y"]->setValue(y);
+	int x = posX_->get<int>() + offsetX_->get<int>();
+	int y = posY_->get<int>() + offsetY_->get<int>();
+	(*answerTextBox_)["x"]->set(x);
+	(*answerTextBox_)["y"]->set(y);
 
 	bool ready = mouseUtil_->justPressed(0) ||
 			answerClock_.GetElapsedTime() > answerTime_;
@@ -42,7 +42,7 @@ void DialogueActorBehavior::update()
 
 		if (waitAnim_)
 		{
-			pOwner_->broadcast(Message("play_animation", waitAnim_->getValue<std::string>()));
+			pOwner_->broadcast(Message("play_animation", waitAnim_->get<std::string>()));
 		}
 	}
 }
@@ -57,7 +57,7 @@ void DialogueActorBehavior::handleMessage(const Message &message)
 		if (talkAnim_)
 		{
 			pOwner_->broadcast(Message("play_animation",
-									   talkAnim_->getValue<std::string>()));
+									   talkAnim_->get<std::string>()));
 		}
 	}
 }
@@ -66,12 +66,12 @@ void DialogueActorBehavior::setText(const std::string &text)
 {
 	answerClock_.Reset();
 	answerTime_ = Dialogue::getSpeechTime(text);
-	(*answerTextBox_)["text"]->setValue(text);
+	(*answerTextBox_)["text"]->set(text);
 	answerTextBox_->broadcast(Message("update_text"));
 
 	typedef std::vector<Attribute*> AttributeVector;
-	const AttributeVector &array = textBoxColor_->getValue<AttributeVector>();
+	const AttributeVector &array = textBoxColor_->get<AttributeVector>();
 	int alpha = (text == "") ? 0 : 64;
-	array[3]->setValue(alpha);
+	array[3]->set(alpha);
 }
 //----------------------------------------------------------------------------//

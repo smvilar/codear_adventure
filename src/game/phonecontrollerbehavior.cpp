@@ -31,7 +31,7 @@ void PhoneControllerBehavior::handleMessage(const Message &message)
 		const std::string &convId = message.argsAs<std::string>();
 		const std::string &filename = conversationStates_[convId].step();
 
-		dialogueFilenameAttr_->setValue(filename);
+		dialogueFilenameAttr_->set(filename);
 		// add the DialogueControlBehavior
 		pOwner_->addBehavior(new DialogueControlBehavior);
 	}

@@ -58,13 +58,13 @@ Json::Value WorldSerializer::serializeAttributeValue(const Attribute &attribute)
 {
 	boost::any anyValue = attribute._value;
 	if (anyValue.type() == typeid(int))
-		return Json::Value(attribute.getValue<int>());
+		return Json::Value(attribute.get<int>());
 	else if (anyValue.type() == typeid(float))
-		return Json::Value(attribute.getValue<float>());
+		return Json::Value(attribute.get<float>());
 	else if (anyValue.type() == typeid(bool))
-		return Json::Value(attribute.getValue<bool>());
+		return Json::Value(attribute.get<bool>());
 	else if (anyValue.type() == typeid(std::string))
-		return Json::Value(attribute.getValue<std::string>());
+		return Json::Value(attribute.get<std::string>());
 	// TODO: arrays, objects
 	return Json::Value();
 }

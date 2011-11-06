@@ -13,7 +13,7 @@ class Attribute;
 class ENGINE_API SpriteBehavior : public Behavior
 {
 public:
-	Behavior* clone() const;
+	Behavior* clone() const { return new SpriteBehavior; }
 	void update();
 	void handleMessage(const Message &message);
 

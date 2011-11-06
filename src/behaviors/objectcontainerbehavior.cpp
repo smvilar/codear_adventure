@@ -22,7 +22,7 @@ void ObjectContainerBehavior::added()
 
 	for (size_t i = 0; i < objectFilenames.size(); ++i)
 	{
-		string objectFilename = objectFilenames[i]->getValue<string>();
+		string objectFilename = objectFilenames[i]->get<string>();
 		GameObject *object = _pWorld->parseObject(objectFilename.c_str());
 		objects.push_back(object);
 	}
@@ -32,7 +32,7 @@ void ObjectContainerBehavior::added()
 
 	for (size_t i = 0; i < objectNames.size(); ++i)
 	{
-		string objectName = objectNames[i]->getValue<string>();
+		string objectName = objectNames[i]->get<string>();
 		GameObject *object = _pWorld->getObject(objectName.c_str());
 		if (object)
 			objects.push_back(object);
@@ -56,7 +56,7 @@ void ObjectContainerBehavior::activate()
 
 	for (size_t i = 0; i < objectNames.size(); ++i)
 	{
-		string objectName = objectNames[i]->getValue<string>();
+		string objectName = objectNames[i]->get<string>();
 		GameObject *object = pWorld_->getObject(objectName);
 		if (object)
 			objects.push_back(object);

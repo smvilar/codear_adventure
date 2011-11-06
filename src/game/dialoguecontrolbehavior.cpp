@@ -11,7 +11,7 @@ void DialogueControlBehavior::activate()
 {
 	GameObject& owner = *pOwner_;
 
-	const std::string &filename = owner["dialogueFilename"]->getValue<std::string>();
+	const std::string &filename = owner["dialogueFilename"]->get<std::string>();
 	const std::string &text =
 			pWorld_->getResourceManager().getTextResource(filename);
 

@@ -13,13 +13,13 @@ public:
 	Attribute(boost::any value);
 
 	template<typename T>
-	T getValue() const
+	T get() const
 	{
 		return boost::any_cast<T>(_value);
 	}
 
 	template<typename T>
-	void setValue(T value)
+	void set(T value)
 	{
 		_value = value;
 	}

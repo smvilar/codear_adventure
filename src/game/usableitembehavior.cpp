@@ -15,7 +15,7 @@ void UsableItemBehavior::activate()
 	Attribute *fontAttr = pOwner_->getAttribute("font");
 	if (fontAttr)
 	{
-		std::string fontFilename = fontAttr->getValue<std::string>();
+		std::string fontFilename = fontAttr->get<std::string>();
 		ResourceData res = pWorld_->getResourceManager().getResource(fontFilename);
 		if (!font_.LoadFromMemory(res.data, res.size))
 			std::cerr << "Couldn't load font: " << fontFilename << std::endl;
@@ -24,24 +24,24 @@ void UsableItemBehavior::activate()
 
 	Attribute *fontSize = pOwner_->getAttribute("fontSize");
 	if (fontSize)
-		text_.SetCharacterSize(fontSize->getValue<int>());
+		text_.SetCharacterSize(fontSize->get<int>());
 }
 //----------------------------------------------------------------------------//
 void UsableItemBehavior::update()
 {
-	if (mouseUtil_->isInBox(posX_->getValue<int>(),
-							posY_->getValue<int>(),
-							width_->getValue<int>(),
-							height_->getValue<int>()))
+	if (mouseUtil_->isInBox(posX_->get<int>(),
+							posY_->get<int>(),
+							width_->get<int>(),
+							height_->get<int>()))
 	{
-		text_.SetString(textToShow_->getValue<std::string>());
+		text_.SetString(textToShow_->get<std::string>());
 		text_.SetPosition(mouseUtil_->x, mouseUtil_->y - 30);
 		if (!pWorld_->getScene().hasDrawable(text_))
 			pWorld_->getScene().addDrawable(text_, 1);
 
 		if (mouseUtil_->justPressed(0))
 			pWorld_->broadcast(Message("trigger_condition",
-									   condition_->getValue<std::string>()));
+									   condition_->get<std::string>()));
 	}
 	else if (pWorld_->getScene().hasDrawable(text_))
 	{

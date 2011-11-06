@@ -8,7 +8,7 @@ void ActionAddObjectBehavior::handleMessage(const Message &message)
 	{
 		// read the args
 		const AttributeVector &args = message.argsAs<AttributeVector>();
-		GameObject *obj = pWorld_->createObject(args[0]->getValue<std::string>());
+		GameObject *obj = pWorld_->createObject(args[0]->get<std::string>());
 		pWorld_->addObject(obj);
 	}
 }

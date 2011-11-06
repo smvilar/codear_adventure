@@ -36,7 +36,7 @@ public:
 	template <typename T>
 	T getAttributeAs(const char *name)
 	{
-		return getAttribute(name)->getValue<T>();
+		return getAttribute(name)->get<T>();
 	}
 
 	Attribute* operator[](const std::string &name) { return getAttribute(name); }

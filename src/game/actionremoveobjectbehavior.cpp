@@ -8,7 +8,7 @@ void ActionRemoveObjectBehavior::handleMessage(const Message &message)
 	{
 		// read the args
 		const AttributeVector &args = message.argsAs<AttributeVector>();
-		pWorld_->removeObject(args[0]->getValue<std::string>());
+		pWorld_->removeObject(args[0]->get<std::string>());
 	}
 }
 //----------------------------------------------------------------------------//

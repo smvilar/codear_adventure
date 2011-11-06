@@ -46,16 +46,16 @@ void TriggerBehavior::activate()
 	conditions_.reserve(conditions.size());
 	for (size_t i = 0; i < conditions.size(); ++i)
 	{
-		conditions_.push_back(conditions[i]->getValue<std::string>());
+		conditions_.push_back(conditions[i]->get<std::string>());
 	}
 
 	AttributeVector actions = pOwner_->getAttributeAs<AttributeVector>("actions");
 	actions_.reserve(actions.size());
 	for (size_t i = 0; i < actions.size(); ++i)
 	{
-		AttributeMap actionObj = actions[i]->getValue<AttributeMap>();
-		actions_.push_back(Action(actionObj["action"]->getValue<std::string>(),
-								  actionObj["args"]->getValue<AttributeVector>()));
+		AttributeMap actionObj = actions[i]->get<AttributeMap>();
+		actions_.push_back(Action(actionObj["action"]->get<std::string>(),
+								  actionObj["args"]->get<AttributeVector>()));
 	}
 }
 //----------------------------------------------------------------------------//

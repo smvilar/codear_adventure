@@ -26,7 +26,7 @@ void WindowBehavior::update()
 	bool isControlPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::LSystem);
 	bool isQPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::Q);
 	if (isControlPressed && isQPressed)
-		pOwner_->getAttribute("alive")->setValue(false);
+		pOwner_->getAttribute("alive")->set(false);
 
 	window_->Clear();
 	pWorld_->getScene().render(*window_);
@@ -65,7 +65,7 @@ void WindowBehavior::pollEvents()
 	{
 		pWorld_->broadcast(Message("window_event", &event));
 		if (event.Type == sf::Event::Closed)
-			pOwner_->getAttribute("alive")->setValue(false);
+			pOwner_->getAttribute("alive")->set(false);
 	}
 }
 //----------------------------------------------------------------------------//

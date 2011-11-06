@@ -21,7 +21,7 @@ void TextBoxBehavior::added()
 	Attribute *fontAttr = pOwner_->getAttribute("font");
 	if (fontAttr)
 	{
-		std::string fontFilename = fontAttr->getValue<std::string>();
+		std::string fontFilename = fontAttr->get<std::string>();
 		ResourceData res = pWorld_->getResourceManager().getResource(fontFilename);
 		if (!font_.LoadFromMemory(res.data, res.size))
 			std::cerr << "Couldn't load font: " << fontFilename << std::endl;
@@ -30,11 +30,11 @@ void TextBoxBehavior::added()
 
 	fontSize_ = pOwner_->getAttribute("fontSize");
 	if (fontSize_)
-		text_.SetCharacterSize(fontSize_->getValue<int>());
+		text_.SetCharacterSize(fontSize_->get<int>());
 
 	textAttr_ = pOwner_->getAttribute("text");
 	if (textAttr_)
-		text_.SetString(textAttr_->getValue<std::string>());
+		text_.SetString(textAttr_->get<std::string>());
 	else
 		text_.SetString(loremIpsum); // fallback to lorem ipsum
 
@@ -43,7 +43,7 @@ void TextBoxBehavior::added()
 //----------------------------------------------------------------------------//
 void TextBoxBehavior::update()
 {
-	text_.SetPosition(posX_->getValue<int>(), posY_->getValue<int>());
+	text_.SetPosition(posX_->get<int>(), posY_->get<int>());
 }
 //----------------------------------------------------------------------------//
 void TextBoxBehavior::handleMessage(const Message &message)
@@ -53,7 +53,7 @@ void TextBoxBehavior::handleMessage(const Message &message)
 		textAttr_ = pOwner_->getAttribute("text");
 		if (textAttr_)
 		{
-			const std::string &text = textAttr_->getValue<std::string>();
+			const std::string &text = textAttr_->get<std::string>();
 			std::wstring wtext;
 			sf::Utf8::ToUtf16(text.begin(), text.end(), std::back_inserter(wtext));
 			text_.SetString(wtext);
@@ -77,7 +77,7 @@ void TextBoxBehavior::adjustText()
 	// This is a so-called 'cabezeada'
 
 	std::string str = text_.GetString();
-	int width = width_->getValue<int>();
+	int width = width_->get<int>();
 
 	size_t lastSpace = 0;
 	sf::Text t;
@@ -87,7 +87,7 @@ void TextBoxBehavior::adjustText()
 		t.SetString(substr);
 		t.SetFont(font_);
 		if (fontSize_)
-			t.SetCharacterSize(fontSize_->getValue<int>());
+			t.SetCharacterSize(fontSize_->get<int>());
 		if (t.GetRect().Width > width)
 		{
 			// replace the last space found with a new line :)

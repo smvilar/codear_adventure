@@ -22,7 +22,7 @@ void GameLoop::start(World &world, const char *gameFilename) const
 	world.addObject(game);
 	world.getWorldSerializer().addIgnoredObject(game->name);
 
-	while (isGameAlive->getValue<bool>())
+	while (isGameAlive->get<bool>())
 		world.update();
 }
 //----------------------------------------------------------------------------//
