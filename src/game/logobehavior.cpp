@@ -15,6 +15,7 @@ void LogoBehavior::update()
 {
 	if (clock_.GetElapsedTime() > logoTime_)
 	{
+		clock_.Reset();
 		pWorld_->broadcast(he::Message("screen_transition",
 									   std::string("timeout")));
 	}
