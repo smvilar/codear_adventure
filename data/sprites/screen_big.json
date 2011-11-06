@@ -1,0 +1,17 @@
+{
+	"textureFilename" : "textures/screen_big.png",
+	"framesHorizontal" : 2,
+	"framesVertical" : 1,
+	"defaultAnimation" : "static",
+	"animations" :
+	[
+		{
+			"name" : "static",
+			"firstFrame" : 0
+		},
+		{
+			"name" : "console",
+			"firstFrame" : 1
+		}
+	]
+}

@@ -96,6 +96,42 @@
         },
         "behaviors" : [ "UsableItem", "DialogueActor" ]
     },
+    {
+        "name" : "BigScreen",
+        "attributes" :
+        {
+            "x" : 657,
+            "y" : 55,
+            "spriteInfo" : "sprites/screen_big.json"
+        },
+        "behaviors" : [ "Sprite" ]
+    },
+    {
+        "name" : "SearchScreen",
+        "attributes" :
+        {
+            "x" : 531,
+            "y" : 39,
+            "spriteInfo" : "sprites/screen_1.json",
+            "overText" : "Search database",
+            "font" : "fonts/rough_typewriter.otf",
+			"fontSize" : 16
+        },
+        "behaviors" : [ "Sprite", "UsableItem" ]
+    },
+    {
+        "name" : "InfoScreen",
+        "attributes" :
+        {
+            "x" : 531,
+            "y" : 142,
+            "spriteInfo" : "sprites/screen_2.json",
+            "overText" : "Read reports",
+            "font" : "fonts/rough_typewriter.otf",
+			"fontSize" : 16
+        },
+        "behaviors" : [ "Sprite", "UsableItem" ]
+    },
 	{
 		"name" : "JimmyAnswerBox",
 		"attributes" :
@@ -249,7 +285,7 @@
     {
         "name" : "GameScreen",
         "behaviors" : [ "GameScreen" ]
-    }/*,
+    },
 	{
 		"name" : "Editor",
 		"attributes" :
@@ -258,9 +294,12 @@
 			[
 				"Richard",
 				"Phone",
-                "Jimmy"
+                "Jimmy",
+                "BigScreen",
+                "SearchScreen",
+                "InfoScreen"
 			]
 		},
 		"behaviors" : [ "ObjectContainer", "Edit" ]
-	}*/
+	}
 ]

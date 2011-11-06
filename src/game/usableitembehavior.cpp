@@ -4,15 +4,17 @@ void UsableItemBehavior::activate()
 {
 	mouseUtil_ = pWorld_->getObject("Game")->getAttributeAs<MouseUtil*>("mouse");
 
-	posX_ = pOwner_->getAttribute("x");
-	posY_ = pOwner_->getAttribute("y");
-	width_ = pOwner_->getAttribute("width");
-	height_ = pOwner_->getAttribute("height");
+	GameObject &owner = *pOwner_;
 
-	condition_ = pOwner_->getAttribute("condition");
-	textToShow_ = pOwner_->getAttribute("overText");
+	posX_ = owner["x"];
+	posY_ = owner["y"];
+	width_ = owner["width"];
+	height_ = owner["height"];
 
-	Attribute *fontAttr = pOwner_->getAttribute("font");
+	condition_ = owner["condition"];
+	textToShow_ = owner["overText"];
+
+	Attribute *fontAttr = owner["font"];
 	if (fontAttr)
 	{
 		std::string fontFilename = fontAttr->get<std::string>();
@@ -22,7 +24,7 @@ void UsableItemBehavior::activate()
 	}
 	text_.SetFont(font_);
 
-	Attribute *fontSize = pOwner_->getAttribute("fontSize");
+	Attribute *fontSize = owner["fontSize"];
 	if (fontSize)
 		text_.SetCharacterSize(fontSize->get<int>());
 }
@@ -39,7 +41,7 @@ void UsableItemBehavior::update()
 		if (!pWorld_->getScene().hasDrawable(text_))
 			pWorld_->getScene().addDrawable(text_, 1);
 
-		if (mouseUtil_->justPressed(0))
+		if (condition_ && mouseUtil_->justPressed(0))
 			pWorld_->broadcast(Message("trigger_condition",
 									   condition_->get<std::string>()));
 	}

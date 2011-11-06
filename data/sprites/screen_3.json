@@ -1,0 +1,13 @@
+{
+	"textureFilename" : "textures/screen_3.png",
+	"framesHorizontal" : 2,
+	"framesVertical" : 1,
+	"defaultAnimation" : "idle",
+	"animations" :
+	[
+		{
+			"name" : "idle",
+			"firstFrame" : 1
+		}
+	]
+}
