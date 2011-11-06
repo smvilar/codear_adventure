@@ -65,8 +65,8 @@ void SpriteAnimation::update(u32 elapsedMs)
 		if (currentFrame_ > maxFrame)
 		{
 			++loopCounter_;
-			currentFrame_ = loopCount_ && loopCounter_ > loopCount_
-							? loopFromFrame_ : lastFrame_;
+			currentFrame_ = (!loopCount_ || loopCounter_ < loopCount_)
+							? loopFromFrame_ : maxFrame;
 		}
 		updateRect();
 	}

@@ -9,6 +9,8 @@ void DialogueActorBehavior::added()
 	posY_ = owner["y"];
 	offsetX_ = owner["boxOffsetX"];
 	offsetY_ = owner["boxOffsetY"];
+	talkAnim_ = owner["talkAnimation"];
+	waitAnim_ = owner["waitAnimation"];
 }
 //----------------------------------------------------------------------------//
 void DialogueActorBehavior::activate()
@@ -37,6 +39,11 @@ void DialogueActorBehavior::update()
 		setText("");
 		pWorld_->broadcast(Message("speech_shown"));
 		showingSpeech_ = false;
+
+		if (waitAnim_)
+		{
+			pOwner_->broadcast(Message("play_animation", waitAnim_->getValue<std::string>()));
+		}
 	}
 }
 //----------------------------------------------------------------------------//
@@ -46,6 +53,12 @@ void DialogueActorBehavior::handleMessage(const Message &message)
 	{
 		setText(message.argsAs<std::string>());
 		showingSpeech_ = true;
+
+		if (talkAnim_)
+		{
+			pOwner_->broadcast(Message("play_animation",
+									   talkAnim_->getValue<std::string>()));
+		}
 	}
 }
 //----------------------------------------------------------------------------//

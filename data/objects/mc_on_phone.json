@@ -7,7 +7,9 @@
 		"spriteInfo" : "sprites/sprite_mc_onphone.json",
 		"answerBox" : "MCAnswerBox",
 		"boxOffsetX" : 180,
-		"boxOffsetY" : 0
+		"boxOffsetY" : 0,
+        "talkAnimation" : "talk",
+        "waitAnimation" : "idle"
 	},
 	"behaviors" : [ "Sprite", "DialogueActor" ]
 }

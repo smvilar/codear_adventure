@@ -54,21 +54,18 @@ void DialogueControlBehavior::nextSpeech()
 	if (!dialogue_.hasEnded())
 	{
 		const std::string &speech = dialogue_.getCurrentNode()->getCurrentSpeech();
-		std::cout << "speech: " << speech << std::endl;
 		GameObject* speaker = getSpeaker();
 		if (speaker)
 		{
-			std::cout << "speaker: " << speaker->name << std::endl;
 			speaker->broadcast(Message("show_speech", speech));
 		}
 		else
 		{
-			std::cout << "default speaker" << std::endl;
 			pOwner_->broadcast(Message("show_speech", speech));
 		}
 		dialogue_.getCurrentNode()->nextSpeech();
 	}
-	else
+	else // clean all speech boxes
 		pWorld_->broadcast(Message("show_speech", std::string("")));
 }
 //----------------------------------------------------------------------------//

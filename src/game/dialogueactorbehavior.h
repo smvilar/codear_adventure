@@ -25,6 +25,7 @@ private:
 	u32 answerTime_;
 
 	Attribute *posX_, *posY_, *offsetX_, *offsetY_, *textBoxColor_;
+	Attribute *talkAnim_, *waitAnim_;
 	MouseUtil *mouseUtil_;
 
 private:

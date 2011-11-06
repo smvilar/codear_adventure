@@ -69,7 +69,7 @@ DialogueNode* Dialogue::getNodeById(const std::string &id)
 //----------------------------------------------------------------------------//
 u32 Dialogue::getSpeechTime(const std::string &text)
 {
-	return std::max<int>(1000, text.length() * 30);
+	return std::max<int>(1000, text.length() * 50);
 }
 //----------------------------------------------------------------------------//
 void Dialogue::next()

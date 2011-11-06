@@ -10,7 +10,7 @@
 			"msPerFrame" : 240,
 			"firstFrame" : 0,
 			"lastFrame" : 9,
-			"loopCount" : 0,
+			"loopCount" : 1,
 			"loopFromFrame" : 0
 		},
         {
@@ -19,7 +19,7 @@
         },
         {
             "name" : "talk",
-            "msPerFrame" : 200,
+            "msPerFrame" : 300,
             "firstFrame" : 9,
             "lastFrame" : 11,
             "loopCount" : 0,

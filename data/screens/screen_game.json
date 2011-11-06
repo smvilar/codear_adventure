@@ -202,12 +202,20 @@
 			"actions" :
 			[
                 {
-                    "action" : "SendMessage",
-                    "args" : [ "RichardOnPhone", "play_animation", "hang" ]
+                    "action" : "RemoveObject",
+                    "args" : [ "RichardOnPhone" ]
+                },
+                {
+                    "action" : "AddObject",
+                    "args" : [ "Richard" ]
                 },
                 {
                     "action" : "AddBehavior",
                     "args" : [ "Phone", "UsableItem" ]
+                },
+                {
+                    "action" : "AddBehavior",
+                    "args" : [ "Jimmy", "UsableItem" ]
                 }
 			]
 		},
