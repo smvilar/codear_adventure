@@ -61,7 +61,7 @@
             "boxOffsetX" : 0,
             "boxOffsetY" : 0
 		},
-		"behaviors" : [ "PhoneController", "DialogueActor" ]
+		"behaviors" : [ "DialogueManager", "DialogueActor" ]
 	},
 	{
 		"name" : "Phone",

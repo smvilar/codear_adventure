@@ -1,8 +1,8 @@
-#include "phonecontrollerbehavior.h"
+#include "dialoguemanagerbehavior.h"
 //----------------------------------------------------------------------------//
 #include "dialoguecontrolbehavior.h"
 //----------------------------------------------------------------------------//
-PhoneControllerBehavior::PhoneControllerBehavior()
+DialogueManagerBehavior::DialogueManagerBehavior()
 : conversationStarted_(false)
 {
 	conversationStates_["phone"].state = 0;
@@ -12,7 +12,7 @@ PhoneControllerBehavior::PhoneControllerBehavior()
 	conversationStates_["jimmy"].filenames.push_back("dialogues/jimmy_dialogue2.json");
 }
 //----------------------------------------------------------------------------//
-void PhoneControllerBehavior::added()
+void DialogueManagerBehavior::added()
 {
 	dialogueFilenameAttr_ = pOwner_->getAttribute("dialogueFilename");
 	if (!dialogueFilenameAttr_)
@@ -22,7 +22,7 @@ void PhoneControllerBehavior::added()
 	}
 }
 //----------------------------------------------------------------------------//
-void PhoneControllerBehavior::handleMessage(const Message &message)
+void DialogueManagerBehavior::handleMessage(const Message &message)
 {
 	if (conversationStarted_) return;
 

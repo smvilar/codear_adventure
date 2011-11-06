@@ -3,7 +3,7 @@
 #include "logobehavior.h"
 #include "gamescreenbehavior.h"
 #include "dialoguecontrolbehavior.h"
-#include "phonecontrollerbehavior.h"
+#include "dialoguemanagerbehavior.h"
 #include "dialogueactorbehavior.h"
 #include "actionsendmessagebehavior.h"
 #include "actionswitchtriggerbehavior.h"
@@ -21,7 +21,7 @@ void setupWorld(World &world)
 	world.registerBehavior("Logo", new LogoBehavior);
 	world.registerBehavior("GameScreen", new GameScreenBehavior);
 	world.registerBehavior("DialogueControl", new DialogueControlBehavior);
-	world.registerBehavior("PhoneController", new PhoneControllerBehavior);
+	world.registerBehavior("DialogueManager", new DialogueManagerBehavior);
 	world.registerBehavior("DialogueActor", new DialogueActorBehavior);
 	world.registerBehavior("ActionSendMessage", new ActionSendMessageBehavior);
 	world.registerBehavior("ActionSwitchTrigger", new ActionSwitchTriggerBehavior);

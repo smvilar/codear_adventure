@@ -5,11 +5,11 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-class PhoneControllerBehavior : public Behavior
+class DialogueManagerBehavior : public Behavior
 {
 public:
-	PhoneControllerBehavior();
-	virtual Behavior *clone() const { return new PhoneControllerBehavior; }
+	DialogueManagerBehavior();
+	virtual Behavior *clone() const { return new DialogueManagerBehavior; }
 
 	virtual void handleMessage(const Message &message);
 

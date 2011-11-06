@@ -103,7 +103,7 @@ HEADERS += \
 	../src/game/dialogue.h \
 	../src/game/dialoguenode.h \
 	../src/game/dialoguecontrolbehavior.h \
-	../src/game/phonecontrollerbehavior.h \
+	../src/game/dialoguemanagerbehavior.h \
 	../src/game/actionswitchtriggerbehavior.h \
 	../src/game/actionsendmessagebehavior.h \
 	../src/game/dialogueactorbehavior.h \
@@ -161,7 +161,7 @@ SOURCES += \
 	../src/game/dialogue.cpp \
 	../src/game/dialoguenode.cpp \
 	../src/game/dialoguecontrolbehavior.cpp \
-	../src/game/phonecontrollerbehavior.cpp \
+	../src/game/dialoguemanagerbehavior.cpp \
 	../src/game/actionswitchtriggerbehavior.cpp \
 	../src/game/actionsendmessagebehavior.cpp \
 	../src/game/dialogueactorbehavior.cpp \
