@@ -57,7 +57,7 @@ void ObjectContainerBehavior::activate()
 	for (size_t i = 0; i < objectNames.size(); ++i)
 	{
 		string objectName = objectNames[i]->getValue<string>();
-		GameObject *object = pWorld_->getObject(objectName.c_str());
+		GameObject *object = pWorld_->getObject(objectName);
 		if (object)
 			objects.push_back(object);
 	}

@@ -5,11 +5,12 @@
 #include "gameobject/world.h"
 #include "gameobject/attribute.h"
 #include "gameobject/behavior.h"
+#include "gameobject/message.h"
 #include "core/assert.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-GameObject::GameObject(const char *name)
+GameObject::GameObject(const std::string &name)
 : name(name)
 , pWorld_(0)
 {
@@ -17,17 +18,38 @@ GameObject::GameObject(const char *name)
 //----------------------------------------------------------------------------//
 GameObject::~GameObject()
 {
-	// clean behaviors
-	BehaviorVector::iterator itBehavior = behaviors_.begin();
-	for (; itBehavior != behaviors_.end(); ++itBehavior)
-		delete *itBehavior;
-
 	// clean attributes
 	AttributeMap::iterator itAttribute = attributes_.begin();
 	for (; itAttribute != attributes_.end(); ++itAttribute)
 	{
 		delete itAttribute->second;
 	}
+
+	// clean behaviors
+	BehaviorVector::iterator itBehavior = behaviors_.begin();
+	for (; itBehavior != behaviors_.end(); ++itBehavior)
+		delete *itBehavior;
+}
+//----------------------------------------------------------------------------//
+void GameObject::addAttribute(const std::string &name, Attribute *attribute)
+{
+	Assert(attributes_.find(name) == attributes_.end(),
+		   "Error when adding attribute: another one with the same name exists");
+	attributes_[name] = attribute;
+}
+//----------------------------------------------------------------------------//
+void GameObject::removeAttribute(const std::string &name)
+{
+	Assert(attributes_.find(name) != attributes_.end(),
+		   "Error when removing attribute: it doesn't exist");
+	delete attributes_[name];
+	attributes_.erase(name);
+}
+//----------------------------------------------------------------------------//
+Attribute* GameObject::getAttribute(const std::string &name)
+{
+	AttributeMap::iterator it = attributes_.find(name);
+	return it != attributes_.end() ? it->second : 0;
 }
 //----------------------------------------------------------------------------//
 void GameObject::addBehavior(Behavior *behavior)
@@ -61,27 +83,6 @@ Behavior* GameObject::getBehaviorByName(const std::string &name)
 	return toFind;
 }
 //----------------------------------------------------------------------------//
-void GameObject::addAttribute(const char *name, Attribute *attribute)
-{
-	Assert(attributes_.find(name) == attributes_.end(),
-		   "Error when adding attribute: another one with the same name exists");
-	attributes_[name] = attribute;
-}
-//----------------------------------------------------------------------------//
-void GameObject::removeAttribute(const char *name)
-{
-	Assert(attributes_.find(name) != attributes_.end(),
-		   "Error when removing attribute: it doesn't exist");
-	delete attributes_[name];
-	attributes_.erase(name);
-}
-//----------------------------------------------------------------------------//
-Attribute* GameObject::getAttribute(const char *name)
-{
-	AttributeMap::iterator it = attributes_.find(name);
-	return it != attributes_.end() ? it->second : 0;
-}
-//----------------------------------------------------------------------------//
 void GameObject::update()
 {
 	BehaviorVector::iterator it = behaviors_.begin();
@@ -92,9 +93,7 @@ void GameObject::update()
 //----------------------------------------------------------------------------//
 void GameObject::broadcast(const Message &message)
 {
-	BehaviorVector::iterator it = behaviors_.begin();
-	for (; it != behaviors_.end(); ++it)
-		(*it)->handleMessage(message);
+	messages_.push(message);
 }
 //----------------------------------------------------------------------------//
 void GameObject::removeFromWorld()
@@ -105,14 +104,14 @@ void GameObject::removeFromWorld()
 //----------------------------------------------------------------------------//
 GameObject* GameObject::clone() const
 {
-	GameObject* copy = new GameObject(name.c_str());
+	GameObject* copy = new GameObject(name);
 
 	// clone attributes
 	AttributeMap::const_iterator itAttribute = attributes_.begin();
 	for (; itAttribute != attributes_.end(); ++itAttribute)
 	{
 		Attribute *attr = new Attribute(*itAttribute->second);
-		copy->addAttribute(itAttribute->first.c_str(), attr);
+		copy->addAttribute(itAttribute->first, attr);
 	}
 
 	// clone behaviors
@@ -158,6 +157,12 @@ void GameObject::processQueues()
 		doRemoveBehavior(behaviorsToRemove_.front());
 		behaviorsToRemove_.pop();
 	}
+
+	while (!messages_.empty())
+	{
+		doBroadcast(messages_.front());
+		messages_.pop();
+	}
 }
 //----------------------------------------------------------------------------//
 void GameObject::doAddBehavior(Behavior *behavior)
@@ -180,6 +185,13 @@ void GameObject::doRemoveBehavior(Behavior *behavior)
 	behaviors_.erase(std::find(behaviors_.begin(), behaviors_.end(), behavior));
 	delete behavior;
 	behavior = 0;
+}
+//----------------------------------------------------------------------------//
+void GameObject::doBroadcast(const Message &message)
+{
+	BehaviorVector::iterator it = behaviors_.begin();
+	for (; it != behaviors_.end(); ++it)
+		(*it)->handleMessage(message);
 }
 //----------------------------------------------------------------------------//
 std::string GameObject::debugToString() const

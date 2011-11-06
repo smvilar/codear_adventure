@@ -22,11 +22,27 @@ public:
 	std::string name;
 
 public:
-	GameObject(const char *name);
+	GameObject(const std::string &name);
 	~GameObject();
 
 	std::string debugToString() const;
 
+/// Attributes
+public:
+	void addAttribute(const std::string &name, Attribute *attribute);
+	void removeAttribute(const std::string &name);
+	Attribute* getAttribute(const std::string &name);
+
+	template <typename T>
+	T getAttributeAs(const char *name)
+	{
+		return getAttribute(name)->getValue<T>();
+	}
+
+	Attribute* operator[](const std::string &name) { return getAttribute(name); }
+
+/// Behaviors
+public:
 	void addBehavior(Behavior *behavior);
 	void removeBehavior(Behavior *behavior);
 	Behavior* getBehaviorByName(const std::string &name);
@@ -35,16 +51,8 @@ public:
 		removeBehavior(getBehaviorByName(name));
 	}
 
-	void addAttribute(const char *name, Attribute *attribute);
-	void removeAttribute(const char *name);
-	Attribute* getAttribute(const char *name);
-
-	template <typename T>
-	T getAttributeAs(const char *name)
-	{
-		return getAttribute(name)->getValue<T>();
-	}
-
+/// Logic stuff
+public:
 	void update();
 	void broadcast(const Message &message);
 
@@ -69,10 +77,12 @@ private:
 private:
 	std::queue<Behavior*> behaviorsToAdd_;
 	std::queue<Behavior*> behaviorsToRemove_;
+	std::queue<Message> messages_;
 
 	void processQueues();
 	void doAddBehavior(Behavior *behavior);
 	void doRemoveBehavior(Behavior *behavior);
+	void doBroadcast(const Message &message);
 
 private:
 	friend class ObjectParser;

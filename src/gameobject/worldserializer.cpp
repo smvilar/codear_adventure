@@ -142,7 +142,7 @@ void WorldSerializer::deserializeAttributes(GameObject &object, const Json::Valu
 		if (attribute)
 		{
 			//cout << "Adding attribute " << attrName << endl;
-			object.addAttribute(attrName.c_str(), attribute);
+			object.addAttribute(attrName, attribute);
 		}
 		else
 		{
@@ -224,7 +224,7 @@ void WorldSerializer::deserializeBehaviors(GameObject &object, const Json::Value
 	}
 }
 //----------------------------------------------------------------------------//
-void WorldSerializer::addIgnoredObject(const char *name)
+void WorldSerializer::addIgnoredObject(const std::string &name)
 {
 	ignoredObjects_.push_back(name);
 }

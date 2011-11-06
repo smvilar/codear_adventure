@@ -17,8 +17,8 @@ public:
 	std::string filename;
 
 public:
-	void addTransition(const char *name, Screen *screen);
-	Screen* resolveTransition(const char *name);
+	void addTransition(const std::string &name, Screen *screen);
+	Screen* resolveTransition(const std::string &name);
 
 private:
 	typedef std::map<std::string, Screen*> TransitionMap;

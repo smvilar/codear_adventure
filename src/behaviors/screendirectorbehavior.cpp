@@ -19,14 +19,14 @@ void ScreenDirectorBehavior::activate()
 
 	// Get the initial screen
 	string initialScreen = pOwner_->getAttributeAs<string>("initialScreen");
-	screenDirector_.show(initialScreen.c_str(), *pWorld_);
+	screenDirector_.show(initialScreen, *pWorld_);
 }
 //----------------------------------------------------------------------------//
 void ScreenDirectorBehavior::handleMessage(const Message &message)
 {
 	if (message.equals("screen_transition"))
 	{
-		screenDirector_.transition(message.argsAs<std::string>().c_str(), *pWorld_);
+		screenDirector_.transition(message.argsAs<std::string>(), *pWorld_);
 	}
 }
 //----------------------------------------------------------------------------//

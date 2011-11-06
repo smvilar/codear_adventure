@@ -1,25 +1,21 @@
 [
 	{
         "id" : "0",
+        "speaker" : "Jimmy",
         "speech" : [ "Hey, tú debes ser el negociador. Yo soy James. Vaya, no luces bien. ¿Largo viaje?" ],
-        "answers" :
-        [
-            {
-                "answer" : "Sí... Se podría decir. Mi nombre es Richard Solomon.",
-                "goto" : "1"
-            }
-        ]
-	},
-	{
+        "goto" : "1"
+    },
+    {
         "id" : "1",
+        "speaker" : "Richard",
+        "speech" : [ "Sí... Se podría decir. Mi nombre es Richard Solomon." ],
+        "goto" : "2"
+    },
+	{
+        "id" : "2",
+        "speaker" : "Jimmy",
         "speech" : [ "Un placer Rick.", "Toda una situación tenemos entre manos, ¿eh?. El jefe me dijo que te acercara este reporte apenas entraras. Te pondrá al tanto de lo que sabemos por el momento." ],
-        "answers" :
-        [
-            {
-                "answer" : "Veamos...",
-                "goto" : "end",
-                "event" : "jimmy_end"
-            }
-        ]
-	}
+        "goto" : "end",
+        "event" : "jimmy_end"
+    }
 ]

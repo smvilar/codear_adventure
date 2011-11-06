@@ -19,7 +19,7 @@ public:
 	void serialize(const World &world, std::ostream &os) const;
 	void deserialize(World &world, const std::string &text) const;
 
-	void addIgnoredObject(const char *name);
+	void addIgnoredObject(const std::string &name);
 
 private:
 	Json::Value serializeObject(const GameObject &object, const World &world) const;

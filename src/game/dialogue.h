@@ -16,21 +16,23 @@ public:
 
 	bool parse(const std::string &text);
 
-	DialogueNode* getNodeById(const char *id);
+	DialogueNode* getNodeById(const std::string &id);
 	DialogueNode* getCurrentNode() { return currentNode_; }
+
+	void next();
 
 	// Selects the specified answer
 	// Returns a custom event that it may have
-	std::string selectAnswer(size_t index);
+	//std::string selectAnswer(size_t index);
 
-	bool isValidAnswer(size_t index) const { return index < currentNode_->answers.size(); }
+	//bool isValidAnswer(size_t index) const { return index < currentNode_->answers.size(); }
 	bool hasEnded() const { return hasEnded_; }
 
 	static u32 getSpeechTime(const std::string &text);
 
 private:
-	typedef std::vector<DialogueNode*> DialogueNodeVector;
-	DialogueNodeVector dialogueNodes_;
+	typedef std::vector<DialogueNode*> DialogueNodes;
+	DialogueNodes dialogueNodes_;
 
 	DialogueNode *currentNode_;
 	bool hasEnded_;

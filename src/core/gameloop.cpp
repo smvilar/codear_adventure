@@ -20,7 +20,7 @@ void GameLoop::start(World &world, const char *gameFilename) const
 	game->addBehavior(new ScreenDirectorBehavior);
 
 	world.addObject(game);
-	world.getWorldSerializer().addIgnoredObject(game->name.c_str());
+	world.getWorldSerializer().addIgnoredObject(game->name);
 
 	while (isGameAlive->getValue<bool>())
 		world.update();

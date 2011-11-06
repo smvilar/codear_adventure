@@ -36,25 +36,32 @@
 		},
 		"behaviors" : [ "Shape", "TextBox" ]
 	},
-	{
-		"name" : "DialogueBox",
-		"attributes" :
-		{
-			"x" : 40,
-			"y" : 640,
+    {
+        "name" : "DefaultAnswerBox",
+        "attributes" :
+        {
+			"x" : 0,
+			"y" : 0,
 			"width" : 1200,
 			"height" : 60,
 			"font" : "fonts/rough_typewriter.otf",
 			"fontSize" : 16,
 			"text" : "",
 			"color" : [0, 0, 0, 64]
+        },
+        "behaviors" : [ "Shape", "TextBox" ]
+    },
+	{
+		"name" : "DialogueManager",
+		"attributes" :
+		{
+            "x" : 40,
+            "y" : 640,
+            "answerBox" : "DefaultAnswerBox",
+            "boxOffsetX" : 0,
+            "boxOffsetY" : 0
 		},
-		"behaviors" :
-		[
-			"Shape",
-			"TextBox",
-			"PhoneController"
-		]
+		"behaviors" : [ "PhoneController", "DialogueActor" ]
 	},
 	{
 		"name" : "Phone",
@@ -82,10 +89,28 @@
             "condition" : "jimmy_talk",
             "overText" : "Talk to Jimmy",
             "font" : "fonts/rough_typewriter.otf",
-			"fontSize" : 16
+			"fontSize" : 16,
+            "answerBox" : "JimmyAnswerBox",
+            "boxOffsetX" : 180,
+            "boxOffsetY" : 0
         },
-        "behaviors" : [ "UsableItem" ]
+        "behaviors" : [ "UsableItem", "DialogueActor" ]
     },
+	{
+		"name" : "JimmyAnswerBox",
+		"attributes" :
+		{
+			"x" : 0,
+			"y" : 0,
+			"width" : 400,
+			"height" : 120,
+			"font" : "fonts/rough_typewriter.otf",
+			"fontSize" : 16,
+			"text" : "",
+			"color" : [0, 0, 0, 64]
+		},
+		"behaviors" : [ "Shape", "TextBox" ]
+	},
 	{
 		"name" : "BackgroundMusic",
 		"attributes" :
@@ -105,7 +130,7 @@
             [
                 {
                     "action" : "SendMessage",
-                    "args" : [ "DialogueBox", "start_conversation", "jimmy" ]
+                    "args" : [ "DialogueManager", "start_conversation", "jimmy" ]
                 },
                 {
                     "action" : "RemoveBehavior",
@@ -147,15 +172,15 @@
 			[
 				{
 					"action" : "SendMessage",
-					"args" : [ "DialogueBox", "start_conversation", "phone" ]
+					"args" : [ "DialogueManager", "start_conversation", "phone" ]
 				},
                 {
                     "action" : "AddObject",
-                    "args" : [ "MCOnPhone" ]
+                    "args" : [ "RichardOnPhone" ]
                 },
                 {
                     "action" : "RemoveObject",
-                    "args" : [ "MC" ]
+                    "args" : [ "Richard" ]
                 },
                 {
                     "action" : "RemoveBehavior",
@@ -178,7 +203,7 @@
 			[
                 {
                     "action" : "SendMessage",
-                    "args" : [ "MCOnPhone", "play_animation", "hang" ]
+                    "args" : [ "RichardOnPhone", "play_animation", "hang" ]
                 },
                 {
                     "action" : "AddBehavior",
@@ -216,18 +241,18 @@
     {
         "name" : "GameScreen",
         "behaviors" : [ "GameScreen" ]
-    },
+    }/*,
 	{
 		"name" : "Editor",
 		"attributes" :
 		{
 			"object_names" :
 			[
-				"MC"//,
-				//"Phone",
-                //"Jimmy"
+				"Richard",
+				"Phone",
+                "Jimmy"
 			]
 		},
 		"behaviors" : [ "ObjectContainer", "Edit" ]
-	}
+	}*/
 ]

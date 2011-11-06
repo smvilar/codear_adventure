@@ -4,12 +4,12 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-void Screen::addTransition(const char *name, Screen *screen)
+void Screen::addTransition(const std::string &name, Screen *screen)
 {
 	transitions_[name] = screen;
 }
 //----------------------------------------------------------------------------//
-Screen* Screen::resolveTransition(const char *name)
+Screen* Screen::resolveTransition(const std::string &name)
 {
 	TransitionMap::iterator it = transitions_.find(name);
 	if (it == transitions_.end())

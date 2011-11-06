@@ -20,7 +20,7 @@ private:
 private:
 	GameObject *answerTextBox_;
 
-	bool showingAnswer_;
+	bool showingSpeech_;
 	sf::Clock answerClock_;
 	u32 answerTime_;
 

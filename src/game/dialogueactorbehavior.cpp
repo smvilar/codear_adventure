@@ -1,11 +1,14 @@
 #include "dialogueactorbehavior.h"
 //----------------------------------------------------------------------------//
+#include "dialogue.h"
+//----------------------------------------------------------------------------//
 void DialogueActorBehavior::added()
 {
-	posX_ = pOwner_->getAttribute("x");
-	posY_ = pOwner_->getAttribute("y");
-	offsetX_ = pOwner_->getAttribute("boxOffsetX");
-	offsetY_ = pOwner_->getAttribute("boxOffsetY");
+	GameObject &owner = *pOwner_;
+	posX_ = owner["x"];
+	posY_ = owner["y"];
+	offsetX_ = owner["boxOffsetX"];
+	offsetY_ = owner["boxOffsetY"];
 }
 //----------------------------------------------------------------------------//
 void DialogueActorBehavior::activate()
@@ -13,7 +16,7 @@ void DialogueActorBehavior::activate()
 	const std::string &textBoxName =
 			pOwner_->getAttributeAs<std::string>("answerBox");
 	answerTextBox_ = pWorld_->getObject(textBoxName);
-	textBoxColor_ = answerTextBox_->getAttribute("color");
+	textBoxColor_ = (*answerTextBox_)["color"];
 	setText("");
 
 	mouseUtil_ = pWorld_->getObject("Game")->getAttributeAs<MouseUtil*>("mouse");
@@ -23,34 +26,34 @@ void DialogueActorBehavior::update()
 {
 	int x = posX_->getValue<int>() + offsetX_->getValue<int>();
 	int y = posY_->getValue<int>() + offsetY_->getValue<int>();
-	answerTextBox_->getAttribute("x")->setValue(x);
-	answerTextBox_->getAttribute("y")->setValue(y);
+	(*answerTextBox_)["x"]->setValue(x);
+	(*answerTextBox_)["y"]->setValue(y);
 
 	bool ready = mouseUtil_->justPressed(0) ||
 			answerClock_.GetElapsedTime() > answerTime_;
 
-	if (showingAnswer_ && ready)
+	if (showingSpeech_ && ready)
 	{
 		setText("");
-		pWorld_->broadcast(Message("answer_shown"));
-		showingAnswer_ = false;
+		pWorld_->broadcast(Message("speech_shown"));
+		showingSpeech_ = false;
 	}
 }
 //----------------------------------------------------------------------------//
 void DialogueActorBehavior::handleMessage(const Message &message)
 {
-	if (message.equals("show_answer"))
+	if (message.equals("show_speech"))
 	{
 		setText(message.argsAs<std::string>());
-		showingAnswer_ = true;
+		showingSpeech_ = true;
 	}
 }
 //----------------------------------------------------------------------------//
 void DialogueActorBehavior::setText(const std::string &text)
 {
 	answerClock_.Reset();
-	answerTime_ = text.length() * 30;
-	answerTextBox_->getAttribute("text")->setValue(text);
+	answerTime_ = Dialogue::getSpeechTime(text);
+	(*answerTextBox_)["text"]->setValue(text);
 	answerTextBox_->broadcast(Message("update_text"));
 
 	typedef std::vector<Attribute*> AttributeVector;

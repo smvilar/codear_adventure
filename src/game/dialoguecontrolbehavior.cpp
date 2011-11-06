@@ -9,114 +9,117 @@
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::activate()
 {
-	const std::string &filename =
-			pOwner_->getAttributeAs<std::string>("dialogueFilename");
+	GameObject& owner = *pOwner_;
+
+	const std::string &filename = owner["dialogueFilename"]->getValue<std::string>();
 	const std::string &text =
 			pWorld_->getResourceManager().getTextResource(filename);
 
 	dialogue_.parse(text);
 
-	textAttr_ = pOwner_->getAttribute("text");
-	if (!textAttr_)
-	{
-		textAttr_ = new Attribute(std::string());
-		pOwner_->addAttribute("text", textAttr_);
-	}
-	updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
+	nextSpeech();
 
 	displayingAnswers_ = false;
-	showingAnswer_ = false;
-
-	mouseUtil_ = pWorld_->getObject("Game")->getAttributeAs<MouseUtil*>("mouse");
-}
-//----------------------------------------------------------------------------//
-void DialogueControlBehavior::update()
-{
-	if (dialogue_.hasEnded()) return;
-
-	bool textReady = mouseUtil_->justPressed(0) ||
-			textClock_.GetElapsedTime() > textTime_;
-
-	if (!showingAnswer_ && textReady)
-		nextSpeech();
+	showingSpeech_ = false;
 }
 //----------------------------------------------------------------------------//
 void DialogueControlBehavior::handleMessage(const Message &message)
 {
-	if (message.equals("answer_shown"))
+	if (message.equals("speech_shown"))
 	{
-		showingAnswer_ = false;
+		showingSpeech_ = false;
+
 		if (!dialogue_.hasEnded())
-			updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
+			nextSpeech();
 		else
 		{
-			updateText("");
 			pOwner_->removeBehavior(this);
 		}
 	}
 }
 //----------------------------------------------------------------------------//
-void DialogueControlBehavior::updateText(const std::string &text)
-{
-	textTime_ = Dialogue::getSpeechTime(text);
-	textClock_.Reset();
-
-	textAttr_->setValue(text);
-	pOwner_->broadcast(Message("update_text"));
-}
-//----------------------------------------------------------------------------//
 void DialogueControlBehavior::nextSpeech()
 {
-	if (!dialogue_.getCurrentNode()->hasSpeechEnded())
+	if (dialogue_.getCurrentNode()->hasSpeechEnded())
 	{
-		dialogue_.getCurrentNode()->nextSpeech();
-		updateText(dialogue_.getCurrentNode()->getCurrentSpeech());
-	}
-	else
-	{
-		displayAnswers();
-	}
-}
-//----------------------------------------------------------------------------//
-void DialogueControlBehavior::displayAnswers()
-{
-	displayingAnswers_ = true;
-
-	const size_t num = dialogue_.getCurrentNode()->getAnswerQuantity();
-	if (num == 1)
-	{
-		selectAnswer(0);
-	}
-	else
-	{
-		std::stringstream answersText;
-		for (size_t i = 0; i < num; ++i)
-		{
-			answersText << (i + 1) << ". ";
-			answersText << dialogue_.getCurrentNode()->getAnswer(i);
-			answersText << std::endl;
-		}
-		updateText(answersText.str());
-	}
-}
-//----------------------------------------------------------------------------//
-void DialogueControlBehavior::selectAnswer(size_t index)
-{
-	if (displayingAnswers_ && dialogue_.isValidAnswer(index))
-	{
-		displayingAnswers_ = false;
-		const std::string &answerText = dialogue_.getCurrentNode()->getAnswer(index);
-		const std::string &event = dialogue_.selectAnswer(index);
-
-		updateText("");
-
+		const std::string &event = dialogue_.getCurrentNode()->event;
 		if (event != "")
 		{
 			pWorld_->broadcast(Message("trigger_condition", event));
 		}
 
-		showingAnswer_ = true;
-		pWorld_->broadcast(Message("show_answer", answerText));
+		dialogue_.next();
 	}
+
+	if (!dialogue_.hasEnded())
+	{
+		const std::string &speech = dialogue_.getCurrentNode()->getCurrentSpeech();
+		std::cout << "speech: " << speech << std::endl;
+		GameObject* speaker = getSpeaker();
+		if (speaker)
+		{
+			std::cout << "speaker: " << speaker->name << std::endl;
+			speaker->broadcast(Message("show_speech", speech));
+		}
+		else
+		{
+			std::cout << "default speaker" << std::endl;
+			pOwner_->broadcast(Message("show_speech", speech));
+		}
+		dialogue_.getCurrentNode()->nextSpeech();
+	}
+	else
+		pWorld_->broadcast(Message("show_speech", std::string("")));
+}
+//----------------------------------------------------------------------------//
+void DialogueControlBehavior::displayAnswers()
+{
+//	displayingAnswers_ = true;
+
+//	const size_t num = dialogue_.getCurrentNode()->getAnswerQuantity();
+//	if (num == 1)
+//	{
+//		selectAnswer(0);
+//	}
+//	else
+//	{
+//		std::stringstream answersText;
+//		for (size_t i = 0; i < num; ++i)
+//		{
+//			answersText << (i + 1) << ". ";
+//			answersText << dialogue_.getCurrentNode()->getAnswer(i);
+//			answersText << std::endl;
+//		}
+//		updateText(answersText.str());
+//	}
+}
+//----------------------------------------------------------------------------//
+void DialogueControlBehavior::selectAnswer(size_t /*index*/)
+{
+//	if (displayingAnswers_ && dialogue_.isValidAnswer(index))
+//	{
+//		displayingAnswers_ = false;
+//		const std::string &answerText = dialogue_.getCurrentNode()->getAnswer(index);
+//		const std::string &event = dialogue_.selectAnswer(index);
+
+//		updateText("");
+
+//		if (event != "")
+//		{
+//			pWorld_->broadcast(Message("trigger_condition", event));
+//		}
+
+//		showingAnswer_ = true;
+//		pWorld_->broadcast(Message("show_answer", answerText));
+//	}
+}
+//----------------------------------------------------------------------------//
+GameObject* DialogueControlBehavior::getSpeaker()
+{
+	GameObject * speaker = pWorld_->getObject(dialogue_.getCurrentNode()->speaker);
+	if (speaker && speaker->getAttribute("answerBox"))
+		return speaker;
+	else
+		return 0;
 }
 //----------------------------------------------------------------------------//

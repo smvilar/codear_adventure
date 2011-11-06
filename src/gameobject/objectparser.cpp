@@ -53,7 +53,7 @@ void ObjectParser::parseAttributes(const Json::Value &attrsValue, GameObject &ob
 		if (attribute)
 		{
 			//cout << "Adding attribute " << attrName << endl;
-			object.addAttribute(attrName.c_str(), attribute);
+			object.addAttribute(attrName, attribute);
 		}
 		else
 		{

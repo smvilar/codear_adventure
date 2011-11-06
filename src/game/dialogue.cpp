@@ -22,23 +22,16 @@ bool Dialogue::parse(const std::string &text)
 		const Json::Value &jsDNode = root[i];
 
 		DialogueNode *dialogueNode = new DialogueNode;
-		dialogueNode->id = jsDNode["id"].asCString();
+		dialogueNode->id = jsDNode["id"].asString();
+		dialogueNode->speaker = jsDNode["speaker"].asString();
 
 		const Json::Value &jsSpeech = jsDNode["speech"];
 		for (size_t j = 0; j < jsSpeech.size(); ++j)
-		{
-			dialogueNode->speech.push_back(jsSpeech[j].asCString());
-		}
+			dialogueNode->speech.push_back(jsSpeech[j].asString());
 
-		const Json::Value &jsAnswers = jsDNode["answers"];
-		for (size_t j = 0; j < jsAnswers.size(); ++j)
-		{
-			const Json::Value &jsAns = jsAnswers[j];
-			const char *ans = jsAns["answer"].asCString();
-			const char *gotoId = jsAns["goto"].asCString();
-			const char *event = !jsAns["event"] ? "" : jsAns["event"].asCString();
-			dialogueNode->answers.push_back(DialogueNode::Answer(ans, gotoId, event));
-		}
+		dialogueNode->event = jsDNode["event"].asString();
+		dialogueNode->gotoId = jsDNode["goto"].asString();
+		dialogueNode->multipleChoice = jsDNode["multipleChoice"].asBool();
 
 		dialogueNodes_.push_back(dialogueNode);
 	}
@@ -51,31 +44,39 @@ bool Dialogue::parse(const std::string &text)
 struct EqualIds
 {
 	std::string id;
-	EqualIds(const char *id) : id(id) {}
+	EqualIds(const std::string &id) : id(id) {}
 	bool operator()(DialogueNode *node) { return node->id == id; }
 };
 //----------------------------------------------------------------------------//
-DialogueNode* Dialogue::getNodeById(const char *id)
+DialogueNode* Dialogue::getNodeById(const std::string &id)
 {
-	DialogueNodeVector::iterator it =
+	DialogueNodes::iterator it =
 		std::find_if(dialogueNodes_.begin(), dialogueNodes_.end(), EqualIds(id));
 	return it != dialogueNodes_.end() ? *it : 0;
 }
 //----------------------------------------------------------------------------//
-std::string Dialogue::selectAnswer(size_t index)
-{
-	const std::string &gotoId = currentNode_->getNextDialogueNodeId(index);
-	const std::string &event = currentNode_->getAnswerEvent(index);
-	if (gotoId == "end")
-		hasEnded_ = true;
-	else
-		currentNode_ = getNodeById(gotoId.c_str());
+//std::string Dialogue::selectAnswer(size_t index)
+//{
+//	const std::string &gotoId = currentNode_->getNextDialogueNodeId(index);
+//	const std::string &event = currentNode_->getAnswerEvent(index);
+//	if (gotoId == "end")
+//		hasEnded_ = true;
+//	else
+//		currentNode_ = getNodeById(gotoId.c_str());
 
-	return event;
-}
+//	return event;
+//}
 //----------------------------------------------------------------------------//
 u32 Dialogue::getSpeechTime(const std::string &text)
 {
 	return std::max<int>(1000, text.length() * 30);
+}
+//----------------------------------------------------------------------------//
+void Dialogue::next()
+{
+	if (currentNode_->gotoId == "end")
+		hasEnded_ = true;
+	else
+		currentNode_ = getNodeById(currentNode_->gotoId);
 }
 //----------------------------------------------------------------------------//

@@ -1,7 +1,8 @@
 #include "game/dialoguenode.h"
 //----------------------------------------------------------------------------//
 DialogueNode::DialogueNode()
-: currentSpeechIndex_(0)
+: multipleChoice(false)
+, currentSpeechIndex_(0)
 {
 	//
 }
@@ -9,7 +10,5 @@ DialogueNode::DialogueNode()
 void DialogueNode::nextSpeech()
 {
 	++currentSpeechIndex_;
-	if (currentSpeechIndex_ >= speech.size())
-		currentSpeechIndex_ = speech.size() - 1;
 }
 //----------------------------------------------------------------------------//

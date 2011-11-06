@@ -45,8 +45,7 @@ bool ScreenDirector::parse(const std::string &text)
 		{
 			const string &transName = transNames[j];
 			const string &toScreenName = jsTransitions[transName].asString();
-			screens_[screenName]->addTransition(transName.c_str(),
-												screens_[toScreenName]);
+			screens_[screenName]->addTransition(transName, screens_[toScreenName]);
 
 			std::cout << screenName << " [ " << transName << " ]-> " << toScreenName << std::endl;
 		}
@@ -55,7 +54,7 @@ bool ScreenDirector::parse(const std::string &text)
 	return true;
 }
 //----------------------------------------------------------------------------//
-void ScreenDirector::show(const char *screenName, World &world)
+void ScreenDirector::show(const std::string &screenName, World &world)
 {
 	ScreenMap::iterator it = screens_.find(screenName);
 	if (it == screens_.end())
@@ -66,16 +65,16 @@ void ScreenDirector::show(const char *screenName, World &world)
 
 	currentScreen_ = it->second;
 
-	world.loadState(currentScreen_->filename.c_str());
+	world.loadState(currentScreen_->filename);
 }
 //----------------------------------------------------------------------------//
-void ScreenDirector::transition(const char *transitionName, World &world)
+void ScreenDirector::transition(const std::string &transitionName, World &world)
 {
 	Screen *nextScreen = currentScreen_->resolveTransition(transitionName);
 	if (nextScreen)
 	{
 		currentScreen_ = nextScreen;
-		world.loadState(currentScreen_->filename.c_str());
+		world.loadState(currentScreen_->filename);
 	}
 }
 //----------------------------------------------------------------------------//
