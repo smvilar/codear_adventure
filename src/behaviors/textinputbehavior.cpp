@@ -22,6 +22,8 @@ void TextInputBehavior::handleMessage(const Message &message)
 		const sf::Event &ev = message.argsAs<sf::Event>();
 		if (ev.Type == sf::Event::TextEntered)
 		{
+			if (ev.Text.Unicode < '0')
+				return;
 			sf::String str = ev.Text.Unicode;
 			updateText(str.ToAnsiString());
 		}

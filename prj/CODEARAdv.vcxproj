@@ -41,12 +41,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IntDir>../obj/</IntDir>
+    <TargetName>DamageControl</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>../bin/</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IntDir>../obj/</IntDir>
+    <TargetName>DamageControl</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -58,8 +60,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../lib/SFML/lib/win32;../lib/zlib125/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OpenGL32.lib;zdll.lib;sfml-main-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>OpenGL32.lib;sfml-main-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(ProjectDir)..\lib\SFML\lib\win32\*.dll" "$(ProjectDir)..\bin"
@@ -81,7 +83,7 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>../lib/SFML/lib/win32;../lib/zlib125/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OpenGL32.lib;zdll.lib;sfml-main.lib;sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;sfml-main.lib;sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
@@ -122,14 +124,15 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
     <ClCompile Include="..\src\game\actionremoveobjectbehavior.cpp" />
     <ClCompile Include="..\src\game\actionsendmessagebehavior.cpp" />
     <ClCompile Include="..\src\game\actionswitchtriggerbehavior.cpp" />
+    <ClCompile Include="..\src\game\databasebehavior.cpp" />
     <ClCompile Include="..\src\game\dialogue.cpp" />
     <ClCompile Include="..\src\game\dialogueactorbehavior.cpp" />
     <ClCompile Include="..\src\game\dialoguecontrolbehavior.cpp" />
+    <ClCompile Include="..\src\game\dialoguemanagerbehavior.cpp" />
     <ClCompile Include="..\src\game\dialoguenode.cpp" />
     <ClCompile Include="..\src\game\gamescreenbehavior.cpp" />
     <ClCompile Include="..\src\game\logobehavior.cpp" />
     <ClCompile Include="..\src\game\main.cpp" />
-    <ClCompile Include="..\src\game\phonecontrollerbehavior.cpp" />
     <ClCompile Include="..\src\game\usableitembehavior.cpp" />
     <ClCompile Include="..\src\json\json_reader.cpp" />
     <ClCompile Include="..\src\json\json_value.cpp" />
@@ -142,7 +145,6 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
     <ClCompile Include="..\src\util\base64.cpp" />
     <ClCompile Include="..\src\util\FileSystem.cpp" />
     <ClCompile Include="..\src\util\FPSCounter.cpp" />
-    <ClCompile Include="..\src\util\gzstream.cpp" />
     <ClCompile Include="..\src\util\Logger.cpp" />
     <ClCompile Include="..\src\util\MemoryManager.cpp" />
     <ClCompile Include="..\src\util\mouseutil.cpp" />
@@ -186,13 +188,14 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
     <ClInclude Include="..\src\game\actionremoveobjectbehavior.h" />
     <ClInclude Include="..\src\game\actionsendmessagebehavior.h" />
     <ClInclude Include="..\src\game\actionswitchtriggerbehavior.h" />
+    <ClInclude Include="..\src\game\databasebehavior.h" />
     <ClInclude Include="..\src\game\dialogue.h" />
     <ClInclude Include="..\src\game\dialogueactorbehavior.h" />
     <ClInclude Include="..\src\game\dialoguecontrolbehavior.h" />
+    <ClInclude Include="..\src\game\dialoguemanagerbehavior.h" />
     <ClInclude Include="..\src\game\dialoguenode.h" />
     <ClInclude Include="..\src\game\gamescreenbehavior.h" />
     <ClInclude Include="..\src\game\logobehavior.h" />
-    <ClInclude Include="..\src\game\phonecontrollerbehavior.h" />
     <ClInclude Include="..\src\game\usableitembehavior.h" />
     <ClInclude Include="..\src\hierophantengine.h" />
     <ClInclude Include="..\src\json\autolink.h" />
