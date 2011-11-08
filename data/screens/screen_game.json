@@ -30,7 +30,7 @@
 			"y" : 0,
 			"width" : 400,
 			"height" : 120,
-			"font" : "fonts/rough_typewriter.otf",
+			"font" : "fonts/Candal.ttf",
 			"fontSize" : 16,
 			"text" : "",
 			"color" : [0, 0, 0, 64]
@@ -45,7 +45,7 @@
 			"y" : 0,
 			"width" : 1200,
 			"height" : 60,
-			"font" : "fonts/rough_typewriter.otf",
+			"font" : "fonts/Candal.ttf",
 			"fontSize" : 16,
 			"text" : "",
 			"color" : [0, 0, 0, 64]
@@ -74,7 +74,7 @@
 			"height" : 50,
 			"condition" : "phone_used",
             "overText" : "Use phone",
-			"font" : "fonts/rough_typewriter.otf",
+			"font" : "fonts/Candal.ttf",
 			"fontSize" : 16
 		},
 		"behaviors" : [ "UsableItem" ]
@@ -89,7 +89,7 @@
             "height" : 360,
             "condition" : "jimmy_talk",
             "overText" : "Talk to Jimmy",
-            "font" : "fonts/rough_typewriter.otf",
+            "font" : "fonts/Candal.ttf",
 			"fontSize" : 16,
             "answerBox" : "JimmyAnswerBox",
             "boxOffsetX" : 180,
@@ -116,7 +116,7 @@
             "spriteInfo" : "sprites/screen_1.json",
             "condition" : "search_clicked",
             "overText" : "Search database",
-            "font" : "fonts/rough_typewriter.otf",
+            "font" : "fonts/Candal.ttf",
 			"fontSize" : 16
         },
         "behaviors" : [ "Sprite", "UsableItem" ]
@@ -129,11 +129,25 @@
             "y" : 142,
             "spriteInfo" : "sprites/screen_2.json",
             "overText" : "Read reports",
-            "font" : "fonts/rough_typewriter.otf",
+            "font" : "fonts/Candal.ttf",
 			"fontSize" : 16
         },
         "behaviors" : [ "Sprite", "UsableItem" ]
     },
+	{
+    "name" : "DatabaseInput",
+	"attributes" :
+	{
+		"x" : 670,
+		"y" : 70,
+		"width" : 300,
+		"height" : 100,
+        "font" : "fonts/telegrama_raw_osn.otf",
+		"fontSize" : 16,
+		"text" : ""
+	},
+	"behaviors" : [ "TextBox", "TextInput" ]
+},
     {
         "name" : "EmptyScreen",
         "attributes" :
@@ -152,7 +166,7 @@
 			"y" : 0,
 			"width" : 400,
 			"height" : 120,
-			"font" : "fonts/rough_typewriter.otf",
+			"font" : "fonts/Candal.ttf",
 			"fontSize" : 16,
 			"text" : "",
 			"color" : [0, 0, 0, 64]

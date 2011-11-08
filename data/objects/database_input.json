@@ -6,7 +6,7 @@
 		"y" : 70,
 		"width" : 300,
 		"height" : 100,
-        //"font" : "fonts/rough_typewriter.otf",
+//        "font" : "fonts/VeraMono.ttf",
 		"fontSize" : 16,
 		"text" : ""
 	},
