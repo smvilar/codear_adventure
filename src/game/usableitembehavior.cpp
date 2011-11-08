@@ -1,5 +1,7 @@
 #include "usableitembehavior.h"
 //----------------------------------------------------------------------------//
+#include <iterator>
+//----------------------------------------------------------------------------//
 void UsableItemBehavior::activate()
 {
 	mouseUtil_ = pWorld_->getObject("Game")->getAttributeAs<MouseUtil*>("mouse");
