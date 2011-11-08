@@ -2,11 +2,11 @@
     "name" : "DatabaseInput",
 	"attributes" :
 	{
-		"x" : 670,
+		"x" : 680,
 		"y" : 70,
-		"width" : 300,
+		"width" : 280,
 		"height" : 100,
-//        "font" : "fonts/VeraMono.ttf",
+        "font" : "fonts/telegrama_raw_osn.otf",
 		"fontSize" : 16,
 		"text" : ""
 	},

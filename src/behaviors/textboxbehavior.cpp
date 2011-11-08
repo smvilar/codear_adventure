@@ -20,15 +20,6 @@ void TextBoxBehavior::added()
 	width_ = owner["width"];
 	height_ = owner["height"];
 
-	Attribute *fontAttr = owner["font"];
-	if (fontAttr)
-	{
-		std::string fontFilename = fontAttr->get<std::string>();
-		text_.SetFont(pWorld_->getResourceManager().getFont(fontFilename));
-	}
-	else
-		text_.SetFont(sf::Font::GetDefaultFont());
-
 	fontSize_ = owner["fontSize"];
 	if (fontSize_)
 		text_.SetCharacterSize(fontSize_->get<int>());
@@ -42,6 +33,25 @@ void TextBoxBehavior::added()
 		text_.SetString(loremIpsum); // fallback to lorem ipsum
 
 	adjustText();
+}
+//----------------------------------------------------------------------------//
+void TextBoxBehavior::activate()
+{
+	Attribute *fontAttr = (*pOwner_)["font"];
+	if (fontAttr)
+	{
+		std::string fontFilename = fontAttr->get<std::string>();
+		text_.SetFont(pWorld_->getResourceManager().getFont(fontFilename));
+	}
+	else
+		text_.SetFont(sf::Font::GetDefaultFont());
+
+	pWorld_->getScene().addDrawable(text_, 1);
+}
+//----------------------------------------------------------------------------//
+void TextBoxBehavior::deactivate()
+{
+	pWorld_->getScene().removeDrawable(text_);
 }
 //----------------------------------------------------------------------------//
 void TextBoxBehavior::update()
@@ -63,16 +73,6 @@ void TextBoxBehavior::handleMessage(const Message &message)
 			adjustText();
 		}
 	}
-}
-//----------------------------------------------------------------------------//
-void TextBoxBehavior::activate()
-{
-	pWorld_->getScene().addDrawable(text_, 1);
-}
-//----------------------------------------------------------------------------//
-void TextBoxBehavior::deactivate()
-{
-	pWorld_->getScene().removeDrawable(text_);
 }
 //----------------------------------------------------------------------------//
 void TextBoxBehavior::adjustText()

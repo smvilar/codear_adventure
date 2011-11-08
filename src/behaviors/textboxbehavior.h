@@ -13,15 +13,15 @@ class Attribute;
 class ENGINE_API TextBoxBehavior : public Behavior
 {
 public:
-	virtual void update();
-	virtual void handleMessage(const Message &message);
+	void update();
+	void handleMessage(const Message &message);
 
-	virtual Behavior* clone() const { return new TextBoxBehavior; }
+	Behavior* clone() const { return new TextBoxBehavior; }
 
 private:
-	virtual void added();
-	virtual void activate();
-	virtual void deactivate();
+	void added();
+	void activate();
+	void deactivate();
 
 private:
 	sf::Text text_;
