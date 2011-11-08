@@ -23,7 +23,7 @@ void TextInputBehavior::handleMessage(const Message &message)
 		const sf::Event &ev = message.argsAs<sf::Event>();
 		if (ev.Type == sf::Event::TextEntered)
 		{
-			if (ev.Text.Unicode < '0')
+			if (ev.Text.Unicode < ' ')
 				return;
 			sf::String str = ev.Text.Unicode;
 			updateText(str.ToAnsiString());
@@ -34,7 +34,6 @@ void TextInputBehavior::handleMessage(const Message &message)
 				backspace();
 			if (ev.Key.Code == sf::Keyboard::Return)
 			{
-				pWorld_->broadcast(Message("text_input", textAttr_->get<std::string>()));
 				updateText(std::string("\n"));
 			}
 		}
@@ -49,6 +48,8 @@ void TextInputBehavior::updateText(const std::string &str)
 		text += str;
 		textAttr_->set(text);
 		pOwner_->broadcast(Message("update_text"));
+
+		pWorld_->broadcast(Message("text_input", textAttr_->get<std::string>()));
 	}
 }
 //----------------------------------------------------------------------------//

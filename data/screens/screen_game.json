@@ -18,7 +18,8 @@
                 "objects/mc_walk.json",
                 "objects/mc_on_phone.json",
 				"objects/database_input.json",
-				"objects/boss_report.json"
+				"objects/boss_report.json",
+				"objects/employee_report.json"
             ]
         },
         "behaviors" : [ "ObjectRegistry" ]

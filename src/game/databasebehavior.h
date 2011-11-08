@@ -17,6 +17,11 @@ private:
 
 private:
 	GameObject *databaseInput_;
+	bool displayingResult_;
+
+private:
+	void searchDatabase(const std::string &text);
+	void updateText(const std::string &text);
 };
 //----------------------------------------------------------------------------//
 #endif // DATABASEBEHAVIOR_H
