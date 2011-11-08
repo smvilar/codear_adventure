@@ -7,6 +7,7 @@
 #include "gameobject/message.h"
 #include "gameobject/gameobject.h"
 #include "gameobject/attribute.h"
+#include "gameobject/world.h"
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
@@ -32,7 +33,10 @@ void TextInputBehavior::handleMessage(const Message &message)
 			if (ev.Key.Code == sf::Keyboard::Back)
 				backspace();
 			if (ev.Key.Code == sf::Keyboard::Return)
+			{
+				pWorld_->broadcast(Message("text_input", textAttr_->get<std::string>()));
 				updateText(std::string("\n"));
+			}
 		}
 	}
 }

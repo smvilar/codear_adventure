@@ -1,0 +1,21 @@
+{
+    "name" : "BossReport",
+	"attributes" :
+	{
+		"x" : 160,
+		"y" : 60,
+		"width" : 960,
+		"height" : 600,
+        "font" : "fonts/Candal.ttf",
+		"fontSize" : 16,
+		"text" : "	A las 08:20 a.m. del corriente, la comisaría de la zona fue notificada de que el cuarto piso del edificio de la compañía Schulman Researchs ha sido tomado por un criminal no identificado. En él se encuentran ubicado el departamento de investigación bacteriológica, el cual se conforma de una serie de laboratorios aislados entre sí y del resto del edificio por cámaras que funcionan a modo de esclusa de aire.
+	Según fue reportado, el sistema de cuarentena para casos de emergencia fue activado a las 08:07 a.m., causando un cierre automático de los cerrojos de seguridad ubicados en todas las esclusas, así como las salidas por ascensor y escaleras. Siguiendo el protocolo de seguridad correspondiente, los pisos primero, segundo y tercero del edificio han sido evacuados en su totalidad. Según el conteo de empleados se registra que unos nueve trabajadores se encuentran encerrados en el cuarto piso.
+	A pesar de estar en efecto el protocolo de cuarentena, los sistemas de Schulman Researchs no indican la presencia de químicos o material peligroso en el ambiente, lo cual indica que fue activado por el agresor. Ante una activación manual, la única forma de desactivar las medidas de seguridad es desde adentro, o mediante un ingreso forzado.
+	Luego de un primer análisis de los planos del cuarto piso se llegó a la conclusión de que forzar la entrada sin establecer una buena ruta de ingreso podría causar daño colateral, poniendo en peligro la salud de los trabajadores que se encuentran encerrados en él, y de los agentes que intenten dicho ingreso.
+	Los primeros intentos de contactar el interior del cuarto piso han fallado, a las 08:43 a.m. un sujeto masculino atendió una llamada telefónica efectuada al laboratorio 4 - C. El mismo reclamó la presencia de un negociador externo al departamento de policía local. Múltiples voces se oían conversando en el fondo, las voces parecían nerviosas. A las 9:08 a.m. se decidió contactar al negociador externo, dada la falta de cooperación por parte del agresor.
+El equipo SWAT se encuentra actualmente analizando alternativas para ingresar al sector en cuarentena.",
+		"color" : [0, 0, 0, 192],
+		"condition" : "report_read"
+	},
+	"behaviors" : [ "Shape", "TextBox", "UsableItem" ]
+}

@@ -28,6 +28,7 @@ private:
 
 	Attribute *posX_, *posY_, *width_, *height_, *fontSize_, *textAttr_;
 
+	void updateText();
 	void adjustText();
 };
 //----------------------------------------------------------------------------//

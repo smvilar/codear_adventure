@@ -10,34 +10,19 @@ using namespace he;
 //----------------------------------------------------------------------------//
 void TextBoxBehavior::added()
 {
-	// fill with test text
-	const char *loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis nulla sed massa sodales iaculis. Etiam et nisi ac massa interdum pulvinar. Aliquam eu urna mauris. Cras sit amet tortor nulla. Praesent eget nisi sit amet erat feugiat congue at et ante. Pellentesque eros justo, dignissim sed egestas et, auctor non nisl. Aliquam erat volutpat. Pellentesque aliquet, leo vel vulputate rhoncus, sapien sem laoreet leo, at egestas augue nisi at velit. Donec sollicitudin, leo id elementum rhoncus, nunc mi consectetur neque, vel placerat nulla diam a massa.";
-
 	GameObject &owner = *pOwner_;
 
 	posX_ = owner["x"];
 	posY_ = owner["y"];
 	width_ = owner["width"];
 	height_ = owner["height"];
-
-	fontSize_ = owner["fontSize"];
-	if (fontSize_)
-		text_.SetCharacterSize(fontSize_->get<int>());
-	else
-		text_.SetCharacterSize(12);
-
-	textAttr_ = owner["text"];
-	if (textAttr_)
-		text_.SetString(textAttr_->get<std::string>());
-	else
-		text_.SetString(loremIpsum); // fallback to lorem ipsum
-
-	adjustText();
 }
 //----------------------------------------------------------------------------//
 void TextBoxBehavior::activate()
 {
-	Attribute *fontAttr = (*pOwner_)["font"];
+	GameObject &owner = *pOwner_;
+
+	Attribute *fontAttr = owner["font"];
 	if (fontAttr)
 	{
 		std::string fontFilename = fontAttr->get<std::string>();
@@ -46,6 +31,15 @@ void TextBoxBehavior::activate()
 	else
 		text_.SetFont(sf::Font::GetDefaultFont());
 
+	fontSize_ = owner["fontSize"];
+	if (fontSize_)
+		text_.SetCharacterSize(fontSize_->get<int>());
+	else
+		text_.SetCharacterSize(12);
+
+	updateText();
+
+	// add to gui layer
 	pWorld_->getScene().addDrawable(text_, 1);
 }
 //----------------------------------------------------------------------------//
@@ -63,15 +57,20 @@ void TextBoxBehavior::handleMessage(const Message &message)
 {
 	if (message.equals("update_text"))
 	{
-		textAttr_ = pOwner_->getAttribute("text");
-		if (textAttr_)
-		{
-			const std::string &text = textAttr_->get<std::string>();
-			std::wstring wtext;
-			sf::Utf8::ToUtf16(text.begin(), text.end(), std::back_inserter(wtext));
-			text_.SetString(wtext);
-			adjustText();
-		}
+		updateText();
+	}
+}
+//----------------------------------------------------------------------------//
+void TextBoxBehavior::updateText()
+{
+	textAttr_ = (*pOwner_)["text"];
+	if (textAttr_)
+	{
+		const std::string &text = textAttr_->get<std::string>();
+		std::wstring wtext;
+		sf::Utf8::ToUtf16(text.begin(), text.end(), std::back_inserter(wtext));
+		text_.SetString(wtext);
+		adjustText();
 	}
 }
 //----------------------------------------------------------------------------//

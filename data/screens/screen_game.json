@@ -17,7 +17,8 @@
             [
                 "objects/mc_walk.json",
                 "objects/mc_on_phone.json",
-				"objects/database_input.json"
+				"objects/database_input.json",
+				"objects/boss_report.json"
             ]
         },
         "behaviors" : [ "ObjectRegistry" ]
@@ -73,7 +74,7 @@
 			"width" : 50,
 			"height" : 50,
 			"condition" : "phone_used",
-            "overText" : "Use phone",
+            "overText" : "Usar teléfono",
 			"font" : "fonts/Candal.ttf",
 			"fontSize" : 16
 		},
@@ -88,7 +89,7 @@
             "width" : 200,
             "height" : 360,
             "condition" : "jimmy_talk",
-            "overText" : "Talk to Jimmy",
+            "overText" : "Hablar con Jimmy",
             "font" : "fonts/Candal.ttf",
 			"fontSize" : 16,
             "answerBox" : "JimmyAnswerBox",
@@ -115,7 +116,7 @@
             "y" : 39,
             "spriteInfo" : "sprites/screen_1.json",
             "condition" : "search_clicked",
-            "overText" : "Search database",
+            "overText" : "Buscar en la base de datos",
             "font" : "fonts/Candal.ttf",
 			"fontSize" : 16
         },
@@ -128,7 +129,7 @@
             "x" : 531,
             "y" : 142,
             "spriteInfo" : "sprites/screen_2.json",
-            "overText" : "Read reports",
+            "overText" : "Leer reportes",
             "font" : "fonts/Candal.ttf",
 			"fontSize" : 16
         },
@@ -163,12 +164,13 @@
 		"name" : "BackgroundMusic",
 		"attributes" :
 		{
-			"musicFilename" : "music/bgmusic.ogg",
+			"musicFilename" : "music/bgmusic2.ogg",
 			"musicLoop" : true,
 			"musicAutoPlay" : true
 		},
 		"behaviors" : [ "MusicPlayer" ]
 	},
+	// TRIGGERS
     {
         "name" : "TriggerJimmy",
         "attributes" :
@@ -176,18 +178,11 @@
             "conditions" : [ "jimmy_talk" ],
             "actions" :
             [
-                {
-                    "action" : "SendMessage",
-                    "args" : [ "DialogueManager", "start_conversation", "jimmy" ]
-                },
-                {
-                    "action" : "RemoveBehavior",
-                    "args" : [ "Phone", "UsableItem" ]
-                },
-                {
-                    "action" : "RemoveBehavior",
-                    "args" : [ "Jimmy", "UsableItem" ]
-                }
+                { "action" : "SendMessage", "args" : [ "DialogueManager", "start_conversation", "jimmy" ] },
+                { "action" : "RemoveBehavior", "args" : [ "Phone", "UsableItem" ] },
+                { "action" : "RemoveBehavior", "args" : [ "Jimmy", "UsableItem" ] },
+				{ "action" : "RemoveBehavior", "args" : [ "SearchScreen", "UsableItem" ] },
+				{ "action" : "RemoveBehavior", "args" : [ "InfoScreen", "UsableItem" ] }
             ]
         },
         "behaviors" : [ "Trigger" ]
@@ -196,21 +191,42 @@
         "name" : "TriggerJimmyEnd",
         "attributes" :
         {
-            "conditions" : [ "jimmy_end" ],
+            "conditions" : [ "jimmy1_end" ],
             "actions" :
             [
-                {
-                    "action" : "AddBehavior",
-                    "args" : [ "Phone", "UsableItem" ]
-                },
-                {
-                    "action" : "AddBehavior",
-                    "args" : [ "Jimmy", "UsableItem" ]
-                }
+				{ "action" : "AddObject", "args" : [ "BossReport" ] }
             ]
         },
         "behaviors" : [ "Trigger" ]
     },
+	{
+		"name" : "TriggerReportRead",
+		"attributes" :
+		{
+			"conditions" : [ "report_read" ],
+			"actions" :
+			[
+				{ "action" : "RemoveObject", "args" : [ "BossReport" ] },
+                { "action" : "AddBehavior", "args" : [ "Jimmy", "UsableItem" ] },
+//				{ "action" : "AddBehavior", "args" : [ "SearchScreen", "UsableItem" ] },
+//				{ "action" : "AddBehavior", "args" : [ "InfoScreen", "UsableItem" ] },
+				{ "action" : "SwitchTrigger", "args" : [ "TriggerJimmy", true ] }
+			]
+		},
+		"behaviors" : [ "Trigger" ]
+	},
+	{
+		"name" : "TriggerJimmy2End",
+		"attributes" :
+		{
+			"conditions" : [ "jimmy2_end" ],
+			"actions" :
+			[
+				{ "action" : "AddBehavior", "args" : [ "Phone", "UsableItem" ] }
+			]
+		},
+		"behaviors" : [ "Trigger" ]
+	},
 	{
 		"name" : "TriggerStartConversation",
 		"attributes" :
@@ -218,26 +234,13 @@
 			"conditions" : [ "phone_used" ],
 			"actions" :
 			[
-				{
-					"action" : "SendMessage",
-					"args" : [ "DialogueManager", "start_conversation", "phone" ]
-				},
-                {
-                    "action" : "AddObject",
-                    "args" : [ "RichardOnPhone" ]
-                },
-                {
-                    "action" : "RemoveObject",
-                    "args" : [ "Richard" ]
-                },
-                {
-                    "action" : "RemoveBehavior",
-                    "args" : [ "Phone", "UsableItem" ]
-                },
-                {
-                    "action" : "RemoveBehavior",
-                    "args" : [ "Jimmy", "UsableItem" ]
-                }
+				{ "action" : "SendMessage", "args" : [ "DialogueManager", "start_conversation", "phone" ] },
+				{ "action" : "AddObject", "args" : [ "RichardOnPhone" ] },
+				{ "action" : "RemoveObject", "args" : [ "Richard" ] },
+				{ "action" : "RemoveBehavior", "args" : [ "Phone", "UsableItem" ] },
+				{ "action" : "RemoveBehavior", "args" : [ "Jimmy", "UsableItem" ] },
+				{ "action" : "RemoveBehavior", "args" : [ "SearchScreen", "UsableItem" ] },
+				{ "action" : "RemoveBehavior", "args" : [ "InfoScreen", "UsableItem" ] }
 			]
 		},
 		"behaviors" : [ "Trigger" ]
@@ -249,22 +252,12 @@
 			"conditions" : [ "phone_hang" ],
 			"actions" :
 			[
-                {
-                    "action" : "RemoveObject",
-                    "args" : [ "RichardOnPhone" ]
-                },
-                {
-                    "action" : "AddObject",
-                    "args" : [ "Richard" ]
-                },
-                {
-                    "action" : "AddBehavior",
-                    "args" : [ "Phone", "UsableItem" ]
-                },
-                {
-                    "action" : "AddBehavior",
-                    "args" : [ "Jimmy", "UsableItem" ]
-                }
+                { "action" : "RemoveObject", "args" : [ "RichardOnPhone" ] },
+                { "action" : "AddObject", "args" : [ "Richard" ] },
+//				{ "action" : "AddBehavior", "args" : [ "Phone", "UsableItem" ] },
+//				{ "action" : "AddBehavior", "args" : [ "Jimmy", "UsableItem" ] },
+				{ "action" : "AddBehavior", "args" : [ "SearchScreen", "UsableItem" ] },
+				{ "action" : "AddBehavior", "args" : [ "InfoScreen", "UsableItem" ] }
 			]
 		},
 		"behaviors" : [ "Trigger" ]
@@ -276,14 +269,12 @@
             "conditions" : [ "search_clicked" ],
             "actions" :
             [
-                {
-					"action" : "SendMessage",
-					"args" : [ "BigScreen", "database_prepare_input" ]
-                }
+                { "action" : "SendMessage", "args" : [ "BigScreen", "database_prepare_input" ] }
             ]
         },
         "behaviors" : [ "Trigger" ]
     },
+	// ACTIONS
 	{
 		"name" : "SendMessage",
 		"behaviors" : [ "ActionSendMessage" ]

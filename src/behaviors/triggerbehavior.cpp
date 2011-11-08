@@ -33,6 +33,8 @@ void TriggerBehavior::handleMessage(const Message &message)
 	else if (message.equals("trigger_switch"))
 	{
 		active_ = message.argsAs<bool>();
+		if (active_)
+			resetConditions();
 		std::cout << "Switching trigger " << pOwner_->name << ": " << active_ << std::endl;
 	}
 }
@@ -81,6 +83,14 @@ void TriggerBehavior::doActions()
 			actionObject->broadcast(Message("action_triggered", actions_[i].args));
 		else
 			pWorld_->broadcast(Message(actions_[i].name, actions_[i].args));
+	}
+}
+//----------------------------------------------------------------------------//
+void TriggerBehavior::resetConditions()
+{
+	for (size_t i = 0; i < conditions_.size(); ++i)
+	{
+		conditions_[i].met = false;
 	}
 }
 //----------------------------------------------------------------------------//

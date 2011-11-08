@@ -35,14 +35,22 @@ void UsableItemBehavior::update()
 							width_->get<int>(),
 							height_->get<int>()))
 	{
-		text_.SetString(textToShow_->get<std::string>());
-		text_.SetPosition(mouseUtil_->x, mouseUtil_->y - 30);
-		if (!pWorld_->getScene().hasDrawable(text_))
-			pWorld_->getScene().addDrawable(text_, 1);
+		if (textToShow_)
+		{
+			const std::string &text = textToShow_->get<std::string>();
+			std::wstring wtext;
+			sf::Utf8::ToUtf16(text.begin(), text.end(), std::back_inserter(wtext));
+			text_.SetString(wtext);
+			text_.SetPosition(mouseUtil_->x, mouseUtil_->y - 30);
+			if (!pWorld_->getScene().hasDrawable(text_))
+				pWorld_->getScene().addDrawable(text_, 1);
+		}
 
 		if (condition_ && mouseUtil_->justPressed(0))
+		{
 			pWorld_->broadcast(Message("trigger_condition",
 									   condition_->get<std::string>()));
+		}
 	}
 	else if (pWorld_->getScene().hasDrawable(text_))
 	{

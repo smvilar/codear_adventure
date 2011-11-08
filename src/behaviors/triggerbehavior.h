@@ -51,6 +51,7 @@ private:
 
 	bool allConditionsMet() const;
 	void doActions();
+	void resetConditions();
 };
 //----------------------------------------------------------------------------//
 } // end namespace he
