@@ -1,0 +1,20 @@
+[
+	{
+		"id" : "0",
+		"speaker" : "David",
+		"speech" : [ "¿Quién soy, señor negociador?" ],
+		"goto" : "1"
+	},
+	{
+		"id" : "1",
+		"speaker" : "Richard",
+		"speech" : [ "Basta de juegos, David, dime qué es lo que quieres." ],
+		"goto" : "2"
+	},
+	{
+		"id" : "2",
+		"speech" : [ "CONTINUARÁ"],
+		"goto" : "end",
+		"event" : "end_game"
+	}
+]

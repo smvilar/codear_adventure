@@ -1,0 +1,27 @@
+[
+	{
+		"id" : "0",
+		"speaker" : "Jimmy",
+		"speech" : [ "¿Has descubierto algo, Rick?" ],
+		"goto" : "1"
+	},
+	{
+		"id" : "1",
+		"speaker" : "Richard",
+		"speech" : [ "Puede que haya dado con algo que nos dará nombres para investigar.", "Creo que nuestra persona de interés es uno de los empleados que no ha salido nunca del edificio después de la evacuación.", "¿Puedes conseguir los nombres de esos empleados?" ],
+		"goto" : "2"
+	},
+	{
+		"id" : "2",
+		"speaker" : "Jimmy",
+		"speech" : [ "Seguro, dame unos segundos...", "Listo Rick. De los nueve empleados en el edificio descarté cuatro que son mujeres.", "Los nombres del resto están ahora en nuestra terminal de trabajo." ],
+		"goto" : "3"
+	},
+	{
+		"id" : "3",
+		"speaker" : "Richard",
+		"speech" : [ "Gracias, Jimmy" ],
+		"goto" : "end",
+		"event" : "puzzle_jimmy1_end"
+	}
+]

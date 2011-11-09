@@ -1,0 +1,9 @@
+[
+	{
+		"id" : "0",
+        "speaker" : "Richard",
+		"speech" : [ "Mmm, esto es interesante.", "El reporte decía que nueve empleados registrados nunca salieron del edificio.", "Sin embargo el señor dígame-mi-nombre dijo que tenía a ocho rehenes en su poder.", "Esto puede significar dos cosas. Por un lado puede ser que alguno de los empleados no haya sido evacuado y por otro puede ser que uno de los empleados sea nuestro sujeto.", "Necesitaría información sobre los empleados en el edificio. Quizá James pueda ayudarme con eso." ],
+        "goto" : "end",
+        "event" : "info_puzzle1_end"
+    }
+]

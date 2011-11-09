@@ -1,0 +1,9 @@
+[
+	{
+		"id" : "0",
+        "speaker" : "Richard",
+		"speech" : [ "Creo que tenemos algo aquí.", "Para empezar nuestro sujeto es alguien con un conocimiento sobre virus y con acceso a los contenedores de sustancias peligrosas.", "Ahí creo que podemos eliminar a los señores Remington y Schultz de seguridad y del equipo de técnicos respectivamente.", "Y por otro lado cuando hablé con él por teléfono me dijo que tenía hijos. Sólo uno de los tres científicos tiene hijos.", "David Wright es nuestro hombre." ],
+        "goto" : "end",
+        "event" : "info_puzzle2_end"
+    }
+]

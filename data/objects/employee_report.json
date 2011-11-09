@@ -1,0 +1,27 @@
+{
+    "name" : "EmployeeReport",
+	"attributes" :
+	{
+		"x" : 320,
+		"y" : 60,
+		"width" : 640,
+		"height" : 400,
+        "font" : "fonts/Candal.ttf",
+		"fontSize" : 16,
+		"text" : "		Empleados
+
+
+			Matthew Smith
+
+			Jeffrey Remington
+
+			Carl Schultz
+
+			David Wright
+
+			George Ingram",
+		"color" : [0, 0, 0, 192],
+		"condition" : "employee_report_read"
+	},
+	"behaviors" : [ "Shape", "TextBox", "UsableItem" ]
+}
