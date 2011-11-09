@@ -63,7 +63,7 @@ void DatabaseBehavior::searchDatabase(const std::string &text)
 	const size_t maxLen = 4;
 	std::string lowerText;
 	for (size_t i=0; i<std::min(maxLen,text.length()); ++i)
-		lowerText.push_back(std::tolower(text[i]));
+		lowerText.push_back(std::tolower(text[i], std::locale()));
 
 	size_t numDBEntries = sizeof(dbEntries) / sizeof(DBEntry);
 	std::string info = "Not found";
@@ -71,7 +71,7 @@ void DatabaseBehavior::searchDatabase(const std::string &text)
 	{
 		std::string lowerEntry;
 		for (size_t j=0; j<std::min(maxLen,dbEntries[i].key.length()); ++j)
-			lowerEntry.push_back(std::tolower(dbEntries[i].key[j]));
+			lowerEntry.push_back(std::tolower(dbEntries[i].key[j], std::locale()));
 
 		if (lowerText == lowerEntry)
 		{
