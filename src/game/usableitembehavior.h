@@ -23,6 +23,8 @@ private:
 	Attribute *textToShow_;
 
 	sf::Text text_;
+
+	bool firstUpdate_;
 };
 //----------------------------------------------------------------------------//
 #endif // OVERTEXTBEHAVIOR_H

@@ -7,9 +7,11 @@ DialogueManagerBehavior::DialogueManagerBehavior()
 {
 	conversationStates_["phone"].state = 0;
 	conversationStates_["phone"].filenames.push_back("dialogues/phone_dialogue1.json");
+	conversationStates_["phone"].filenames.push_back("dialogues/phone_david2.json");
 	conversationStates_["jimmy"].state = 0;
 	conversationStates_["jimmy"].filenames.push_back("dialogues/jimmy_dialogue1.json");
 	conversationStates_["jimmy"].filenames.push_back("dialogues/jimmy_dialogue2.json");
+	conversationStates_["jimmy"].filenames.push_back("dialogues/puzzle_jimmy1.json");
 }
 //----------------------------------------------------------------------------//
 void DialogueManagerBehavior::added()

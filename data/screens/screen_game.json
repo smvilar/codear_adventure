@@ -130,6 +130,7 @@
             "x" : 531,
             "y" : 142,
             "spriteInfo" : "sprites/screen_2.json",
+            "condition" : "info_clicked",
             "overText" : "Leer reportes",
             "font" : "fonts/Candal.ttf",
 			"fontSize" : 16
@@ -209,8 +210,6 @@
 			[
 				{ "action" : "RemoveObject", "args" : [ "BossReport" ] },
                 { "action" : "AddBehavior", "args" : [ "Jimmy", "UsableItem" ] },
-//				{ "action" : "AddBehavior", "args" : [ "SearchScreen", "UsableItem" ] },
-//				{ "action" : "AddBehavior", "args" : [ "InfoScreen", "UsableItem" ] },
 				{ "action" : "SwitchTrigger", "args" : [ "TriggerJimmy", true ] }
 			]
 		},
@@ -229,7 +228,7 @@
 		"behaviors" : [ "Trigger" ]
 	},
 	{
-		"name" : "TriggerStartConversation",
+		"name" : "TriggerPhoneUsed",
 		"attributes" :
 		{
 			"conditions" : [ "phone_used" ],
@@ -247,7 +246,7 @@
 		"behaviors" : [ "Trigger" ]
     },
 	{
-		"name" : "TriggerEndConversation",
+		"name" : "TriggerPhoneHang",
 		"attributes" :
 		{
 			"conditions" : [ "phone_hang" ],
@@ -255,14 +254,55 @@
 			[
                 { "action" : "RemoveObject", "args" : [ "RichardOnPhone" ] },
                 { "action" : "AddObject", "args" : [ "Richard" ] },
-//				{ "action" : "AddBehavior", "args" : [ "Phone", "UsableItem" ] },
-//				{ "action" : "AddBehavior", "args" : [ "Jimmy", "UsableItem" ] },
+				{ "action" : "AddBehavior", "args" : [ "Jimmy", "UsableItem" ] },
+				{ "action" : "SwitchTrigger", "args" : [ "TriggerJimmy", true ] }
+			]
+		},
+		"behaviors" : [ "Trigger" ]
+	},
+	{
+		"name" : "TriggerEmployeeReport",
+		"attributes" :
+		{
+			"conditions" : [ "puzzle_jimmy1_end" ],
+			"actions" :
+			[
 				{ "action" : "AddBehavior", "args" : [ "SearchScreen", "UsableItem" ] },
 				{ "action" : "AddBehavior", "args" : [ "InfoScreen", "UsableItem" ] }
 			]
 		},
 		"behaviors" : [ "Trigger" ]
 	},
+    {
+        "name" : "TriggerInfoReport",
+        "attributes" :
+        {
+            "conditions" : [ "info_clicked" ],
+            "actions" :
+            [
+                { "action" : "AddObject", "args" : [ "EmployeeReport" ] },
+                { "action" : "SwitchTrigger", "args" : [ "TriggerCloseReport", true ] },
+				{ "action" : "RemoveBehavior", "args" : [ "SearchScreen", "UsableItem" ] },
+				{ "action" : "RemoveBehavior", "args" : [ "InfoScreen", "UsableItem" ] }
+            ]
+        },
+        "behaviors" : [ "Trigger" ]
+    },
+    {
+        "name" : "TriggerCloseReport",
+        "attributes" :
+        {
+            "conditions" : [ "employee_report_read" ],
+            "actions" :
+            [
+                { "action" : "RemoveObject", "args" : [ "EmployeeReport" ] },
+                { "action" : "SwitchTrigger", "args" : [ "TriggerInfoReport", true ] },
+				{ "action" : "AddBehavior", "args" : [ "SearchScreen", "UsableItem" ] },
+				{ "action" : "AddBehavior", "args" : [ "InfoScreen", "UsableItem" ] }
+            ]
+        },
+        "behaviors" : [ "Trigger" ]
+    },
     {
         "name" : "TriggerDatabaseSearch",
         "attributes" :
@@ -271,6 +311,19 @@
             "actions" :
             [
                 { "action" : "SendMessage", "args" : [ "BigScreen", "database_prepare_input" ] }
+            ]
+        },
+        "behaviors" : [ "Trigger" ]
+    },
+    {
+        "name" : "TriggerDavidFound",
+        "attributes" :
+        {
+            "conditions" : [ "david_found" ],
+            "actions" :
+            [
+				{ "action" : "AddBehavior", "args" : [ "Phone", "UsableItem" ] },
+				{ "action" : "SwitchTrigger", "args" : [ "TriggerPhoneUsed", true ] }
             ]
         },
         "behaviors" : [ "Trigger" ]

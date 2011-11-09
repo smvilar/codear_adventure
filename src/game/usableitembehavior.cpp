@@ -28,10 +28,18 @@ void UsableItemBehavior::activate()
 	Attribute *fontSize = owner["fontSize"];
 	if (fontSize)
 		text_.SetCharacterSize(fontSize->get<int>());
+
+	firstUpdate_ = true;
 }
 //----------------------------------------------------------------------------//
 void UsableItemBehavior::update()
 {
+	if (firstUpdate_)
+	{
+		firstUpdate_ = false;
+		return;
+	}
+
 	if (mouseUtil_->isInBox(posX_->get<int>(),
 							posY_->get<int>(),
 							width_->get<int>(),

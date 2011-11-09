@@ -76,6 +76,11 @@ void DatabaseBehavior::searchDatabase(const std::string &text)
 		if (lowerText == lowerEntry)
 		{
 			info = dbEntries[i].key + "\n\n" + dbEntries[i].info;
+			// check win condition
+			if (dbEntries[i].key == "David Wright")
+			{
+				pWorld_->broadcast(Message("trigger_condition", std::string("david_found")));
+			}
 			break;
 		}
 	}
