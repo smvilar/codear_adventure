@@ -1,0 +1,8 @@
+.DS_Store
+obj
+.vs
+.idea
+*.pdb
+*.exe
+bin/*.dll
+*.vcxproj.user
