@@ -21,14 +21,14 @@ void Profiler::begin(const char* name)
 		_logger = new Logger("ProfilerLog.txt");
 	}
 	ProfileInfo& info = _infos[name];
-	info.lastTicks = s_clock.GetElapsedTime();
+	info.lastTicks = s_clock.getElapsedTime().asMilliseconds();
 	++info.count;
 }
 //----------------------------------------------------------------------------//
 void Profiler::end(const char* name)
 {
 	ProfileInfo& info = _infos[name];
-	info.ticks += s_clock.GetElapsedTime() - info.lastTicks;
+	info.ticks += s_clock.getElapsedTime().asMilliseconds() - info.lastTicks;
 }
 //----------------------------------------------------------------------------//
 void Profiler::clear(const char* name)

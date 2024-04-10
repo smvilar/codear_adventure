@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2023 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -41,7 +41,7 @@ namespace sf
 template <typename T>
 class Rect
 {
-public :
+public:
 
     ////////////////////////////////////////////////////////////
     /// \brief Default constructor
@@ -58,13 +58,13 @@ public :
     /// Be careful, the last two parameters are the width
     /// and height, not the right and bottom coordinates!
     ///
-    /// \param left   Left coordinate of the rectangle
-    /// \param top    Top coordinate of the rectangle
-    /// \param width  Width of the rectangle
-    /// \param height Height of the rectangle
+    /// \param rectLeft   Left coordinate of the rectangle
+    /// \param rectTop    Top coordinate of the rectangle
+    /// \param rectWidth  Width of the rectangle
+    /// \param rectHeight Height of the rectangle
     ///
     ////////////////////////////////////////////////////////////
-    Rect(T left, T top, T width, T height);
+    Rect(T rectLeft, T rectTop, T rectWidth, T rectHeight);
 
     ////////////////////////////////////////////////////////////
     /// \brief Construct the rectangle from position and size
@@ -95,27 +95,33 @@ public :
     ////////////////////////////////////////////////////////////
     /// \brief Check if a point is inside the rectangle's area
     ///
+    /// This check is non-inclusive. If the point lies on the
+    /// edge of the rectangle, this function will return false.
+    ///
     /// \param x X coordinate of the point to test
     /// \param y Y coordinate of the point to test
     ///
     /// \return True if the point is inside, false otherwise
     ///
-    /// \see Intersects
+    /// \see intersects
     ///
     ////////////////////////////////////////////////////////////
-    bool Contains(T x, T y) const;
+    bool contains(T x, T y) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Check if a point is inside the rectangle's area
+    ///
+    /// This check is non-inclusive. If the point lies on the
+    /// edge of the rectangle, this function will return false.
     ///
     /// \param point Point to test
     ///
     /// \return True if the point is inside, false otherwise
     ///
-    /// \see Intersects
+    /// \see intersects
     ///
     ////////////////////////////////////////////////////////////
-    bool Contains(const Vector2<T>& point) const;
+    bool contains(const Vector2<T>& point) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Check the intersection between two rectangles
@@ -124,10 +130,10 @@ public :
     ///
     /// \return True if rectangles overlap, false otherwise
     ///
-    /// \see Contains
+    /// \see contains
     ///
     ////////////////////////////////////////////////////////////
-    bool Intersects(const Rect<T>& rectangle) const;
+    bool intersects(const Rect<T>& rectangle) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Check the intersection between two rectangles
@@ -140,19 +146,69 @@ public :
     ///
     /// \return True if rectangles overlap, false otherwise
     ///
-    /// \see Contains
+    /// \see contains
     ///
     ////////////////////////////////////////////////////////////
-    bool Intersects(const Rect<T>& rectangle, Rect<T>& intersection) const;
+    bool intersects(const Rect<T>& rectangle, Rect<T>& intersection) const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Get the position of the rectangle's top-left corner
+    ///
+    /// \return Position of rectangle
+    ///
+    /// \see getSize
+    ///
+    ////////////////////////////////////////////////////////////
+    sf::Vector2<T> getPosition() const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Get the size of the rectangle
+    ///
+    /// \return Size of rectangle
+    ///
+    /// \see getPosition
+    ///
+    ////////////////////////////////////////////////////////////
+    sf::Vector2<T> getSize() const;
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    T Left;   ///< Left coordinate of the rectangle
-    T Top;    ///< Top coordinate of the rectangle
-    T Width;  ///< Width of the rectangle
-    T Height; ///< Height of the rectangle
+    T left;   //!< Left coordinate of the rectangle
+    T top;    //!< Top coordinate of the rectangle
+    T width;  //!< Width of the rectangle
+    T height; //!< Height of the rectangle
 };
+
+////////////////////////////////////////////////////////////
+/// \relates Rect
+/// \brief Overload of binary operator ==
+///
+/// This operator compares strict equality between two rectangles.
+///
+/// \param left  Left operand (a rectangle)
+/// \param right Right operand (a rectangle)
+///
+/// \return True if \a left is equal to \a right
+///
+////////////////////////////////////////////////////////////
+template <typename T>
+bool operator ==(const Rect<T>& left, const Rect<T>& right);
+
+////////////////////////////////////////////////////////////
+/// \relates Rect
+/// \brief Overload of binary operator !=
+///
+/// This operator compares strict difference between two rectangles.
+///
+/// \param left  Left operand (a rectangle)
+/// \param right Right operand (a rectangle)
+///
+/// \return True if \a left is not equal to \a right
+///
+////////////////////////////////////////////////////////////
+template <typename T>
+bool operator !=(const Rect<T>& left, const Rect<T>& right);
 
 #include <SFML/Graphics/Rect.inl>
 
@@ -172,24 +228,24 @@ typedef Rect<float> FloatRect;
 ///
 /// A rectangle is defined by its top-left corner and its size.
 /// It is a very simple class defined for convenience, so
-/// its member variables (Left, Top, Width and Height) are public
+/// its member variables (left, top, width and height) are public
 /// and can be accessed directly, just like the vector classes
 /// (Vector2 and Vector3).
 ///
 /// To keep things simple, sf::Rect doesn't define
 /// functions to emulate the properties that are not directly
-/// members (such as Right, Bottom, Center, etc.), it rather
+/// members (such as right, bottom, center, etc.), it rather
 /// only provides intersection functions.
 ///
 /// sf::Rect uses the usual rules for its boundaries:
-/// \li The Left and Top edges are included in the rectangle's area
-/// \li The right (Left + Width) and bottom (Top + Height) edges are excluded from the rectangle's area
+/// \li The left and top edges are included in the rectangle's area
+/// \li The right (left + width) and bottom (top + height) edges are excluded from the rectangle's area
 ///
 /// This means that sf::IntRect(0, 0, 1, 1) and sf::IntRect(1, 1, 1, 1)
 /// don't intersect.
 ///
 /// sf::Rect is a template and may be used with any numeric type, but
-/// for simplicity the instanciations used by SFML are typedefed:
+/// for simplicity the instantiations used by SFML are typedef'd:
 /// \li sf::Rect<int> is sf::IntRect
 /// \li sf::Rect<float> is sf::FloatRect
 ///
@@ -206,12 +262,12 @@ typedef Rect<float> FloatRect;
 /// sf::IntRect r2(position, size);
 ///
 /// // Test intersections with the point (3, 1)
-/// bool b1 = r1.Contains(3, 1); // true
-/// bool b2 = r2.Contains(3, 1); // false
+/// bool b1 = r1.contains(3, 1); // true
+/// bool b2 = r2.contains(3, 1); // false
 ///
 /// // Test the intersection between r1 and r2
 /// sf::IntRect result;
-/// bool b3 = r1.Intersects(r2, result); // true
+/// bool b3 = r1.intersects(r2, result); // true
 /// // result == (4, 2, 16, 3)
 /// \endcode
 ///

@@ -5,26 +5,50 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0FC49A02-2C75-4D2A-A9B2-A8231F00EE07}</ProjectGuid>
     <RootNamespace>CODEARAdv</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -32,7 +56,13 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -43,6 +73,11 @@
     <IntDir>../obj/</IntDir>
     <TargetName>DamageControl</TargetName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>DamageControl</TargetName>
+    <OutDir>../bin/</OutDir>
+    <IntDir>../obj/</IntDir>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>../bin/</OutDir>
   </PropertyGroup>
@@ -50,21 +85,49 @@
     <IntDir>../obj/</IntDir>
     <TargetName>DamageControl</TargetName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>DamageControl</TargetName>
+    <OutDir>../bin/</OutDir>
+    <IntDir>../obj/</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>../src;../lib;../lib/SFML/include;../lib/freetype/include;../lib/rapidxml-1.13;../lib/zlib125/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../lib/SFML/lib/win32;../lib/zlib125/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../lib/SFML/lib;../lib/zlib125/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OpenGL32.lib;sfml-main-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(ProjectDir)..\lib\SFML\lib\win32\*.dll" "$(ProjectDir)..\bin"
+      <Command>copy "$(ProjectDir)..\lib\SFML\bin\*.dll" "$(ProjectDir)..\bin"
+copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
+      <Message>Copy SFML dlls</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../src;../lib;../lib/SFML/include;../lib/freetype/include;../lib/rapidxml-1.13;../lib/zlib125/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../lib/SFML/lib;../lib/zlib125/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenGL32.lib;sfml-main-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(ProjectDir)..\lib\SFML\bin\*.dll" "$(ProjectDir)..\bin"
 copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
       <Message>Copy SFML dlls</Message>
     </PostBuildEvent>
@@ -77,17 +140,46 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>../src;../lib;../lib/SFML/include;../lib/freetype/include;../lib/rapidxml-1.13;../lib/zlib125/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>../lib/SFML/lib/win32;../lib/zlib125/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../lib/SFML/lib;../lib/zlib125/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OpenGL32.lib;sfml-main.lib;sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(ProjectDir)..\lib\SFML\lib\win32\*.dll" "$(ProjectDir)..\bin"
+      <Command>copy "$(ProjectDir)..\lib\SFML\bin\*.dll" "$(ProjectDir)..\bin"
+copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy SFML dlls</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>../src;../lib;../lib/SFML/include;../lib/freetype/include;../lib/rapidxml-1.13;../lib/zlib125/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../lib/SFML/lib;../lib/zlib125/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenGL32.lib;sfml-main.lib;sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(ProjectDir)..\lib\SFML\bin\*.dll" "$(ProjectDir)..\bin"
 copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
@@ -234,6 +326,44 @@ copy "$(ProjectDir)..\lib\zlib125\zlib1.dll" "$(ProjectDir)..\bin"</Command>
     <None Include="..\src\util\fpscounter.inl" />
     <None Include="..\src\util\logger.inl" />
     <None Include="..\src\util\memorymanager.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\data\config\game.json" />
+    <Content Include="..\data\dialogues\info_puzzle1.json" />
+    <Content Include="..\data\dialogues\info_puzzle2.json" />
+    <Content Include="..\data\dialogues\jimmy_dialogue1.json" />
+    <Content Include="..\data\dialogues\jimmy_dialogue2.json" />
+    <Content Include="..\data\dialogues\phone_david2.json" />
+    <Content Include="..\data\dialogues\phone_dialogue1.json" />
+    <Content Include="..\data\dialogues\puzzle_jimmy1.json" />
+    <Content Include="..\data\fonts\Candal.ttf" />
+    <Content Include="..\data\fonts\telegrama_raw_osn.otf" />
+    <Content Include="..\data\music\bgmusic.ogg" />
+    <Content Include="..\data\music\bgmusic2.ogg" />
+    <Content Include="..\data\objects\boss_report.json" />
+    <Content Include="..\data\objects\database_input.json" />
+    <Content Include="..\data\objects\employee_report.json" />
+    <Content Include="..\data\objects\mc_on_phone.json" />
+    <Content Include="..\data\objects\mc_walk.json" />
+    <Content Include="..\data\screens\screen_flow.json" />
+    <Content Include="..\data\screens\screen_game.json" />
+    <Content Include="..\data\screens\screen_logo.json" />
+    <Content Include="..\data\sprites\hierophant_logo.json" />
+    <Content Include="..\data\sprites\screen_1.json" />
+    <Content Include="..\data\sprites\screen_2.json" />
+    <Content Include="..\data\sprites\screen_3.json" />
+    <Content Include="..\data\sprites\screen_big.json" />
+    <Content Include="..\data\sprites\sprite_info_bkg.json" />
+    <Content Include="..\data\sprites\sprite_info_mc.json" />
+    <Content Include="..\data\sprites\sprite_mc_onphone.json" />
+    <Content Include="..\data\textures\background.png" />
+    <Content Include="..\data\textures\hierophant_logo.jpg" />
+    <Content Include="..\data\textures\phone_pickup.png" />
+    <Content Include="..\data\textures\screen_1.png" />
+    <Content Include="..\data\textures\screen_2.png" />
+    <Content Include="..\data\textures\screen_3.png" />
+    <Content Include="..\data\textures\screen_big.png" />
+    <Content Include="..\data\textures\walk.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

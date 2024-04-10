@@ -191,9 +191,6 @@
     <ClInclude Include="..\src\behaviors\fpscounterbehavior.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\behaviors\gamebehaviors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\behaviors\spawnbehavior.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -204,9 +201,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\core\Assert.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\core\BaseObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\core\gameloop.h">
@@ -403,9 +397,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\src\core\BaseObject.inl">
-      <Filter>Header Files</Filter>
-    </None>
     <None Include="..\src\gameobject\world.inl">
       <Filter>Header Files</Filter>
     </None>

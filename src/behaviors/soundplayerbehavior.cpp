@@ -10,27 +10,27 @@ void SoundPlayerBehavior::activate()
 {
 	std::string filename = pOwner_->getAttributeAs<std::string>("soundFilename");
 
-	sound_.SetBuffer(pWorld_->getResourceManager().getSoundBuffer(filename));
+	sound_.setBuffer(pWorld_->getResourceManager().getSoundBuffer(filename));
 	if (Attribute* attr = pOwner_->getAttribute("soundLoop"))
-		sound_.SetLoop(attr->get<bool>());
+		sound_.setLoop(attr->get<bool>());
 	if (Attribute* attr = pOwner_->getAttribute("soundAutoPlay"))
 		if (attr->get<bool>())
-			sound_.Play();
+			sound_.play();
 }
 //----------------------------------------------------------------------------//
 void SoundPlayerBehavior::handleMessage(const Message &message)
 {
 	if (message.equals("sound_play"))
 	{
-		sound_.Play();
+		sound_.play();
 	}
 	else if (message.equals("sound_pause"))
 	{
-		sound_.Pause();
+		sound_.pause();
 	}
 	else if (message.equals("sound_stop"))
 	{
-		sound_.Stop();
+		sound_.stop();
 	}
 }
 //----------------------------------------------------------------------------//

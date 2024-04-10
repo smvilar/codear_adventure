@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2023 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,25 +28,30 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/System/NonCopyable.hpp>
+#include <SFML/Graphics/Export.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Rect.hpp>
-#include <SFML/Graphics/Renderer.hpp>
 #include <SFML/Graphics/View.hpp>
+#include <SFML/Graphics/Transform.hpp>
+#include <SFML/Graphics/BlendMode.hpp>
+#include <SFML/Graphics/RenderStates.hpp>
+#include <SFML/Graphics/PrimitiveType.hpp>
+#include <SFML/Graphics/Vertex.hpp>
+#include <SFML/System/NonCopyable.hpp>
 
 
 namespace sf
 {
 class Drawable;
-class Shader;
+class VertexBuffer;
 
 ////////////////////////////////////////////////////////////
 /// \brief Base class for all render targets (window, texture, ...)
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API RenderTarget : NonCopyable
+class SFML_GRAPHICS_API RenderTarget : NonCopyable
 {
-public :
+public:
 
     ////////////////////////////////////////////////////////////
     /// \brief Destructor
@@ -63,82 +68,38 @@ public :
     /// \param color Fill color to use to clear the render target
     ///
     ////////////////////////////////////////////////////////////
-    void Clear(const Color& color = Color(0, 0, 0, 255));
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Draw an object into the target
-    ///
-    /// This function draws anything that inherits from the
-    /// sf::Drawable base class (sf::Sprite, sf::Shape, sf::Text,
-    /// or even your own derived classes).
-    ///
-    /// \param object Object to draw
-    ///
-    ////////////////////////////////////////////////////////////
-    void Draw(const Drawable& object);
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Draw an object into the target with a shader
-    ///
-    /// This function draws anything that inherits from the
-    /// sf::Drawable base class (sf::Sprite, sf::Shape, sf::Text,
-    /// or even your own derived classes).
-    /// The shader alters the way that the pixels are processed
-    /// right before being written to the render target.
-    ///
-    /// \param object Object to draw
-    /// \param shader Shader to use for drawing the object
-    ///
-    ////////////////////////////////////////////////////////////
-    void Draw(const Drawable& object, const Shader& shader);
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Return the width of the rendering region of the target
-    ///
-    /// \return Width in pixels
-    ///
-    /// \see GetHeight
-    ///
-    ////////////////////////////////////////////////////////////
-    virtual unsigned int GetWidth() const = 0;
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Return the height of the rendering region of the target
-    ///
-    /// \return Height in pixels
-    ///
-    /// \see GetWidth
-    ///
-    ////////////////////////////////////////////////////////////
-    virtual unsigned int GetHeight() const = 0;
+    void clear(const Color& color = Color(0, 0, 0, 255));
 
     ////////////////////////////////////////////////////////////
     /// \brief Change the current active view
     ///
+    /// The view is like a 2D camera, it controls which part of
+    /// the 2D scene is visible, and how it is viewed in the
+    /// render target.
     /// The new view will affect everything that is drawn, until
-    /// another view is activated.
+    /// another view is set.
     /// The render target keeps its own copy of the view object,
     /// so it is not necessary to keep the original one alive
-    /// as long as it is in use.
+    /// after calling this function.
     /// To restore the original view of the target, you can pass
-    /// the result of GetDefaultView() to this function.
+    /// the result of getDefaultView() to this function.
     ///
     /// \param view New view to use
     ///
-    /// \see GetView, GetDefaultView
+    /// \see getView, getDefaultView
     ///
     ////////////////////////////////////////////////////////////
-    void SetView(const View& view);
+    void setView(const View& view);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Retrieve the view currently in use in the render target
+    /// \brief Get the view currently in use in the render target
     ///
     /// \return The view object that is currently used
     ///
-    /// \see SetView, GetDefaultView
+    /// \see setView, getDefaultView
     ///
     ////////////////////////////////////////////////////////////
-    const View& GetView() const;
+    const View& getView() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the default view of the render target
@@ -148,10 +109,10 @@ public :
     ///
     /// \return The default view of the render target
     ///
-    /// \see SetView, GetView
+    /// \see setView, getView
     ///
     ////////////////////////////////////////////////////////////
-    const View& GetDefaultView() const;
+    const View& getDefaultView() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the viewport of a view, applied to this render target
@@ -166,63 +127,190 @@ public :
     /// \return Viewport rectangle, expressed in pixels
     ///
     ////////////////////////////////////////////////////////////
-    IntRect GetViewport(const View& view) const;
+    IntRect getViewport(const View& view) const;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Convert a point from target coordinates to view coordinates
+    /// \brief Convert a point from target coordinates to world
+    ///        coordinates, using the current view
     ///
-    /// Initially, a unit of the 2D world matches a pixel of the
-    /// render target. But if you define a custom view, this
-    /// assertion is not true anymore, ie. a point located at
-    /// (10, 50) in your render target (for example a window) may
-    /// map to the point (150, 75) in your 2D world -- for example
-    /// if the view is translated by (140, 25).
+    /// This function is an overload of the mapPixelToCoords
+    /// function that implicitly uses the current view.
+    /// It is equivalent to:
+    /// \code
+    /// target.mapPixelToCoords(point, target.getView());
+    /// \endcode
     ///
-    /// For render windows, this function is typically used to find
-    /// which point (or object) is located below the mouse cursor.
+    /// \param point Pixel to convert
     ///
-    /// This version uses the current view of the render target.
-    /// See the other overload to specify a custom view.
+    /// \return The converted point, in "world" coordinates
     ///
-    /// \param x X coordinate of the point to convert, relative to the render target
-    /// \param y Y coordinate of the point to convert, relative to the render target
-    ///
-    /// \return The converted point, in "world" units
+    /// \see mapCoordsToPixel
     ///
     ////////////////////////////////////////////////////////////
-    Vector2f ConvertCoords(unsigned int x, unsigned int y) const;
+    Vector2f mapPixelToCoords(const Vector2i& point) const;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Convert a point from target coordinates to view coordinates
+    /// \brief Convert a point from target coordinates to world coordinates
     ///
-    /// Initially, a unit of the 2D world matches a pixel of the
-    /// render target. But if you define a custom view, this
-    /// assertion is not true anymore, ie. a point located at
-    /// (10, 50) in your render target (for example a window) may
-    /// map to the point (150, 75) in your 2D world -- for example
-    /// if the view is translated by (140, 25).
+    /// This function finds the 2D position that matches the
+    /// given pixel of the render target. In other words, it does
+    /// the inverse of what the graphics card does, to find the
+    /// initial position of a rendered pixel.
     ///
-    /// For render windows, this function is typically used to find
+    /// Initially, both coordinate systems (world units and target pixels)
+    /// match perfectly. But if you define a custom view or resize your
+    /// render target, this assertion is not true anymore, i.e. a point
+    /// located at (10, 50) in your render target may map to the point
+    /// (150, 75) in your 2D world -- if the view is translated by (140, 25).
+    ///
+    /// For render-windows, this function is typically used to find
     /// which point (or object) is located below the mouse cursor.
     ///
     /// This version uses a custom view for calculations, see the other
-    /// overload of the function to use the current view of the render
-    /// target.
+    /// overload of the function if you want to use the current view of the
+    /// render target.
     ///
-    /// \param x    X coordinate of the point to convert, relative to the render target
-    /// \param y    Y coordinate of the point to convert, relative to the render target
+    /// \param point Pixel to convert
     /// \param view The view to use for converting the point
     ///
     /// \return The converted point, in "world" units
     ///
+    /// \see mapCoordsToPixel
+    ///
     ////////////////////////////////////////////////////////////
-    Vector2f ConvertCoords(unsigned int x, unsigned int y, const View& view) const;
+    Vector2f mapPixelToCoords(const Vector2i& point, const View& view) const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Convert a point from world coordinates to target
+    ///        coordinates, using the current view
+    ///
+    /// This function is an overload of the mapCoordsToPixel
+    /// function that implicitly uses the current view.
+    /// It is equivalent to:
+    /// \code
+    /// target.mapCoordsToPixel(point, target.getView());
+    /// \endcode
+    ///
+    /// \param point Point to convert
+    ///
+    /// \return The converted point, in target coordinates (pixels)
+    ///
+    /// \see mapPixelToCoords
+    ///
+    ////////////////////////////////////////////////////////////
+    Vector2i mapCoordsToPixel(const Vector2f& point) const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Convert a point from world coordinates to target coordinates
+    ///
+    /// This function finds the pixel of the render target that matches
+    /// the given 2D point. In other words, it goes through the same process
+    /// as the graphics card, to compute the final position of a rendered point.
+    ///
+    /// Initially, both coordinate systems (world units and target pixels)
+    /// match perfectly. But if you define a custom view or resize your
+    /// render target, this assertion is not true anymore, i.e. a point
+    /// located at (150, 75) in your 2D world may map to the pixel
+    /// (10, 50) of your render target -- if the view is translated by (140, 25).
+    ///
+    /// This version uses a custom view for calculations, see the other
+    /// overload of the function if you want to use the current view of the
+    /// render target.
+    ///
+    /// \param point Point to convert
+    /// \param view The view to use for converting the point
+    ///
+    /// \return The converted point, in target coordinates (pixels)
+    ///
+    /// \see mapPixelToCoords
+    ///
+    ////////////////////////////////////////////////////////////
+    Vector2i mapCoordsToPixel(const Vector2f& point, const View& view) const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Draw a drawable object to the render target
+    ///
+    /// \param drawable Object to draw
+    /// \param states   Render states to use for drawing
+    ///
+    ////////////////////////////////////////////////////////////
+    void draw(const Drawable& drawable, const RenderStates& states = RenderStates::Default);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Draw primitives defined by an array of vertices
+    ///
+    /// \param vertices    Pointer to the vertices
+    /// \param vertexCount Number of vertices in the array
+    /// \param type        Type of primitives to draw
+    /// \param states      Render states to use for drawing
+    ///
+    ////////////////////////////////////////////////////////////
+    void draw(const Vertex* vertices, std::size_t vertexCount,
+              PrimitiveType type, const RenderStates& states = RenderStates::Default);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Draw primitives defined by a vertex buffer
+    ///
+    /// \param vertexBuffer Vertex buffer
+    /// \param states       Render states to use for drawing
+    ///
+    ////////////////////////////////////////////////////////////
+    void draw(const VertexBuffer& vertexBuffer, const RenderStates& states = RenderStates::Default);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Draw primitives defined by a vertex buffer
+    ///
+    /// \param vertexBuffer Vertex buffer
+    /// \param firstVertex  Index of the first vertex to render
+    /// \param vertexCount  Number of vertices to render
+    /// \param states       Render states to use for drawing
+    ///
+    ////////////////////////////////////////////////////////////
+    void draw(const VertexBuffer& vertexBuffer, std::size_t firstVertex, std::size_t vertexCount, const RenderStates& states = RenderStates::Default);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Return the size of the rendering region of the target
+    ///
+    /// \return Size in pixels
+    ///
+    ////////////////////////////////////////////////////////////
+    virtual Vector2u getSize() const = 0;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Tell if the render target will use sRGB encoding when drawing on it
+    ///
+    /// \return True if the render target use sRGB encoding, false otherwise
+    ///
+    ////////////////////////////////////////////////////////////
+    virtual bool isSrgb() const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Activate or deactivate the render target for rendering
+    ///
+    /// This function makes the render target's context current for
+    /// future OpenGL rendering operations (so you shouldn't care
+    /// about it if you're not doing direct OpenGL stuff).
+    /// A render target's context is active only on the current thread,
+    /// if you want to make it active on another thread you have
+    /// to deactivate it on the previous thread first if it was active.
+    /// Only one context can be current in a thread, so if you
+    /// want to draw OpenGL geometry to another render target
+    /// don't forget to activate it again. Activating a render
+    /// target will automatically deactivate the previously active
+    /// context (if any).
+    ///
+    /// \param active True to activate, false to deactivate
+    ///
+    /// \return True if operation was successful, false otherwise
+    ///
+    ////////////////////////////////////////////////////////////
+    virtual bool setActive(bool active = true);
 
     ////////////////////////////////////////////////////////////
     /// \brief Save the current OpenGL render states and matrices
     ///
     /// This function can be used when you mix SFML drawing
-    /// and direct OpenGL rendering. Combined with RestoreGLStates,
+    /// and direct OpenGL rendering. Combined with popGLStates,
     /// it ensures that:
     /// \li SFML's internal states are not messed up by your OpenGL code
     /// \li your OpenGL states are not modified by a call to a SFML function
@@ -231,36 +319,62 @@ public :
     /// calls Draw functions. Example:
     /// \code
     /// // OpenGL code here...
-    /// window.SaveGLStates();
-    /// window.Draw(...);
-    /// window.Draw(...);
-    /// window.RestoreGLStates();
+    /// window.pushGLStates();
+    /// window.draw(...);
+    /// window.draw(...);
+    /// window.popGLStates();
     /// // OpenGL code here...
     /// \endcode
     ///
-    /// Note that this function is quite expensive and should be
-    /// used wisely. It is provided for convenience, and the best
-    /// results will be achieved if you handle OpenGL states
-    /// yourself (because you really know which states have really
-    /// changed, and need to be saved / restored).
+    /// Note that this function is quite expensive: it saves all the
+    /// possible OpenGL states and matrices, even the ones you
+    /// don't care about. Therefore it should be used wisely.
+    /// It is provided for convenience, but the best results will
+    /// be achieved if you handle OpenGL states yourself (because
+    /// you know which states have really changed, and need to be
+    /// saved and restored). Take a look at the resetGLStates
+    /// function if you do so.
     ///
-    /// \see RestoreGLStates
+    /// \see popGLStates
     ///
     ////////////////////////////////////////////////////////////
-    void SaveGLStates();
+    void pushGLStates();
 
     ////////////////////////////////////////////////////////////
     /// \brief Restore the previously saved OpenGL render states and matrices
     ///
-    /// See the description of SaveGLStates to get a detailed
+    /// See the description of pushGLStates to get a detailed
     /// description of these functions.
     ///
-    /// \see SaveGLStates
+    /// \see pushGLStates
     ///
     ////////////////////////////////////////////////////////////
-    void RestoreGLStates();
+    void popGLStates();
 
-protected :
+    ////////////////////////////////////////////////////////////
+    /// \brief Reset the internal OpenGL states so that the target is ready for drawing
+    ///
+    /// This function can be used when you mix SFML drawing
+    /// and direct OpenGL rendering, if you choose not to use
+    /// pushGLStates/popGLStates. It makes sure that all OpenGL
+    /// states needed by SFML are set, so that subsequent draw()
+    /// calls will work as expected.
+    ///
+    /// Example:
+    /// \code
+    /// // OpenGL code here...
+    /// glPushAttrib(...);
+    /// window.resetGLStates();
+    /// window.draw(...);
+    /// window.draw(...);
+    /// glPopAttrib(...);
+    /// // OpenGL code here...
+    /// \endcode
+    ///
+    ////////////////////////////////////////////////////////////
+    void resetGLStates();
+
+protected:
 
     ////////////////////////////////////////////////////////////
     /// \brief Default constructor
@@ -275,32 +389,100 @@ protected :
     /// target is created and ready for drawing.
     ///
     ////////////////////////////////////////////////////////////
-    void Initialize();
+    void initialize();
 
-private :
+private:
 
     ////////////////////////////////////////////////////////////
-    /// \brief Activate the target for rendering
-    ///
-    /// This function must be implemented by derived classes to make
-    /// their OpenGL context current; it is called by the base class
-    /// everytime it's going to use OpenGL calls.
-    ///
-    /// \param active True to make the target active, false to deactivate it
-    ///
-    /// \return True if the function succeeded
+    /// \brief Apply the current view
     ///
     ////////////////////////////////////////////////////////////
-    virtual bool Activate(bool active) = 0;
+    void applyCurrentView();
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Apply a new blending mode
+    ///
+    /// \param mode Blending mode to apply
+    ///
+    ////////////////////////////////////////////////////////////
+    void applyBlendMode(const BlendMode& mode);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Apply a new transform
+    ///
+    /// \param transform Transform to apply
+    ///
+    ////////////////////////////////////////////////////////////
+    void applyTransform(const Transform& transform);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Apply a new texture
+    ///
+    /// \param texture Texture to apply
+    ///
+    ////////////////////////////////////////////////////////////
+    void applyTexture(const Texture* texture);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Apply a new shader
+    ///
+    /// \param shader Shader to apply
+    ///
+    ////////////////////////////////////////////////////////////
+    void applyShader(const Shader* shader);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Setup environment for drawing
+    ///
+    /// \param useVertexCache Are we going to use the vertex cache?
+    /// \param states         Render states to use for drawing
+    ///
+    ////////////////////////////////////////////////////////////
+    void setupDraw(bool useVertexCache, const RenderStates& states);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Draw the primitives
+    ///
+    /// \param type        Type of primitives to draw
+    /// \param firstVertex Index of the first vertex to use when drawing
+    /// \param vertexCount Number of vertices to use when drawing
+    ///
+    ////////////////////////////////////////////////////////////
+    void drawPrimitives(PrimitiveType type, std::size_t firstVertex, std::size_t vertexCount);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Clean up environment after drawing
+    ///
+    /// \param states Render states used for drawing
+    ///
+    ////////////////////////////////////////////////////////////
+    void cleanupDraw(const RenderStates& states);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Render states cache
+    ///
+    ////////////////////////////////////////////////////////////
+    struct StatesCache
+    {
+        enum {VertexCacheSize = 4};
+
+        bool      enable;         //!< Is the cache enabled?
+        bool      glStatesSet;    //!< Are our internal GL states set yet?
+        bool      viewChanged;    //!< Has the current view changed since last draw?
+        BlendMode lastBlendMode;  //!< Cached blending mode
+        Uint64    lastTextureId;  //!< Cached texture
+        bool      texCoordsArrayEnabled; //!< Is GL_TEXTURE_COORD_ARRAY client state enabled?
+        bool      useVertexCache; //!< Did we previously use the vertex cache?
+        Vertex    vertexCache[VertexCacheSize]; //!< Pre-transformed vertices cache
+    };
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    Renderer myRenderer;       ///< Renderer that will process the rendering commands of the window
-    View     myDefaultView;    ///< Default view
-    View     myCurrentView;    ///< Current active view
-    bool     myStatesSaved;    ///< Are we between a SaveGLStates and a RestoreGLStates?
-    bool     myViewHasChanged; ///< Has the current view changed?
+    View        m_defaultView; //!< Default view
+    View        m_view;        //!< Current view
+    StatesCache m_cache;       //!< Render states cache
+    Uint64      m_id;          //!< Unique number that identifies the RenderTarget
 };
 
 } // namespace sf
@@ -313,7 +495,7 @@ private :
 /// \class sf::RenderTarget
 /// \ingroup graphics
 ///
-/// sf::RenderTarget defines the common behaviour of all the
+/// sf::RenderTarget defines the common behavior of all the
 /// 2D render targets usable in the graphics module. It makes
 /// it possible to draw 2D entities like sprites, shapes, text
 /// without using any OpenGL command directly.
@@ -328,8 +510,8 @@ private :
 /// On top of that, render targets are still able to render direct
 /// OpenGL stuff. It is even possible to mix together OpenGL calls
 /// and regular SFML drawing commands. When doing so, make sure that
-/// OpenGL states are not messed up by calling the SaveGLStates /
-/// RestoreGLStates functions.
+/// OpenGL states are not messed up by calling the
+/// pushGLStates/popGLStates functions.
 ///
 /// \see sf::RenderWindow, sf::RenderTexture, sf::View
 ///

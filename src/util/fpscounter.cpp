@@ -19,7 +19,7 @@ FPSCounter::FPSCounter(u32 maxFramerate)
 //----------------------------------------------------------------------------//
 void FPSCounter::tick()
 {
-	u32 currentTime = s_clock.GetElapsedTime();
+	u32 currentTime = s_clock.getElapsedTime().asMilliseconds();
 
 	// Compute DT (time elapsed between frames)
 	_dt = currentTime - _lastFrameTime;
@@ -29,8 +29,8 @@ void FPSCounter::tick()
 		u32 maxDT = 1000 / _maxFramerate;
 		if (_dt < maxDT)
 		{
-			sf::Sleep(maxDT - _dt);
-			currentTime = s_clock.GetElapsedTime();
+			sf::sleep(sf::milliseconds(maxDT - _dt));
+			currentTime = s_clock.getElapsedTime().asMilliseconds();
 			_dt = currentTime - _lastFrameTime;
 		}
 	}

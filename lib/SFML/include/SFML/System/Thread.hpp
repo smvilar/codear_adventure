@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2023 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,7 +28,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Config.hpp>
+#include <SFML/System/Export.hpp>
 #include <SFML/System/NonCopyable.hpp>
 #include <cstdlib>
 
@@ -45,15 +45,15 @@ namespace priv
 /// \brief Utility class to manipulate threads
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API Thread : NonCopyable
+class SFML_SYSTEM_API Thread : NonCopyable
 {
-public :
+public:
 
     ////////////////////////////////////////////////////////////
     /// \brief Construct the thread from a functor with no argument
     ///
     /// This constructor works for function objects, as well
-    /// as free function.
+    /// as free functions.
     ///
     /// Use this constructor for this kind of function:
     /// \code
@@ -66,7 +66,7 @@ public :
     ///     void operator()();
     /// };
     /// \endcode
-    /// Note: this does *not* run the thread, use Launch().
+    /// Note: this does *not* run the thread, use launch().
     ///
     /// \param function Functor or free function to use as the entry point of the thread
     ///
@@ -78,7 +78,7 @@ public :
     /// \brief Construct the thread from a functor with an argument
     ///
     /// This constructor works for function objects, as well
-    /// as free function.
+    /// as free functions.
     /// It is a template, which means that the argument can
     /// have any type (int, std::string, void*, Toto, ...).
     ///
@@ -93,7 +93,7 @@ public :
     ///     void operator()(std::string arg);
     /// };
     /// \endcode
-    /// Note: this does *not* run the thread, use Launch().
+    /// Note: this does *not* run the thread, use launch().
     ///
     /// \param function Functor or free function to use as the entry point of the thread
     /// \param argument argument to forward to the function
@@ -105,18 +105,18 @@ public :
     ////////////////////////////////////////////////////////////
     /// \brief Construct the thread from a member function and an object
     ///
-    /// This constructor is template, which means that you can
+    /// This constructor is a template, which means that you can
     /// use it with any class.
     /// Use this constructor for this kind of function:
     /// \code
     /// class MyClass
     /// {
-    /// public :
+    /// public:
     ///
     ///     void function();
     /// };
     /// \endcode
-    /// Note: this does *not* run the thread, use Launch().
+    /// Note: this does *not* run the thread, use launch().
     ///
     /// \param function Entry point of the thread
     /// \param object Pointer to the object to use
@@ -128,7 +128,7 @@ public :
     ////////////////////////////////////////////////////////////
     /// \brief Destructor
     ///
-    /// This destructor calls Wait(), so that the internal thread
+    /// This destructor calls wait(), so that the internal thread
     /// cannot survive after its sf::Thread instance is destroyed.
     ///
     ////////////////////////////////////////////////////////////
@@ -143,7 +143,7 @@ public :
     /// running in parallel to the calling code.
     ///
     ////////////////////////////////////////////////////////////
-    void Launch();
+    void launch();
 
     ////////////////////////////////////////////////////////////
     /// \brief Wait until the thread finishes
@@ -156,7 +156,7 @@ public :
     /// returns without doing anything.
     ///
     ////////////////////////////////////////////////////////////
-    void Wait();
+    void wait();
 
     ////////////////////////////////////////////////////////////
     /// \brief Terminate the thread
@@ -169,9 +169,9 @@ public :
     /// the thread function terminate by itself.
     ///
     ////////////////////////////////////////////////////////////
-    void Terminate();
+    void terminate();
 
-private :
+private:
 
     friend class priv::ThreadImpl;
 
@@ -181,13 +181,13 @@ private :
     /// This function is called by the thread implementation.
     ///
     ////////////////////////////////////////////////////////////
-    void Run();
+    void run();
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    priv::ThreadImpl* myImpl; ///< OS-specific implementation of the thread
-    priv::ThreadFunc* myFunction; ///< Abstraction of the function to run
+    priv::ThreadImpl* m_impl;       //!< OS-specific implementation of the thread
+    priv::ThreadFunc* m_entryPoint; //!< Abstraction of the function to run
 };
 
 #include <SFML/System/Thread.inl>
@@ -212,31 +212,31 @@ private :
 /// that you can use several types of entry points:
 /// \li non-member functions with no argument
 /// \li non-member functions with one argument of any type
-/// \li functors with no argument (this one is particularly useful for compatibility with boost/std::bind)
+/// \li functors with no argument (this one is particularly useful for compatibility with boost/std::%bind)
 /// \li functors with one argument of any type
 /// \li member functions from any class with no argument
 ///
 /// The function argument, if any, is copied in the sf::Thread
 /// instance, as well as the functor (if the corresponding
 /// constructor is used). Class instances, however, are passed
-/// by pointer to you must make sure that the object won't be
+/// by pointer so you must make sure that the object won't be
 /// destroyed while the thread is still using it.
 ///
 /// The thread ends when its function is terminated. If the
 /// owner sf::Thread instance is destroyed before the
-/// thread is finished, the destructor will wait (see Wait())
+/// thread is finished, the destructor will wait (see wait())
 ///
 /// Usage examples:
 /// \code
 /// // example 1: non member function with one argument
 ///
-/// void ThreadFunc(int argument)
+/// void threadFunc(int argument)
 /// {
 ///     ...
 /// }
 ///
-/// sf::Thread thread(&ThreadFunc, 5);
-/// thread.Launch(); // start the thread (internally calls ThreadFunc(5))
+/// sf::Thread thread(&threadFunc, 5);
+/// thread.launch(); // start the thread (internally calls threadFunc(5))
 /// \endcode
 ///
 /// \code
@@ -244,16 +244,16 @@ private :
 ///
 /// class Task
 /// {
-/// public :
-///     void Run()
+/// public:
+///     void run()
 ///     {
 ///         ...
 ///     }
 /// };
 ///
 /// Task task;
-/// sf::Thread thread(&Task::Run, &task);
-/// thread.Launch(); // start the thread (internally calls task.run())
+/// sf::Thread thread(&Task::run, &task);
+/// thread.launch(); // start the thread (internally calls task.run())
 /// \endcode
 ///
 /// \code
@@ -268,7 +268,7 @@ private :
 /// };
 ///
 /// sf::Thread thread(Task());
-/// thread.Launch(); // start the thread (internally calls operator() on the Task instance)
+/// thread.launch(); // start the thread (internally calls operator() on the Task instance)
 /// \endcode
 ///
 /// Creating parallel threads of execution can be dangerous:

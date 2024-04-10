@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2023 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,8 +28,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <SFML/Graphics/Export.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Window/ContextSettings.hpp>
 
 
 namespace sf
@@ -40,20 +42,20 @@ namespace priv
 }
 
 ////////////////////////////////////////////////////////////
-/// \brief Target for off-screen 2D rendering into an texture
+/// \brief Target for off-screen 2D rendering into a texture
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API RenderTexture : public RenderTarget
+class SFML_GRAPHICS_API RenderTexture : public RenderTarget
 {
-public :
+public:
 
     ////////////////////////////////////////////////////////////
     /// \brief Default constructor
     ///
     /// Constructs an empty, invalid render-texture. You must
-    /// call Create to have a valid render-texture.
+    /// call create to have a valid render-texture.
     ///
-    /// \see Create
+    /// \see create
     ///
     ////////////////////////////////////////////////////////////
     RenderTexture();
@@ -72,43 +74,112 @@ public :
     /// doing anything with the render-texture.
     /// The last parameter, \a depthBuffer, is useful if you want
     /// to use the render-texture for 3D OpenGL rendering that requires
-    /// a depth-buffer. Otherwise it is unnecessary, and you should
+    /// a depth buffer. Otherwise it is unnecessary, and you should
     /// leave this parameter to false (which is its default value).
     ///
-    /// \param width        Width of the render-texture
-    /// \param height       Height of the render-texture
-    /// \param depthBuffer  Do you want this render-texture to have a depth buffer?
+    /// \param width       Width of the render-texture
+    /// \param height      Height of the render-texture
+    /// \param depthBuffer Do you want this render-texture to have a depth buffer?
+    ///
+    /// \return True if creation has been successful
+    ///
+    /// \deprecated Use create(unsigned int, unsigned int, const ContextSettings&) instead.
+    ///
+    ////////////////////////////////////////////////////////////
+    SFML_DEPRECATED bool create(unsigned int width, unsigned int height, bool depthBuffer);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Create the render-texture
+    ///
+    /// Before calling this function, the render-texture is in
+    /// an invalid state, thus it is mandatory to call it before
+    /// doing anything with the render-texture.
+    /// The last parameter, \a settings, is useful if you want to enable
+    /// multi-sampling or use the render-texture for OpenGL rendering that
+    /// requires a depth or stencil buffer. Otherwise it is unnecessary, and
+    /// you should leave this parameter at its default value.
+    ///
+    /// \param width    Width of the render-texture
+    /// \param height   Height of the render-texture
+    /// \param settings Additional settings for the underlying OpenGL texture and context
     ///
     /// \return True if creation has been successful
     ///
     ////////////////////////////////////////////////////////////
-    bool Create(unsigned int width, unsigned int height, bool depthBuffer = false);
+    bool create(unsigned int width, unsigned int height, const ContextSettings& settings = ContextSettings());
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Get the maximum anti-aliasing level supported by the system
+    ///
+    /// \return The maximum anti-aliasing level supported by the system
+    ///
+    ////////////////////////////////////////////////////////////
+    static unsigned int getMaximumAntialiasingLevel();
 
     ////////////////////////////////////////////////////////////
     /// \brief Enable or disable texture smoothing
     ///
-    /// This function is similar to Texture::SetSmooth.
-    /// This parameter is enabled by default.
+    /// This function is similar to Texture::setSmooth.
+    /// This parameter is disabled by default.
     ///
     /// \param smooth True to enable smoothing, false to disable it
     ///
-    /// \see IsSmooth
+    /// \see isSmooth
     ///
     ////////////////////////////////////////////////////////////
-    void SetSmooth(bool smooth);
+    void setSmooth(bool smooth);
 
     ////////////////////////////////////////////////////////////
     /// \brief Tell whether the smooth filtering is enabled or not
     ///
     /// \return True if texture smoothing is enabled
     ///
-    /// \see SetSmooth
+    /// \see setSmooth
     ///
     ////////////////////////////////////////////////////////////
-    bool IsSmooth() const;
+    bool isSmooth() const;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Activate of deactivate the render-texture for rendering
+    /// \brief Enable or disable texture repeating
+    ///
+    /// This function is similar to Texture::setRepeated.
+    /// This parameter is disabled by default.
+    ///
+    /// \param repeated True to enable repeating, false to disable it
+    ///
+    /// \see isRepeated
+    ///
+    ////////////////////////////////////////////////////////////
+    void setRepeated(bool repeated);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Tell whether the texture is repeated or not
+    ///
+    /// \return True if texture is repeated
+    ///
+    /// \see setRepeated
+    ///
+    ////////////////////////////////////////////////////////////
+    bool isRepeated() const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Generate a mipmap using the current texture data
+    ///
+    /// This function is similar to Texture::generateMipmap and operates
+    /// on the texture used as the target for drawing.
+    /// Be aware that any draw operation may modify the base level image data.
+    /// For this reason, calling this function only makes sense after all
+    /// drawing is completed and display has been called. Not calling display
+    /// after subsequent drawing will lead to undefined behavior if a mipmap
+    /// had been previously generated.
+    ///
+    /// \return True if mipmap generation was successful, false if unsuccessful
+    ///
+    ////////////////////////////////////////////////////////////
+    bool generateMipmap();
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Activate or deactivate the render-texture for rendering
     ///
     /// This function makes the render-texture's context current for
     /// future OpenGL rendering operations (so you shouldn't care
@@ -122,7 +193,7 @@ public :
     /// \return True if operation was successful, false otherwise
     ///
     ////////////////////////////////////////////////////////////
-    bool SetActive(bool active = true);
+    bool setActive(bool active = true);
 
     ////////////////////////////////////////////////////////////
     /// \brief Update the contents of the target texture
@@ -133,33 +204,30 @@ public :
     /// it may leave the texture in an undefined state.
     ///
     ////////////////////////////////////////////////////////////
-    void Display();
+    void display();
 
     ////////////////////////////////////////////////////////////
-    /// \brief Return the width of the rendering region of the texture
+    /// \brief Return the size of the rendering region of the texture
     ///
     /// The returned value is the size that you passed to
-    /// the Create function.
+    /// the create function.
     ///
-    /// \return Width in pixels
-    ///
-    /// \return GetHeight
+    /// \return Size in pixels
     ///
     ////////////////////////////////////////////////////////////
-    virtual unsigned int GetWidth() const;
+    virtual Vector2u getSize() const;
+
 
     ////////////////////////////////////////////////////////////
-    /// \brief Return the height of the rendering region of the texture
+    /// \brief Tell if the render-texture will use sRGB encoding when drawing on it
     ///
-    /// The returned value is the size that you passed to
-    /// the Create function.
+    /// You can request sRGB encoding for a render-texture
+    /// by having the sRgbCapable flag set for the context parameter of create() method
     ///
-    /// \return Height in pixels
-    ///
-    /// \return GetWidth
+    /// \return True if the render-texture use sRGB encoding, false otherwise
     ///
     ////////////////////////////////////////////////////////////
-    virtual unsigned int GetHeight() const;
+    virtual bool isSrgb() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get a read-only reference to the target texture
@@ -175,28 +243,15 @@ public :
     /// \return Const reference to the texture
     ///
     ////////////////////////////////////////////////////////////
-    const Texture& GetTexture() const;
+    const Texture& getTexture() const;
 
-private :
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Activate the target for rendering
-    ///
-    /// This function is called by the base class
-    /// everytime it's going to use OpenGL calls.
-    ///
-    /// \param active True to make the target active, false to deactivate it
-    ///
-    /// \return True if the function succeeded
-    ///
-    ////////////////////////////////////////////////////////////
-    virtual bool Activate(bool active);
+private:
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    Texture                  myTexture;       ///< Target texture to draw on
-    priv::RenderTextureImpl* myRenderTexture; ///< Platform/hardware specific implementation
+    priv::RenderTextureImpl* m_impl;    //!< Platform/hardware specific implementation
+    Texture                  m_texture; //!< Target texture to draw on
 };
 
 } // namespace sf
@@ -229,42 +284,42 @@ private :
 ///
 /// // Create a new render-texture
 /// sf::RenderTexture texture;
-/// if (!texture.Create(500, 500))
-///     return -1
+/// if (!texture.create(500, 500))
+///     return -1;
 ///
 /// // The main loop
-/// while (window.IsOpened())
+/// while (window.isOpen())
 /// {
 ///    // Event processing
 ///    // ...
 ///
 ///    // Clear the whole texture with red color
-///    texture.Clear(sf::Color::Red);
+///    texture.clear(sf::Color::Red);
 ///
 ///    // Draw stuff to the texture
-///    texture.Draw(sprite);  // sprite is a sf::Sprite
-///    texture.Draw(shape);   // shape is a sf::Shape
-///    texture.Draw(text);    // text is a sf::Text
+///    texture.draw(sprite);  // sprite is a sf::Sprite
+///    texture.draw(shape);   // shape is a sf::Shape
+///    texture.draw(text);    // text is a sf::Text
 ///
 ///    // We're done drawing to the texture
-///    texture.Display();
+///    texture.display();
 ///
 ///    // Now we start rendering to the window, clear it first
-///    window.Clear();
+///    window.clear();
 ///
 ///    // Draw the texture
-///    sf::Sprite sprite(texture.GetTexture());
-///    window.Draw(sprite);
+///    sf::Sprite sprite(texture.getTexture());
+///    window.draw(sprite);
 ///
 ///    // End the current frame and display its contents on screen
-///    window.Display();
+///    window.display();
 /// }
 /// \endcode
 ///
 /// Like sf::RenderWindow, sf::RenderTexture is still able to render direct
 /// OpenGL stuff. It is even possible to mix together OpenGL calls
 /// and regular SFML drawing commands. If you need a depth buffer for
-/// 3D rendering, don't forget to request it when calling RenderTexture::Create.
+/// 3D rendering, don't forget to request it when calling RenderTexture::create.
 ///
 /// \see sf::RenderTarget, sf::RenderWindow, sf::View, sf::Texture
 ///

@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2023 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,6 +28,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <SFML/Graphics/Export.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <string>
@@ -42,9 +43,9 @@ class InputStream;
 /// \brief Class for loading, manipulating and saving images
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API Image
+class SFML_GRAPHICS_API Image
 {
-public :
+public:
 
     ////////////////////////////////////////////////////////////
     /// \brief Default constructor
@@ -55,6 +56,12 @@ public :
     Image();
 
     ////////////////////////////////////////////////////////////
+    /// \brief Destructor
+    ///
+    ////////////////////////////////////////////////////////////
+    ~Image();
+
+    ////////////////////////////////////////////////////////////
     /// \brief Create the image and fill it with a unique color
     ///
     /// \param width  Width of the image
@@ -62,14 +69,14 @@ public :
     /// \param color  Fill color
     ///
     ////////////////////////////////////////////////////////////
-    void Create(unsigned int width, unsigned int height, const Color& color = Color(0, 0, 0));
+    void create(unsigned int width, unsigned int height, const Color& color = Color(0, 0, 0));
 
     ////////////////////////////////////////////////////////////
-    /// \brief Create the image from an arry of pixels
+    /// \brief Create the image from an array of pixels
     ///
-    /// The \a pixels array is assumed to contain 32-bits RGBA pixels,
+    /// The \a pixel array is assumed to contain 32-bits RGBA pixels,
     /// and have the given \a width and \a height. If not, this is
-    /// an undefined behaviour.
+    /// an undefined behavior.
     /// If \a pixels is null, an empty image is created.
     ///
     /// \param width  Width of the image
@@ -77,31 +84,31 @@ public :
     /// \param pixels Array of pixels to copy to the image
     ///
     ////////////////////////////////////////////////////////////
-    void Create(unsigned int width, unsigned int height, const Uint8* pixels);
+    void create(unsigned int width, unsigned int height, const Uint8* pixels);
 
     ////////////////////////////////////////////////////////////
     /// \brief Load the image from a file on disk
     ///
     /// The supported image formats are bmp, png, tga, jpg, gif,
-    /// psd, hdr and pic. Some format options are not supported,
-    /// like progressive jpeg.
+    /// psd, hdr, pic and pnm. Some format options are not supported,
+    /// like jpeg with arithmetic coding or ASCII pnm.
     /// If this function fails, the image is left unchanged.
     ///
     /// \param filename Path of the image file to load
     ///
     /// \return True if loading was successful
     ///
-    /// \see LoadFromMemory, LoadFromStream, SaveToFile
+    /// \see loadFromMemory, loadFromStream, saveToFile
     ///
     ////////////////////////////////////////////////////////////
-    bool LoadFromFile(const std::string& filename);
+    bool loadFromFile(const std::string& filename);
 
     ////////////////////////////////////////////////////////////
     /// \brief Load the image from a file in memory
     ///
     /// The supported image formats are bmp, png, tga, jpg, gif,
-    /// psd, hdr and pic. Some format options are not supported,
-    /// like progressive jpeg.
+    /// psd, hdr, pic and pnm. Some format options are not supported,
+    /// like jpeg with arithmetic coding or ASCII pnm.
     /// If this function fails, the image is left unchanged.
     ///
     /// \param data Pointer to the file data in memory
@@ -109,27 +116,27 @@ public :
     ///
     /// \return True if loading was successful
     ///
-    /// \see LoadFromFile, LoadFromStream
+    /// \see loadFromFile, loadFromStream
     ///
     ////////////////////////////////////////////////////////////
-    bool LoadFromMemory(const void* data, std::size_t size);
+    bool loadFromMemory(const void* data, std::size_t size);
 
     ////////////////////////////////////////////////////////////
     /// \brief Load the image from a custom stream
     ///
     /// The supported image formats are bmp, png, tga, jpg, gif,
-    /// psd, hdr and pic. Some format options are not supported,
-    /// like progressive jpeg.
+    /// psd, hdr, pic and pnm. Some format options are not supported,
+    /// like jpeg with arithmetic coding or ASCII pnm.
     /// If this function fails, the image is left unchanged.
     ///
     /// \param stream Source stream to read from
     ///
     /// \return True if loading was successful
     ///
-    /// \see LoadFromFile, LoadFromMemory
+    /// \see loadFromFile, loadFromMemory
     ///
     ////////////////////////////////////////////////////////////
-    bool LoadFromStream(InputStream& stream);
+    bool loadFromStream(InputStream& stream);
 
     ////////////////////////////////////////////////////////////
     /// \brief Save the image to a file on disk
@@ -143,30 +150,36 @@ public :
     ///
     /// \return True if saving was successful
     ///
-    /// \see Create, LoadFromFile, LoadFromMemory
+    /// \see create, loadFromFile, loadFromMemory
     ///
     ////////////////////////////////////////////////////////////
-    bool SaveToFile(const std::string& filename) const;
+    bool saveToFile(const std::string& filename) const;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Return the width of the image
+    /// \brief Save the image to a buffer in memory
     ///
-    /// \return Width in pixels
+    /// The format of the image must be specified.
+    /// The supported image formats are bmp, png, tga and jpg.
+    /// This function fails if the image is empty, or if
+    /// the format was invalid.
     ///
-    /// \see GetHeight
+    /// \param output Buffer to fill with encoded data
+    /// \param format Encoding format to use
+    ///
+    /// \return True if saving was successful
+    ///
+    /// \see create, loadFromFile, loadFromMemory, saveToFile
     ///
     ////////////////////////////////////////////////////////////
-    unsigned int GetWidth() const;
+    bool saveToMemory(std::vector<sf::Uint8>& output, const std::string& format) const;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Return the height of the image
+    /// \brief Return the size (width and height) of the image
     ///
-    /// \return Height in pixels
-    ///
-    /// \see GetWidth
+    /// \return Size of the image, in pixels
     ///
     ////////////////////////////////////////////////////////////
-    unsigned int GetHeight() const;
+    Vector2u getSize() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Create a transparency mask from a specified color-key
@@ -179,7 +192,7 @@ public :
     /// \param alpha Alpha value to assign to transparent pixels
     ///
     ////////////////////////////////////////////////////////////
-    void CreateMaskFromColor(const Color& color, Uint8 alpha = 0);
+    void createMaskFromColor(const Color& color, Uint8 alpha = 0);
 
     ////////////////////////////////////////////////////////////
     /// \brief Copy pixels from another image onto this one
@@ -190,56 +203,62 @@ public :
     /// kind of feature in real-time you'd better use sf::RenderTexture.
     ///
     /// If \a sourceRect is empty, the whole image is copied.
-    /// If \a applyAlpha is set to true, the transparency of
-    /// source pixels is applied. If it is false, the pixels are
-    /// copied unchanged with their alpha value.
+    /// If \a applyAlpha is set to true, alpha blending is
+    /// applied from the source pixels to the destination pixels
+    /// using the \b over operator. If it is false, the source
+    /// pixels are copied unchanged with their alpha value.
+    ///
+    /// See https://en.wikipedia.org/wiki/Alpha_compositing for
+    /// details on the \b over operator.
     ///
     /// \param source     Source image to copy
     /// \param destX      X coordinate of the destination position
     /// \param destY      Y coordinate of the destination position
     /// \param sourceRect Sub-rectangle of the source image to copy
-    /// \param applyAlpha Should the copy take in account the source transparency?
+    /// \param applyAlpha Should the copy take into account the source transparency?
     ///
     ////////////////////////////////////////////////////////////
-    void Copy(const Image& source, unsigned int destX, unsigned int destY, const IntRect& sourceRect = IntRect(0, 0, 0, 0), bool applyAlpha = false);
+    void copy(const Image& source, unsigned int destX, unsigned int destY, const IntRect& sourceRect = IntRect(0, 0, 0, 0), bool applyAlpha = false);
 
     ////////////////////////////////////////////////////////////
     /// \brief Change the color of a pixel
     ///
     /// This function doesn't check the validity of the pixel
     /// coordinates, using out-of-range values will result in
-    /// an undefined behaviour.
+    /// an undefined behavior.
     ///
     /// \param x     X coordinate of pixel to change
     /// \param y     Y coordinate of pixel to change
     /// \param color New color of the pixel
     ///
-    /// \see GetPixel
+    /// \see getPixel
     ///
     ////////////////////////////////////////////////////////////
-    void SetPixel(unsigned int x, unsigned int y, const Color& color);
+    void setPixel(unsigned int x, unsigned int y, const Color& color);
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the color of a pixel
     ///
     /// This function doesn't check the validity of the pixel
     /// coordinates, using out-of-range values will result in
-    /// an undefined behaviour.
+    /// an undefined behavior.
     ///
     /// \param x X coordinate of pixel to get
     /// \param y Y coordinate of pixel to get
     ///
     /// \return Color of the pixel at coordinates (x, y)
     ///
+    /// \see setPixel
+    ///
     ////////////////////////////////////////////////////////////
-    Color GetPixel(unsigned int x, unsigned int y) const;
+    Color getPixel(unsigned int x, unsigned int y) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get a read-only pointer to the array of pixels
     ///
     /// The returned value points to an array of RGBA pixels made of
     /// 8 bits integers components. The size of the array is
-    /// GetWidth() * GetHeight() * 4.
+    /// width * height * 4 (getSize().x * getSize().y * 4).
     /// Warning: the returned pointer may become invalid if you
     /// modify the image, so you should never store it for too long.
     /// If the image is empty, a null pointer is returned.
@@ -247,28 +266,27 @@ public :
     /// \return Read-only pointer to the array of pixels
     ///
     ////////////////////////////////////////////////////////////
-    const Uint8* GetPixelsPtr() const;
+    const Uint8* getPixelsPtr() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Flip the image horizontally (left <-> right)
     ///
     ////////////////////////////////////////////////////////////
-    void FlipHorizontally();
+    void flipHorizontally();
 
     ////////////////////////////////////////////////////////////
     /// \brief Flip the image vertically (top <-> bottom)
     ///
     ////////////////////////////////////////////////////////////
-    void FlipVertically();
+    void flipVertically();
 
-private :
+private:
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    unsigned int       myWidth;  ///< Image width
-    unsigned int       myHeight; ///< Image Height
-    std::vector<Uint8> myPixels; ///< Pixels of the image
+    Vector2u           m_size;   //!< Image size
+    std::vector<Uint8> m_pixels; //!< Pixels of the image
 };
 
 } // namespace sf
@@ -292,7 +310,7 @@ private :
 /// channels -- just like a sf::Color.
 /// All the functions that return an array of pixels follow
 /// this rule, and all parameters that you pass to sf::Image
-/// functions (such as LoadFromPixels) must use this
+/// functions (such as loadFromMemory) must use this
 /// representation as well.
 ///
 /// A sf::Image can be copied, but it is a heavy resource and
@@ -303,24 +321,23 @@ private :
 /// \code
 /// // Load an image file from a file
 /// sf::Image background;
-/// if (!background.LoadFromFile("background.jpg"))
+/// if (!background.loadFromFile("background.jpg"))
 ///     return -1;
 ///
 /// // Create a 20x20 image filled with black color
 /// sf::Image image;
-/// if (!image.Create(20, 20, sf::Color::Black))
-///     return -1;
+/// image.create(20, 20, sf::Color::Black);
 ///
 /// // Copy image1 on image2 at position (10, 10)
-/// image.Copy(background, 10, 10);
+/// image.copy(background, 10, 10);
 ///
 /// // Make the top-left pixel transparent
-/// sf::Color color = image.GetPixel(0, 0);
+/// sf::Color color = image.getPixel(0, 0);
 /// color.a = 0;
-/// image.SetPixel(0, 0, color);
+/// image.setPixel(0, 0, color);
 ///
 /// // Save the image to a file
-/// if (!image.SaveToFile("result.png"))
+/// if (!image.saveToFile("result.png"))
 ///     return -1;
 /// \endcode
 ///

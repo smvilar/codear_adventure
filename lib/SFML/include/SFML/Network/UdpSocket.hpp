@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2023 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,29 +28,30 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <SFML/Network/Export.hpp>
 #include <SFML/Network/Socket.hpp>
+#include <SFML/Network/IpAddress.hpp>
 #include <vector>
 
 
 namespace sf
 {
-class IpAddress;
 class Packet;
 
 ////////////////////////////////////////////////////////////
 /// \brief Specialized socket using the UDP protocol
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API UdpSocket : public Socket
+class SFML_NETWORK_API UdpSocket : public Socket
 {
-public :
+public:
 
     ////////////////////////////////////////////////////////////
     // Constants
     ////////////////////////////////////////////////////////////
     enum
     {
-        MaxDatagramSize = 65507 ///< The maximum number of bytes that can be sent in a single UDP datagram
+        MaxDatagramSize = 65507 //!< The maximum number of bytes that can be sent in a single UDP datagram
     };
 
     ////////////////////////////////////////////////////////////
@@ -67,40 +68,49 @@ public :
     ///
     /// \return Port to which the socket is bound
     ///
-    /// \see Bind
+    /// \see bind
     ///
     ////////////////////////////////////////////////////////////
-    unsigned short GetLocalPort() const;
+    unsigned short getLocalPort() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Bind the socket to a specific port
     ///
     /// Binding the socket to a port is necessary for being
     /// able to receive data on that port.
-    /// You can use the special value Socket::AnyPort to tell the
-    /// system to automatically pick an available port, and then
-    /// call GetLocalPort to retrieve the chosen port.
     ///
-    /// \param port Port to bind the socket to
+    /// When providing sf::Socket::AnyPort as port, the listener
+    /// will request an available port from the system.
+    /// The chosen port can be retrieved by calling getLocalPort().
+    ///
+    /// Since the socket can only be bound to a single port at
+    /// any given moment, if it is already bound when this
+    /// function is called, it will be unbound from the previous
+    /// port before being bound to the new one.
+    ///
+    /// \param port    Port to bind the socket to
+    /// \param address Address of the interface to bind to
     ///
     /// \return Status code
     ///
-    /// \see Unbind, GetLocalPort
+    /// \see unbind, getLocalPort
     ///
     ////////////////////////////////////////////////////////////
-    Status Bind(unsigned short port);
+    Status bind(unsigned short port, const IpAddress& address = IpAddress::Any);
 
     ////////////////////////////////////////////////////////////
     /// \brief Unbind the socket from the local port to which it is bound
     ///
-    /// The port that the socket was previously using is immediately
-    /// available after this function is called. If the
-    /// socket is not bound to a port, this function has no effect.
+    /// The port that the socket was previously bound to is immediately
+    /// made available to the operating system after this function is called.
+    /// This means that a subsequent call to bind() will be able to re-bind
+    /// the port if no other process has done so in the mean time.
+    /// If the socket is not bound to a port, this function has no effect.
     ///
-    /// \see Bind
+    /// \see bind
     ///
     ////////////////////////////////////////////////////////////
-    void Unbind();
+    void unbind();
 
     ////////////////////////////////////////////////////////////
     /// \brief Send raw data to a remote peer
@@ -116,10 +126,10 @@ public :
     ///
     /// \return Status code
     ///
-    /// \see Receive
+    /// \see receive
     ///
     ////////////////////////////////////////////////////////////
-    Status Send(const char* data, std::size_t size, const IpAddress& remoteAddress, unsigned short remotePort);
+    Status send(const void* data, std::size_t size, const IpAddress& remoteAddress, unsigned short remotePort);
 
     ////////////////////////////////////////////////////////////
     /// \brief Receive raw data from a remote peer
@@ -139,10 +149,10 @@ public :
     ///
     /// \return Status code
     ///
-    /// \see Send
+    /// \see send
     ///
     ////////////////////////////////////////////////////////////
-    Status Receive(char* data, std::size_t size, std::size_t& received, IpAddress& remoteAddress, unsigned short& remotePort);
+    Status receive(void* data, std::size_t size, std::size_t& received, IpAddress& remoteAddress, unsigned short& remotePort);
 
     ////////////////////////////////////////////////////////////
     /// \brief Send a formatted packet of data to a remote peer
@@ -157,18 +167,16 @@ public :
     ///
     /// \return Status code
     ///
-    /// \see Receive
+    /// \see receive
     ///
     ////////////////////////////////////////////////////////////
-    Status Send(Packet& packet, const IpAddress& remoteAddress, unsigned short remotePort);
+    Status send(Packet& packet, const IpAddress& remoteAddress, unsigned short remotePort);
 
     ////////////////////////////////////////////////////////////
     /// \brief Receive a formatted packet of data from a remote peer
     ///
     /// In blocking mode, this function will wait until the whole packet
     /// has been received.
-    /// Warning: this functon doesn't properly handle mixed data
-    /// received from multiple peers.
     ///
     /// \param packet        Packet to fill with the received data
     /// \param remoteAddress Address of the peer that sent the data
@@ -176,17 +184,17 @@ public :
     ///
     /// \return Status code
     ///
-    /// \see Send
+    /// \see send
     ///
     ////////////////////////////////////////////////////////////
-    Status Receive(Packet& packet, IpAddress& remoteAddress, unsigned short& remotePort);
+    Status receive(Packet& packet, IpAddress& remoteAddress, unsigned short& remotePort);
 
 private:
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    std::vector<char> myBuffer; ///< Temporary buffer holding the received data in Receive(Packet)
+    std::vector<char> m_buffer; //!< Temporary buffer holding the received data in Receive(Packet)
 };
 
 } // namespace sf
@@ -205,10 +213,10 @@ private:
 ///
 /// It is a datagram protocol: bounded blocks of data (datagrams)
 /// are transfered over the network rather than a continuous
-/// stream of data (TCP). Therefore, one call to Send will always
-/// match one call to Receive (if the datagram is not lost),
+/// stream of data (TCP). Therefore, one call to send will always
+/// match one call to receive (if the datagram is not lost),
 /// with the same data that was sent.
-/// 
+///
 /// The UDP protocol is lightweight but unreliable. Unreliable
 /// means that datagrams may be duplicated, be lost or
 /// arrive reordered. However, if a datagram arrives, its
@@ -236,7 +244,7 @@ private:
 ///
 /// If the socket is bound to a port, it is automatically
 /// unbound from it when the socket is destroyed. However,
-/// you can unbind the socket explicitely with the Unbind
+/// you can unbind the socket explicitly with the Unbind
 /// function if necessary, to stop receiving messages or
 /// make the port available for other sockets.
 ///
@@ -246,37 +254,37 @@ private:
 ///
 /// // Create a socket and bind it to the port 55001
 /// sf::UdpSocket socket;
-/// socket.Bind(55001);
+/// socket.bind(55001);
 ///
 /// // Send a message to 192.168.1.50 on port 55002
-/// std::string message = "Hi, I am " + sf::IpAddress::GetLocalAddress().ToString();
-/// socket.Send(message.c_str(), message.size() + 1, "192.168.1.50", 55002);
+/// std::string message = "Hi, I am " + sf::IpAddress::getLocalAddress().toString();
+/// socket.send(message.c_str(), message.size() + 1, "192.168.1.50", 55002);
 ///
 /// // Receive an answer (most likely from 192.168.1.50, but could be anyone else)
 /// char buffer[1024];
 /// std::size_t received = 0;
 /// sf::IpAddress sender;
 /// unsigned short port;
-/// socket.Receive(buffer, sizeof(buffer), received, sender, port);
+/// socket.receive(buffer, sizeof(buffer), received, sender, port);
 /// std::cout << sender.ToString() << " said: " << buffer << std::endl;
 ///
 /// // ----- The server -----
 ///
 /// // Create a socket and bind it to the port 55002
 /// sf::UdpSocket socket;
-/// socket.Bind(55002);
+/// socket.bind(55002);
 ///
 /// // Receive a message from anyone
 /// char buffer[1024];
 /// std::size_t received = 0;
 /// sf::IpAddress sender;
 /// unsigned short port;
-/// socket.Receive(buffer, sizeof(buffer), received, sender, port);
+/// socket.receive(buffer, sizeof(buffer), received, sender, port);
 /// std::cout << sender.ToString() << " said: " << buffer << std::endl;
 ///
 /// // Send an answer
-/// std::string message = "Welcome " + sender.ToString();
-/// socket.Send(message.c_str(), message.size() + 1, sender, port);
+/// std::string message = "Welcome " + sender.toString();
+/// socket.send(message.c_str(), message.size() + 1, sender, port);
 /// \endcode
 ///
 /// \see sf::Socket, sf::TcpSocket, sf::Packet

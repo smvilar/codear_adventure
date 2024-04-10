@@ -36,7 +36,7 @@ private:
 	typedef std::vector<GameObject*> GameObjectVector;
 	GameObjectVector objects_;
 
-	sf::Shape gizmo_;
+	sf::RectangleShape gizmo_;
 	GameObject* activeObject_;
 
 	bool tabPressed_;

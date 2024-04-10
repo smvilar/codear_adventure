@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2023 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,9 +28,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/System/Resource.hpp>
-#include <SFML/System/Vector2.hpp>
-#include <SFML/System/String.hpp>
+#include <SFML/Graphics/Export.hpp>
 #include <SFML/Graphics/Glyph.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Rect.hpp>
@@ -47,9 +45,20 @@ class InputStream;
 /// \brief Class for loading and manipulating character fonts
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API Font : public Resource<Font>
+class SFML_GRAPHICS_API Font
 {
-public :
+public:
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Holds various information about a font
+    ///
+    ////////////////////////////////////////////////////////////
+    struct Info
+    {
+        std::string family; //!< The font family
+    };
+
+public:
 
     ////////////////////////////////////////////////////////////
     /// \brief Default constructor
@@ -80,37 +89,43 @@ public :
     ///
     /// The supported font formats are: TrueType, Type 1, CFF,
     /// OpenType, SFNT, X11 PCF, Windows FNT, BDF, PFR and Type 42.
-    /// Note that this function know nothing about the standard
+    /// Note that this function knows nothing about the standard
     /// fonts installed on the user's system, thus you can't
     /// load them directly.
+    ///
+    /// \warning SFML cannot preload all the font data in this
+    /// function, so the file has to remain accessible until
+    /// the sf::Font object loads a new font or is destroyed.
     ///
     /// \param filename Path of the font file to load
     ///
     /// \return True if loading succeeded, false if it failed
     ///
-    /// \see LoadFromMemory, LoadFromStream
+    /// \see loadFromMemory, loadFromStream
     ///
     ////////////////////////////////////////////////////////////
-    bool LoadFromFile(const std::string& filename);
+    bool loadFromFile(const std::string& filename);
 
     ////////////////////////////////////////////////////////////
     /// \brief Load the font from a file in memory
     ///
     /// The supported font formats are: TrueType, Type 1, CFF,
     /// OpenType, SFNT, X11 PCF, Windows FNT, BDF, PFR and Type 42.
-    /// Warning: SFML cannot preload all the font data in this
+    ///
+    /// \warning SFML cannot preload all the font data in this
     /// function, so the buffer pointed by \a data has to remain
-    /// valid as long as the font is used.
+    /// valid until the sf::Font object loads a new font or
+    /// is destroyed.
     ///
     /// \param data        Pointer to the file data in memory
     /// \param sizeInBytes Size of the data to load, in bytes
     ///
     /// \return True if loading succeeded, false if it failed
     ///
-    /// \see LoadFromFile, LoadFromStream
+    /// \see loadFromFile, loadFromStream
     ///
     ////////////////////////////////////////////////////////////
-    bool LoadFromMemory(const void* data, std::size_t sizeInBytes);
+    bool loadFromMemory(const void* data, std::size_t sizeInBytes);
 
     ////////////////////////////////////////////////////////////
     /// \brief Load the font from a custom stream
@@ -121,26 +136,68 @@ public :
     /// function, so the contents of \a stream have to remain
     /// valid as long as the font is used.
     ///
+    /// \warning SFML cannot preload all the font data in this
+    /// function, so the stream has to remain accessible until
+    /// the sf::Font object loads a new font or is destroyed.
+    ///
     /// \param stream Source stream to read from
     ///
     /// \return True if loading succeeded, false if it failed
     ///
-    /// \see LoadFromFile, LoadFromMemory
+    /// \see loadFromFile, loadFromMemory
     ///
     ////////////////////////////////////////////////////////////
-    bool LoadFromStream(InputStream& stream);
+    bool loadFromStream(InputStream& stream);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Get the font information
+    ///
+    /// \return A structure that holds the font information
+    ///
+    ////////////////////////////////////////////////////////////
+    const Info& getInfo() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Retrieve a glyph of the font
     ///
-    /// \param codePoint     Unicode code point of the character to get
-    /// \param characterSize Reference character size
-    /// \param bold          Retrieve the bold version or the regular one?
+    /// If the font is a bitmap font, not all character sizes
+    /// might be available. If the glyph is not available at the
+    /// requested size, an empty glyph is returned.
+    ///
+    /// You may want to use \ref hasGlyph to determine if the
+    /// glyph exists before requesting it. If the glyph does not
+    /// exist, a font specific default is returned.
+    ///
+    /// Be aware that using a negative value for the outline
+    /// thickness will cause distorted rendering.
+    ///
+    /// \param codePoint        Unicode code point of the character to get
+    /// \param characterSize    Reference character size
+    /// \param bold             Retrieve the bold version or the regular one?
+    /// \param outlineThickness Thickness of outline (when != 0 the glyph will not be filled)
     ///
     /// \return The glyph corresponding to \a codePoint and \a characterSize
     ///
     ////////////////////////////////////////////////////////////
-    const Glyph& GetGlyph(Uint32 codePoint, unsigned int characterSize, bool bold) const;
+    const Glyph& getGlyph(Uint32 codePoint, unsigned int characterSize, bool bold, float outlineThickness = 0) const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Determine if this font has a glyph representing the requested code point
+    ///
+    /// Most fonts only include a very limited selection of glyphs from
+    /// specific Unicode subsets, like Latin, Cyrillic, or Asian characters.
+    ///
+    /// While code points without representation will return a font specific
+    /// default character, it might be useful to verify whether specific
+    /// code points are included to determine whether a font is suited
+    /// to display text in a specific language.
+    ///
+    /// \param codePoint Unicode code point to check
+    ///
+    /// \return True if the codepoint has a glyph representation, false otherwise
+    ///
+    ////////////////////////////////////////////////////////////
+    bool hasGlyph(Uint32 codePoint) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the kerning offset of two glyphs
@@ -158,7 +215,7 @@ public :
     /// \return Kerning value for \a first and \a second, in pixels
     ///
     ////////////////////////////////////////////////////////////
-    int GetKerning(Uint32 first, Uint32 second, unsigned int characterSize) const;
+    float getKerning(Uint32 first, Uint32 second, unsigned int characterSize, bool bold = false) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the line spacing
@@ -171,7 +228,36 @@ public :
     /// \return Line spacing, in pixels
     ///
     ////////////////////////////////////////////////////////////
-    int GetLineSpacing(unsigned int characterSize) const;
+    float getLineSpacing(unsigned int characterSize) const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Get the position of the underline
+    ///
+    /// Underline position is the vertical offset to apply between the
+    /// baseline and the underline.
+    ///
+    /// \param characterSize Reference character size
+    ///
+    /// \return Underline position, in pixels
+    ///
+    /// \see getUnderlineThickness
+    ///
+    ////////////////////////////////////////////////////////////
+    float getUnderlinePosition(unsigned int characterSize) const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Get the thickness of the underline
+    ///
+    /// Underline thickness is the vertical size of the underline.
+    ///
+    /// \param characterSize Reference character size
+    ///
+    /// \return Underline thickness, in pixels
+    ///
+    /// \see getUnderlinePosition
+    ///
+    ////////////////////////////////////////////////////////////
+    float getUnderlineThickness(unsigned int characterSize) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Retrieve the texture containing the loaded glyphs of a certain size
@@ -185,7 +271,33 @@ public :
     /// \return Texture containing the glyphs of the requested size
     ///
     ////////////////////////////////////////////////////////////
-    const Texture& GetTexture(unsigned int characterSize) const;
+    const Texture& getTexture(unsigned int characterSize) const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Enable or disable the smooth filter
+    ///
+    /// When the filter is activated, the font appears smoother
+    /// so that pixels are less noticeable. However if you want
+    /// the font to look exactly the same as its source file,
+    /// you should disable it.
+    /// The smooth filter is enabled by default.
+    ///
+    /// \param smooth True to enable smoothing, false to disable it
+    ///
+    /// \see isSmooth
+    ///
+    ////////////////////////////////////////////////////////////
+    void setSmooth(bool smooth);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Tell whether the smooth filter is enabled or not
+    ///
+    /// \return True if smoothing is enabled, false if it is disabled
+    ///
+    /// \see setSmooth
+    ///
+    ////////////////////////////////////////////////////////////
+    bool isSmooth() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Overload of assignment operator
@@ -197,21 +309,7 @@ public :
     ////////////////////////////////////////////////////////////
     Font& operator =(const Font& right);
 
-    ////////////////////////////////////////////////////////////
-    /// \brief Return the default built-in font
-    ///
-    /// This font is provided for convenience, it is used by
-    /// sf::Text instances by default. It is provided so that
-    /// users don't have to provide and load a font file in order
-    /// to display text on screen.
-    /// The font used is Arial.
-    ///
-    /// \return Reference to the built-in default font
-    ///
-    ////////////////////////////////////////////////////////////
-    static const Font& GetDefaultFont();
-
-private :
+private:
 
     ////////////////////////////////////////////////////////////
     /// \brief Structure defining a row of glyphs
@@ -219,17 +317,17 @@ private :
     ////////////////////////////////////////////////////////////
     struct Row
     {
-        Row(unsigned int top, unsigned int height) : Width(0), Top(top), Height(height) {}
+        Row(unsigned int rowTop, unsigned int rowHeight) : width(0), top(rowTop), height(rowHeight) {}
 
-        unsigned int Width;  ///< Current width of the row
-        unsigned int Top;    ///< Y position of the row into the texture
-        unsigned int Height; ///< Height of the row
+        unsigned int width;  //!< Current width of the row
+        unsigned int top;    //!< Y position of the row into the texture
+        unsigned int height; //!< Height of the row
     };
 
     ////////////////////////////////////////////////////////////
     // Types
     ////////////////////////////////////////////////////////////
-    typedef std::map<Uint32, Glyph> GlyphTable; ///< Table mapping a codepoint to its glyph
+    typedef std::map<Uint64, Glyph> GlyphTable; //!< Table mapping a codepoint to its glyph
 
     ////////////////////////////////////////////////////////////
     /// \brief Structure defining a page of glyphs
@@ -237,31 +335,42 @@ private :
     ////////////////////////////////////////////////////////////
     struct Page
     {
-        Page();
+        explicit Page(bool smooth);
 
-        GlyphTable       Glyphs;  ///< Table mapping code points to their corresponding glyph
-        sf::Texture      Texture; ///< Texture containing the pixels of the glyphs
-        unsigned int     NextRow; ///< Y position of the next new row in the texture
-        std::vector<Row> Rows;    ///< List containing the position of all the existing rows
+        GlyphTable       glyphs;  //!< Table mapping code points to their corresponding glyph
+        Texture          texture; //!< Texture containing the pixels of the glyphs
+        unsigned int     nextRow; //!< Y position of the next new row in the texture
+        std::vector<Row> rows;    //!< List containing the position of all the existing rows
     };
 
     ////////////////////////////////////////////////////////////
     /// \brief Free all the internal resources
     ///
     ////////////////////////////////////////////////////////////
-    void Cleanup();
+    void cleanup();
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Find or create the glyphs page corresponding to the given character size
+    ///
+    /// \param characterSize Reference character size
+    ///
+    /// \return The glyphs page corresponding to \a characterSize
+    ///
+    ////////////////////////////////////////////////////////////
+    Page& loadPage(unsigned int characterSize) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Load a new glyph and store it in the cache
     ///
-    /// \param codePoint     Unicode code point of the character to load
-    /// \param characterSize Reference character size
-    /// \param bold          Retrieve the bold version or the regular one?
+    /// \param codePoint        Unicode code point of the character to load
+    /// \param characterSize    Reference character size
+    /// \param bold             Retrieve the bold version or the regular one?
+    /// \param outlineThickness Thickness of outline (when != 0 the glyph will not be filled)
     ///
     /// \return The glyph corresponding to \a codePoint and \a characterSize
     ///
     ////////////////////////////////////////////////////////////
-    Glyph LoadGlyph(Uint32 codePoint, unsigned int characterSize, bool bold) const;
+    Glyph loadGlyph(Uint32 codePoint, unsigned int characterSize, bool bold, float outlineThickness) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Find a suitable rectangle within the texture for a glyph
@@ -273,7 +382,7 @@ private :
     /// \return Found rectangle within the texture
     ///
     ////////////////////////////////////////////////////////////
-    IntRect FindGlyphRect(Page& page, unsigned int width, unsigned int height) const;
+    IntRect findGlyphRect(Page& page, unsigned int width, unsigned int height) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Make sure that the given size is the current one
@@ -283,22 +392,28 @@ private :
     /// \return True on success, false if any error happened
     ///
     ////////////////////////////////////////////////////////////
-    bool SetCurrentSize(unsigned int characterSize) const;
+    bool setCurrentSize(unsigned int characterSize) const;
 
     ////////////////////////////////////////////////////////////
     // Types
     ////////////////////////////////////////////////////////////
-    typedef std::map<unsigned int, Page> PageTable; ///< Table mapping a character size to its page (texture)
+    typedef std::map<unsigned int, Page> PageTable; //!< Table mapping a character size to its page (texture)
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    void*                      myLibrary;     ///< Pointer to the internal library interface (it is typeless to avoid exposing implementation details)
-    void*                      myFace;        ///< Pointer to the internal font face (it is typeless to avoid exposing implementation details)
-    void*                      myStreamRec;   ///< Pointer to the stream rec instance (it is typeless to avoid exposing implementation details)
-    int*                       myRefCount;    ///< Reference counter used by implicit sharing
-    mutable PageTable          myPages;       ///< Table containing the glyphs pages by character size
-    mutable std::vector<Uint8> myPixelBuffer; ///< Pixel buffer holding a glyph's pixels before being written to the texture
+    void*                      m_library;     //!< Pointer to the internal library interface (it is typeless to avoid exposing implementation details)
+    void*                      m_face;        //!< Pointer to the internal font face (it is typeless to avoid exposing implementation details)
+    void*                      m_streamRec;   //!< Pointer to the stream rec instance (it is typeless to avoid exposing implementation details)
+    void*                      m_stroker;     //!< Pointer to the stroker (it is typeless to avoid exposing implementation details)
+    int*                       m_refCount;    //!< Reference counter used by implicit sharing
+    bool                       m_isSmooth;    //!< Status of the smooth filter
+    Info                       m_info;        //!< Information about the font
+    mutable PageTable          m_pages;       //!< Table containing the glyphs pages by character size
+    mutable std::vector<Uint8> m_pixelBuffer; //!< Pixel buffer holding a glyph's pixels before being written to the texture
+    #ifdef SFML_SYSTEM_ANDROID
+    void*                      m_stream; //!< Asset file streamer (if loaded from file)
+    #endif
 };
 
 } // namespace sf
@@ -313,10 +428,10 @@ private :
 ///
 /// Fonts can be loaded from a file, from memory or from a custom
 /// stream, and supports the most common types of fonts. See
-/// the LoadFromFile function for the complete list of supported formats.
+/// the loadFromFile function for the complete list of supported formats.
 ///
 /// Once it is loaded, a sf::Font instance provides three
-/// types of informations about the font:
+/// types of information about the font:
 /// \li Global metrics, such as the line spacing
 /// \li Per-glyph metrics, such as bounding box or kerning
 /// \li Pixel representation of glyphs
@@ -345,30 +460,36 @@ private :
 /// \code
 /// // Declare a new font
 /// sf::Font font;
-/// 
+///
 /// // Load it from a file
-/// if (!font.LoadFromFile("arial.ttf"))
+/// if (!font.loadFromFile("arial.ttf"))
 /// {
 ///     // error...
 /// }
-/// 
+///
 /// // Create a text which uses our font
 /// sf::Text text1;
-/// text1.SetFont(font);
-/// text1.SetCharacterSize(30);
-/// text1.SetStyle(sf::Text::Regular);
-/// 
+/// text1.setFont(font);
+/// text1.setCharacterSize(30);
+/// text1.setStyle(sf::Text::Regular);
+///
 /// // Create another text using the same font, but with different parameters
 /// sf::Text text2;
-/// text2.SetFont(font);
-/// text2.SetCharacterSize(50);
-/// text1.SetStyle(sf::Text::Italic);
+/// text2.setFont(font);
+/// text2.setCharacterSize(50);
+/// text2.setStyle(sf::Text::Italic);
 /// \endcode
 ///
 /// Apart from loading font files, and passing them to instances
 /// of sf::Text, you should normally not have to deal directly
 /// with this class. However, it may be useful to access the
 /// font metrics or rasterized glyphs for advanced usage.
+///
+/// Note that if the font is a bitmap font, it is not scalable,
+/// thus not all requested sizes will be available to use. This
+/// needs to be taken into consideration when using sf::Text.
+/// If you need to display text of a certain size, make sure the
+/// corresponding bitmap font that supports that size is used.
 ///
 /// \see sf::Text
 ///

@@ -14,14 +14,13 @@ void ShapeBehavior::added()
 	rotation_ = pOwner_->getAttribute("rotation");
 	color_ = pOwner_->getAttribute("color");
 
-	sf::FloatRect rect(0, 0, width_->get<int>(), height_->get<int>());
-	shape_ = sf::Shape::Rectangle(rect, sf::Color());
+	shape_.setSize({ static_cast<float>(width_->get<int>()), static_cast<float>(height_->get<int>()) });
 	updateColor();
 }
 //----------------------------------------------------------------------------//
 void ShapeBehavior::update()
 {
-	shape_.SetPosition(posX_->get<int>(), posY_->get<int>());
+	shape_.setPosition(posX_->get<int>(), posY_->get<int>());
 	updateColor();
 }
 //----------------------------------------------------------------------------//
@@ -47,6 +46,6 @@ void ShapeBehavior::updateColor()
 		color.b = array[2]->get<int>();
 		color.a = array[3]->get<int>();
 	}
-	shape_.SetColor(color);
+	shape_.setFillColor(color);
 }
 //----------------------------------------------------------------------------//

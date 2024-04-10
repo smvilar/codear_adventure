@@ -44,7 +44,7 @@ sf::Texture& ResourceManager::getTexture(const std::string &name)
 		// Load the texture
 		ResourceData res = defaultResPack_->getResource(name);
 		sf::Texture &texture = textures_[name];
-		if (!texture.LoadFromMemory(res.data, res.size))
+		if (!texture.loadFromMemory(res.data, res.size))
 		{
 			std::cerr << "Error loading texture: " << name << std::endl;
 			Assert(false, "Error loading texture");
@@ -62,7 +62,7 @@ sf::Font& ResourceManager::getFont(const std::string &name)
 		std::cout << "Loading font " << name << std::endl;
 		ResourceData res = defaultResPack_->getResource(name);
 		sf::Font &font = fonts_[name];
-		if (!font.LoadFromMemory(res.data, res.size))
+		if (!font.loadFromMemory(res.data, res.size))
 		{
 			std::cerr << "Error loading font: " << name << std::endl;
 			Assert(false, "Error loading font");
@@ -79,7 +79,7 @@ sf::SoundBuffer& ResourceManager::getSoundBuffer(const std::string &name)
 		// Load the sound buffer
 		ResourceData res = defaultResPack_->getResource(name);
 		sf::SoundBuffer &soundBuffer = soundBuffers_[name];
-		if (!soundBuffer.LoadFromMemory(res.data, res.size))
+		if (!soundBuffer.loadFromMemory(res.data, res.size))
 		{
 			std::cerr << "Error loading sound buffer: " << name << std::endl;
 			Assert(false, "Error loading sound buffer");

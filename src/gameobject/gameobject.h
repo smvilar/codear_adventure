@@ -39,7 +39,7 @@ public:
 		return getAttribute(name)->get<T>();
 	}
 
-	Attribute* operator[](const std::string &name) { return getAttribute(name); }
+	Attribute* operator[](const std::string &attributeName) { return getAttribute(attributeName); }
 
 /// Behaviors
 public:

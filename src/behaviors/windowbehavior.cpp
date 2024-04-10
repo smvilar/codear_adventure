@@ -27,7 +27,7 @@ void WindowBehavior::added()
 	u32 style = fullscreen ? sf::Style::Fullscreen : sf::Style::Close;
 
 	window_ = new sf::RenderWindow(videoMode, caption, style, contextSettings);
-	window_->SetPosition(0, 0);
+	window_->setPosition({ 0, 0 });
 
 	pOwner_->addAttribute("window", new Attribute(window_));
 	pOwner_->addAttribute("mouse", new Attribute(&mouseUtil_));
@@ -37,30 +37,30 @@ void WindowBehavior::update()
 {
 	pollEvents();
 
-	const sf::Vector2i &mousePos = sf::Mouse::GetPosition(*window_);
+	const sf::Vector2i &mousePos = sf::Mouse::getPosition(*window_);
 	mouseUtil_.setPosition(mousePos.x, mousePos.y);
-	mouseUtil_.setPressed(0, sf::Mouse::IsButtonPressed(sf::Mouse::Left));
-	mouseUtil_.setPressed(1, sf::Mouse::IsButtonPressed(sf::Mouse::Right));
-	mouseUtil_.setPressed(2, sf::Mouse::IsButtonPressed(sf::Mouse::Middle));
+	mouseUtil_.setPressed(0, sf::Mouse::isButtonPressed(sf::Mouse::Left));
+	mouseUtil_.setPressed(1, sf::Mouse::isButtonPressed(sf::Mouse::Right));
+	mouseUtil_.setPressed(2, sf::Mouse::isButtonPressed(sf::Mouse::Middle));
 
 	// TODO: this should be maybe in another behavior, or gone
-	bool isControlPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::LSystem);
-	bool isQPressed = sf::Keyboard::IsKeyPressed(sf::Keyboard::Q);
+	bool isControlPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::LSystem);
+	bool isQPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Q);
 	if (isControlPressed && isQPressed)
 		pOwner_->getAttribute("alive")->set(false);
 
-	window_->Clear();
+	window_->clear();
 	pWorld_->getScene().render(*window_);
-	window_->Display();
+	window_->display();
 }
 //----------------------------------------------------------------------------//
 void WindowBehavior::pollEvents()
 {
 	sf::Event event;
-	while (window_->PollEvent(event))
+	while (window_->pollEvent(event))
 	{
 		pWorld_->broadcast(Message("window_event", event));
-		if (event.Type == sf::Event::Closed)
+		if (event.type == sf::Event::Closed)
 			pOwner_->getAttribute("alive")->set(false);
 	}
 }

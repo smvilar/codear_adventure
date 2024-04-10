@@ -32,7 +32,7 @@ void DialogueActorBehavior::update()
 	(*answerTextBox_)["y"]->set(y);
 
 	bool ready = mouseUtil_->justPressed(0) ||
-			answerClock_.GetElapsedTime() > answerTime_;
+			answerClock_.getElapsedTime().asMilliseconds() > answerTime_;
 
 	if (showingSpeech_ && ready)
 	{
@@ -64,7 +64,7 @@ void DialogueActorBehavior::handleMessage(const Message &message)
 //----------------------------------------------------------------------------//
 void DialogueActorBehavior::setText(const std::string &text)
 {
-	answerClock_.Reset();
+	answerClock_.restart();
 	answerTime_ = Dialogue::getSpeechTime(text);
 	(*answerTextBox_)["text"]->set(text);
 	answerTextBox_->broadcast(Message("update_text"));

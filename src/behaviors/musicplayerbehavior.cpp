@@ -11,28 +11,28 @@ void MusicPlayerBehavior::activate()
 	std::string filename = pOwner_->getAttributeAs<std::string>("musicFilename");
 	ResourceData res = pWorld_->getResourceManager().getResource(filename);
 
-	music_.OpenFromMemory(res.data, res.size);
+	music_.openFromMemory(res.data, res.size);
 
 	if (Attribute* attr = pOwner_->getAttribute("musicLoop"))
-		music_.SetLoop(attr->get<bool>());
+		music_.setLoop(attr->get<bool>());
 	if (Attribute* attr = pOwner_->getAttribute("musicAutoPlay"))
 		if (attr->get<bool>())
-			music_.Play();
+			music_.play();
 }
 //----------------------------------------------------------------------------//
 void MusicPlayerBehavior::handleMessage(const Message &message)
 {
 	if (message.equals("music_play"))
 	{
-		music_.Play();
+		music_.play();
 	}
 	else if (message.equals("music_pause"))
 	{
-		music_.Pause();
+		music_.pause();
 	}
 	else if (message.equals("music_stop"))
 	{
-		music_.Stop();
+		music_.stop();
 	}
 }
 //----------------------------------------------------------------------------//

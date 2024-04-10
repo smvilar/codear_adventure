@@ -21,18 +21,18 @@ void TextInputBehavior::handleMessage(const Message &message)
 	if (message.equals("window_event"))
 	{
 		const sf::Event &ev = message.argsAs<sf::Event>();
-		if (ev.Type == sf::Event::TextEntered)
+		if (ev.type == sf::Event::TextEntered)
 		{
-			if (ev.Text.Unicode < ' ')
+			if (ev.text.unicode < ' ')
 				return;
-			sf::String str = ev.Text.Unicode;
-			updateText(str.ToAnsiString());
+			sf::String str = ev.text.unicode;
+			updateText(str.toAnsiString());
 		}
-		else if (ev.Type == sf::Event::KeyPressed)
+		else if (ev.type == sf::Event::KeyPressed)
 		{
-			if (ev.Key.Code == sf::Keyboard::Back)
+			if (ev.key.code == sf::Keyboard::Backspace)
 				backspace();
-			if (ev.Key.Code == sf::Keyboard::Return)
+			if (ev.key.code == sf::Keyboard::Return)
 			{
 				updateText(std::string("\n"));
 			}

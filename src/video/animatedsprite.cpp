@@ -20,7 +20,7 @@ bool AnimatedSprite::parse(const std::string &filename, ResourceManager &resMgr)
 
 	const std::string &textureFilename = root["textureFilename"].asString();
 
-	sprite_.SetTexture(resMgr.getTexture(textureFilename));
+	sprite_.setTexture(resMgr.getTexture(textureFilename));
 
 	u32 framesHorizontal = root["framesHorizontal"].asInt();
 	u32 framesVertical = root["framesVertical"].asInt();

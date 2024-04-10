@@ -8,14 +8,14 @@
 void LogoBehavior::activate()
 {
 	logoTime_ = pOwner_->getAttributeAs<int>("logo_time");
-	clock_.Reset();
+	clock_.restart();
 }
 //----------------------------------------------------------------------------//
 void LogoBehavior::update()
 {
-	if (clock_.GetElapsedTime() > logoTime_)
+	if (clock_.getElapsedTime().asMilliseconds() > logoTime_)
 	{
-		clock_.Reset();
+		clock_.restart();
 		pWorld_->broadcast(he::Message("screen_transition",
 									   std::string("timeout")));
 	}

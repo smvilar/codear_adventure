@@ -15,7 +15,7 @@ void Scene::render(sf::RenderTarget &renderTarget)
 	Drawables::iterator it = drawables_.begin();
 	for (; it != drawables_.end(); ++it)
 	{
-		renderTarget.Draw(*it->second);
+		renderTarget.draw(*it->second);
 	}
 }
 //----------------------------------------------------------------------------//

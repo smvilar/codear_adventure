@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2023 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,7 +28,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <SFML/Network/Export.hpp>
 #include <SFML/Network/Socket.hpp>
+#include <SFML/Network/IpAddress.hpp>
 
 
 namespace sf
@@ -39,9 +41,9 @@ class TcpSocket;
 /// \brief Socket that listens to new TCP connections
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API TcpListener : public Socket
+class SFML_NETWORK_API TcpListener : public Socket
 {
-public :
+public:
 
     ////////////////////////////////////////////////////////////
     /// \brief Default constructor
@@ -57,27 +59,34 @@ public :
     ///
     /// \return Port to which the socket is bound
     ///
-    /// \see Listen
+    /// \see listen
     ///
     ////////////////////////////////////////////////////////////
-    unsigned short GetLocalPort() const;
+    unsigned short getLocalPort() const;
 
     ////////////////////////////////////////////////////////////
-    /// \brief Start listening for connections
+    /// \brief Start listening for incoming connection attempts
     ///
-    /// This functions makes the socket listen to the specified
-    /// port, waiting for new connections.
-    /// If the socket was previously listening to another port,
-    /// it will be stopped first and bound to the new port.
+    /// This function makes the socket start listening on the
+    /// specified port, waiting for incoming connection attempts.
     ///
-    /// \param port Port to listen for new connections
+    /// If the socket is already listening on a port when this
+    /// function is called, it will stop listening on the old
+    /// port before starting to listen on the new port.
+    ///
+    /// When providing sf::Socket::AnyPort as port, the listener
+    /// will request an available port from the system.
+    /// The chosen port can be retrieved by calling getLocalPort().
+    ///
+    /// \param port    Port to listen on for incoming connection attempts
+    /// \param address Address of the interface to listen on
     ///
     /// \return Status code
     ///
-    /// \see Accept, Close
+    /// \see accept, close
     ///
     ////////////////////////////////////////////////////////////
-    Status Listen(unsigned short port);
+    Status listen(unsigned short port, const IpAddress& address = IpAddress::Any);
 
     ////////////////////////////////////////////////////////////
     /// \brief Stop listening and close the socket
@@ -85,10 +94,10 @@ public :
     /// This function gracefully stops the listener. If the
     /// socket is not listening, this function has no effect.
     ///
-    /// \see Listen
+    /// \see listen
     ///
     ////////////////////////////////////////////////////////////
-    void Close();
+    void close();
 
     ////////////////////////////////////////////////////////////
     /// \brief Accept a new connection
@@ -100,10 +109,10 @@ public :
     ///
     /// \return Status code
     ///
-    /// \see Listen
+    /// \see listen
     ///
     ////////////////////////////////////////////////////////////
-    Status Accept(TcpSocket& socket);
+    Status accept(TcpSocket& socket);
 };
 
 
@@ -121,7 +130,7 @@ public :
 /// a given port and waits for connections on that port.
 /// This is all it can do.
 ///
-/// When a new connection is received, you must call Accept and
+/// When a new connection is received, you must call accept and
 /// the listener returns a new instance of sf::TcpSocket that
 /// is properly initialized and can be used to communicate with
 /// the new client.
@@ -133,7 +142,7 @@ public :
 ///
 /// A listener is automatically closed on destruction, like all
 /// other types of socket. However if you want to stop listening
-/// before the socket is destroyed, you can call its Close()
+/// before the socket is destroyed, you can call its close()
 /// function.
 ///
 /// Usage example:
@@ -141,17 +150,17 @@ public :
 /// // Create a listener socket and make it wait for new
 /// // connections on port 55001
 /// sf::TcpListener listener;
-/// listener.Listen(55001);
+/// listener.listen(55001);
 ///
 /// // Endless loop that waits for new connections
 /// while (running)
 /// {
 ///     sf::TcpSocket client;
-///     if (listener.Accept(client) == sf::Socket::Done)
+///     if (listener.accept(client) == sf::Socket::Done)
 ///     {
 ///         // A new client just connected!
-///         std::cout << "New connection received from " << client.GetRemoteAddress() << std::endl;
-///         DoSomethingWith(client);
+///         std::cout << "New connection received from " << client.getRemoteAddress() << std::endl;
+///         doSomethingWith(client);
 ///     }
 /// }
 /// \endcode

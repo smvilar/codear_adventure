@@ -30,9 +30,9 @@ void SpriteBehavior::activate()
 	sf::Sprite &sprite = animatedSprite_.getSprite();
 
 	if (!owner["width"])
-		pOwner_->addAttribute("width", new Attribute(static_cast<int>(sprite.GetSize().x)));
+		pOwner_->addAttribute("width", new Attribute(static_cast<int>(sprite.getTextureRect().width)));
 	if (!owner["height"])
-		pOwner_->addAttribute("height", new Attribute(static_cast<int>(sprite.GetSize().y)));
+		pOwner_->addAttribute("height", new Attribute(static_cast<int>(sprite.getTextureRect().height)));
 
 	pWorld_->getScene().addDrawable(animatedSprite_.getSprite());
 }
@@ -44,11 +44,11 @@ void SpriteBehavior::deactivate()
 //----------------------------------------------------------------------------//
 void SpriteBehavior::update()
 {
-	animatedSprite_.getSprite().SetPosition(posX_->get<int>(), posY_->get<int>());
+	animatedSprite_.getSprite().setPosition(posX_->get<int>(), posY_->get<int>());
 	if (rotation_)
-		animatedSprite_.getSprite().SetRotation(rotation_->get<int>());
+		animatedSprite_.getSprite().setRotation(rotation_->get<int>());
 	if (scale_)
-		animatedSprite_.getSprite().SetScale(scale_->get<int>(), scale_->get<int>());
+		animatedSprite_.getSprite().setScale(scale_->get<int>(), scale_->get<int>());
 
 	// TODO: unhardcode
 	animatedSprite_.update(30);

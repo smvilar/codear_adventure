@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2023 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,7 +28,8 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Config.hpp>
+#include <SFML/Network/Export.hpp>
+#include <SFML/System/Time.hpp>
 
 
 namespace sf
@@ -39,9 +40,9 @@ class Socket;
 /// \brief Multiplexer that allows to read from multiple sockets
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API SocketSelector
+class SFML_NETWORK_API SocketSelector
 {
-public :
+public:
 
     ////////////////////////////////////////////////////////////
     /// \brief Default constructor
@@ -69,13 +70,14 @@ public :
     /// This function keeps a weak reference to the socket,
     /// so you have to make sure that the socket is not destroyed
     /// while it is stored in the selector.
+    /// This function does nothing if the socket is not valid.
     ///
     /// \param socket Reference to the socket to add
     ///
-    /// \see Remove, Clear
+    /// \see remove, clear
     ///
     ////////////////////////////////////////////////////////////
-    void Add(Socket& socket);
+    void add(Socket& socket);
 
     ////////////////////////////////////////////////////////////
     /// \brief Remove a socket from the selector
@@ -85,10 +87,10 @@ public :
     ///
     /// \param socket Reference to the socket to remove
     ///
-    /// \see Add, Clear
+    /// \see add, clear
     ///
     ////////////////////////////////////////////////////////////
-    void Remove(Socket& socket);
+    void remove(Socket& socket);
 
     ////////////////////////////////////////////////////////////
     /// \brief Remove all the sockets stored in the selector
@@ -97,35 +99,35 @@ public :
     /// removes all the references that the selector has to
     /// external sockets.
     ///
-    /// \see Add, Remove
+    /// \see add, remove
     ///
     ////////////////////////////////////////////////////////////
-    void Clear();
+    void clear();
 
     ////////////////////////////////////////////////////////////
     /// \brief Wait until one or more sockets are ready to receive
     ///
     /// This function returns as soon as at least one socket has
     /// some data available to be received. To know which sockets are
-    /// ready, use the IsReady function.
+    /// ready, use the isReady function.
     /// If you use a timeout and no socket is ready before the timeout
     /// is over, the function returns false.
     ///
-    /// \param timeout Maximum time to wait, in milliseconds (use 0 for infinity)
+    /// \param timeout Maximum time to wait, (use Time::Zero for infinity)
     ///
     /// \return True if there are sockets ready, false otherwise
     ///
-    /// \see IsReady
+    /// \see isReady
     ///
     ////////////////////////////////////////////////////////////
-    bool Wait(Uint32 timeout = 0);
+    bool wait(Time timeout = Time::Zero);
 
     ////////////////////////////////////////////////////////////
     /// \brief Test a socket to know if it is ready to receive data
     ///
     /// This function must be used after a call to Wait, to know
     /// which sockets are ready to receive data. If a socket is
-    /// ready, a call to Receive will never block because we know
+    /// ready, a call to receive will never block because we know
     /// that there is data available to read.
     /// Note that if this function returns true for a TcpListener,
     /// this means that it is ready to accept a new connection.
@@ -134,10 +136,10 @@ public :
     ///
     /// \return True if the socket is ready to read, false otherwise
     ///
-    /// \see IsReady
+    /// \see isReady
     ///
     ////////////////////////////////////////////////////////////
-    bool IsReady(Socket& socket) const;
+    bool isReady(Socket& socket) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Overload of assignment operator
@@ -149,14 +151,14 @@ public :
     ////////////////////////////////////////////////////////////
     SocketSelector& operator =(const SocketSelector& right);
 
-private :
+private:
 
     struct SocketSelectorImpl;
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    SocketSelectorImpl* myImpl; ///< Opaque pointer to the implementation (which requires OS-specific types)
+    SocketSelectorImpl* m_impl; //!< Opaque pointer to the implementation (which requires OS-specific types)
 };
 
 } // namespace sf
@@ -185,8 +187,8 @@ private :
 /// A selector doesn't store its own copies of the sockets
 /// (socket classes are not copyable anyway), it simply keeps
 /// a reference to the original sockets that you pass to the
-/// Add function. Therefore, you can't use the selector as a
-/// socket container, you must store them oustide and make sure
+/// "add" function. Therefore, you can't use the selector as a
+/// socket container, you must store them outside and make sure
 /// that they are alive as long as they are used in the selector.
 ///
 /// Using a selector is simple:
@@ -198,7 +200,7 @@ private :
 /// \code
 /// // Create a socket to listen to new connections
 /// sf::TcpListener listener;
-/// listener.Listen(55001);
+/// listener.listen(55001);
 ///
 /// // Create a list to store the future clients
 /// std::list<sf::TcpSocket*> clients;
@@ -207,16 +209,16 @@ private :
 /// sf::SocketSelector selector;
 ///
 /// // Add the listener to the selector
-/// selector.Add(listener);
+/// selector.add(listener);
 ///
 /// // Endless loop that waits for new connections
 /// while (running)
 /// {
 ///     // Make the selector wait for data on any socket
-///     if (selector.Wait())
+///     if (selector.wait())
 ///     {
 ///         // Test the listener
-///         if (selector.IsReady(listener))
+///         if (selector.isReady(listener))
 ///         {
 ///             // The listener is ready: there is a pending connection
 ///             sf::TcpSocket* client = new sf::TcpSocket;
@@ -227,7 +229,12 @@ private :
 ///
 ///                 // Add the new client to the selector so that we will
 ///                 // be notified when he sends something
-///                 selector.Add(*client);
+///                 selector.add(*client);
+///             }
+///             else
+///             {
+///                 // Error, we won't get a new connection, delete the socket
+///                 delete client;
 ///             }
 ///         }
 ///         else
@@ -236,11 +243,11 @@ private :
 ///             for (std::list<sf::TcpSocket*>::iterator it = clients.begin(); it != clients.end(); ++it)
 ///             {
 ///                 sf::TcpSocket& client = **it;
-///                 if (selector.IsReady(client))
+///                 if (selector.isReady(client))
 ///                 {
 ///                     // The client has sent some data, we can receive it
 ///                     sf::Packet packet;
-///                     if (client.Receive(packet) == sf::Socket::Done)
+///                     if (client.receive(packet) == sf::Socket::Done)
 ///                     {
 ///                         ...
 ///                     }

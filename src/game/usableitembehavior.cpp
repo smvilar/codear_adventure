@@ -20,14 +20,12 @@ void UsableItemBehavior::activate()
 	if (fontAttr)
 	{
 		std::string fontFilename = fontAttr->get<std::string>();
-		text_.SetFont(pWorld_->getResourceManager().getFont(fontFilename));
+		text_.setFont(pWorld_->getResourceManager().getFont(fontFilename));
 	}
-	else
-		text_.SetFont(sf::Font::GetDefaultFont());
 
 	Attribute *fontSize = owner["fontSize"];
 	if (fontSize)
-		text_.SetCharacterSize(fontSize->get<int>());
+		text_.setCharacterSize(fontSize->get<int>());
 
 	firstUpdate_ = true;
 }
@@ -49,9 +47,9 @@ void UsableItemBehavior::update()
 		{
 			const std::string &text = textToShow_->get<std::string>();
 			std::wstring wtext;
-			sf::Utf8::ToUtf16(text.begin(), text.end(), std::back_inserter(wtext));
-			text_.SetString(wtext);
-			text_.SetPosition(mouseUtil_->x, mouseUtil_->y - 30);
+			sf::Utf8::toUtf16(text.begin(), text.end(), std::back_inserter(wtext));
+			text_.setString(wtext);
+			text_.setPosition(mouseUtil_->x, mouseUtil_->y - 30);
 			if (!pWorld_->getScene().hasDrawable(text_))
 				pWorld_->getScene().addDrawable(text_, 1);
 		}

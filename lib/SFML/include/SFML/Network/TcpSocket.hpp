@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2023 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,7 +28,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <SFML/Network/Export.hpp>
 #include <SFML/Network/Socket.hpp>
+#include <SFML/System/Time.hpp>
 
 
 namespace sf
@@ -41,9 +43,9 @@ class Packet;
 /// \brief Specialized socket using the TCP protocol
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API TcpSocket : public Socket
+class SFML_NETWORK_API TcpSocket : public Socket
 {
-public :
+public:
 
     ////////////////////////////////////////////////////////////
     /// \brief Default constructor
@@ -58,23 +60,23 @@ public :
     ///
     /// \return Port to which the socket is bound
     ///
-    /// \see Connect, GetRemotePort
+    /// \see connect, getRemotePort
     ///
     ////////////////////////////////////////////////////////////
-    unsigned short GetLocalPort() const;
+    unsigned short getLocalPort() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the address of the connected peer
     ///
-    /// It the socket is not connected, this function returns
+    /// If the socket is not connected, this function returns
     /// sf::IpAddress::None.
     ///
     /// \return Address of the remote peer
     ///
-    /// \see GetRemotePort
+    /// \see getRemotePort
     ///
     ////////////////////////////////////////////////////////////
-    IpAddress GetRemoteAddress() const;
+    IpAddress getRemoteAddress() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the port of the connected peer to which
@@ -84,10 +86,10 @@ public :
     ///
     /// \return Remote port to which the socket is connected
     ///
-    /// \see GetRemoteAddress
+    /// \see getRemoteAddress
     ///
     ////////////////////////////////////////////////////////////
-    unsigned short GetRemotePort() const;
+    unsigned short getRemotePort() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Connect the socket to a remote peer
@@ -95,18 +97,19 @@ public :
     /// In blocking mode, this function may take a while, especially
     /// if the remote peer is not reachable. The last parameter allows
     /// you to stop trying to connect after a given timeout.
-    /// If the socket was previously connected, it is first disconnected.
+    /// If the socket is already connected, the connection is
+    /// forcibly disconnected before attempting to connect again.
     ///
     /// \param remoteAddress Address of the remote peer
     /// \param remotePort    Port of the remote peer
-    /// \param timeout       Optional maximum time to wait, in milliseconds
+    /// \param timeout       Optional maximum time to wait
     ///
     /// \return Status code
     ///
-    /// \see Disconnect
+    /// \see disconnect
     ///
     ////////////////////////////////////////////////////////////
-    Status Connect(const IpAddress& remoteAddress, unsigned short remotePort, Uint32 timeout = 0);
+    Status connect(const IpAddress& remoteAddress, unsigned short remotePort, Time timeout = Time::Zero);
 
     ////////////////////////////////////////////////////////////
     /// \brief Disconnect the socket from its remote peer
@@ -114,10 +117,28 @@ public :
     /// This function gracefully closes the connection. If the
     /// socket is not connected, this function has no effect.
     ///
-    /// \see Connect
+    /// \see connect
     ///
     ////////////////////////////////////////////////////////////
-    void Disconnect();
+    void disconnect();
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Send raw data to the remote peer
+    ///
+    /// To be able to handle partial sends over non-blocking
+    /// sockets, use the send(const void*, std::size_t, std::size_t&)
+    /// overload instead.
+    /// This function will fail if the socket is not connected.
+    ///
+    /// \param data Pointer to the sequence of bytes to send
+    /// \param size Number of bytes to send
+    ///
+    /// \return Status code
+    ///
+    /// \see receive
+    ///
+    ////////////////////////////////////////////////////////////
+    Status send(const void* data, std::size_t size);
 
     ////////////////////////////////////////////////////////////
     /// \brief Send raw data to the remote peer
@@ -126,13 +147,14 @@ public :
     ///
     /// \param data Pointer to the sequence of bytes to send
     /// \param size Number of bytes to send
+    /// \param sent The number of bytes sent will be written here
     ///
     /// \return Status code
     ///
-    /// \see Receive
+    /// \see receive
     ///
     ////////////////////////////////////////////////////////////
-    Status Send(const char* data, std::size_t size);
+    Status send(const void* data, std::size_t size, std::size_t& sent);
 
     ////////////////////////////////////////////////////////////
     /// \brief Receive raw data from the remote peer
@@ -147,24 +169,28 @@ public :
     ///
     /// \return Status code
     ///
-    /// \see Send
+    /// \see send
     ///
     ////////////////////////////////////////////////////////////
-    Status Receive(char* data, std::size_t size, std::size_t& received);
+    Status receive(void* data, std::size_t size, std::size_t& received);
 
     ////////////////////////////////////////////////////////////
     /// \brief Send a formatted packet of data to the remote peer
     ///
+    /// In non-blocking mode, if this function returns sf::Socket::Partial,
+    /// you \em must retry sending the same unmodified packet before sending
+    /// anything else in order to guarantee the packet arrives at the remote
+    /// peer uncorrupted.
     /// This function will fail if the socket is not connected.
     ///
     /// \param packet Packet to send
     ///
     /// \return Status code
     ///
-    /// \see Receive
+    /// \see receive
     ///
     ////////////////////////////////////////////////////////////
-    Status Send(Packet& packet);
+    Status send(Packet& packet);
 
     ////////////////////////////////////////////////////////////
     /// \brief Receive a formatted packet of data from the remote peer
@@ -177,10 +203,10 @@ public :
     ///
     /// \return Status code
     ///
-    /// \see Send
+    /// \see send
     ///
     ////////////////////////////////////////////////////////////
-    Status Receive(Packet& packet);
+    Status receive(Packet& packet);
 
 private:
 
@@ -194,15 +220,15 @@ private:
     {
         PendingPacket();
 
-        Uint32            Size;         ///< Data of packet size
-        std::size_t       SizeReceived; ///< Number of size bytes received so far
-        std::vector<char> Data;         ///< Data of the packet
+        Uint32            Size;         //!< Data of packet size
+        std::size_t       SizeReceived; //!< Number of size bytes received so far
+        std::vector<char> Data;         //!< Data of the packet
     };
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    PendingPacket myPendingPacket; ///< Temporary data of the packet currently being received
+    PendingPacket m_pendingPacket; //!< Temporary data of the packet currently being received
 };
 
 } // namespace sf
@@ -225,10 +251,10 @@ private:
 ///
 /// When a socket is connected to a remote host, you can
 /// retrieve informations about this host with the
-/// GetRemoteAddress and GetRemotePort functions. You can
+/// getRemoteAddress and getRemotePort functions. You can
 /// also get the local port to which the socket is bound
 /// (which is automatically chosen when the socket is connected),
-/// with the GetLocalPort function.
+/// with the getLocalPort function.
 ///
 /// Sending and receiving data can use either the low-level
 /// or the high-level functions. The low-level functions
@@ -242,8 +268,8 @@ private:
 /// class to get more details about how they work.
 ///
 /// The socket is automatically disconnected when it is destroyed,
-/// but if you want to explicitely close the connection while
-/// the socket instance is still alive, you can call Disconnect.
+/// but if you want to explicitly close the connection while
+/// the socket instance is still alive, you can call disconnect.
 ///
 /// Usage example:
 /// \code
@@ -251,38 +277,38 @@ private:
 ///
 /// // Create a socket and connect it to 192.168.1.50 on port 55001
 /// sf::TcpSocket socket;
-/// socket.Connect("192.168.1.50", 55001);
+/// socket.connect("192.168.1.50", 55001);
 ///
 /// // Send a message to the connected host
 /// std::string message = "Hi, I am a client";
-/// socket.Send(message.c_str(), message.size() + 1);
+/// socket.send(message.c_str(), message.size() + 1);
 ///
 /// // Receive an answer from the server
 /// char buffer[1024];
 /// std::size_t received = 0;
-/// socket.Receive(buffer, sizeof(buffer), received);
+/// socket.receive(buffer, sizeof(buffer), received);
 /// std::cout << "The server said: " << buffer << std::endl;
 ///
 /// // ----- The server -----
 ///
 /// // Create a listener to wait for incoming connections on port 55001
 /// sf::TcpListener listener;
-/// listener.Listen(55001);
+/// listener.listen(55001);
 ///
 /// // Wait for a connection
 /// sf::TcpSocket socket;
-/// listener.Accept(socket);
-/// std::cout << "New client connected: " << socket.GetRemoteAddress() << std::endl;
+/// listener.accept(socket);
+/// std::cout << "New client connected: " << socket.getRemoteAddress() << std::endl;
 ///
 /// // Receive a message from the client
 /// char buffer[1024];
 /// std::size_t received = 0;
-/// socket.Receive(buffer, sizeof(buffer), received);
+/// socket.receive(buffer, sizeof(buffer), received);
 /// std::cout << "The client said: " << buffer << std::endl;
 ///
 /// // Send an answer
 /// std::string message = "Welcome, client";
-/// socket.Send(message.c_str(), message.size() + 1);
+/// socket.send(message.c_str(), message.size() + 1);
 /// \endcode
 ///
 /// \see sf::Socket, sf::UdpSocket, sf::Packet

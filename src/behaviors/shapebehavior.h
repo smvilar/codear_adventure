@@ -22,7 +22,7 @@ private:
 	virtual void deactivate();
 
 private:
-	sf::Shape shape_;
+	sf::RectangleShape shape_;
 	Attribute *posX_, *posY_, *width_, *height_;
 	Attribute *rotation_, *color_;
 

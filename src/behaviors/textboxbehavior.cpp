@@ -26,16 +26,14 @@ void TextBoxBehavior::activate()
 	if (fontAttr)
 	{
 		std::string fontFilename = fontAttr->get<std::string>();
-		text_.SetFont(pWorld_->getResourceManager().getFont(fontFilename));
+		text_.setFont(pWorld_->getResourceManager().getFont(fontFilename));
 	}
-	else
-		text_.SetFont(sf::Font::GetDefaultFont());
 
 	fontSize_ = owner["fontSize"];
 	if (fontSize_)
-		text_.SetCharacterSize(fontSize_->get<int>());
+		text_.setCharacterSize(fontSize_->get<int>());
 	else
-		text_.SetCharacterSize(12);
+		text_.setCharacterSize(12);
 
 	updateText();
 
@@ -50,7 +48,7 @@ void TextBoxBehavior::deactivate()
 //----------------------------------------------------------------------------//
 void TextBoxBehavior::update()
 {
-	text_.SetPosition(posX_->get<int>(), posY_->get<int>());
+	text_.setPosition(posX_->get<int>(), posY_->get<int>());
 }
 //----------------------------------------------------------------------------//
 void TextBoxBehavior::handleMessage(const Message &message)
@@ -68,8 +66,8 @@ void TextBoxBehavior::updateText()
 	{
 		const std::string &text = textAttr_->get<std::string>();
 		std::wstring wtext;
-		sf::Utf8::ToUtf16(text.begin(), text.end(), std::back_inserter(wtext));
-		text_.SetString(wtext);
+		sf::Utf8::toUtf16(text.begin(), text.end(), std::back_inserter(wtext));
+		text_.setString(wtext);
 		adjustText();
 	}
 }
@@ -78,7 +76,7 @@ void TextBoxBehavior::adjustText()
 {
 	// This is a so-called 'cabezeada'
 
-	std::string str = text_.GetString();
+	std::string str = text_.getString();
 	int width = width_->get<int>();
 
 	size_t lastSpace = 0;
@@ -86,11 +84,12 @@ void TextBoxBehavior::adjustText()
 	for (size_t i = 0; i < str.size(); ++i)
 	{
 		std::string substr = str.substr(0, i);
-		t.SetString(substr);
-		t.SetFont(text_.GetFont());
+		t.setString(substr);
+		if (const sf::Font* font = text_.getFont())
+			t.setFont(*font);
 		if (fontSize_)
-			t.SetCharacterSize(fontSize_->get<int>());
-		if (t.GetRect().Width > width)
+			t.setCharacterSize(fontSize_->get<int>());
+		if (t.getLocalBounds().width > width)
 		{
 			// replace the last space found with a new line :)
 			str.replace(lastSpace, 1, 1, '\n');
@@ -98,6 +97,6 @@ void TextBoxBehavior::adjustText()
 		if (str[i] == ' ')
 			lastSpace = i;
 	}
-	text_.SetString(str);
+	text_.setString(str);
 }
 //----------------------------------------------------------------------------//

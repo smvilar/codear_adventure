@@ -82,12 +82,12 @@ void SpriteAnimation::reset()
 //----------------------------------------------------------------------------//
 void SpriteAnimation::updateRect()
 {
-	u32 frameWidth = sprite_->GetTexture()->GetWidth() / framesHorizontal_;
-	u32 frameHeight = sprite_->GetTexture()->GetHeight() / framesVertical_;
+	u32 frameWidth = sprite_->getTexture()->getSize().x / framesHorizontal_;
+	u32 frameHeight = sprite_->getTexture()->getSize().y / framesVertical_;
 
 	u32 frameX = (currentFrame_ % framesHorizontal_) * frameWidth;
 	u32 frameY = (currentFrame_ / framesHorizontal_) * frameHeight;
 
-	sprite_->SetSubRect(sf::IntRect(frameX, frameY, frameWidth, frameHeight));
+	sprite_->setTextureRect(sf::IntRect(frameX, frameY, frameWidth, frameHeight));
 }
 //----------------------------------------------------------------------------//

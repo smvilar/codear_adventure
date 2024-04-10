@@ -28,12 +28,12 @@ void EditBehavior::deactivate()
 //----------------------------------------------------------------------------//
 void EditBehavior::update()
 {
-	if (!tabPressed_ && sf::Keyboard::IsKeyPressed(sf::Keyboard::Tab))
+	if (!tabPressed_ && sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
 	{
 		mode_ = (mode_ == INACTIVE) ? SELECT : INACTIVE;
 		tabPressed_ = true;
 	}
-	else if (!sf::Keyboard::IsKeyPressed(sf::Keyboard::Tab))
+	else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
 	{
 		tabPressed_ = false;
 	}
@@ -93,7 +93,7 @@ void EditBehavior::updateDrag()
 	posXAttr->set(posX);
 	posYAttr->set(posY);
 
-	gizmo_.SetPosition(posX, posY);
+	gizmo_.setPosition(posX, posY);
 
 	std::cout << posX << ", " << posY << std::endl;
 
@@ -106,22 +106,17 @@ void EditBehavior::updateDrag()
 //----------------------------------------------------------------------------//
 void EditBehavior::initGizmo()
 {
-	sf::Color outlineColor(255, 255, 0);
-	sf::Color color(255, 255, 255, 25);
-	gizmo_.AddPoint(0, 0, color, outlineColor);
-	gizmo_.AddPoint(1, 0, color, outlineColor);
-	gizmo_.AddPoint(1, 1, color, outlineColor);
-	gizmo_.AddPoint(0, 1, color, outlineColor);
-	gizmo_.EnableOutline(true);
-	gizmo_.SetOutlineThickness(2);
+	const sf::Color outlineColor(255, 255, 0);
+	const sf::Color color(255, 255, 255, 25);
+	gizmo_.setSize({ 1, 1 });
+	gizmo_.setFillColor(color);
+	gizmo_.setOutlineColor(outlineColor);
+	gizmo_.setOutlineThickness(2);
 }
 //----------------------------------------------------------------------------//
 void EditBehavior::setGizmo(s32 x, s32 y, u32 w, u32 h)
 {
-	gizmo_.SetPointPosition(0, 0, 0);
-	gizmo_.SetPointPosition(1, w, 0);
-	gizmo_.SetPointPosition(2, w, h);
-	gizmo_.SetPointPosition(3, 0, h);
-	gizmo_.SetPosition(x, y);
+	gizmo_.setSize({ static_cast<float>(w), static_cast<float>(h) });
+	gizmo_.setPosition(x, y);
 }
 //----------------------------------------------------------------------------//
