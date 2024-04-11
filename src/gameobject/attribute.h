@@ -1,7 +1,7 @@
 #ifndef HE_ATTRIBUTE_H
 #define HE_ATTRIBUTE_H
 //----------------------------------------------------------------------------//
-#include <boost/any.hpp>
+#include <any>
 #include "dllexport.h"
 //----------------------------------------------------------------------------//
 namespace he
@@ -10,22 +10,22 @@ namespace he
 class ENGINE_API Attribute
 {
 public:
-	Attribute(boost::any value);
+	Attribute(const std::any& value);
 
 	template<typename T>
 	T get() const
 	{
-		return boost::any_cast<T>(_value);
+		return std::any_cast<T>(value_);
 	}
 
 	template<typename T>
 	void set(T value)
 	{
-		_value = value;
+		value_ = value;
 	}
 
 private:
-	boost::any _value;
+	std::any value_;
 
 	friend class WorldSerializer;
 };

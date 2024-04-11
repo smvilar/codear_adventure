@@ -2,8 +2,8 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-Attribute::Attribute(boost::any value)
-	: _value(value)
+Attribute::Attribute(const std::any& value)
+	: value_(value)
 {
 	// ...
 }

@@ -1,6 +1,7 @@
 #include "gameobject/worldserializer.h"
 //----------------------------------------------------------------------------//
 #include <string>
+#include <any>
 #include <algorithm>
 //----------------------------------------------------------------------------//
 #include "json/json.h"
@@ -56,7 +57,7 @@ Json::Value WorldSerializer::serializeAttributes(const GameObject &object) const
 //----------------------------------------------------------------------------//
 Json::Value WorldSerializer::serializeAttributeValue(const Attribute &attribute) const
 {
-	boost::any anyValue = attribute._value;
+	std::any anyValue = attribute.value_;
 	if (anyValue.type() == typeid(int))
 		return Json::Value(attribute.get<int>());
 	else if (anyValue.type() == typeid(float))

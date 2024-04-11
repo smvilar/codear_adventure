@@ -3,7 +3,6 @@
 //----------------------------------------------------------------------------//
 #include <vector>
 #include <string>
-#include <boost/any.hpp>
 //----------------------------------------------------------------------------//
 #include "dllexport.h"
 #include "gameobject/behavior.h"
