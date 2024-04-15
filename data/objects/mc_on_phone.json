@@ -1,15 +1,14 @@
 {
-	"name" : "RichardOnPhone",
-	"attributes" :
-	{
-		"x" : 432,
-		"y" : 132,
-		"spriteInfo" : "sprites/sprite_mc_onphone.json",
-		"answerBox" : "MCAnswerBox",
-		"boxOffsetX" : 180,
-		"boxOffsetY" : 0,
-        "talkAnimation" : "talk",
-        "waitAnimation" : "idle"
-	},
-	"behaviors" : [ "Sprite", "DialogueActor" ]
+  "name": "RichardOnPhone",
+  "attributes": {
+    "x": 432,
+    "y": 132,
+    "spriteInfo": "sprites/sprite_mc_onphone.json",
+    "answerBox": "MCAnswerBox",
+    "boxOffsetX": 180,
+    "boxOffsetY": 0,
+    "talkAnimation": "talk",
+    "waitAnimation": "idle"
+  },
+  "behaviors": [ "Sprite", "DialogueActor" ]
 }

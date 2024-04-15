@@ -1,57 +1,57 @@
 [
-    {
-        "id" : "-1",
-        "speaker" : "David",
-        "speech" : [ "*el teléfono suena durante un largo rato*", "Hable" ],
-        "goto" : "0"
-    },
-	{
-		"id" : "0",
-        "speaker" : "RichardOnPhone",
-		"speech" : [ "Me gustaría hablar con la persona a cargo de la situación" ],
-        "goto" : "1"
-	},
-	{
-		"id" : "1",
-        "speaker" : "David",
-		"speech" : [ "Está hablando con ella. ¿Es usted el encargado de resolver el lío que armé?" ],
-        "goto" : "2"
-    },
-    {
-        "id" : "2",
-        "speaker" : "RichardOnPhone",
-        "speech" : [ "Soy el negociador que pidió.", "Mi nombre es Richard Solomon y mi trabajo es asegurar que usted y sus rehenes salgan intactos del edificio.", "Pero para hacer eso necesito que coopere y me diga quién es." ],
-        "goto" : "3"
-	},
-	{
-		"id" : "3",
-        "speaker" : "David",
-		"speech" : [ "Mi identidad no es importante por el momento.", "Hay personas en este mundo que son intocables y van a asegurarse de mantenerse así para siempre. Yo tuve la mala suerte de dar con algunas de ellas.", "Ahora la seguridad mía y de mi familia están en riesgo, pero hay mucho más en juego... muchas otras vidas inocentes están en peligro.", "Es por esto que me vi obligado a tomar medidas desesperadas." ],
-        "goto" : "4"
-    },
-    {
-        "id" : "4",
-        "speaker" : "RichardOnPhone",
-        "speech" : [ "¿De qué está hablando?" ],
-        "goto" : "5"
-	},
-	{
-		"id" : "5",
-        "speaker" : "David",
-		"speech" : [ "Como sabrá estoy en el cuarto piso y tengo en mi poder la vida de ocho personas.", "Tengo un interruptor conectado a cuatro contenedores de codearxis v9, un virus muy peligroso para el ser humano.", "Si llego a presionar mi interruptor el virus se liberará, infectando a los ocho empleados que tengo encerrados en uno de los laboratorios del piso. No es mi intención hacerlo, pero aquí hay en peligro algo mucho más allá de una u ocho vidas." ],
-        "goto" : "6"
-    },
-    {
-        "id" : "6",
-        "speaker" : "RichardOnPhone",
-		"speech" : [ "Nadie va a morir hoy, amigo mío. Aunque todavía no tengo claro que es lo que usted quiere y para poder ayudarlo necesito más información." ],
-        "goto" : "7"
-	},
-	{
-		"id" : "7",
-        "speaker" : "David",
-		"speech" : [ "Le daré toda la información pertinente en su debido momento. Pero antes necesito que pruebe que verdaderamente tiene capacidades y acceso a recursos y que no es sólo un oficial puesto para hacerme perder tiempo mientras SWAT resuelve cual es la mejor manera de entrar a volarme la cabeza.", "Lo que necesito que haga es que me diga quien soy. Y no hablo de interrogantes metafísicos. Dígame solamente mi nombre y apellido.", "Luego hablaremos." ],
-        "goto" : "end",
-        "event" : "phone_hang"
-    }
+  {
+    "id": "-1",
+    "speaker": "David",
+    "speech": [ "*el teléfono suena durante un largo rato*", "Hable" ],
+    "goto": "0"
+  },
+  {
+    "id": "0",
+    "speaker": "RichardOnPhone",
+    "speech": [ "Me gustaría hablar con la persona a cargo de la situación" ],
+    "goto": "1"
+  },
+  {
+    "id": "1",
+    "speaker": "David",
+    "speech": [ "Está hablando con ella. ¿Es usted el encargado de resolver el lío que armé?" ],
+    "goto": "2"
+  },
+  {
+    "id": "2",
+    "speaker": "RichardOnPhone",
+    "speech": [ "Soy el negociador que pidió.", "Mi nombre es Richard Solomon y mi trabajo es asegurar que usted y sus rehenes salgan intactos del edificio.", "Pero para hacer eso necesito que coopere y me diga quién es." ],
+    "goto": "3"
+  },
+  {
+    "id": "3",
+    "speaker": "David",
+    "speech": [ "Mi identidad no es importante por el momento.", "Hay personas en este mundo que son intocables y van a asegurarse de mantenerse así para siempre. Yo tuve la mala suerte de dar con algunas de ellas.", "Ahora la seguridad mía y de mi familia están en riesgo, pero hay mucho más en juego... muchas otras vidas inocentes están en peligro.", "Es por esto que me vi obligado a tomar medidas desesperadas." ],
+    "goto": "4"
+  },
+  {
+    "id": "4",
+    "speaker": "RichardOnPhone",
+    "speech": [ "¿De qué está hablando?" ],
+    "goto": "5"
+  },
+  {
+    "id": "5",
+    "speaker": "David",
+    "speech": [ "Como sabrá estoy en el cuarto piso y tengo en mi poder la vida de ocho personas.", "Tengo un interruptor conectado a cuatro contenedores de codearxis v9, un virus muy peligroso para el ser humano.", "Si llego a presionar mi interruptor el virus se liberará, infectando a los ocho empleados que tengo encerrados en uno de los laboratorios del piso. No es mi intención hacerlo, pero aquí hay en peligro algo mucho más allá de una u ocho vidas." ],
+    "goto": "6"
+  },
+  {
+    "id": "6",
+    "speaker": "RichardOnPhone",
+    "speech": [ "Nadie va a morir hoy, amigo mío. Aunque todavía no tengo claro que es lo que usted quiere y para poder ayudarlo necesito más información." ],
+    "goto": "7"
+  },
+  {
+    "id": "7",
+    "speaker": "David",
+    "speech": [ "Le daré toda la información pertinente en su debido momento. Pero antes necesito que pruebe que verdaderamente tiene capacidades y acceso a recursos y que no es sólo un oficial puesto para hacerme perder tiempo mientras SWAT resuelve cual es la mejor manera de entrar a volarme la cabeza.", "Lo que necesito que haga es que me diga quien soy. Y no hablo de interrogantes metafísicos. Dígame solamente mi nombre y apellido.", "Luego hablaremos." ],
+    "goto": "end",
+    "event": "phone_hang"
+  }
 ]
