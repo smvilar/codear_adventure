@@ -1,8 +1,9 @@
 #include "gameobject/worldserializer.h"
 //----------------------------------------------------------------------------//
-#include <string>
-#include <any>
 #include <algorithm>
+#include <any>
+#include <functional>
+#include <string>
 //----------------------------------------------------------------------------//
 #include "json/json.h"
 #include "gameobject/world.h"
@@ -15,20 +16,17 @@ void WorldSerializer::serialize(const World &world, std::ostream &os) const
 {
 	Json::Value root(Json::arrayValue);
 
-	const World::ObjectVector& objects = world.objects_;
-
-	for (size_t i = 0; i < objects.size(); ++i)
+	for (GameObject* object : world.objects_)
 	{
-		const GameObject &object = *objects[i];
-		if (!isIgnored(object))
-			root.append(serializeObject(object, world));
+		if (!isIgnored(*object))
+			root.append(serializeObject(*object, world));
 	}
 
 	Json::StyledStreamWriter writer;
 	writer.write(os, root);
 }
 //----------------------------------------------------------------------------//
-Json::Value WorldSerializer::serializeObject(const GameObject &object, const World &world) const
+Json::Value WorldSerializer::serializeObject(const GameObject &object, const World &world)
 {
 	Json::Value objRoot(Json::objectValue);
 	Json::Value attributes = serializeAttributes(object);
@@ -41,21 +39,21 @@ Json::Value WorldSerializer::serializeObject(const GameObject &object, const Wor
 	return objRoot;
 }
 //----------------------------------------------------------------------------//
-Json::Value WorldSerializer::serializeAttributes(const GameObject &object) const
+Json::Value WorldSerializer::serializeAttributes(const GameObject &object)
 {
 	Json::Value attrs(Json::objectValue);
 	const GameObject::AttributeMap &attributes = object.attributes_;
-	GameObject::AttributeMap::const_iterator it = attributes.begin();
-	for (; it != attributes.end(); ++it)
+
+	for (const auto& attribute : attributes)
 	{
-		Json::Value attrValue = serializeAttributeValue(*it->second);
+		Json::Value attrValue = serializeAttributeValue(*attribute.second);
 		if (attrValue.type() != Json::nullValue)
-			attrs[it->first] = attrValue;
+			attrs[attribute.first] = attrValue;
 	}
 	return attrs;
 }
 //----------------------------------------------------------------------------//
-Json::Value WorldSerializer::serializeAttributeValue(const Attribute &attribute) const
+Json::Value WorldSerializer::serializeAttributeValue(const Attribute &attribute)
 {
 	std::any anyValue = attribute.value_;
 	if (anyValue.type() == typeid(int))
@@ -70,7 +68,7 @@ Json::Value WorldSerializer::serializeAttributeValue(const Attribute &attribute)
 	return Json::Value();
 }
 //----------------------------------------------------------------------------//
-Json::Value WorldSerializer::serializeBehaviors(const GameObject &object, const World &world) const
+Json::Value WorldSerializer::serializeBehaviors(const GameObject &object, const World &world)
 {
 	Json::Value behavs(Json::arrayValue);
 
@@ -112,30 +110,28 @@ void WorldSerializer::deserialize(World &world, const std::string &text) const
 
 	cleanWorld(world);
 
-	for (size_t i = 0; i < root.size(); ++i)
+	for (const auto& child : root)
 	{
 		GameObject *object = new GameObject("unnamed");
-		deserializeObject(*object, root[i], world);
+		deserializeObject(*object, child, world);
 		world.addObject(object);
 	}
 }
 //----------------------------------------------------------------------------//
-void WorldSerializer::deserializeObject(GameObject &object, const Json::Value &jsObject, const World &world) const
+void WorldSerializer::deserializeObject(GameObject &object, const Json::Value &jsObject, const World &world)
 {
 	object.name = jsObject["name"].asCString();
 	deserializeAttributes(object, jsObject["attributes"]);
 	deserializeBehaviors(object, jsObject["behaviors"], world);
 }
 //----------------------------------------------------------------------------//
-void WorldSerializer::deserializeAttributes(GameObject &object, const Json::Value &jsAttrs) const
+void WorldSerializer::deserializeAttributes(GameObject &object, const Json::Value &jsAttrs)
 {
 	using std::cout; using std::cerr; using std::endl;
 
 	const Json::Value::Members attrNames = jsAttrs.getMemberNames();
-	Json::Value::Members::const_iterator it = attrNames.begin();
-	for (; it != attrNames.end(); ++it)
+	for (const auto& attrName : attrNames)
 	{
-		const std::string& attrName = *it;
 		Json::Value value = jsAttrs[attrName];
 
 		Attribute *attribute = deserializeAttributeValue(value);
@@ -153,54 +149,51 @@ void WorldSerializer::deserializeAttributes(GameObject &object, const Json::Valu
 	}
 }
 //----------------------------------------------------------------------------//
-Attribute* WorldSerializer::deserializeAttributeValue(const Json::Value &jsValue) const
+Attribute* WorldSerializer::deserializeAttributeValue(const Json::Value &jsValue)
 {
-	Attribute* attribute = 0;
-
 	if (jsValue.isInt())
 	{
-		attribute = new Attribute(jsValue.asInt());
+		return new Attribute(jsValue.asInt());
 	}
 	else if (jsValue.isDouble())
 	{
-		attribute = new Attribute(jsValue.asDouble());
+		return new Attribute(jsValue.asDouble());
 	}
 	else if (jsValue.isBool())
 	{
-		attribute = new Attribute(jsValue.asBool());
+		return new Attribute(jsValue.asBool());
 	}
 	else if (jsValue.isString())
 	{
-		attribute = new Attribute(jsValue.asString());
+		return new Attribute(jsValue.asString());
 	}
 	else if (jsValue.isArray())
 	{
-		std::vector<Attribute*> vec;
-		vec.reserve(jsValue.size());
-		for (size_t i = 0; i < jsValue.size(); ++i)
-		{
-			//recurse
-			vec.push_back(deserializeAttributeValue(jsValue[i]));
-		}
-		attribute = new Attribute(vec);
+		std::vector<Attribute*> vec(jsValue.size());
+		std::transform(
+			jsValue.begin(), jsValue.end(), vec.begin(),
+			&WorldSerializer::deserializeAttributeValue
+		);
+
+		return new Attribute(vec);
 	}
 	else if (jsValue.isObject())
 	{
 		std::map<std::string, Attribute*> dict;
-		Json::Value::Members memberNames = jsValue.getMemberNames();
-		for (size_t i = 0; i < jsValue.size(); ++i)
-		{
-			//recurse
-			const std::string &memberName = memberNames[i];
-			dict[memberName] = deserializeAttributeValue(jsValue[memberName]);
-		}
-		attribute = new Attribute(dict);
+		const Json::Value::Members& memberNames = jsValue.getMemberNames();
+		std::transform(
+			memberNames.cbegin(), memberNames.cend(), std::inserter(dict, dict.end()),
+			[&jsValue](const std::string& memberName) {
+				return std::make_pair(memberName, WorldSerializer::deserializeAttributeValue(jsValue[memberName]));
+			}
+		);
+		return new Attribute(dict);
 	}
 
-	return attribute;
+	return nullptr;
 }
 //----------------------------------------------------------------------------//
-void WorldSerializer::deserializeBehaviors(GameObject &object, const Json::Value &jsBehavs, const World &world) const
+void WorldSerializer::deserializeBehaviors(GameObject &object, const Json::Value &jsBehavs, const World &world)
 {
 	using std::cerr;
 	using std::endl;
@@ -211,17 +204,17 @@ void WorldSerializer::deserializeBehaviors(GameObject &object, const Json::Value
 		return;
 	}
 
-	for (size_t i = 0; i < jsBehavs.size(); ++i)
+	for (const auto &behaviorName : jsBehavs)
 	{
-		const char* behaviorName = jsBehavs[i].asCString();
-
-		Behavior* behavior = world.createBehavior(behaviorName);
+		Behavior* behavior = world.createBehavior(behaviorName.asCString());
 		if (behavior)
 		{
 			object.addBehavior(behavior);
 		}
 		else
+		{
 			cerr << behaviorName << " not found" << endl;
+		}
 	}
 }
 //----------------------------------------------------------------------------//
@@ -232,19 +225,17 @@ void WorldSerializer::addIgnoredObject(const std::string &name)
 //----------------------------------------------------------------------------//
 bool WorldSerializer::isIgnored(const GameObject &object) const
 {
-	StringList::const_iterator it =
-		std::find(ignoredObjects_.begin(), ignoredObjects_.end(), object.name);
-	return it != ignoredObjects_.end();
+	return std::find(ignoredObjects_.begin(), ignoredObjects_.end(), object.name)
+		!= ignoredObjects_.end();
 }
 //----------------------------------------------------------------------------//
 void WorldSerializer::cleanWorld(World &world) const
 {
-	for (size_t i = 0; i < world.objects_.size(); ++i)
+	for (GameObject* object : world.objects_)
 	{
-		GameObject &object = *world.objects_[i];
-		if (!isIgnored(object))
+		if (!isIgnored(*object))
 		{
-			world.removeObject(&object);
+			world.removeObject(object);
 		}
 	}
 }

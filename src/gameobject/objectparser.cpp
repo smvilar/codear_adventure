@@ -41,11 +41,9 @@ void ObjectParser::parseAttributes(const Json::Value &attrsValue, GameObject &ob
 		return;
 	}
 
-	const Json::Value::Members attrNames = attrsValue.getMemberNames();
-	Json::Value::Members::const_iterator it = attrNames.begin();
-	for (; it != attrNames.end(); ++it)
+	const Json::Value::Members& attrNames = attrsValue.getMemberNames();
+	for (const auto& attrName : attrNames)
 	{
-		const std::string& attrName = *it;
 		Json::Value value = attrsValue[attrName];
 
 		Attribute *attribute = resolveType(value);
@@ -84,13 +82,15 @@ void ObjectParser::parseBehaviors(const Json::Value &behaviorsValue, GameObject 
 			object.doAddBehavior(behavior);
 		}
 		else
+		{
 			cerr << behaviorName << " not found" << endl;
+		}
 	}
 }
 //----------------------------------------------------------------------------//
 Attribute* ObjectParser::resolveType(const Json::Value &jsonValue) const
 {
-	Attribute* attribute = 0;
+	Attribute* attribute = nullptr;
 
 	if (jsonValue.isInt())
 	{

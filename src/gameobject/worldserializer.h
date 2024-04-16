@@ -22,16 +22,16 @@ public:
 	void addIgnoredObject(const std::string &name);
 
 private:
-	Json::Value serializeObject(const GameObject &object, const World &world) const;
-	Json::Value serializeAttributes(const GameObject &object) const;
-	Json::Value serializeBehaviors(const GameObject &object, const World &world) const;
-	Json::Value serializeAttributeValue(const Attribute &attribute) const;
+	static Json::Value serializeObject(const GameObject &object, const World &world);
+	static Json::Value serializeAttributes(const GameObject &object);
+	static Json::Value serializeBehaviors(const GameObject &object, const World &world);
+	static Json::Value serializeAttributeValue(const Attribute &attribute);
 
 private:
-	void deserializeObject(GameObject& object, const Json::Value &jsObject, const World &world) const;
-	void deserializeAttributes(GameObject& object, const Json::Value &jsAttrs) const;
-	void deserializeBehaviors(GameObject& object, const Json::Value &jsBehavs, const World &world) const;
-	Attribute* deserializeAttributeValue(const Json::Value &jsValue) const;
+	static void deserializeObject(GameObject& object, const Json::Value &jsObject, const World &world);
+	static void deserializeAttributes(GameObject& object, const Json::Value &jsAttrs);
+	static void deserializeBehaviors(GameObject& object, const Json::Value &jsBehavs, const World &world);
+	static Attribute* deserializeAttributeValue(const Json::Value& jsValue);
 
 private:
 	bool isIgnored(const GameObject &object) const;

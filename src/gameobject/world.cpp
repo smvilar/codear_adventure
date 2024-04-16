@@ -14,19 +14,6 @@
 //----------------------------------------------------------------------------//
 using namespace he;
 //----------------------------------------------------------------------------//
-// Helper class that acts like a "Functor"
-//----------------------------------------------------------------------------//
-class ObjectNamesAreEqual
-{
-	const std::string &name_;
-public:
-	ObjectNamesAreEqual(const std::string &name) : name_(name) {}
-	bool operator()(GameObject* obj)
-	{
-		return obj->name == name_;
-	}
-};
-//----------------------------------------------------------------------------//
 World::World()
 {
 	Behaviors::registerToWorld(*this);
@@ -52,33 +39,31 @@ void World::removeObject(GameObject *object)
 //----------------------------------------------------------------------------//
 GameObject* World::getObject(const std::string &name)
 {
-	ObjectVector::iterator it =
-		std::find_if(objects_.begin(), objects_.end(), ObjectNamesAreEqual(name));
-	return (it != objects_.end()) ? *it : 0;
+	auto search = std::find_if(
+		objects_.begin(), objects_.end(), [&name](const GameObject* obj) {
+			return obj->name == name;
+		}
+	);
+	return (search != objects_.end()) ? *search : nullptr;
 }
 //----------------------------------------------------------------------------//
 void World::removeAllObjects()
 {
-	ObjectVector::iterator it = objects_.begin();
-	for (; it != objects_.end(); ++it)
-		delete *it;
+	for (GameObject* obj : objects_)
+		delete obj;
 }
 //----------------------------------------------------------------------------//
 void World::update()
 {
-	ObjectVector::iterator it = objects_.begin();
-	for (; it != objects_.end(); ++it)
-		(*it)->update();
+	for (GameObject* obj : objects_)
+		obj->update();
 	processQueues();
 }
 //----------------------------------------------------------------------------//
 void World::broadcast(const Message &message)
 {
-	ObjectVector::iterator it = objects_.begin();
-	for (; it != objects_.end(); ++it)
-	{
-		(*it)->broadcast(message);
-	}
+	for (GameObject* obj : objects_)
+		obj->broadcast(message);
 }
 //----------------------------------------------------------------------------//
 void World::registerObjectPrototype(const std::string &name, GameObject *object)
@@ -134,28 +119,25 @@ void World::unregisterBehavior(const std::string &name)
 Behavior* World::createBehavior(const std::string &name) const
 {
 	BehaviorMap::const_iterator it = behaviors_.find(name);
-	if (it != behaviors_.end())
-	{
-		Behavior* behavior = it->second->clone();
-		behavior->pWorld_ = const_cast<World*>(this);
-		return behavior;
-	}
-	else return 0;
+
+	if (it == behaviors_.end()) return nullptr;
+
+	Behavior* behavior = it->second->clone();
+	behavior->pWorld_ = const_cast<World*>(this);
+	return behavior;
 }
 //----------------------------------------------------------------------------//
 void World::cleanRegisteredBehaviors()
 {
-	BehaviorMap::iterator it = behaviors_.begin();
-	for (; it != behaviors_.end(); ++it)
-		delete it->second;
+	for (const auto& behavior : behaviors_)
+		delete behavior.second;
 }
 //----------------------------------------------------------------------------//
 GameObject* World::parseObject(const std::string &filename)
 {
 	GameObject* obj = new GameObject("unnamed");
 	ObjectParser parser;
-	parser.parse(resourceManager_.getTextResource(filename),
-				 *obj, this);
+	parser.parse(resourceManager_.getTextResource(filename), *obj, this);
 	return obj;
 }
 //----------------------------------------------------------------------------//
@@ -201,7 +183,7 @@ void World::doAddObject(GameObject *object)
 void World::doRemoveObject(GameObject *object)
 {
 	Assert(object, "Object to remove shouldn't be null");
-	ObjectVector::iterator it =
+	ObjectVector::const_iterator it =
 			std::find(objects_.begin(), objects_.end(), object);
 	Assert(it != objects_.end(), "Object to remove should be in the list");
 	objects_.erase(it);
