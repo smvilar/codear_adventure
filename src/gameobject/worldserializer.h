@@ -17,21 +17,19 @@ class ENGINE_API WorldSerializer
 {
 public:
 	void serialize(const World &world, std::ostream &os) const;
-	void deserialize(World &world, const std::string &text) const;
+	void parse(World &world, const std::string &text) const;
 
 	void addIgnoredObject(const std::string &name);
 
-private:
 	static Json::Value serializeObject(const GameObject &object, const World &world);
 	static Json::Value serializeAttributes(const GameObject &object);
 	static Json::Value serializeBehaviors(const GameObject &object, const World &world);
 	static Json::Value serializeAttributeValue(const Attribute &attribute);
 
-private:
-	static void deserializeObject(GameObject& object, const Json::Value &jsObject, const World &world);
-	static void deserializeAttributes(GameObject& object, const Json::Value &jsAttrs);
-	static void deserializeBehaviors(GameObject& object, const Json::Value &jsBehavs, const World &world);
-	static Attribute* deserializeAttributeValue(const Json::Value& jsValue);
+	static void parseObject(GameObject& object, const Json::Value &json, const World &world);
+	static void parseAttributes(GameObject& object, const Json::Value &jsonAttrs);
+	static void parseBehaviors(GameObject& object, const Json::Value &jsonBehavs, const World &world);
+	static Attribute* parseAttributeValue(const Json::Value& jsonValue);
 
 private:
 	bool isIgnored(const GameObject &object) const;

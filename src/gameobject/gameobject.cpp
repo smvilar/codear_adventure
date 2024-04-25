@@ -49,7 +49,7 @@ void GameObject::removeAttribute(const std::string &name)
 Attribute* GameObject::getAttribute(const std::string &name)
 {
 	AttributeMap::iterator it = attributes_.find(name);
-	return it != attributes_.end() ? it->second : 0;
+	return it != attributes_.end() ? it->second : nullptr;
 }
 //----------------------------------------------------------------------------//
 void GameObject::addBehavior(Behavior *behavior)
@@ -67,7 +67,7 @@ Behavior* GameObject::getBehaviorByName(const std::string &name)
 	Assert(pWorld_, "GameObject should be added to World");
 
 	Behavior *prototype = pWorld_->createBehavior(name);
-	Behavior *toFind = 0;
+	Behavior *toFind = nullptr;
 
 	for (size_t i = 0; i < behaviors_.size(); ++i)
 	{
@@ -85,9 +85,8 @@ Behavior* GameObject::getBehaviorByName(const std::string &name)
 //----------------------------------------------------------------------------//
 void GameObject::update()
 {
-	BehaviorVector::iterator it = behaviors_.begin();
-	for (; it != behaviors_.end(); ++it)
-		(*it)->update();
+	for (Behavior* behavior : behaviors_)
+		behavior->update();
 	processQueues();
 }
 //----------------------------------------------------------------------------//
@@ -127,10 +126,8 @@ GameObject* GameObject::clone() const
 //----------------------------------------------------------------------------//
 void GameObject::added()
 {
-	BehaviorVector::iterator it = behaviors_.begin();
-	for (; it != behaviors_.end(); ++it)
+	for (Behavior* behavior : behaviors_)
 	{
-		Behavior* behavior = *it;
 		behavior->pWorld_ = pWorld_;
 		behavior->activate();
 		behavior->update();
@@ -139,9 +136,8 @@ void GameObject::added()
 //----------------------------------------------------------------------------//
 void GameObject::removed()
 {
-	BehaviorVector::iterator it = behaviors_.begin();
-	for (; it != behaviors_.end(); ++it)
-		(*it)->deactivate();
+	for (Behavior* behavior : behaviors_)
+		behavior->deactivate();
 }
 //----------------------------------------------------------------------------//
 void GameObject::processQueues()
@@ -184,7 +180,7 @@ void GameObject::doRemoveBehavior(Behavior *behavior)
 	behavior->removed();
 	behaviors_.erase(std::find(behaviors_.begin(), behaviors_.end(), behavior));
 	delete behavior;
-	behavior = 0;
+	behavior = nullptr;
 }
 //----------------------------------------------------------------------------//
 void GameObject::doBroadcast(const Message &message)

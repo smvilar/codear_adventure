@@ -149,7 +149,7 @@ void World::saveState(const std::string &filename) const
 //----------------------------------------------------------------------------//
 void World::loadState(const std::string &filename)
 {
-	worldSerializer_.deserialize(*this, resourceManager_.getTextResource(filename));
+	worldSerializer_.parse(*this, resourceManager_.getTextResource(filename));
 }
 //----------------------------------------------------------------------------//
 WorldSerializer& World::getWorldSerializer()

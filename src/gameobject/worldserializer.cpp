@@ -2,7 +2,6 @@
 //----------------------------------------------------------------------------//
 #include <algorithm>
 #include <any>
-#include <functional>
 #include <string>
 //----------------------------------------------------------------------------//
 #include "json/json.h"
@@ -96,7 +95,7 @@ Json::Value WorldSerializer::serializeBehaviors(const GameObject &object, const 
 	return behavs;
 }
 //----------------------------------------------------------------------------//
-void WorldSerializer::deserialize(World &world, const std::string &text) const
+void WorldSerializer::parse(World &world, const std::string &text) const
 {
 	Json::Value root;
 	Json::Reader reader;
@@ -113,28 +112,35 @@ void WorldSerializer::deserialize(World &world, const std::string &text) const
 	for (const auto& child : root)
 	{
 		GameObject *object = new GameObject("unnamed");
-		deserializeObject(*object, child, world);
+		parseObject(*object, child, world);
 		world.addObject(object);
 	}
 }
 //----------------------------------------------------------------------------//
-void WorldSerializer::deserializeObject(GameObject &object, const Json::Value &jsObject, const World &world)
+void WorldSerializer::parseObject(GameObject &object, const Json::Value &json, const World &world)
 {
-	object.name = jsObject["name"].asCString();
-	deserializeAttributes(object, jsObject["attributes"]);
-	deserializeBehaviors(object, jsObject["behaviors"], world);
+	if (!json["name"].isNull())
+		object.name = json["name"].asCString();
+	parseAttributes(object, json["attributes"]);
+	parseBehaviors(object, json["behaviors"], world);
 }
 //----------------------------------------------------------------------------//
-void WorldSerializer::deserializeAttributes(GameObject &object, const Json::Value &jsAttrs)
+void WorldSerializer::parseAttributes(GameObject &object, const Json::Value &jsonAttrs)
 {
 	using std::cout; using std::cerr; using std::endl;
 
-	const Json::Value::Members attrNames = jsAttrs.getMemberNames();
+	if (!jsonAttrs.isObject())
+	{
+		cerr << "The attributes are bad formatted" << endl;
+		return;
+	}
+
+	const Json::Value::Members& attrNames = jsonAttrs.getMemberNames();
 	for (const auto& attrName : attrNames)
 	{
-		Json::Value value = jsAttrs[attrName];
+		Json::Value value = jsonAttrs[attrName];
 
-		Attribute *attribute = deserializeAttributeValue(value);
+		Attribute *attribute = parseAttributeValue(value);
 
 		if (attribute)
 		{
@@ -149,42 +155,42 @@ void WorldSerializer::deserializeAttributes(GameObject &object, const Json::Valu
 	}
 }
 //----------------------------------------------------------------------------//
-Attribute* WorldSerializer::deserializeAttributeValue(const Json::Value &jsValue)
+Attribute* WorldSerializer::parseAttributeValue(const Json::Value &jsonValue)
 {
-	if (jsValue.isInt())
+	if (jsonValue.isInt())
 	{
-		return new Attribute(jsValue.asInt());
+		return new Attribute(jsonValue.asInt());
 	}
-	else if (jsValue.isDouble())
+	else if (jsonValue.isDouble())
 	{
-		return new Attribute(jsValue.asDouble());
+		return new Attribute(jsonValue.asDouble());
 	}
-	else if (jsValue.isBool())
+	else if (jsonValue.isBool())
 	{
-		return new Attribute(jsValue.asBool());
+		return new Attribute(jsonValue.asBool());
 	}
-	else if (jsValue.isString())
+	else if (jsonValue.isString())
 	{
-		return new Attribute(jsValue.asString());
+		return new Attribute(jsonValue.asString());
 	}
-	else if (jsValue.isArray())
+	else if (jsonValue.isArray())
 	{
-		std::vector<Attribute*> vec(jsValue.size());
+		std::vector<Attribute*> vec(jsonValue.size());
 		std::transform(
-			jsValue.begin(), jsValue.end(), vec.begin(),
-			&WorldSerializer::deserializeAttributeValue
+			jsonValue.begin(), jsonValue.end(), vec.begin(),
+			&WorldSerializer::parseAttributeValue
 		);
 
 		return new Attribute(vec);
 	}
-	else if (jsValue.isObject())
+	else if (jsonValue.isObject())
 	{
 		std::map<std::string, Attribute*> dict;
-		const Json::Value::Members& memberNames = jsValue.getMemberNames();
+		const Json::Value::Members& memberNames = jsonValue.getMemberNames();
 		std::transform(
 			memberNames.cbegin(), memberNames.cend(), std::inserter(dict, dict.end()),
-			[&jsValue](const std::string& memberName) {
-				return std::make_pair(memberName, WorldSerializer::deserializeAttributeValue(jsValue[memberName]));
+			[&jsonValue](const std::string& memberName) {
+				return std::make_pair(memberName, WorldSerializer::parseAttributeValue(jsonValue[memberName]));
 			}
 		);
 		return new Attribute(dict);
@@ -193,18 +199,18 @@ Attribute* WorldSerializer::deserializeAttributeValue(const Json::Value &jsValue
 	return nullptr;
 }
 //----------------------------------------------------------------------------//
-void WorldSerializer::deserializeBehaviors(GameObject &object, const Json::Value &jsBehavs, const World &world)
+void WorldSerializer::parseBehaviors(GameObject &object, const Json::Value &jsonBehavs, const World &world)
 {
 	using std::cerr;
 	using std::endl;
 
-	if (!jsBehavs.isArray())
+	if (!jsonBehavs.isArray())
 	{
 		cerr << "The behaviors are bad formatted" << endl;
 		return;
 	}
 
-	for (const auto &behaviorName : jsBehavs)
+	for (const auto &behaviorName : jsonBehavs)
 	{
 		Behavior* behavior = world.createBehavior(behaviorName.asCString());
 		if (behavior)
